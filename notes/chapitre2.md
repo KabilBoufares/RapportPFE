@@ -89,7 +89,7 @@ Figure 2.1 : Diagramme de cas d’utilisation global de FESTY
 
 Ce diagramme constitue une vue globale du système. Les traitements détaillés liés à l’authentification, à la billetterie, au paiement, à la gestion des événements, au scan, à la modération et à l’administration seront approfondis dans les chapitres de sprint.
 
-## 2.4 Organisation du projet avec Scrum
+## 2.4 Pilotage du projet avec Scrum
 
 Après l’identification des besoins et la définition du périmètre fonctionnel global, nous avons organisé la réalisation de **FESTY** selon une démarche Scrum. Le projet est découpé en plusieurs sprints, chacun regroupant un ensemble cohérent de fonctionnalités à analyser, concevoir, développer et valider.
 
@@ -205,7 +205,7 @@ La figure suivante présente une vue synthétique des principales technologies e
 
 ![Technologies et services utilisés dans FESTY](images/technologies-festy.png)
 
-**Figure 2.2 : Technologies et services utilisés dans FESTY**
+Figure 2.2 : Technologies et services utilisés dans FESTY
 
 ### 2.6.1 Technologies Front-End et Mobile
 
@@ -274,9 +274,9 @@ Enfin, plusieurs services externes sont intégrés à la plateforme afin de couv
 
 La figure suivante présente l’architecture de déploiement adoptée pour la plateforme **FESTY**.
 
-![Architecture de déploiement de la plateforme FESTY](images/architecture-deploiement-festy.PNG)
+![Architecture de déploiement de la plateforme FESTY](images/architecture-deploiement-festy.png)
 
-**Figure 2.3 : Architecture de déploiement de la plateforme FESTY**
+Figure 2.3 : Architecture de déploiement de la plateforme FESTY
 
 Cette architecture physique montre que le Back-End constitue le noyau central de la plateforme. Il reçoit les requêtes provenant de l’application mobile et des interfaces web, applique les règles métier, communique avec la base de données et orchestre les échanges avec les services externes.
 
@@ -344,3 +344,5 @@ Dans ce chapitre, nous avons présenté la phase d’analyse et de préparation 
 Nous avons également présenté le diagramme de cas d’utilisation global, qui synthétise les principales interactions entre les acteurs et la plateforme. Par la suite, nous avons décrit le pilotage du projet avec Scrum à travers l’équipe, le backlog du produit et la planification des sprints.
 
 Enfin, nous avons détaillé l’environnement de travail, les technologies utilisées et l’architecture générale de la solution. Cette préparation constitue une base solide pour aborder les chapitres suivants, qui seront consacrés à la réalisation progressive des fonctionnalités de **FESTY** à travers les différents sprints.
+
+Le chapitre suivant sera consacré au premier sprint, portant sur l’authentification, l’inscription, la vérification du numéro de téléphone et la gestion initiale des comptes utilisateurs.
