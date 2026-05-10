@@ -1,0 +1,32 @@
+\chapter{chapitre 1} 
+\begingroup
+\parindent=0em
+\etocsettocstyle{\rule{\linewidth}{\tocrulewidth}\vskip0.5\baselineskip}{\rule{\linewidth}{\tocrulewidth}}
+\localtableofcontents 
+\endgroup
+\newpage
+
+
+
+\section{Introduction}
+\section{Tableau}
+\begin{table}[!h]
+    \renewcommand{\arraystretch}{1.2}
+    \caption{Variables définies.}
+\centering
+\begin{tabular}{|l|p{10.5cm}|}
+        \hline
+        \rowcolor[HTML]{ECF4FF} 
+        \textbf{Variables Déclarées} & \textbf{Description} \\ \hline
+        \textbf{network[de][à]} & Une file d'attente de messages envoyés d'un processus à un autre. \\ \hline
+        \textbf{activeClients} & Une liste contenant les identifiants des clients actifs. \\ \hline
+        \textbf{Topics} & Une liste de sujets disponibles. \\ \hline
+        \textbf{TopicPool} & Une liste associant chaque sujet à un ensemble de clients qui y sont abonnés. \\ \hline
+        \textbf{{SessionClients}} & Une liste d'identifiants des clients avec une session active. \\ \hline
+        \textbf{{RetainedMessages}} & Une liste contenant les messages conservés par le courtier. \\ \hline
+    \end{tabular}
+    \label{variables}
+\end{table}
+\FloatBarrier
+
+\section{Conclusion}
