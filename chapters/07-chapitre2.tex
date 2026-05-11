@@ -19,15 +19,15 @@ L’identification des acteurs constitue une étape essentielle dans l’analyse
 \begin{table}[H]
 \centering
 \caption{Liste des acteurs}
-\renewcommand{\arraystretch}{1.2}
-\begin{tabularx}{\textwidth}{|p{3cm}|X|}
-\hline
-\Tcell{Acteur} & \Tcell{Description} \\ \hline
-Visiteur & Représente une personne non authentifiée qui accède aux fonctionnalités publiques de la plateforme. Il peut consulter les événements, rechercher un événement, consulter le catalogue des stars, s'inscrire ou s'authentifier. \\ \hline
-Utilisateur & Personne authentifiée disposant d’un compte sur la plateforme. \\ \hline
-Partenaire & Organisateur d’événements disposant d’un espace de gestion dédié. \\ \hline
-Agent de scan & Utilisateur affecté à un événement afin de contrôler les billets à l’entrée. \\ \hline
-Administrateur & Représente le responsable de supervision de la plateforme. Il assure la gestion des utilisateurs, la validation des partenaires, la modération de la plateforme, la supervision des opérations financières et la configuration globale du système. \\ \hline
+\begin{tabularx}{\textwidth}{p{3cm} X}
+\toprule
+\Tcell{Acteur} & \Tcell{Description} \\ \midrule
+Visiteur & Représente une personne non authentifiée qui accède aux fonctionnalités publiques de la plateforme. Il peut consulter les événements, rechercher un événement, consulter le catalogue des stars, s'inscrire ou s'authentifier. \\ \lightrule
+Utilisateur & Personne authentifiée disposant d’un compte sur la plateforme. \\ \lightrule
+Partenaire & Organisateur d’événements disposant d’un espace de gestion dédié. \\ \lightrule
+Agent de scan & Utilisateur affecté à un événement afin de contrôler les billets à l’entrée. \\ \lightrule
+Administrateur & Représente le responsable de supervision de la plateforme. Il assure la gestion des utilisateurs, la validation des partenaires, la modération de la plateforme, la supervision des opérations financières et la configuration globale du système. \\ \lightrule
+\bottomrule
 \end{tabularx}
 \end{table}
 
@@ -48,15 +48,15 @@ Les besoins fonctionnels représentent les actions que les acteurs peuvent effec
 \begin{table}[H]
 \centering
 \caption{Besoins fonctionnels principaux par acteur}
-\renewcommand{\arraystretch}{1.2}
-\begin{tabularx}{\textwidth}{|p{3.2cm}|X|}
-\hline
-\Tcell{Acteur} & \Tcell{Besoins fonctionnels principaux} \\ \hline
-Visiteur & S’inscrire, s’authentifier et explorer les événements et les stars. \\ \hline
-Utilisateur & Gérer son compte, personnaliser son expérience, gérer sa billetterie personnelle, interagir avec les événements et devenir partenaire. \\ \hline
-Partenaire & Gérer son espace partenaire, gérer ses événements, gérer le contrôle d’accès, suivre son activité et ses finances. \\ \hline
-Agent de scan & Contrôler les billets à l’entrée des événements. \\ \hline
-Administrateur & Administrer la plateforme, modérer et superviser la plateforme. \\ \hline
+\begin{tabularx}{\textwidth}{p{3.2cm} X}
+\toprule
+\Tcell{Acteur} & \Tcell{Besoins fonctionnels principaux} \\ \midrule
+Visiteur & S’inscrire, s’authentifier et explorer les événements et les stars. \\ \lightrule
+Utilisateur & Gérer son compte, personnaliser son expérience, gérer sa billetterie personnelle, interagir avec les événements et devenir partenaire. \\ \lightrule
+Partenaire & Gérer son espace partenaire, gérer ses événements, gérer le contrôle d’accès, suivre son activité et ses finances. \\ \lightrule
+Agent de scan & Contrôler les billets à l’entrée des événements. \\ \lightrule
+Administrateur & Administrer la plateforme, modérer et superviser la plateforme. \\ \lightrule
+\bottomrule
 \end{tabularx}
 \end{table}
 
@@ -68,20 +68,20 @@ Les besoins non fonctionnels décrivent les contraintes de qualité que doit res
 \begin{table}[H]
 \centering
 \caption{Besoins non fonctionnels}
-\renewcommand{\arraystretch}{1.2}
-\begin{tabularx}{\textwidth}{|p{3.6cm}|X|}
-\hline
-\Tcell{Besoin non fonctionnel} & \Tcell{Description} \\ \hline
-Sécurité & Le système doit protéger les comptes utilisateurs, les données personnelles, les billets numériques, les paiements et les accès aux fonctionnalités sensibles. Les opérations critiques doivent être accessibles uniquement aux acteurs autorisés. \\ \hline
-Performance & Assurer un temps de réponse acceptable lors de la consultation, la recherche, l’achat et le scan. \\ \hline
-Disponibilité & Les fonctionnalités principales de la plateforme doivent rester accessibles afin de garantir une expérience continue aux visiteurs, utilisateurs, partenaires et agents de scan. \\ \hline
-Ergonomie & L'application doit proposer une interface claire, intuitive et adaptée à une utilisation mobile afin de faciliter la navigation et l'accès aux différentes fonctionnalités. \\ \hline
-Compatibilité & La solution doit être compatible avec les plateformes mobiles ciblées et permettre une utilisation fluide sur différents appareils. \\ \hline
-Maintenabilité & Faciliter l’évolution du système et la correction des anomalies. \\ \hline
-Scalabilité & Supporter l’augmentation du nombre d’utilisateurs, d’événements et d’opérations. \\ \hline
-Traçabilité & Les opérations sensibles telles que les paiements, les remboursements, les scans, les validations, les actions administratives et les opérations de modération doivent être suivies et historisées. \\ \hline
-Confidentialité & Les informations personnelles des utilisateurs, les données partenaires et les informations liées aux transactions doivent être protégées contre tout accès non autorisé. \\ \hline
-Fiabilité & Le système doit assurer la cohérence des données, notamment lors de l'achat des billets, de la génération des billets numériques, de la revente, du scan et du traitement des opérations financières. \\ \hline
+\begin{tabularx}{\textwidth}{p{3.6cm} X}
+\toprule
+\Tcell{Besoin non fonctionnel} & \Tcell{Description} \\ \midrule
+Sécurité & Le système doit protéger les comptes utilisateurs, les données personnelles, les billets numériques, les paiements et les accès aux fonctionnalités sensibles. Les opérations critiques doivent être accessibles uniquement aux acteurs autorisés. \\ \lightrule
+Performance & Assurer un temps de réponse acceptable lors de la consultation, la recherche, l’achat et le scan. \\ \lightrule
+Disponibilité & Les fonctionnalités principales de la plateforme doivent rester accessibles afin de garantir une expérience continue aux visiteurs, utilisateurs, partenaires et agents de scan. \\ \lightrule
+Ergonomie & L'application doit proposer une interface claire, intuitive et adaptée à une utilisation mobile afin de faciliter la navigation et l'accès aux différentes fonctionnalités. \\ \lightrule
+Compatibilité & La solution doit être compatible avec les plateformes mobiles ciblées et permettre une utilisation fluide sur différents appareils. \\ \lightrule
+Maintenabilité & Faciliter l’évolution du système et la correction des anomalies. \\ \lightrule
+Scalabilité & Supporter l’augmentation du nombre d’utilisateurs, d’événements et d’opérations. \\ \lightrule
+Traçabilité & Les opérations sensibles telles que les paiements, les remboursements, les scans, les validations, les actions administratives et les opérations de modération doivent être suivies et historisées. \\ \lightrule
+Confidentialité & Les informations personnelles des utilisateurs, les données partenaires et les informations liées aux transactions doivent être protégées contre tout accès non autorisé. \\ \lightrule
+Fiabilité & Le système doit assurer la cohérence des données, notamment lors de l'achat des billets, de la génération des billets numériques, de la revente, du scan et du traitement des opérations financières. \\ \lightrule
+\bottomrule
 \end{tabularx}
 \end{table}
 
@@ -118,13 +118,13 @@ L'équipe Scrum regroupe les intervenants directement impliqués dans la gestion
 \begin{table}[H]
 \centering
 \caption{Répartition des rôles Scrum}
-\renewcommand{\arraystretch}{1.2}
-\begin{tabularx}{\textwidth}{|p{3cm}|p{4cm}|X|}
-\hline
-\Tcell{R\^ole Scrum} & \Tcell{Responsable} & \Tcell{Missions} \\ \hline
-\textbf{Product Owner} & Encadrant professionnel / représentant métier & Définir les besoins fonctionnels, prioriser le backlog produit, valider les fonctionnalités réalisées et s'assurer que le produit répond aux objectifs métier. \\ \hline
-\textbf{Scrum Master} & Chef de projet & Organiser les sprints, suivre l'avancement du projet, faciliter la communication et veiller au respect de la méthodologie Scrum. \\ \hline
-\textbf{Équipe de développement} & Étudiant développeur & Analyser, concevoir, développer, tester et intégrer les fonctionnalités de la plateforme FESTY. \\ \hline
+\begin{tabularx}{\textwidth}{p{3cm} p{4cm} X}
+\toprule
+\Tcell{R\^ole Scrum} & \Tcell{Responsable} & \Tcell{Missions} \\ \midrule
+\textbf{Product Owner} & Encadrant professionnel / représentant métier & Définir les besoins fonctionnels, prioriser le backlog produit, valider les fonctionnalités réalisées et s'assurer que le produit répond aux objectifs métier. \\ \lightrule
+\textbf{Scrum Master} & Chef de projet & Organiser les sprints, suivre l'avancement du projet, faciliter la communication et veiller au respect de la méthodologie Scrum. \\ \lightrule
+\textbf{Équipe de développement} & Étudiant développeur & Analyser, concevoir, développer, tester et intégrer les fonctionnalités de la plateforme FESTY. \\ \lightrule
+\bottomrule
 \end{tabularx}
 \end{table}
 
@@ -138,13 +138,14 @@ Afin de prioriser les fonctionnalités, nous avons adopté la méthode \textbf{M
 \begin{table}[H]
 \centering
 \caption{Niveaux de priorité MoSCoW}
-\begin{tabularx}{\textwidth}{|p{3cm}|X|}
-\hline
-\Tcell{Priorité} & \Tcell{Signification} \\ \hline
-\textbf{Must Have} & Fonctionnalité indispensable au bon fonctionnement de la plateforme. \\ \hline
-\textbf{Should Have} & Fonctionnalité importante, mais pouvant être livrée après les fonctionnalités indispensables. \\ \hline
-\textbf{Could Have} & Fonctionnalité utile ou complémentaire, mais non prioritaire dans la première version. \\ \hline
-\textbf{Won't Have} & Fonctionnalité exclue du périmètre actuel, pouvant être envisagée dans une version future. \\ \hline
+\begin{tabularx}{\textwidth}{p{3cm} X}
+\toprule
+\Tcell{Priorité} & \Tcell{Signification} \\ \midrule
+\textbf{Must Have} & Fonctionnalité indispensable au bon fonctionnement de la plateforme. \\ \lightrule
+\textbf{Should Have} & Fonctionnalité importante, mais pouvant être livrée après les fonctionnalités indispensables. \\ \lightrule
+\textbf{Could Have} & Fonctionnalité utile ou complémentaire, mais non prioritaire dans la première version. \\ \lightrule
+\textbf{Won't Have} & Fonctionnalité exclue du périmètre actuel, pouvant être envisagée dans une version future. \\ \lightrule
+\bottomrule
 \end{tabularx}
 \end{table}
 
@@ -153,26 +154,26 @@ Le tableau suivant présente le Product Backlog priorisé de la plateforme \text
 \begin{table}[H]
 \centering
 \caption{Backlog produit de FESTY}
-\renewcommand{\arraystretch}{1.15}
 \scriptsize
-\begin{tabular}{|p{0.9cm}|p{2.6cm}|p{7.2cm}|p{1.8cm}|p{1.4cm}|}
-\hline
-\Tcell{ID} & \Tcell{Épic / Module} & \Tcell{User Story} & \Tcell{Priorité} & \Tcell{Sprint} \\ \hline
-US01 & Authentification & En tant que visiteur, je veux m’inscrire afin de créer un compte sur la plateforme. & Must Have & S1 \\ \hline
-US02 & Authentification & En tant que visiteur, je veux m’authentifier afin d’accéder aux fonctionnalités sécurisées de FESTY. & Must Have & S1 \\ \hline
-US03 & Gestion du compte & En tant qu’utilisateur, je veux gérer mon compte afin de maintenir mes informations personnelles à jour. & Must Have & S1 \\ \hline
-US04 & Exploration & En tant que visiteur, je veux explorer les événements et les stars afin de découvrir les contenus disponibles sur la plateforme. & Must Have & S2 \\ \hline
-US05 & Personnalisation & En tant qu’utilisateur, je veux personnaliser mon expérience afin de recevoir des recommandations. & Should Have & S2 \\ \hline
-US06 & Billetterie & En tant qu’utilisateur, je veux gérer ma billetterie personnelle (achat, consultation, revente). & Must Have & S3 \\ \hline
-US07 & Interactions & En tant qu’utilisateur, je veux interagir avec les événements afin de publier des avis. & Should Have & S3 \\ \hline
-US08 & Onboarding partenaire & En tant qu’utilisateur, je veux devenir partenaire afin d’organiser des événements. & Must Have & S4 \\ \hline
-US09 & Espace partenaire & En tant que partenaire, je veux gérer mon espace partenaire afin de maintenir mes informations professionnelles et mon activité. & Must Have & S4 \\ \hline
-US10 & Gestion des événements & En tant que partenaire, je veux gérer mes événements afin de les créer, les modifier, gérer leur billetterie et les stars associées. & Must Have & S4 \\ \hline
-US11 & Contrôle d’accès & En tant que partenaire, je veux gérer les sessions de scan et les agents affectés. & Must Have & S5 \\ \hline
-US12 & Scan des billets & En tant qu’agent de scan, je veux contrôler les billets afin de valider l’entrée des participants. & Must Have & S5 \\ \hline
-US13 & Activité et finances partenaire & En tant que partenaire, je veux suivre mon activité et mes finances afin de consulter mes ventes, mes soldes et mes opérations financières. & Should Have & S5 \\ \hline
-US14 & Administration & En tant qu’administrateur, je veux administrer la plateforme. & Must Have & S6 \\ \hline
-US15 & Modération & En tant qu’administrateur, je veux modérer et superviser la plateforme. & Must Have & S6 \\ \hline
+\begin{tabular}{p{0.9cm} p{2.6cm} p{7.2cm} p{1.8cm} p{1.4cm}}
+\toprule
+\Tcell{ID} & \Tcell{Épic / Module} & \Tcell{User Story} & \Tcell{Priorité} & \Tcell{Sprint} \\ \midrule
+US01 & Authentification & En tant que visiteur, je veux m’inscrire afin de créer un compte sur la plateforme. & Must Have & S1 \\ \lightrule
+US02 & Authentification & En tant que visiteur, je veux m’authentifier afin d’accéder aux fonctionnalités sécurisées de FESTY. & Must Have & S1 \\ \lightrule
+US03 & Gestion du compte & En tant qu’utilisateur, je veux gérer mon compte afin de maintenir mes informations personnelles à jour. & Must Have & S1 \\ \lightrule
+US04 & Exploration & En tant que visiteur, je veux explorer les événements et les stars afin de découvrir les contenus disponibles sur la plateforme. & Must Have & S2 \\ \lightrule
+US05 & Personnalisation & En tant qu’utilisateur, je veux personnaliser mon expérience afin de recevoir des recommandations. & Should Have & S2 \\ \lightrule
+US06 & Billetterie & En tant qu’utilisateur, je veux gérer ma billetterie personnelle (achat, consultation, revente). & Must Have & S3 \\ \lightrule
+US07 & Interactions & En tant qu’utilisateur, je veux interagir avec les événements afin de publier des avis. & Should Have & S3 \\ \lightrule
+US08 & Onboarding partenaire & En tant qu’utilisateur, je veux devenir partenaire afin d’organiser des événements. & Must Have & S4 \\ \lightrule
+US09 & Espace partenaire & En tant que partenaire, je veux gérer mon espace partenaire afin de maintenir mes informations professionnelles et mon activité. & Must Have & S4 \\ \lightrule
+US10 & Gestion des événements & En tant que partenaire, je veux gérer mes événements afin de les créer, les modifier, gérer leur billetterie et les stars associées. & Must Have & S4 \\ \lightrule
+US11 & Contrôle d’accès & En tant que partenaire, je veux gérer les sessions de scan et les agents affectés. & Must Have & S5 \\ \lightrule
+US12 & Scan des billets & En tant qu’agent de scan, je veux contrôler les billets afin de valider l’entrée des participants. & Must Have & S5 \\ \lightrule
+US13 & Activité et finances partenaire & En tant que partenaire, je veux suivre mon activité et mes finances afin de consulter mes ventes, mes soldes et mes opérations financières. & Should Have & S5 \\ \lightrule
+US14 & Administration & En tant qu’administrateur, je veux administrer la plateforme. & Must Have & S6 \\ \lightrule
+US15 & Modération & En tant qu’administrateur, je veux modérer et superviser la plateforme. & Must Have & S6 \\ \lightrule
+\bottomrule
 \end{tabular}
 \normalsize
 \end{table}
@@ -187,16 +188,16 @@ Pour le projet \textbf{FESTY}, nous avons découpé le développement en six spr
 \begin{table}[H]
 \centering
 \caption{Planification des sprints}
-\renewcommand{\arraystretch}{1.2}
-\begin{tabularx}{\textwidth}{|p{1.6cm}|p{4.4cm}|X|}
-\hline
-\Tcell{Sprint} & \Tcell{Intitulé} & \Tcell{Objectif principal} \\ \hline
-Sprint 1 & Authentification et comptes & Mettre en place l’inscription, l’authentification et la gestion du compte utilisateur. \\ \hline
-Sprint 2 & Exploration, personnalisation et stars & Permettre la consultation des événements, la recherche, la consultation du catalogue des stars et la personnalisation de l'expérience utilisateur. \\ \hline
-Sprint 3 & Billetterie et interactions & Gérer l’achat, le paiement, la consultation des billets et les interactions. \\ \hline
-Sprint 4 & Espace partenaire & Gérer le parcours partenaire, l’espace dédié et la gestion des événements. \\ \hline
-Sprint 5 & Contrôle d’accès et scan & Gérer sessions de scan, affectation des agents et contrôle des billets. \\ \hline
-Sprint 6 & Administration & Assurer l’administration, la modération et la supervision globale. \\ \hline
+\begin{tabularx}{\textwidth}{p{1.6cm} p{4.4cm} X}
+\toprule
+\Tcell{Sprint} & \Tcell{Intitulé} & \Tcell{Objectif principal} \\ \midrule
+Sprint 1 & Authentification et comptes & Mettre en place l’inscription, l’authentification et la gestion du compte utilisateur. \\ \lightrule
+Sprint 2 & Exploration, personnalisation et stars & Permettre la consultation des événements, la recherche, la consultation du catalogue des stars et la personnalisation de l'expérience utilisateur. \\ \lightrule
+Sprint 3 & Billetterie et interactions & Gérer l’achat, le paiement, la consultation des billets et les interactions. \\ \lightrule
+Sprint 4 & Espace partenaire & Gérer le parcours partenaire, l’espace dédié et la gestion des événements. \\ \lightrule
+Sprint 5 & Contrôle d’accès et scan & Gérer sessions de scan, affectation des agents et contrôle des billets. \\ \lightrule
+Sprint 6 & Administration & Assurer l’administration, la modération et la supervision globale. \\ \lightrule
+\bottomrule
 \end{tabularx}
 \end{table}
 
@@ -211,17 +212,18 @@ Le tableau suivant présente les caractéristiques matérielles de l'ordinateur 
 \begin{table}[H]
 \centering
 \caption{Environnement matériel}
-\begin{tabularx}{\textwidth}{|p{4cm}|X|}
-\hline
-\Tcell{Caractéristique} & \Tcell{Description} \\ \hline
-Nom de l’appareil & DELL G15 5510 \\ \hline
-Processeur & Intel(R) Core(TM) i5-10500H CPU @ 2.50GHz \\ \hline
-Mémoire RAM & 24 Go \\ \hline
-Carte graphique dédiée & NVIDIA GeForce GTX 1650 (4 Go) \\ \hline
-Carte graphique intégrée & Intel(R) UHD Graphics \\ \hline
-Stockage & SSD 238 Go \\ \hline
-Système d’exploitation & Windows \\ \hline
-Appareil de test mobile & Téléphone Android réel via Android Studio, tests iOS via TestFlight \\ \hline
+\begin{tabularx}{\textwidth}{p{4cm} X}
+\toprule
+\Tcell{Caractéristique} & \Tcell{Description} \\ \midrule
+Nom de l’appareil & DELL G15 5510 \\ \lightrule
+Processeur & Intel(R) Core(TM) i5-10500H CPU @ 2.50GHz \\ \lightrule
+Mémoire RAM & 24 Go \\ \lightrule
+Carte graphique dédiée & NVIDIA GeForce GTX 1650 (4 Go) \\ \lightrule
+Carte graphique intégrée & Intel(R) UHD Graphics \\ \lightrule
+Stockage & SSD 238 Go \\ \lightrule
+Système d’exploitation & Windows \\ \lightrule
+Appareil de test mobile & Téléphone Android réel via Android Studio, tests iOS via TestFlight \\ \lightrule
+\bottomrule
 \end{tabularx}
 \end{table}
 
@@ -229,22 +231,23 @@ Appareil de test mobile & Téléphone Android réel via Android Studio, tests iO
 \begin{table}[H]
 \centering
 \caption{Environnement logiciel}
-\begin{tabularx}{\textwidth}{|p{3.8cm}|X|}
-\hline
-\Tcell{Outil} & \Tcell{Utilisation} \\ \hline
-Visual Studio Code & Édition du code source, des fichiers de configuration et de la documentation. \\ \hline
-IntelliJ IDEA & Développement et maintenance de la partie Back-End basée sur Spring Boot. \\ \hline
-Android Studio & Compilation et test de l’application Android \\ \hline
-Postman & Test et validation des API REST. \\ \hline
-Git & Gestion locale des versions du code source. \\ \hline
-GitHub / GitLab & Hébergement du code source et suivi des modifications. \\ \hline
-PostgreSQL & Base de données relationnelle utilisée pour le stockage local des données. \\ \hline
-pgAdmin & Administration et consultation de la base de données PostgreSQL. \\ \hline
-Docker & Exécution de certains services nécessaires aux tests et à l'environnement de développement. \\ \hline
-Stripe CLI & Test local des webhooks Stripe et simulation des événements de paiement. \\ \hline
-ngrok & Exposition temporaire de l'environnement local afin de tester les webhooks et les services externes. \\ \hline
-PlantUML & Réalisation des diagrammes UML. \\ \hline
-Draw.io & Création et amélioration visuelle des diagrammes. \\ \hline
+\begin{tabularx}{\textwidth}{p{3.8cm} X}
+\toprule
+\Tcell{Outil} & \Tcell{Utilisation} \\ \midrule
+Visual Studio Code & Édition du code source, des fichiers de configuration et de la documentation. \\ \lightrule
+IntelliJ IDEA & Développement et maintenance de la partie Back-End basée sur Spring Boot. \\ \lightrule
+Android Studio & Compilation et test de l’application Android \\ \lightrule
+Postman & Test et validation des API REST. \\ \lightrule
+Git & Gestion locale des versions du code source. \\ \lightrule
+GitHub / GitLab & Hébergement du code source et suivi des modifications. \\ \lightrule
+PostgreSQL & Base de données relationnelle utilisée pour le stockage local des données. \\ \lightrule
+pgAdmin & Administration et consultation de la base de données PostgreSQL. \\ \lightrule
+Docker & Exécution de certains services nécessaires aux tests et à l'environnement de développement. \\ \lightrule
+Stripe CLI & Test local des webhooks Stripe et simulation des événements de paiement. \\ \lightrule
+ngrok & Exposition temporaire de l'environnement local afin de tester les webhooks et les services externes. \\ \lightrule
+PlantUML & Réalisation des diagrammes UML. \\ \lightrule
+Draw.io & Création et amélioration visuelle des diagrammes. \\ \lightrule
+\bottomrule
 \end{tabularx}
 \end{table}
 
@@ -265,13 +268,14 @@ La partie Front-End de \textbf{FESTY} comprend l'application mobile destinée au
 \begin{table}[H]
 \centering
 \caption{Technologies Front-End et Mobile}
-\begin{tabularx}{\textwidth}{|p{3.3cm}|X|}
-\hline
-\Tcell{Technologie} & \Tcell{Description} \\ \hline
-Flutter & Framework de développement mobile multiplateforme \cite{REF-FLUTTER}. \\ \hline
-Dart & Langage utilisé avec Flutter \cite{REF-DART}. \\ \hline
-React.js & Développement des dashboards web (admin/partenaire) \cite{REF-REACT}. \\ \hline
-TypeScript / JavaScript & Structuration de la logique front-end \cite{REF-TYPESCRIPT}, \cite{REF-JAVASCRIPT}. \\ \hline
+\begin{tabularx}{\textwidth}{p{3.3cm} X}
+\toprule
+\Tcell{Technologie} & \Tcell{Description} \\ \midrule
+Flutter & Framework de développement mobile multiplateforme \cite{REF-FLUTTER}. \\ \lightrule
+Dart & Langage utilisé avec Flutter \cite{REF-DART}. \\ \lightrule
+React.js & Développement des dashboards web (admin/partenaire) \cite{REF-REACT}. \\ \lightrule
+TypeScript / JavaScript & Structuration de la logique front-end \cite{REF-TYPESCRIPT}, \cite{REF-JAVASCRIPT}. \\ \lightrule
+\bottomrule
 \end{tabularx}
 \end{table}
 
@@ -281,21 +285,22 @@ La partie Back-End de \textbf{FESTY} repose sur un monolithe modulaire développ
 \begin{table}[H]
 \centering
 \caption{Technologies Back-End}
-\begin{tabularx}{\textwidth}{|p{3.6cm}|X|}
-\hline
-\Tcell{Technologie} & \Tcell{Description} \\ \hline
-Java 17 & Langage principal du back-end \cite{REF-JAVA17}. \\ \hline
-Spring Boot & Développement des services back-end \cite{REF-SPRING-BOOT}. \\ \hline
-Maven & Gestion des dépendances et build \cite{REF-MAVEN}. \\ \hline
-Spring MVC / REST API & Exposition des API REST \cite{REF-SPRING-MVC}. \\ \hline
-Spring Modulith & Organisation modulaire du monolithe \cite{REF-SPRING-MODULITH}. \\ \hline
-Spring Security & Gestion de la sécurité et des autorisations \cite{REF-SPRING-SECURITY}. \\ \hline
-JWT & Authentification stateless \cite{REF-JWT}. \\ \hline
-Spring Data JPA / Hibernate & Persistance des données \cite{REF-SPRING-DATA-JPA}, \cite{REF-HIBERNATE}. \\ \hline
-Flyway & Gestion des migrations SQL \cite{REF-FLYWAY}. \\ \hline
-Springdoc OpenAPI / Swagger UI & Documentation et test des API \cite{REF-SPRINGDOC}. \\ \hline
-Spring Boot Actuator & Supervision de l’état de l’application \cite{REF-SPRING-ACTUATOR}. \\ \hline
-Lombok & Réduction du code répétitif \cite{REF-LOMBOK}. \\ \hline
+\begin{tabularx}{\textwidth}{p{3.6cm} X}
+\toprule
+\Tcell{Technologie} & \Tcell{Description} \\ \midrule
+Java 17 & Langage principal du back-end \cite{REF-JAVA17}. \\ \lightrule
+Spring Boot & Développement des services back-end \cite{REF-SPRING-BOOT}. \\ \lightrule
+Maven & Gestion des dépendances et build \cite{REF-MAVEN}. \\ \lightrule
+Spring MVC / REST API & Exposition des API REST \cite{REF-SPRING-MVC}. \\ \lightrule
+Spring Modulith & Organisation modulaire du monolithe \cite{REF-SPRING-MODULITH}. \\ \lightrule
+Spring Security & Gestion de la sécurité et des autorisations \cite{REF-SPRING-SECURITY}. \\ \lightrule
+JWT & Authentification stateless \cite{REF-JWT}. \\ \lightrule
+Spring Data JPA / Hibernate & Persistance des données \cite{REF-SPRING-DATA-JPA}, \cite{REF-HIBERNATE}. \\ \lightrule
+Flyway & Gestion des migrations SQL \cite{REF-FLYWAY}. \\ \lightrule
+Springdoc OpenAPI / Swagger UI & Documentation et test des API \cite{REF-SPRINGDOC}. \\ \lightrule
+Spring Boot Actuator & Supervision de l’état de l’application \cite{REF-SPRING-ACTUATOR}. \\ \lightrule
+Lombok & Réduction du code répétitif \cite{REF-LOMBOK}. \\ \lightrule
+\bottomrule
 \end{tabularx}
 \end{table}
 
@@ -305,18 +310,19 @@ La plateforme \textbf{FESTY} s'appuie sur une base de données relationnelle et 
 \begin{table}[H]
 \centering
 \caption{Base de données, déploiement et services externes}
-\begin{tabularx}{\textwidth}{|p{4.2cm}|X|}
-\hline
-\Tcell{Technologie / Service} & \Tcell{Description} \\ \hline
-PostgreSQL & Stockage principal des données \cite{REF-POSTGRESQL}. \\ \hline
-Supabase & Hébergement cloud PostgreSQL et scénarios d’authentification \cite{REF-SUPABASE}. \\ \hline
-PostGIS / Hibernate Spatial & Gestion des données géographiques \cite{REF-POSTGIS}, \cite{REF-HIBERNATE-SPATIAL}. \\ \hline
-Render & Déploiement des services back-end et front-end \cite{REF-RENDER}. \\ \hline
-Stripe & Paiements, remboursements, webhooks, payouts \cite{REF-STRIPE}. \\ \hline
-Firebase Cloud Messaging & Notifications push \cite{REF-FIREBASE-FCM}. \\ \hline
-Brevo & Emails transactionnels \cite{REF-BREVO}. \\ \hline
-Twilio & SMS de vérification / notification \cite{REF-TWILIO}. \\ \hline
-Bunny.net & Stockage ou diffusion de médias \cite{REF-BUNNY}. \\ \hline
+\begin{tabularx}{\textwidth}{p{4.2cm} X}
+\toprule
+\Tcell{Technologie / Service} & \Tcell{Description} \\ \midrule
+PostgreSQL & Stockage principal des données \cite{REF-POSTGRESQL}. \\ \lightrule
+Supabase & Hébergement cloud PostgreSQL et scénarios d’authentification \cite{REF-SUPABASE}. \\ \lightrule
+PostGIS / Hibernate Spatial & Gestion des données géographiques \cite{REF-POSTGIS}, \cite{REF-HIBERNATE-SPATIAL}. \\ \lightrule
+Render & Déploiement des services back-end et front-end \cite{REF-RENDER}. \\ \lightrule
+Stripe & Paiements, remboursements, webhooks, payouts \cite{REF-STRIPE}. \\ \lightrule
+Firebase Cloud Messaging & Notifications push \cite{REF-FIREBASE-FCM}. \\ \lightrule
+Brevo & Emails transactionnels \cite{REF-BREVO}. \\ \lightrule
+Twilio & SMS de vérification / notification \cite{REF-TWILIO}. \\ \lightrule
+Bunny.net & Stockage ou diffusion de médias \cite{REF-BUNNY}. \\ \lightrule
+\bottomrule
 \end{tabularx}
 \end{table}
 
@@ -356,21 +362,21 @@ Les principaux modules de la plateforme sont les suivants :
 \begin{table}[H]
 \centering
 \caption{Principaux modules du Back-End FESTY}
-\renewcommand{\arraystretch}{1.2}
-\begin{tabularx}{\textwidth}{|p{3.5cm}|X|}
-\hline
-\Tcell{Module} & \Tcell{Rôle principal} \\ \hline
-\textbf{Authentification} & Gestion de l'inscription, de la connexion, des jetons JWT, de l'échange de jeton Supabase et de la sécurisation des accès. \\ \hline
-\textbf{Utilisateurs} & Gestion des profils utilisateurs, des informations personnelles et des préférences. \\ \hline
-\textbf{Événements} & Création, consultation, recherche, modification et gestion du cycle de vie des événements. \\ \hline
-\textbf{Stars} & Gestion du catalogue des stars, des profils publics et des associations entre stars et événements. \\ \hline
-\textbf{Billetterie} & Gestion des types de billets, des réservations, des billets numériques et de la billetterie personnelle. \\ \hline
-\textbf{Paiement} & Intégration avec Stripe pour le paiement, les remboursements, les webhooks, les payouts et les comptes connectés. \\ \hline
-\textbf{Partenaire} & Gestion de l'espace partenaire, du profil professionnel, des événements organisés et du suivi de l'activité. \\ \hline
-\textbf{Scan} & Gestion des sessions de scan, des agents affectés, de la validation des billets et du contrôle d'accès. \\ \hline
-\textbf{Notifications} & Gestion des notifications push, emails et messages liés aux événements importants de la plateforme. \\ \hline
-\textbf{Avis et interactions} & Gestion des avis, des interactions avec les événements et des signalements. \\ \hline
-\textbf{Administration} & Supervision des utilisateurs, validation des partenaires, modération des contenus et configuration globale de la plateforme. \\ \hline
+\begin{tabularx}{\textwidth}{p{3.5cm} X}
+\toprule
+\Tcell{Module} & \Tcell{Rôle principal} \\ \midrule
+\textbf{Authentification} & Gestion de l'inscription, de la connexion, des jetons JWT, de l'échange de jeton Supabase et de la sécurisation des accès. \\ \lightrule
+\textbf{Utilisateurs} & Gestion des profils utilisateurs, des informations personnelles et des préférences. \\ \lightrule
+\textbf{Événements} & Création, consultation, recherche, modification et gestion du cycle de vie des événements. \\ \lightrule
+\textbf{Stars} & Gestion du catalogue des stars, des profils publics et des associations entre stars et événements. \\ \lightrule
+\textbf{Billetterie} & Gestion des types de billets, des réservations, des billets numériques et de la billetterie personnelle. \\ \lightrule
+\textbf{Paiement} & Intégration avec Stripe pour le paiement, les remboursements, les webhooks, les payouts et les comptes connectés. \\ \lightrule
+\textbf{Partenaire} & Gestion de l'espace partenaire, du profil professionnel, des événements organisés et du suivi de l'activité. \\ \lightrule
+\textbf{Scan} & Gestion des sessions de scan, des agents affectés, de la validation des billets et du contrôle d'accès. \\ \lightrule
+\textbf{Notifications} & Gestion des notifications push, emails et messages liés aux événements importants de la plateforme. \\ \lightrule
+\textbf{Avis et interactions} & Gestion des avis, des interactions avec les événements et des signalements. \\ \lightrule
+\textbf{Administration} & Supervision des utilisateurs, validation des partenaires, modération des contenus et configuration globale de la plateforme. \\ \lightrule
+\bottomrule
 \end{tabularx}
 \end{table}
 
@@ -396,20 +402,20 @@ Le tableau suivant récapitule les principaux flux de communication de la platef
 \begin{table}[H]
 \centering
 \caption{Principaux flux de communication}
-\renewcommand{\arraystretch}{1.2}
-\begin{tabularx}{\textwidth}{|p{5.5cm}|X|}
-\hline
-\Tcell{Flux} & \Tcell{Description} \\ \hline
-Application mobile $\rightarrow$ Back-End & Communication HTTPS via API REST sécurisées par JWT. \\ \hline
-Navigateur web partenaire $\rightarrow$ Portail web partenaire & Accès HTTPS à l’application React déployée sur Render. \\ \hline
-Navigateur web administrateur $\rightarrow$ Dashboard administrateur & Accès HTTPS à l’application React d’administration déployée sur Render. \\ \hline
-Portail web partenaire $\rightarrow$ Back-End & Appels HTTPS aux API REST sécurisées. \\ \hline
-Dashboard administrateur $\rightarrow$ Back-End & Appels HTTPS aux API REST sécurisées. \\ \hline
-Application mobile / Portail partenaire $\rightarrow$ Supabase Auth & Authentification OAuth 2.0 pour les utilisateurs et les partenaires. \\ \hline
-Supabase Auth $\rightarrow$ Back-End & Vérification et échange de jeton. \\ \hline
-Back-End $\leftrightarrow$ PostgreSQL/PostGIS & Connexion sécurisée JDBC/TLS pour l’accès aux données. \\ \hline
-Back-End $\rightarrow$ Services externes & Appels API HTTPS vers Stripe, Firebase FCM, Brevo, Twilio et Bunny.net CDN. \\ \hline
-Stripe $\rightarrow$ Back-End & Webhooks HTTPS pour notifier les événements liés aux paiements. \\ \hline
+\begin{tabularx}{\textwidth}{p{5.5cm} X}
+\toprule
+\Tcell{Flux} & \Tcell{Description} \\ \midrule
+Application mobile $\rightarrow$ Back-End & Communication HTTPS via API REST sécurisées par JWT. \\ \lightrule
+Navigateur web partenaire $\rightarrow$ Portail web partenaire & Accès HTTPS à l’application React déployée sur Render. \\ \lightrule
+Navigateur web administrateur $\rightarrow$ Dashboard administrateur & Accès HTTPS à l’application React d’administration déployée sur Render. \\ \lightrule
+Portail web partenaire $\rightarrow$ Back-End & Appels HTTPS aux API REST sécurisées. \\ \lightrule
+Dashboard administrateur $\rightarrow$ Back-End & Appels HTTPS aux API REST sécurisées. \\ \lightrule
+Application mobile / Portail partenaire $\rightarrow$ Supabase Auth & Authentification OAuth 2.0 pour les utilisateurs et les partenaires. \\ \lightrule
+Supabase Auth $\rightarrow$ Back-End & Vérification et échange de jeton. \\ \lightrule
+Back-End $\leftrightarrow$ PostgreSQL/PostGIS & Connexion sécurisée JDBC/TLS pour l’accès aux données. \\ \lightrule
+Back-End $\rightarrow$ Services externes & Appels API HTTPS vers Stripe, Firebase FCM, Brevo, Twilio et Bunny.net CDN. \\ \lightrule
+Stripe $\rightarrow$ Back-End & Webhooks HTTPS pour notifier les événements liés aux paiements. \\ \lightrule
+\bottomrule
 \end{tabularx}
 \end{table}
 

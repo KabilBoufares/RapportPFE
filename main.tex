@@ -72,7 +72,7 @@
 \usepackage{array}
 
 \usepackage{tabularx}
-\renewcommand{\arraystretch}{1.4}
+\renewcommand{\arraystretch}{1.5}
 
 \usepackage{wrapfig}
 \usepackage{subcaption}
@@ -156,7 +156,11 @@ urlcolor=blue}
 \renewcommand{\headrule}{\color{PrimaryBlue} \headruleORIG}
 \renewcommand{\headrulewidth}{1.0pt}
 \usepackage{colortbl}
-\arrayrulecolor{PrimaryBlue!70!black}
+\arrayrulecolor{PrimaryBlue}
+% Booktabs: suppress extra spacing above/below rules so row colours don't bleed
+\setlength{\aboverulesep}{0pt}
+\setlength{\belowrulesep}{0pt}
+\setlength{\extrarowheight}{2pt}
 
 \fancypagestyle{plain}{
   \fancyhead{}
@@ -213,7 +217,10 @@ urlcolor=blue}
 \renewcommand\cellgape{\Gape[2pt]}
 
 %--- Table header cell command ---
-\newcommand{\Tcell}[1]{\cellcolor{TableHeader}\textcolor{white}{\textbf{#1}}}
+\newcommand{\Tcell}[1]{%
+  \cellcolor{TableHeader}\textcolor{white}{\bfseries\small\MakeUppercase{#1}}}
+% Light inter-row rule (replaces \hline between data rows)
+\newcommand{\lightrule}{\noalign{{\color{PrimaryBlue!18}\hrule height 0.35pt}}}
 
 %--- Chapter heading rules helper (avoids nested [] inside optional arg) ---
 \newcommand{\chapterrule}{%
