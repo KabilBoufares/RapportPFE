@@ -1,12 +1,328 @@
-\chapter{chapitre 2} 
-%\vspace{-1.5cm}
+\chapter{Analyse Et Préparation Du Projet}
 \begingroup
 \parindent=0em
 \etocsettocstyle{\rule{\linewidth}{\tocrulewidth}\vskip0.1\baselineskip}{\rule{\linewidth}{\tocrulewidth}}
 \localtableofcontents
 \endgroup
 \newpage
+
 \section{Introduction}
+Ce chapitre présente la phase d’analyse et de préparation du projet FESTY. Il a pour objectif de définir les bases fonctionnelles, méthodologiques et techniques nécessaires à la réalisation de la plateforme.
+
+Nous commençons par l’identification des différents acteurs qui interagissent avec le système. Ensuite, nous présentons les besoins fonctionnels et non fonctionnels afin de préciser les services attendus de l’application. Nous introduisons par la suite le diagramme de cas d’utilisation global, qui offre une vue synthétique des principales interactions entre les acteurs et la plateforme.
+
+Dans un second temps, nous décrivons l’organisation du projet selon la méthodologie Scrum, à travers la définition des rôles, l’élaboration du backlog produit et la planification des sprints. Enfin, nous présentons l’environnement de travail, les technologies utilisées ainsi que l’architecture générale de la solution.
+
+\section{Identification des acteurs}
+L’identification des acteurs constitue une étape essentielle dans l’analyse fonctionnelle du système. Un acteur représente une entité externe qui interagit avec la plateforme afin d’atteindre un objectif précis.
+
+\begin{table}[H]
+\centering
+\caption{Liste des acteurs}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\textwidth}{|p{3cm}|X|}
+\hline
+\textbf{Acteur} & \textbf{Description} \\ \hline
+Visiteur & Personne non authentifiée qui accède aux fonctionnalités publiques de la plateforme. \\ \hline
+Utilisateur & Personne authentifiée disposant d’un compte sur la plateforme. \\ \hline
+Partenaire & Organisateur d’événements disposant d’un espace de gestion dédié. \\ \hline
+Agent de scan & Utilisateur affecté à un événement afin de contrôler les billets à l’entrée. \\ \hline
+Administrateur & Responsable de supervision de la plateforme et de ses opérations sensibles. \\ \hline
+\end{tabularx}
+\end{table}
+
+Dans notre modélisation, l’Utilisateur hérite des fonctionnalités du Visiteur. De même, l’Agent de scan hérite des fonctionnalités de l’Utilisateur, puisqu’il s’agit d’un utilisateur ayant une affectation spécifique pour le contrôle d’accès.
+
+\section{Spécification des besoins}
+La spécification des besoins permet de définir les fonctionnalités attendues de la plateforme ainsi que les contraintes de qualité auxquelles le système doit répondre.
+
+\subsection{Besoins fonctionnels}
+\begin{table}[H]
+\centering
+\caption{Besoins fonctionnels principaux par acteur}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\textwidth}{|p{3.2cm}|X|}
+\hline
+\textbf{Acteur} & \textbf{Besoins fonctionnels principaux} \\ \hline
+Visiteur & S’inscrire, s’authentifier et explorer les événements et les stars. \\ \hline
+Utilisateur & Gérer son compte, personnaliser son expérience, gérer sa billetterie personnelle, interagir avec les événements et devenir partenaire. \\ \hline
+Partenaire & Gérer son espace partenaire, gérer ses événements, gérer le contrôle d’accès, suivre son activité et ses finances. \\ \hline
+Agent de scan & Contrôler les billets à l’entrée des événements. \\ \hline
+Administrateur & Administrer la plateforme, modérer et superviser la plateforme. \\ \hline
+\end{tabularx}
+\end{table}
+
+\subsection{Besoins non fonctionnels}
+\begin{table}[H]
+\centering
+\caption{Besoins non fonctionnels}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\textwidth}{|p{3.6cm}|X|}
+\hline
+\textbf{Besoin non fonctionnel} & \textbf{Description} \\ \hline
+Sécurité & Protéger les comptes, les données personnelles, les billets numériques, les paiements et les accès sensibles. \\ \hline
+Performance & Assurer un temps de réponse acceptable lors de la consultation, la recherche, l’achat et le scan. \\ \hline
+Disponibilité & Maintenir les fonctionnalités principales accessibles en continu. \\ \hline
+Ergonomie & Proposer une interface claire, intuitive et adaptée au mobile. \\ \hline
+Compatibilité & Assurer une utilisation fluide sur les plateformes mobiles ciblées. \\ \hline
+Maintenabilité & Faciliter l’évolution du système et la correction des anomalies. \\ \hline
+Scalabilité & Supporter l’augmentation du nombre d’utilisateurs, d’événements et d’opérations. \\ \hline
+Traçabilité & Historiser les opérations sensibles (paiements, remboursements, scans, modération). \\ \hline
+Confidentialité & Protéger les informations personnelles et transactionnelles contre les accès non autorisés. \\ \hline
+Fiabilité & Assurer la cohérence des données métier et financières. \\ \hline
+\end{tabularx}
+\end{table}
+
+\section{Diagramme de cas d’utilisation global}
+Après l'identification des acteurs et la spécification des besoins, nous présentons le diagramme de cas d'utilisation global de la plateforme \textbf{FESTY}. Ce diagramme permet de représenter, d'une manière synthétique, les principales interactions entre les acteurs et le système.
+
+Afin de conserver une vue lisible et académique, les cas d'utilisation présentés dans ce diagramme sont formulés à un niveau global. Certains cas regroupent donc plusieurs sous-fonctionnalités qui seront détaillées ultérieurement dans les chapitres de sprint à travers des raffinements, des descriptions textuelles et des diagrammes complémentaires.
+
+Le diagramme global met en évidence cinq acteurs principaux : le \textbf{Visiteur}, l'\textbf{Utilisateur}, le \textbf{Partenaire}, l'\textbf{Agent de scan} et l'\textbf{Administrateur}. L'Utilisateur hérite fonctionnellement des cas d'utilisation du Visiteur, tandis que l'Agent de scan hérite des fonctionnalités de l'Utilisateur et dispose d'un rôle spécifique lié au contrôle des billets.
+
+Les cas d'utilisation sont volontairement regroupés afin de représenter les grandes fonctionnalités du système. Ainsi, « Explorer les événements et stars » regroupe la consultation, la recherche et l'accès aux informations publiques. « Gérer sa billetterie personnelle » regroupe les opérations liées à l'achat, la consultation, la revente et le suivi des billets. De même, « Administrer la plateforme » et « Modérer et superviser la plateforme » regroupent les principales actions de gestion, de contrôle et de supervision assurées par l'administrateur.
+
+La figure suivante présente le diagramme de cas d'utilisation global de la plateforme \textbf{FESTY}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{globalusecase.png}
+    \caption{Diagramme de cas d'utilisation global de FESTY}
+\end{figure}
+
+Ce diagramme constitue une vue globale du système. Les traitements détaillés liés à l'authentification, à la billetterie, au paiement, à la gestion des événements, au scan, à la modération et à l'administration seront approfondis dans les chapitres de sprint.
+
+\section{Pilotage du projet avec Scrum}
+Après l'identification des besoins et la définition du périmètre fonctionnel global, nous avons organisé la réalisation de \textbf{FESTY} selon une démarche Scrum. Le projet est découpé en plusieurs sprints, chacun regroupant un ensemble cohérent de fonctionnalités à analyser, concevoir, développer et valider.
+
+Cette organisation permet de structurer le développement de manière progressive, depuis les fonctionnalités de base jusqu'aux modules avancés tels que la billetterie, le contrôle d'accès, la supervision financière et l'administration.
+
+\subsection{Équipe et rôles Scrum}
+
+L'équipe Scrum regroupe les intervenants directement impliqués dans la gestion et la réalisation du projet. Chaque rôle possède des responsabilités précises afin d'assurer le bon déroulement des sprints et la livraison progressive des fonctionnalités.
+
+\begin{table}[H]
+\centering
+\caption{Répartition des rôles Scrum}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\textwidth}{|p{3cm}|p{4cm}|X|}
+\hline
+\textbf{Rôle Scrum} & \textbf{Responsable} & \textbf{Missions} \\ \hline
+\textbf{Product Owner} & Encadrant professionnel / représentant métier & Définir les besoins fonctionnels, prioriser le backlog produit, valider les fonctionnalités réalisées et s'assurer que le produit répond aux objectifs métier. \\ \hline
+\textbf{Scrum Master} & Chef de projet & Organiser les sprints, suivre l'avancement du projet, faciliter la communication et veiller au respect de la méthodologie Scrum. \\ \hline
+\textbf{Équipe de développement} & Étudiant développeur & Analyser, concevoir, développer, tester et intégrer les fonctionnalités de la plateforme FESTY. \\ \hline
+\end{tabularx}
+\end{table}
+
+Dans le cadre de ce projet, l'équipe de développement assure également les tâches de conception, de documentation et de validation technique. Le travail est organisé en sprints afin de garantir une progression structurée et une livraison incrémentale des fonctionnalités.
+
+\subsection{Backlog du produit}
+Le Product Backlog regroupe l'ensemble des fonctionnalités à réaliser dans le cadre du projet \textbf{FESTY}. Il est exprimé sous forme de \textit{user stories} afin de représenter les besoins du point de vue des différents acteurs de la plateforme.
+
+Afin de prioriser les fonctionnalités, nous avons adopté la méthode \textbf{MoSCoW} [REF-MOSCOW]. Cette méthode permet de classer les besoins selon leur importance dans le produit final :
+
+\begin{table}[H]
+\centering
+\caption{Niveaux de priorité MoSCoW}
+\begin{tabularx}{\textwidth}{|p{3cm}|X|}
+\hline
+\textbf{Priorité} & \textbf{Signification} \\ \hline
+\textbf{Must Have} & Fonctionnalité indispensable au bon fonctionnement de la plateforme. \\ \hline
+\textbf{Should Have} & Fonctionnalité importante, mais pouvant être livrée après les fonctionnalités indispensables. \\ \hline
+\textbf{Could Have} & Fonctionnalité utile ou complémentaire, mais non prioritaire dans la première version. \\ \hline
+\textbf{Won't Have} & Fonctionnalité exclue du périmètre actuel, pouvant être envisagée dans une version future. \\ \hline
+\end{tabularx}
+\end{table}
+
+Le tableau suivant présente le Product Backlog priorisé de la plateforme \textbf{FESTY}.
+
+\begin{table}[H]
+\centering
+\caption{Backlog produit de FESTY}
+\renewcommand{\arraystretch}{1.15}
+\scriptsize
+\begin{tabular}{|p{0.9cm}|p{2.6cm}|p{7.2cm}|p{1.8cm}|p{1.4cm}|}
+\hline
+\textbf{ID} & \textbf{Épic / Module} & \textbf{User Story} & \textbf{Priorité} & \textbf{Sprint} \\ \hline
+US01 & Authentification & En tant que visiteur, je veux m’inscrire afin de créer un compte sur la plateforme. & Must Have & S1 \\ \hline
+US02 & Authentification & En tant que visiteur, je veux m’authentifier afin d’accéder aux fonctionnalités sécurisées de FESTY. & Must Have & S1 \\ \hline
+US03 & Gestion du compte & En tant qu’utilisateur, je veux gérer mon compte afin de maintenir mes informations personnelles à jour. & Must Have & S1 \\ \hline
+US04 & Exploration & En tant que visiteur, je veux explorer les événements et les stars afin de découvrir les contenus disponibles. & Must Have & S2 \\ \hline
+US05 & Personnalisation & En tant qu’utilisateur, je veux personnaliser mon expérience afin de recevoir des recommandations. & Should Have & S2 \\ \hline
+US06 & Billetterie & En tant qu’utilisateur, je veux gérer ma billetterie personnelle (achat, consultation, revente). & Must Have & S3 \\ \hline
+US07 & Interactions & En tant qu’utilisateur, je veux interagir avec les événements afin de publier des avis. & Should Have & S3 \\ \hline
+US08 & Onboarding partenaire & En tant qu’utilisateur, je veux devenir partenaire afin d’organiser des événements. & Must Have & S4 \\ \hline
+US09 & Espace partenaire & En tant que partenaire, je veux gérer mon espace partenaire. & Must Have & S4 \\ \hline
+US10 & Gestion événements & En tant que partenaire, je veux gérer mes événements, leur billetterie et les stars associées. & Must Have & S4 \\ \hline
+US11 & Contrôle d’accès & En tant que partenaire, je veux gérer les sessions de scan et les agents affectés. & Must Have & S5 \\ \hline
+US12 & Scan des billets & En tant qu’agent de scan, je veux contrôler les billets afin de valider l’entrée des participants. & Must Have & S5 \\ \hline
+US13 & Activité partenaire & En tant que partenaire, je veux suivre mes ventes, soldes et opérations financières. & Should Have & S5 \\ \hline
+US14 & Administration & En tant qu’administrateur, je veux administrer la plateforme. & Must Have & S6 \\ \hline
+US15 & Modération & En tant qu’administrateur, je veux modérer et superviser la plateforme. & Must Have & S6 \\ \hline
+\end{tabular}
+\normalsize
+\end{table}
+
+\subsection{Planification des sprints}
+\begin{table}[H]
+\centering
+\caption{Planification des sprints}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\textwidth}{|p{1.6cm}|p{4.4cm}|X|}
+\hline
+\textbf{Sprint} & \textbf{Intitulé} & \textbf{Objectif principal} \\ \hline
+Sprint 1 & Authentification et comptes & Mettre en place l’inscription, l’authentification et la gestion du compte utilisateur. \\ \hline
+Sprint 2 & Exploration et personnalisation & Permettre la consultation des événements, la recherche, les stars et la personnalisation. \\ \hline
+Sprint 3 & Billetterie et interactions & Gérer l’achat, le paiement, la consultation des billets et les interactions. \\ \hline
+Sprint 4 & Espace partenaire & Gérer le parcours partenaire, l’espace dédié et la gestion des événements. \\ \hline
+Sprint 5 & Contrôle d’accès et scan & Gérer sessions de scan, affectation des agents et contrôle des billets. \\ \hline
+Sprint 6 & Administration & Assurer l’administration, la modération et la supervision globale. \\ \hline
+\end{tabularx}
+\end{table}
+
+\section{Environnement de travail}
+\subsection{Environnement matériel}
+\begin{table}[H]
+\centering
+\caption{Environnement matériel}
+\begin{tabularx}{\textwidth}{|p{4cm}|X|}
+\hline
+\textbf{Caractéristique} & \textbf{Description} \\ \hline
+Nom de l’appareil & DELL G15 5510 \\ \hline
+Processeur & Intel(R) Core(TM) i5-10500H CPU @ 2.50GHz \\ \hline
+Mémoire RAM & 24 Go \\ \hline
+Carte graphique dédiée & NVIDIA GeForce GTX 1650 (4 Go) \\ \hline
+Carte graphique intégrée & Intel(R) UHD Graphics \\ \hline
+Stockage & SSD 238 Go \\ \hline
+Système d’exploitation & Windows \\ \hline
+Appareil de test mobile & Téléphone Android réel via Android Studio, tests iOS via TestFlight \\ \hline
+\end{tabularx}
+\end{table}
+
+\subsection{Environnement logiciel}
+\begin{table}[H]
+\centering
+\caption{Environnement logiciel}
+\begin{tabularx}{\textwidth}{|p{3.8cm}|X|}
+\hline
+\textbf{Outil} & \textbf{Utilisation} \\ \hline
+Visual Studio Code & Édition du code, configuration et documentation \\ \hline
+IntelliJ IDEA & Développement du back-end Spring Boot \\ \hline
+Android Studio & Compilation et test de l’application Android \\ \hline
+Postman & Test et validation des API REST \\ \hline
+Git & Gestion locale des versions \\ \hline
+GitHub / GitLab & Hébergement du code source \\ \hline
+PostgreSQL & Base de données relationnelle \\ \hline
+pgAdmin & Administration de PostgreSQL \\ \hline
+Docker & Exécution de services locaux \\ \hline
+Stripe CLI & Test des webhooks Stripe \\ \hline
+ngrok & Exposition temporaire de services locaux \\ \hline
+PlantUML & Génération des diagrammes UML \\ \hline
+Draw.io & Édition visuelle des diagrammes \\ \hline
+\end{tabularx}
+\end{table}
+
+\section{Technologies utilisées}
+Cette section présente les principales technologies utilisées pour le développement de la plateforme FESTY.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{technologies-festy.png}
+    \caption{Technologies et services utilisés dans FESTY}
+\end{figure}
+
+\subsection{Technologies Front-End et Mobile}
+\begin{table}[H]
+\centering
+\caption{Technologies Front-End et Mobile}
+\begin{tabularx}{\textwidth}{|p{3.3cm}|X|}
+\hline
+\textbf{Technologie} & \textbf{Description} \\ \hline
+Flutter & Framework de développement mobile multiplateforme [REF-FLUTTER]. \\ \hline
+Dart & Langage utilisé avec Flutter [REF-DART]. \\ \hline
+React.js & Développement des dashboards web (admin/partenaire) [REF-REACT]. \\ \hline
+TypeScript / JavaScript & Structuration de la logique front-end [REF-TYPESCRIPT], [REF-JAVASCRIPT]. \\ \hline
+\end{tabularx}
+\end{table}
+
+\subsection{Technologies Back-End}
+\begin{table}[H]
+\centering
+\caption{Technologies Back-End}
+\begin{tabularx}{\textwidth}{|p{3.6cm}|X|}
+\hline
+\textbf{Technologie} & \textbf{Description} \\ \hline
+Java 17 & Langage principal du back-end [REF-JAVA17]. \\ \hline
+Spring Boot & Développement des services back-end [REF-SPRING-BOOT]. \\ \hline
+Maven & Gestion des dépendances et build [REF-MAVEN]. \\ \hline
+Spring MVC / REST API & Exposition des API REST [REF-SPRING-MVC]. \\ \hline
+Spring Modulith & Organisation modulaire du monolithe [REF-SPRING-MODULITH]. \\ \hline
+Spring Security & Gestion de la sécurité et des autorisations [REF-SPRING-SECURITY]. \\ \hline
+JWT & Authentification stateless [REF-JWT]. \\ \hline
+Spring Data JPA / Hibernate & Persistance des données [REF-SPRING-DATA-JPA], [REF-HIBERNATE]. \\ \hline
+Flyway & Gestion des migrations SQL [REF-FLYWAY]. \\ \hline
+Springdoc OpenAPI / Swagger UI & Documentation et test des API [REF-SPRINGDOC]. \\ \hline
+Spring Boot Actuator & Supervision de l’état de l’application [REF-SPRING-ACTUATOR]. \\ \hline
+Lombok & Réduction du code répétitif [REF-LOMBOK]. \\ \hline
+\end{tabularx}
+\end{table}
+
+\subsection{Base de données, déploiement et services externes}
+\begin{table}[H]
+\centering
+\caption{Base de données, déploiement et services externes}
+\begin{tabularx}{\textwidth}{|p{4.2cm}|X|}
+\hline
+\textbf{Technologie / Service} & \textbf{Description} \\ \hline
+PostgreSQL & Stockage principal des données [REF-POSTGRESQL]. \\ \hline
+Supabase & Hébergement cloud PostgreSQL et scénarios d’authentification [REF-SUPABASE]. \\ \hline
+PostGIS / Hibernate Spatial & Gestion des données géographiques [REF-POSTGIS], [REF-HIBERNATE-SPATIAL]. \\ \hline
+Render & Déploiement des services back-end et front-end [REF-RENDER]. \\ \hline
+Stripe & Paiements, remboursements, webhooks, payouts [REF-STRIPE]. \\ \hline
+Firebase Cloud Messaging & Notifications push [REF-FIREBASE-FCM]. \\ \hline
+Brevo & Emails transactionnels [REF-BREVO]. \\ \hline
+Twilio & SMS de vérification / notification [REF-TWILIO]. \\ \hline
+Bunny.net & Stockage ou diffusion de médias [REF-BUNNY]. \\ \hline
+\end{tabularx}
+\end{table}
+
+\section{Architecture de la solution}
+L’architecture de la solution décrit la répartition des composants, leurs responsabilités et les flux de communication entre les clients, le back-end, la base de données et les services externes.
+
+\subsection{Architecture physique}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{architecture-deploiement-festy.png}
+    \caption{Architecture de déploiement de la plateforme FESTY}
+\end{figure}
+
+\subsection{Architecture logique modulaire}
+Sur le plan logique, FESTY repose sur une architecture modulaire organisée autour d’un back-end Spring Boot. Bien que le projet soit déployé sous la forme d’un service back-end unique, son organisation interne suit une logique de monolithe modulaire.
+
+Les principaux modules sont: Authentification, Utilisateurs, Événements, Stars, Billetterie, Paiement, Partenaire, Scan, Notifications, Avis et interactions, Administration.
+
+\subsection{Flux de communication}
+Les flux de communication de FESTY reposent principalement sur HTTPS afin d’assurer la sécurité des échanges.
+
+\begin{table}[H]
+\centering
+\caption{Principaux flux de communication}
+\begin{tabularx}{\textwidth}{|p{4.8cm}|X|}
+\hline
+\textbf{Flux} & \textbf{Description} \\ \hline
+Application mobile $\rightarrow$ Back-End & Communication HTTPS via API REST sécurisées par JWT. \\ \hline
+Navigateur partenaire $\rightarrow$ Portail web & Accès HTTPS à l’application React déployée sur Render. \\ \hline
+Navigateur admin $\rightarrow$ Dashboard admin & Accès HTTPS à l’application React d’administration. \\ \hline
+Portail partenaire / Dashboard admin $\rightarrow$ Back-End & Appels HTTPS vers les API REST sécurisées. \\ \hline
+Application mobile / Portail partenaire $\rightarrow$ Supabase Auth & Authentification OAuth 2.0. \\ \hline
+Back-End $\leftrightarrow$ PostgreSQL/PostGIS & Connexion sécurisée JDBC/TLS pour l’accès aux données. \\ \hline
+Back-End $\rightarrow$ Services externes & Appels API HTTPS vers Stripe, Firebase FCM, Brevo, Twilio et Bunny.net. \\ \hline
+Stripe $\rightarrow$ Back-End & Webhooks HTTPS pour les événements de paiement. \\ \hline
+\end{tabularx}
+\end{table}
 
 \section{Conclusion}
+Dans ce chapitre, nous avons présenté la phase d’analyse et de préparation du projet FESTY. Nous avons identifié les acteurs, défini les besoins fonctionnels et non fonctionnels, présenté le diagramme de cas d’utilisation global, puis décrit le pilotage Scrum à travers l’équipe, le backlog et la planification des sprints.
+
+Nous avons également détaillé l’environnement de travail, les technologies utilisées et l’architecture générale de la solution. Cette préparation constitue la base des chapitres suivants consacrés à la réalisation des fonctionnalités par sprint.
 
