@@ -20,6 +20,13 @@
 \definecolor{codepurple}{rgb}{0.58,0,0.82}
 \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
 
+%--- Professional colour palette ---
+\usepackage{booktabs}
+\definecolor{PrimaryBlue}{RGB}{25,84,148}
+\definecolor{TableHeader}{RGB}{25,84,148}
+\definecolor{TableAlt}{RGB}{235,244,255}
+%------------------------------------
+
 %Code listing style named "mystyle"
 \lstdefinestyle{mystyle}{
   backgroundcolor=\color{backcolour}, commentstyle=\color{codegreen},
@@ -138,10 +145,10 @@ urlcolor=blue}
 
 \let\headruleORIG\headrule
 
-\renewcommand{\headrule}{\color{black} \headruleORIG}
+\renewcommand{\headrule}{\color{PrimaryBlue} \headruleORIG}
 \renewcommand{\headrulewidth}{1.0pt}
 \usepackage{colortbl}
-\arrayrulecolor{black}
+\arrayrulecolor{PrimaryBlue!70!black}
 
 \fancypagestyle{plain}{
   \fancyhead{}
@@ -196,6 +203,24 @@ urlcolor=blue}
 \renewcommand\theadfont{\bfseries}
 \renewcommand\cellalign{bl}
 \renewcommand\cellgape{\Gape[2pt]}
+
+%--- Table header cell command ---
+\newcommand{\Tcell}[1]{\cellcolor{TableHeader}\textcolor{white}{\textbf{#1}}}
+
+%--- Section / subsection heading styles ---
+\titleformat{\section}[block]
+  {\normalfont\Large\bfseries\color{PrimaryBlue}}
+  {\thesection}{1em}{}
+  [\vspace{2pt}{\color{PrimaryBlue}\rule{\linewidth}{0.8pt}}]
+
+\titleformat{\subsection}[block]
+  {\normalfont\large\bfseries\color{PrimaryBlue!80!black}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}[block]
+  {\normalfont\normalsize\bfseries\color{PrimaryBlue!60!black}}
+  {\thesubsubsection}{1em}{}
+%-----------------------------------------
 
 \parskip=5pt
 
@@ -282,7 +307,8 @@ urlcolor=blue}
   \include{chapters/09-chapitre4}
   \include{chapters/11-Conclusion}
  
-\printbibliography[nottype=misc,title={Bibliographie et Webographie}]
+\nocite{*}
+\printbibliography[title={Bibliographie et Webographie}]
  
 
 
