@@ -1,0 +1,31 @@
+# LaTeX compilation artifacts
+*.aux
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.lof
+*.log
+*.lot
+*.out
+*.run.xml
+*.toc
+*.xdv
+*.synctex.gz
+
+# PDF output (optional - uncomment if you don't want to version it)
+# *.pdf
+
+# Build directory
+build/
+
+# IDE specific files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS specific
+.DS_Store
+Thumbs.db

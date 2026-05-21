@@ -1,0 +1,58 @@
+@startuml
+title Diagramme de séquence — S’authentifier à la plateforme
+
+hide footbox
+autonumber
+
+actor "Utilisateur" as U
+boundary "Interface utilisateur FESTY" as IHM
+control "Système d’authentification" as SA
+database "Référentiel des comptes" as RC
+
+U -> IHM ++ : Accéder à l’interface de connexion
+IHM --> U -- : Afficher le formulaire de connexion
+
+U -> IHM ++ : Saisir l’email et le mot de passe
+IHM -> IHM : Vérifier le format des champs
+
+alt [Champs invalides]
+    IHM --> U -- : Afficher les erreurs de saisie
+
+else [Champs valides]
+    IHM -> SA ++ : Demander l’authentification(email, motDePasse)
+
+    SA -> RC ++ : Rechercher le compte par email
+    RC --> SA -- : Compte trouvé / aucun compte
+
+    alt [Compte introuvable]
+        SA --> IHM -- : Authentification refusée
+        IHM --> U -- : Afficher un message d’erreur
+
+    else [Compte trouvé]
+        SA -> SA : Vérifier le mot de passe
+
+        alt [Mot de passe incorrect]
+            SA --> IHM -- : Authentification refusée
+            IHM --> U -- : Afficher un message d’erreur
+
+        else [Mot de passe correct]
+            SA -> RC ++ : Consulter l’état du compte
+            RC --> SA -- : État du compte
+
+            alt [Compte non vérifié]
+                SA --> IHM -- : Vérification requise
+                IHM --> U -- : Rediriger vers la vérification du compte
+
+            else [Compte suspendu]
+                SA --> IHM -- : Accès refusé
+                IHM --> U -- : Afficher un message de compte suspendu
+
+            else [Compte actif]
+                SA -> SA : Générer une session d’accès sécurisée
+                SA --> IHM -- : Session utilisateur + profil
+                IHM --> U -- : Rediriger vers l’espace personnel
+            end
+        end
+    end
+end
+@enduml

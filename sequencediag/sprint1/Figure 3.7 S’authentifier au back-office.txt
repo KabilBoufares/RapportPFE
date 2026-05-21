@@ -1,0 +1,95 @@
+@startuml
+title Diagramme de séquence — S'authentifier au back-office
+
+hide footbox
+autonumber
+
+skinparam sequenceMessageAlign center
+skinparam responseMessageBelowArrow true
+
+skinparam SequenceGroupFontColor Black
+skinparam SequenceGroupHeaderFontColor Black
+skinparam SequenceGroupBorderColor Black
+skinparam SequenceGroupBackgroundColor White
+
+actor "Administrateur" as A
+boundary "Interface back-office FESTY" as IHM
+control "Système d'authentification" as SA
+database "Référentiel des comptes" as BD
+participant "Services de sécurité\n(2FA / Email Brevo)" as SEC
+
+== Authentification au back-office ==
+
+A -> IHM ++ : Accéder à l'interface de connexion
+IHM --> A -- : Afficher le formulaire
+
+A -> IHM ++ : Saisir email et mot de passe
+IHM -> SA ++ : Demander l'authentification
+
+SA -> BD ++ : Vérifier le compte administrateur
+BD --> SA -- : Résultat de vérification
+
+alt Identifiants incorrects
+    SA --> IHM -- : Authentification refusée
+    IHM --> A -- : Afficher un message d'erreur
+
+else Identifiants corrects
+    SA -> SEC ++ : Déclencher la vérification 2FA
+    SEC --> SA -- : Vérification 2FA initialisée
+
+    SA --> IHM -- : Demander le code 2FA
+    IHM --> A -- : Afficher le formulaire 2FA
+end
+
+== Vérification du code 2FA ==
+
+A -> IHM ++ : Saisir le code 2FA
+IHM -> SA ++ : Transmettre le code
+
+SA -> SEC ++ : Vérifier le code 2FA
+SEC --> SA -- : Code valide / invalide
+
+alt Code 2FA incorrect ou expiré
+    SA --> IHM -- : Accès refusé
+    IHM --> A -- : Demander un code valide
+
+else Code 2FA valide
+    SA -> BD ++ : Finaliser la session administrateur
+    BD --> SA -- : Session créée
+
+    SA --> IHM -- : Authentification confirmée
+    IHM --> A -- : Accéder au tableau de bord
+end
+
+== Mot de passe oublié ==
+
+opt Mot de passe oublié
+    A -> IHM ++ : Demander la récupération du mot de passe
+    IHM -> SA ++ : Transmettre l'adresse email
+
+    SA -> BD ++ : Vérifier le compte et enregistrer l'OTP
+    BD --> SA -- : Demande préparée
+
+    SA -> SEC ++ : Envoyer l'OTP par email
+    SEC --> A : Recevoir le code OTP
+    SEC --> SA -- : Envoi confirmé
+
+    SA --> IHM -- : Réponse neutre
+    IHM --> A -- : Afficher l'écran de réinitialisation
+
+    A -> IHM ++ : Saisir OTP et nouveau mot de passe
+    IHM -> SA ++ : Soumettre la réinitialisation
+
+    SA -> BD ++ : Vérifier l'OTP et mettre à jour le mot de passe
+    BD --> SA -- : Résultat de réinitialisation
+
+    alt OTP invalide ou expiré
+        SA --> IHM -- : Réinitialisation refusée
+        IHM --> A -- : Afficher un message d'erreur
+
+    else OTP valide
+        SA --> IHM -- : Réinitialisation confirmée
+        IHM --> A -- : Rediriger vers la connexion
+    end
+end
+@enduml
