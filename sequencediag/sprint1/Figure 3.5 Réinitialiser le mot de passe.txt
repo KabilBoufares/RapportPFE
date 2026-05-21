@@ -1,0 +1,71 @@
+@startuml
+title Diagramme de séquence — Réinitialiser le mot de passe
+
+hide footbox
+autonumber
+
+actor "Utilisateur" as U
+boundary "Interface FESTY" as IHM
+control "Système d'authentification" as SA
+database "Référentiel des comptes" as RC
+participant "Service OTP/SMS" as OTP
+
+== Demande de réinitialisation ==
+
+U -> IHM ++ : Accéder à l'interface de réinitialisation
+IHM --> U -- : Afficher le formulaire de récupération
+
+U -> IHM ++ : Saisir le numéro de téléphone
+IHM -> IHM : Vérifier le format du numéro
+
+alt [Numéro invalide]
+    IHM --> U -- : Afficher les erreurs de saisie
+
+else [Numéro valide]
+    IHM -> SA ++ : Demander la réinitialisation(numeroTelephone)
+
+    SA -> RC ++ : Rechercher le compte par numéro
+    RC --> SA -- : Compte trouvé / introuvable
+
+    opt [Compte trouvé]
+        SA -> SA : Générer un code OTP temporaire
+
+        SA -> RC ++ : Enregistrer le code OTP
+        RC --> SA -- : Code enregistré
+
+        SA -> OTP ++ : Demander l'envoi du code OTP
+        OTP --> SA -- : Envoi confirmé
+        OTP -> U : Envoyer le code par SMS
+    end
+
+    SA --> IHM -- : Réponse neutre
+    IHM --> U -- : Afficher le message de récupération
+end
+
+== Vérification du code et changement du mot de passe ==
+
+U -> IHM ++ : Saisir le code OTP et le nouveau mot de passe
+IHM -> IHM : Vérifier la conformité du mot de passe
+
+alt [Mot de passe non conforme]
+    IHM --> U -- : Afficher les erreurs de saisie
+
+else [Formulaire valide]
+    IHM -> SA ++ : Confirmer la réinitialisation(codeOTP, nouveauMotDePasse)
+
+    SA -> RC ++ : Vérifier le code OTP
+    RC --> SA -- : Code valide / invalide
+
+    alt [Code invalide ou expiré]
+        SA --> IHM -- : Réinitialisation refusée
+        IHM --> U -- : Afficher un message d'erreur
+
+    else [Code valide]
+        SA -> RC ++ : Mettre à jour le mot de passe\net invalider le code OTP
+        RC --> SA -- : Mot de passe mis à jour
+
+        SA --> IHM -- : Réinitialisation réussie
+        IHM --> U -- : Afficher la confirmation\net rediriger vers la connexion
+    end
+end
+@enduml

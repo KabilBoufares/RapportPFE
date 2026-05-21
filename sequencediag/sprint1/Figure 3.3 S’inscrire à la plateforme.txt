@@ -1,0 +1,106 @@
+@startuml
+
+
+hide footbox
+autonumber
+
+actor "Visiteur" as V
+boundary "Interface FESTY" as IHM
+control "Système d'inscription" as SI
+database "Référentiel des comptes" as RC
+participant "Service OTP/SMS" as OTP
+
+
+
+V -> IHM ++ : Accéder à l'interface d'inscription
+IHM --> V -- : Afficher le formulaire d'inscription
+
+V -> IHM ++ : Saisir les informations d'inscription\n(email, mot de passe, téléphone, nom)
+IHM -> IHM : Vérifier le format des champs
+
+alt [Champs invalides]
+    IHM --> V -- : Afficher les erreurs de saisie
+
+else [Champs valides]
+    IHM -> SI ++ : Soumettre la demande d'inscription(données)
+
+    SI -> RC ++ : Vérifier la disponibilité\n(email, téléphone)
+    RC --> SI -- : Disponible / déjà utilisé
+
+    alt [Email ou téléphone déjà utilisé]
+        SI --> IHM -- : Inscription refusée
+        IHM --> V -- : Afficher un message d'erreur
+
+    else [Informations disponibles]
+        SI -> SI : Générer un code OTP
+
+        SI -> RC ++ : Enregistrer la préinscription\net le code OTP temporaire
+        RC --> SI -- : Préinscription enregistrée
+
+        SI -> OTP ++ : Demander l'envoi du code OTP
+        OTP -> V : Envoyer le code par SMS
+        OTP --> SI -- : Envoi confirmé
+
+        SI --> IHM -- : Vérification téléphonique requise
+        IHM --> V -- : Afficher l'écran de saisie du code
+    end
+end
+
+
+
+opt [Renvoi du code OTP]
+    V -> IHM ++ : Demander le renvoi du code
+    IHM -> SI ++ : Demander un nouveau code OTP
+
+    SI -> RC ++ : Générer et enregistrer\nun nouveau code OTP
+    RC --> SI -- : Nouveau code enregistré
+
+    SI -> OTP ++ : Demander l'envoi du nouveau code
+    OTP -> V : Envoyer le nouveau code par SMS
+    OTP --> SI -- : Envoi confirmé
+
+    SI --> IHM -- : Renvoi confirmé
+    IHM --> V -- : Afficher la confirmation du renvoi
+end
+
+opt [Modification du numéro]
+    V -> IHM ++ : Saisir un nouveau numéro
+    IHM -> IHM : Vérifier le format du numéro
+
+    alt [Nouveau numéro invalide]
+        IHM --> V -- : Afficher les erreurs de saisie
+
+    else [Nouveau numéro valide]
+        IHM -> SI ++ : Modifier le numéro(nouveauNuméro)
+
+        SI -> RC ++ : Mettre à jour le numéro\net générer un nouveau code OTP
+        RC --> SI -- : Numéro mis à jour
+
+        SI -> OTP ++ : Demander l'envoi du nouveau code
+        OTP -> V : Envoyer le nouveau code par SMS
+        OTP --> SI -- : Envoi confirmé
+
+        SI --> IHM -- : Modification confirmée
+        IHM --> V -- : Afficher l'écran de saisie du code
+    end
+end
+
+V -> IHM ++ : Saisir le code OTP reçu
+IHM -> SI ++ : Vérifier le code OTP
+
+SI -> RC ++ : Contrôler le code et sa validité
+RC --> SI -- : Code valide / invalide
+
+alt [Code invalide ou expiré]
+    SI --> IHM -- : Vérification refusée
+    IHM --> V -- : Afficher un message d'erreur
+
+else [Code valide]
+    SI -> RC ++ : Activer le compte utilisateur
+    RC --> SI -- : Compte activé
+
+    SI -> SI : Générer une session d'accès
+    SI --> IHM -- : Inscription confirmée + session
+    IHM --> V -- : Rediriger vers l'espace personnel
+end
+@enduml
