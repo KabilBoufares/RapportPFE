@@ -182,7 +182,7 @@ Ce diagramme présente l’authentification d’un utilisateur sur FESTY. L’ut
 
 #### 3.3.2.3 Diagramme de séquence « Réinitialiser le mot de passe »
 
-Ce diagramme présente la récupération du compte en cas d’oubli du mot de passe. L’utilisateur saisit son numéro de téléphone, puis le système vérifie l’existence du compte et envoie un code OTP par SMS. Après validation du code, l’utilisateur définit un nouveau mot de passe. Le système l’enregistre puis confirme la réinitialisation.
+Ce diagramme présente la récupération du compte en cas d’oubli du mot de passe. L’utilisateur saisit son numéro de téléphone, puis le système traite la demande de récupération associée au numéro saisi et envoie un code OTP par SMS. Après validation du code, l’utilisateur définit un nouveau mot de passe. Le système l’enregistre puis confirme la réinitialisation.
 
 ![Diagramme de séquence - Réinitialiser le mot de passe](images/sequence_reset_password_sprint1.png)
 
