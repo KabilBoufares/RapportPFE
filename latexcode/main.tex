@@ -1,0 +1,73 @@
+\documentclass{report} % Using report class for PFEs / technical projects
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel} % Handles French spacing and naming conventions
+\usepackage{graphicx}
+\usepackage[export]{adjustbox} % Allows smooth alignment and overflow management
+\usepackage{placeins} % Provides \FloatBarrier to keep diagrams inside their sections
+\usepackage{pdflscape}
+\usepackage{subcaption}
+
+% --- GLOBAL PAGE MARGIN SETUP ---
+% This enforces completely uniform margins on all four sides of the page.
+% 2.5cm is the standard professional layout dimension for technical engineering reports.
+\usepackage[margin=2.5cm, includeheadfoot]{geometry}
+
+\begin{document}
+
+% --- DIAGRAMME 1: INSCRIPTION ---
+\begin{figure}[p] % Using [p] lets large diagrams occupy their own beautifully centered page
+    \centering
+    % width=\textwidth fills exactly between the left and right margins.
+    % max height constraints stop it from running into your top/bottom page numbers.
+    \includegraphics[width=0.9\textwidth, height=\textheight]{ah.png}
+    \caption{Diagramme de séquence : S'inscrire à la plateforme}
+    \label{fig:seq_inscription}
+\end{figure}
+
+\FloatBarrier 
+
+% --- CINÉMATIQUE GLOBALE (SUBFIGURES) ---
+\begin{figure}[p]
+    \centering
+    
+    % --- Top Subfigure ---
+    \begin{subfigure}[b]{\textwidth} 
+        \centering
+        \includegraphics[width=0.9\textwidth, height=0.5\textheight]{auth.png}
+        \caption{Phase d'authentification et génération de session}
+        \label{subfig:stack_auth}
+    \end{subfigure}
+    
+    \vspace{2em} % Elegant structural separator gap
+    
+    % --- Bottom Subfigure ---
+    \begin{subfigure}[b]{\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth, height=0.5\textheight]{pass.png}
+        \caption{Phase de réinitialisation du mot de passe}
+        \label{subfig:stack_password}
+    \end{subfigure}
+
+    \caption{Cinématique globale des interactions d'accès utilisateur}
+    \label{fig:cinematique_globale}
+\end{figure}
+
+\FloatBarrier
+
+\begin{figure}[p]
+    \centering
+    \includegraphics[width=0.9\textwidth, height=\textheight]{gerprof.png}
+    \caption{Diagramme de séquence : Processus d'authentification utilisateur et cycle de vie des sessions}
+    \label{fig:seq_auth_office} 
+\end{figure}
+
+% --- DIAGRAMME 3: BACK-OFFICE ---
+\begin{figure}[p]
+    \centering
+    \includegraphics[width=0.9\textwidth, height=\textheight]{authoffice.png}
+    \caption{Diagramme de séquence : Processus d'authentification et gestion d'accès back-office}
+    \label{fig:seq_auth_office} 
+\end{figure}
+
+\end{document}
