@@ -1,0 +1,99 @@
+@startuml
+
+hide footbox
+autonumber
+
+actor "Utilisateur" as U
+boundary "Interface FESTY" as IHM
+control "Back-End FESTY" as BE
+database "Base de données" as DB
+participant "Service de stockage" as STORAGE
+participant "Service de notification" as NOTIF
+
+U -> IHM ++ : Accéder à l'espace demande partenaire
+IHM -> BE ++ : Récupérer le dossier partenaire
+
+BE -> DB ++ : Charger le dossier partenaire
+DB --> BE -- : Statut et brouillon éventuel
+
+alt Demande soumise ou en révision
+    BE --> IHM : Retourner le statut de la demande
+    deactivate BE
+    IHM --> U : Afficher "Demande en cours de traitement"
+    deactivate IHM
+
+else Brouillon existant ou complément demandé
+    BE --> IHM : Retourner le dossier prérempli
+    deactivate BE
+    IHM --> U : Afficher le formulaire prérempli
+    deactivate IHM
+
+else Aucune demande
+    BE --> IHM : Aucun dossier existant
+    deactivate BE
+    IHM --> U : Afficher le formulaire vierge
+    deactivate IHM
+end
+
+U -> IHM ++ : Saisir les informations professionnelles
+IHM -> IHM : Vérifier les champs
+
+alt Données invalides
+    IHM --> U : Afficher les erreurs de saisie
+    deactivate IHM
+
+else Données valides
+    IHM -> BE ++ : Sauvegarder le brouillon
+    BE -> DB ++ : Enregistrer le brouillon\n(statut BROUILLON)
+    DB --> BE -- : Brouillon enregistré
+    BE --> IHM -- : Brouillon sauvegardé
+    IHM --> U : Afficher "Informations enregistrées"
+    deactivate IHM
+end
+
+loop Pour chaque document requis
+    U -> IHM ++ : Déposer un document
+    IHM -> IHM : Vérifier le format et la taille
+
+    alt Fichier non conforme
+        IHM --> U : Afficher une erreur
+        deactivate IHM
+
+    else Fichier valide
+        IHM -> BE ++ : Déposer le document
+        BE -> STORAGE ++ : Stocker le fichier
+        STORAGE --> BE -- : Référence du fichier
+
+        BE -> DB ++ : Enregistrer la référence du document\n(statut EN_ATTENTE)
+        DB --> BE -- : Document enregistré
+
+        BE --> IHM -- : Document ajouté
+        IHM --> U : Afficher la confirmation
+        deactivate IHM
+    end
+end
+
+U -> IHM ++ : Soumettre la candidature
+IHM -> BE ++ : Déclencher la soumission
+
+BE -> DB ++ : Vérifier l'exhaustivité du dossier
+DB --> BE -- : Dossier complet / incomplet
+
+alt Dossier incomplet
+    BE --> IHM -- : Retourner les éléments manquants
+    IHM --> U : Afficher "Complétez votre dossier"
+    deactivate IHM
+
+else Dossier complet
+    BE -> DB ++ : Passer la demande au statut SOUMISE
+    DB --> BE -- : Statut mis à jour
+
+    BE -> NOTIF ++ : Notifier les administrateurs
+    NOTIF --> BE -- : Notifications envoyées
+
+    BE --> IHM -- : Soumission confirmée
+    IHM --> U : Afficher "Candidature enregistrée, vous serez informé."
+    deactivate IHM
+end
+
+@enduml

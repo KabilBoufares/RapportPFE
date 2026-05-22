@@ -1,0 +1,64 @@
+@startuml
+hide footbox
+autonumber
+
+actor "Partenaire" as U
+boundary "Interface partenaire FESTY" as IHM
+control "Back-End FESTY" as BE
+database "Base de données" as DB
+
+== Consultation du profil ==
+
+U -> IHM ++ : Accéder à son profil partenaire
+IHM -> BE ++ : Demander les informations du profil
+
+BE -> BE : Vérifier l'accès partenaire
+BE -> DB ++ : Récupérer les informations professionnelles
+DB --> BE -- : Informations professionnelles
+
+BE --> IHM -- : Profil partenaire
+IHM --> U : Afficher les informations professionnelles
+deactivate IHM
+
+== Modification du profil ==
+
+U -> IHM ++ : Choisir de modifier le profil
+IHM --> U : Afficher le formulaire prérempli
+
+U -> IHM : Saisir les nouvelles informations
+IHM -> IHM : Vérifier les champs saisis
+
+alt Modification annulée
+    U -> IHM : Annuler les modifications
+    IHM --> U : Restaurer les informations précédentes
+    deactivate IHM
+
+else Données invalides
+    IHM --> U : Afficher les erreurs de validation
+    deactivate IHM
+
+else Données valides
+    IHM -> BE ++ : Envoyer les nouvelles informations
+
+    BE -> BE : Vérifier l'accès partenaire
+    BE -> BE : Normaliser les données
+    BE -> DB ++ : Mettre à jour le profil partenaire
+
+    alt Erreur d'enregistrement
+        DB --> BE -- : Échec de la mise à jour
+        BE --> IHM -- : Erreur technique
+        IHM --> U : Afficher "Une erreur est survenue,\nveuillez réessayer"
+        deactivate IHM
+
+    else Mise à jour réussie
+        DB --> BE -- : Profil mis à jour
+
+        BE -> DB ++ : Recharger le profil actualisé
+        DB --> BE -- : Profil actualisé
+
+        BE --> IHM -- : Profil mis à jour
+        IHM --> U : Afficher la confirmation\net le profil actualisé
+        deactivate IHM
+    end
+end
+@enduml

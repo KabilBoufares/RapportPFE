@@ -1,0 +1,89 @@
+@startuml
+
+hide footbox
+autonumber
+
+actor "Partenaire accepté" as U
+boundary "Interface partenaire FESTY" as IHM
+control "Back-End FESTY" as BE
+database "Base de données" as DB
+participant "Service Stripe Connect" as STRIPE
+
+== Consultation de l'état d'activation ==
+
+U -> IHM ++ : Accéder à l'espace d'activation partenaire
+IHM -> BE ++ : Demander le statut d'activation
+
+BE -> DB ++ : Récupérer le statut partenaire\net le statut Stripe
+DB --> BE -- : Statuts actuels
+
+BE --> IHM -- : État d'activation\net étapes restantes
+IHM --> U : Afficher le tableau d'activation
+deactivate IHM
+
+== Lancement de l'onboarding Stripe ==
+
+U -> IHM ++ : Lancer l'onboarding Stripe
+IHM -> BE ++ : Demander le lien d'onboarding
+
+BE -> DB ++ : Vérifier le statut de la demande partenaire
+DB --> BE -- : Statut partenaire
+
+alt Demande non approuvée
+    BE --> IHM -- : Activation non autorisée
+    IHM --> U : Afficher "Votre demande n'est pas encore validée"
+    deactivate IHM
+
+else Demande approuvée
+    BE -> STRIPE ++ : Créer ou récupérer le compte Stripe\net générer le lien d'onboarding
+    STRIPE --> BE -- : Lien d'onboarding sécurisé
+
+    BE -> DB ++ : Enregistrer l'identifiant Stripe\net le statut Stripe EN_COURS
+    DB --> BE -- : Compte enregistré
+
+    BE --> IHM -- : Retourner le lien d'onboarding
+    IHM --> U : Rediriger vers Stripe Connect
+    deactivate IHM
+end
+
+== Complétion de l'onboarding sur Stripe ==
+
+U -> STRIPE ++ : Renseigner les informations requises\n(identité, coordonnées bancaires, activité)
+
+alt Informations incomplètes ou lien expiré
+    STRIPE --> U : Signaler les informations manquantes\nou le lien expiré
+    deactivate STRIPE
+
+else Informations complètes
+    STRIPE --> U : Rediriger vers FESTY
+    STRIPE ->> BE ++ : Notifier la mise à jour du compte
+    deactivate STRIPE
+
+    BE -> DB ++ : Mettre à jour le statut Stripe
+    DB --> BE -- : Statut mis à jour
+    deactivate BE
+end
+
+== Finalisation de l'accès partenaire ==
+
+U -> IHM ++ : Revenir sur l'espace partenaire
+IHM -> BE ++ : Vérifier le statut final d'activation
+
+BE -> DB ++ : Lire le statut partenaire\net le statut Stripe
+DB --> BE -- : Statuts actuels
+
+alt Onboarding non finalisé
+    BE --> IHM -- : Activation non finalisée
+    IHM --> U : Afficher "Veuillez compléter l'onboarding Stripe"
+    deactivate IHM
+
+else Statut Stripe vérifié
+    BE -> DB ++ : Activer l'espace partenaire\net marquer l'onboarding terminé
+    DB --> BE -- : Accès partenaire activé
+
+    BE --> IHM -- : Activation confirmée
+    IHM --> U : Afficher "Espace partenaire actif"
+    deactivate IHM
+end
+
+@enduml

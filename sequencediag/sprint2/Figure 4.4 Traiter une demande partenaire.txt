@@ -1,0 +1,112 @@
+@startuml
+hide footbox
+autonumber
+
+actor "Administrateur" as ADMIN
+boundary "Interface back-office" as IHM
+control "Back-End FESTY" as BE
+database "Base de données" as DB
+participant "Service d'audit" as AUDIT
+participant "Service de notification" as NOTIF
+
+== Consultation des demandes ==
+
+ADMIN -> IHM ++ : Accéder aux demandes partenaires
+IHM -> BE ++ : Demander la liste des candidatures soumises
+BE -> DB ++ : Récupérer les demandes\n(statut SOUMISE)
+DB --> BE -- : Liste des demandes
+BE --> IHM -- : Liste des candidatures
+IHM --> ADMIN : Afficher les demandes
+deactivate IHM
+
+ADMIN -> IHM ++ : Sélectionner une demande
+IHM -> BE ++ : Charger le dossier complet
+BE -> DB ++ : Récupérer informations, documents et statuts
+DB --> BE -- : Dossier du candidat
+
+BE -> DB ++ : Passer la demande au statut EN_REVISION
+DB --> BE -- : Statut mis à jour
+
+BE --> IHM -- : Détail du dossier
+IHM --> ADMIN : Afficher profil et documents
+deactivate IHM
+
+ADMIN -> ADMIN : Examiner les informations et documents
+
+== Prise de décision ==
+
+alt Accepter la demande
+    ADMIN -> IHM ++ : Valider l'acceptation\navec notes éventuelles
+    IHM -> BE ++ : Déclencher l'acceptation
+
+    BE -> DB ++ : Charger le dossier et les documents\npour vérification
+    DB --> BE -- : Données du dossier
+
+    BE -> BE : Vérifier la conformité du dossier\net des documents
+
+    alt Dossier non conforme
+        BE --> IHM -- : Acceptation bloquée
+        IHM --> ADMIN : Afficher "Le dossier ne peut pas être accepté"
+        deactivate IHM
+
+    else Dossier conforme
+        BE -> DB ++ : Mettre à jour la demande\n(statut ACCEPTEE)\net le partenaire (statut APPROUVE)
+        DB --> BE -- : Statuts mis à jour
+
+        BE -> AUDIT ++ : Enregistrer l'action d'acceptation
+        AUDIT --> BE -- : Action tracée
+
+        BE -> NOTIF ++ : Notifier l'utilisateur\n(demande acceptée)
+        NOTIF --> BE -- : Notification envoyée
+
+        BE --> IHM -- : Confirmation d'acceptation
+        IHM --> ADMIN : Afficher "Demande acceptée,\nactivation à finaliser"
+        deactivate IHM
+    end
+
+else Demander des informations complémentaires
+    ADMIN -> IHM ++ : Demander des compléments\navec motif
+    IHM -> BE ++ : Transmettre la demande de compléments
+
+    BE -> DB ++ : Mettre à jour la demande\n(statut COMPLEMENT_DEMANDE)
+    DB --> BE -- : Statut mis à jour
+
+    BE -> AUDIT ++ : Enregistrer la demande de compléments
+    AUDIT --> BE -- : Action tracée
+
+    BE -> NOTIF ++ : Notifier l'utilisateur\n(compléments requis)
+    NOTIF --> BE -- : Notification envoyée
+
+    BE --> IHM -- : Confirmation
+    IHM --> ADMIN : Afficher "Candidat notifié\npour compléter son dossier"
+    deactivate IHM
+
+else Rejeter la demande
+    ADMIN -> IHM ++ : Rejeter la demande\navec motif
+    IHM -> BE ++ : Transmettre le rejet
+
+    BE -> DB ++ : Mettre à jour la demande\n(statut REJETEE)
+    DB --> BE -- : Statut mis à jour
+
+    BE -> AUDIT ++ : Enregistrer le rejet
+    AUDIT --> BE -- : Action tracée
+
+    BE -> NOTIF ++ : Notifier l'utilisateur\n(demande rejetée)
+    NOTIF --> BE -- : Notification envoyée
+
+    BE --> IHM -- : Confirmation
+    IHM --> ADMIN : Afficher "Demande rejetée,\nutilisateur informé"
+    deactivate IHM
+
+else Erreur lors de la mise à jour
+    ADMIN -> IHM ++ : Confirmer une décision
+    IHM -> BE ++ : Transmettre l'action
+
+    BE -> DB ++ : Mettre à jour la demande
+    DB --> BE -- : Échec de la mise à jour
+
+    BE --> IHM -- : Échec de l'opération
+    IHM --> ADMIN : Afficher "Une erreur est survenue,\nveuillez réessayer"
+    deactivate IHM
+end
+@enduml

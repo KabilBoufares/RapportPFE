@@ -1,0 +1,150 @@
+@startuml
+
+hide footbox
+autonumber
+
+actor "Partenaire" as U
+boundary "Interface partenaire FESTY" as IHM
+control "Back-End FESTY" as BE
+database "Base de données" as DB
+
+== Accès à la gestion des événements ==
+
+U -> IHM ++ : Accéder à l'espace de gestion des événements
+IHM -> BE ++ : Charger les événements du partenaire
+BE -> DB ++ : Récupérer les événements\nfiltrés par partenaire
+DB --> BE -- : Liste des événements
+BE --> IHM -- : Liste des événements
+IHM --> U : Afficher le tableau de bord des événements
+deactivate IHM
+
+== Création d'un événement ==
+
+U -> IHM ++ : Créer un nouvel événement
+IHM --> U : Afficher le formulaire de création
+
+U -> IHM : Saisir les informations de l'événement\n(titre, description, date, lieu, catégorie)
+U -> IHM : Choisir le mode de billetterie\n(interne ou externe)
+IHM -> IHM : Vérifier les champs saisis
+
+alt Données invalides
+    IHM --> U : Afficher les erreurs de validation
+    deactivate IHM
+
+else Données valides
+    IHM -> BE ++ : Soumettre les informations de l'événement
+
+    BE -> BE : Vérifier l'accès partenaire
+    BE -> BE : Vérifier la cohérence des données\net du mode de billetterie
+
+    alt Billetterie externe sans lien
+        BE --> IHM -- : Configuration incomplète
+        IHM --> U : Demander le lien de billetterie externe
+        deactivate IHM
+
+    else Données conformes
+        BE -> DB ++ : Enregistrer l'événement\n(statut BROUILLON)
+        DB --> BE -- : Événement créé
+
+        BE --> IHM -- : Événement enregistré
+        IHM --> U : Afficher "Événement créé en brouillon"
+        deactivate IHM
+    end
+end
+
+opt Configuration des types de billets\n[billetterie interne]
+    U -> IHM ++ : Ajouter un type de billet\n(nom, prix, quantité)
+    IHM -> BE ++ : Créer le type de billet
+
+    BE -> BE : Vérifier l'appartenance de l'événement
+    BE -> BE : Valider les données du billet
+
+    alt Données de billet invalides
+        BE --> IHM -- : Erreurs de validation
+        IHM --> U : Afficher les erreurs
+        deactivate IHM
+
+    else Données de billet valides
+        BE -> DB ++ : Enregistrer le type de billet
+        DB --> BE -- : Type de billet créé
+
+        BE --> IHM -- : Confirmation
+        IHM --> U : Afficher "Type de billet ajouté"
+        deactivate IHM
+    end
+end
+
+== Soumission au contrôle administratif ==
+
+U -> IHM ++ : Soumettre l'événement au contrôle administratif
+IHM -> BE ++ : Demander la soumission
+
+BE -> BE : Vérifier les conditions de soumission\n(partenaire actif, Stripe vérifié, billetterie complète)
+
+alt Conditions non remplies
+    BE --> IHM -- : Soumission refusée
+    IHM --> U : Afficher les éléments à compléter
+    deactivate IHM
+
+else Conditions remplies
+    BE -> DB ++ : Mettre à jour l'événement\n(statut SOUMIS)
+    DB --> BE -- : Statut mis à jour
+
+    BE --> IHM -- : Soumission confirmée
+    IHM --> U : Afficher "Événement soumis au contrôle administratif"
+    deactivate IHM
+end
+
+== Modification d'un événement ==
+
+opt Modification d'un événement
+    U -> IHM ++ : Modifier un événement existant
+    IHM -> BE ++ : Charger les informations actuelles
+    BE -> DB ++ : Récupérer l'événement
+    DB --> BE -- : Données de l'événement
+    BE --> IHM -- : Formulaire prérempli
+    IHM --> U : Afficher le formulaire
+
+    U -> IHM : Saisir les modifications
+    IHM -> BE ++ : Envoyer les modifications
+
+    BE -> BE : Vérifier les droits et valider les données
+
+    alt Données invalides
+        BE --> IHM -- : Erreurs de validation
+        IHM --> U : Afficher les erreurs
+        deactivate IHM
+
+    else Données valides
+        BE -> DB ++ : Mettre à jour l'événement
+        DB --> BE -- : Événement mis à jour
+        BE --> IHM -- : Confirmation
+        IHM --> U : Afficher "Modifications enregistrées"
+        deactivate IHM
+    end
+end
+
+== Annulation d'un événement ==
+
+opt Annulation d'un événement
+    U -> IHM ++ : Demander l'annulation
+    IHM -> BE ++ : Annuler l'événement
+
+    BE -> BE : Vérifier que l'annulation est autorisée
+
+    alt Annulation non autorisée
+        BE --> IHM -- : Refus d'annulation
+        IHM --> U : Afficher le motif du refus
+        deactivate IHM
+
+    else Annulation autorisée
+        BE -> DB ++ : Mettre à jour l'événement\n(statut ANNULE)
+        DB --> BE -- : Statut mis à jour
+
+        BE --> IHM -- : Annulation confirmée
+        IHM --> U : Afficher "Événement annulé"
+        deactivate IHM
+    end
+end
+
+@enduml
