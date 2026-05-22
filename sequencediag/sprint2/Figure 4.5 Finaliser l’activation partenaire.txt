@@ -34,7 +34,7 @@ alt Demande non approuvée
     IHM --> U : Afficher "Votre demande n'est pas encore validée"
     deactivate IHM
 
-else Demande approuvée
+else Demande acceptée
     BE -> STRIPE ++ : Créer ou récupérer le compte Stripe\net générer le lien d'onboarding
     STRIPE --> BE -- : Lien d'onboarding sécurisé
 
