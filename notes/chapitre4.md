@@ -195,7 +195,7 @@ Le tableau suivant présente les diagrammes de séquence retenus pour ce sprint.
 
 #### 4.3.2.1 Diagramme de séquence « Soumettre une demande partenaire »
 
-Ce diagramme présente le processus de soumission d’une demande partenaire. L’utilisateur accède à l’espace de candidature, renseigne ses informations professionnelles et dépose les documents requis. Le système permet également de reprendre un brouillon ou de compléter un dossier lorsque des informations supplémentaires sont demandées. Une fois le dossier complet, la demande est soumise et les administrateurs sont notifiés.
+Ce diagramme présente le processus de soumission d’une demande partenaire. L’utilisateur accède à l’espace de candidature, renseigne ses informations professionnelles et dépose les documents requis. Le système permet également de reprendre un brouillon ou de compléter un dossier lorsque des informations supplémentaires sont demandées. Une fois le dossier complet, la demande est soumise et son statut est mis à jour afin d’être traitée par l’administrateur.
 
 ![Diagramme de séquence - Soumettre une demande partenaire](images/sequence_soumettre_demande_partenaire_sprint2.png)
 
@@ -203,7 +203,7 @@ Ce diagramme présente le processus de soumission d’une demande partenaire. L�
 
 #### 4.3.2.2 Diagramme de séquence « Traiter une demande partenaire »
 
-Ce diagramme présente le traitement d’une demande partenaire par l’administrateur. Celui-ci consulte la liste des demandes, ouvre le dossier concerné et vérifie les informations fournies. Selon le résultat de l’analyse, la demande peut être acceptée, rejetée ou renvoyée pour complément d’informations.
+Ce diagramme présente le traitement d’une demande partenaire par l’administrateur. Après consultation des candidatures soumises, l’administrateur ouvre le dossier du candidat, examine les informations et les documents, puis prend une décision. La demande peut être acceptée, rejetée ou renvoyée pour complément d’informations. Le système met ensuite à jour les statuts correspondants et affiche une confirmation à l’administrateur.
 
 ![Diagramme de séquence - Traiter une demande partenaire](images/sequence_traiter_demande_partenaire_sprint2.png)
 

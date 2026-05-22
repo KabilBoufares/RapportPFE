@@ -1,4 +1,5 @@
 @startuml
+
 hide footbox
 autonumber
 
@@ -6,8 +7,6 @@ actor "Administrateur" as ADMIN
 boundary "Interface back-office" as IHM
 control "Back-End FESTY" as BE
 database "Base de données" as DB
-participant "Service d'audit" as AUDIT
-participant "Service de notification" as NOTIF
 
 == Consultation des demandes ==
 
@@ -53,12 +52,6 @@ alt Accepter la demande
         BE -> DB ++ : Mettre à jour la demande\n(statut ACCEPTEE)\net le partenaire (statut APPROUVE)
         DB --> BE -- : Statuts mis à jour
 
-        BE -> AUDIT ++ : Enregistrer l'action d'acceptation
-        AUDIT --> BE -- : Action tracée
-
-        BE -> NOTIF ++ : Notifier l'utilisateur\n(demande acceptée)
-        NOTIF --> BE -- : Notification envoyée
-
         BE --> IHM -- : Confirmation d'acceptation
         IHM --> ADMIN : Afficher "Demande acceptée,\nactivation à finaliser"
         deactivate IHM
@@ -71,14 +64,8 @@ else Demander des informations complémentaires
     BE -> DB ++ : Mettre à jour la demande\n(statut COMPLEMENT_DEMANDE)
     DB --> BE -- : Statut mis à jour
 
-    BE -> AUDIT ++ : Enregistrer la demande de compléments
-    AUDIT --> BE -- : Action tracée
-
-    BE -> NOTIF ++ : Notifier l'utilisateur\n(compléments requis)
-    NOTIF --> BE -- : Notification envoyée
-
     BE --> IHM -- : Confirmation
-    IHM --> ADMIN : Afficher "Candidat notifié\npour compléter son dossier"
+    IHM --> ADMIN : Afficher "Demande de complément enregistrée"
     deactivate IHM
 
 else Rejeter la demande
@@ -88,14 +75,8 @@ else Rejeter la demande
     BE -> DB ++ : Mettre à jour la demande\n(statut REJETEE)
     DB --> BE -- : Statut mis à jour
 
-    BE -> AUDIT ++ : Enregistrer le rejet
-    AUDIT --> BE -- : Action tracée
-
-    BE -> NOTIF ++ : Notifier l'utilisateur\n(demande rejetée)
-    NOTIF --> BE -- : Notification envoyée
-
     BE --> IHM -- : Confirmation
-    IHM --> ADMIN : Afficher "Demande rejetée,\nutilisateur informé"
+    IHM --> ADMIN : Afficher "Demande rejetée"
     deactivate IHM
 
 else Erreur lors de la mise à jour
@@ -109,4 +90,5 @@ else Erreur lors de la mise à jour
     IHM --> ADMIN : Afficher "Une erreur est survenue,\nveuillez réessayer"
     deactivate IHM
 end
+
 @enduml
