@@ -13,7 +13,7 @@ A -> IHM : Accéder au contrôle des événements
 activate IHM
 IHM -> BE : Charger les événements soumis
 activate BE
-BE -> DB : Récupérer les événements\n(statut SOUMIS)
+BE -> DB : Récupérer les événements\n(statut SOUMIS, modération NON_CONTROLE)
 activate DB
 DB --> BE : Liste des événements
 deactivate DB
