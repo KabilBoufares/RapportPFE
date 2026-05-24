@@ -1,57 +1,93 @@
 @startuml
 actor Visiteur
+participant "Application mobile" as App
 participant "Système" as System
 database "Base de données" as DB
-participant "Service SMS" as SMS
+participant "Service OTP/SMS" as SMS
 
 autonumber
 
-Visiteur -> System : Demande le formulaire d'inscription
-activate System
-System --> Visiteur : Affiche le formulaire
-deactivate System
+' Demande du formulaire
+Visiteur -> App : Demander le formulaire d'inscription
+activate App
+App --> Visiteur : Afficher le formulaire
+deactivate App
 
-Visiteur -> System : Soumet les informations\n(nom, email, mot de passe, téléphone)
+' Soumission des informations
+Visiteur -> App : Soumettre les informations d'inscription
+activate App
+App -> System : Envoyer les informations
 activate System
 
-System -> System : Valide les champs saisis
+' Validation des champs
+System -> System : Valider les champs saisis
 alt informations invalides
-    System --> Visiteur : Message d'erreur (E1)
+    System --> App : Message d'erreur (E1)
+    App --> Visiteur : Afficher l'erreur
 else informations valides
+    ' Vérification unicité email
     System -> DB : Vérifier l'unicité de l'email
     activate DB
     DB --> System : Email disponible / indisponible
     deactivate DB
-    alt email déjà utilisé
-        System --> Visiteur : Message d'erreur (E2)
-    else email disponible
-        System -> DB : Créer le compte utilisateur (statut inactif)
-        activate DB
-        DB --> System : Confirmation
-        deactivate DB
-        System -> SMS : Demander l'envoi du code OTP\n(au numéro de téléphone)
-        activate SMS
-        SMS --> System : OTP envoyé
-        deactivate SMS
-        System --> Visiteur : Demander la saisie du code OTP
-        deactivate System
 
-        Visiteur -> System : Saisit le code OTP
-        activate System
-        System -> SMS : Vérifier le code OTP
+    alt email déjà utilisé
+        System --> App : Message d'erreur (E2)
+        App --> Visiteur : Afficher l'erreur
+    else email disponible
+        ' Création du compte
+        System -> DB : Créer le compte utilisateur (statut en attente)
+        activate DB
+        DB --> System : Confirmation création
+        deactivate DB
+
+        ' Génération et enregistrement du code OTP
+        System -> System : Générer le code OTP
+        System -> DB : Enregistrer le code OTP
+        activate DB
+        DB --> System : Code enregistré
+        deactivate DB
+
+        ' Envoi du code OTP par SMS
+        System -> SMS : Envoyer le code OTP (au numéro)
         activate SMS
-        SMS --> System : Code valide / invalide
+        SMS --> System : Confirmation d'envoi
         deactivate SMS
+
+        ' Demande de saisie à l'utilisateur
+        System --> App : Demander la saisie du code OTP
+        deactivate System
+        App --> Visiteur : Afficher le champ de saisie OTP
+        deactivate App
+
+        ' Saisie du code OTP
+        Visiteur -> App : Saisir le code OTP
+        activate App
+        App -> System : Envoyer le code OTP saisi
+        activate System
+
+        ' Vérification du code OTP via la base de données
+        System -> DB : Vérifier le code OTP
+        activate DB
+        DB --> System : Code valide / invalide
+        deactivate DB
+
         alt code OTP incorrect ou expiré
-            System --> Visiteur : Message d'erreur (E3)
+            System --> App : Message d'erreur (E3)
+            App --> Visiteur : Afficher l'erreur
         else code OTP valide
-            System -> DB : Activer le compte (mettre à jour statut)
+            ' Activation du compte
+            System -> DB : Activer le compte (statut actif)
             activate DB
-            DB --> System : Confirmation
+            DB --> System : Confirmation activation
             deactivate DB
-            System --> Visiteur : Confirmation de l'inscription réussie
+
+            ' Confirmation finale
+            System --> App : Confirmation d'inscription réussie
+            App --> Visiteur : Afficher le succès
         end
         deactivate System
+        deactivate App
     end
 end
 @enduml
