@@ -1,58 +1,53 @@
 @startuml
-title Diagramme de séquence — S’authentifier à la plateforme
+actor Utilisateur
+participant "Application mobile" as App
+participant "Back-End FESTY" as System
+database "Base de données" as DB
 
-hide footbox
 autonumber
 
-actor "Utilisateur" as U
-boundary "Interface utilisateur FESTY" as IHM
-control "Système d’authentification" as SA
-database "Référentiel des comptes" as RC
+' Étape 1 – Accès à l'interface
+Utilisateur -> App : Accéder à l'interface de connexion
+activate App
+App --> Utilisateur : Afficher le formulaire de connexion
+deactivate App
 
-U -> IHM ++ : Accéder à l’interface de connexion
-IHM --> U -- : Afficher le formulaire de connexion
+' Étape 2 – Saisie des identifiants
+Utilisateur -> App : Saisir l'email et le mot de passe
+activate App
+App -> System : Envoyer les identifiants (email, mot de passe)
+activate System
 
-U -> IHM ++ : Saisir l’email et le mot de passe
-IHM -> IHM : Vérifier le format des champs
+' Étape 3 – Vérification de l'email
+System -> DB : Vérifier l'existence de l'email
+activate DB
+DB --> System : Email trouvé / introuvable
+deactivate DB
 
-alt [Champs invalides]
-    IHM --> U -- : Afficher les erreurs de saisie
+alt email introuvable
+    System --> App : Message d'erreur (E1)
+    App --> Utilisateur : Afficher "Email introuvable"
+else email trouvé
+    ' Suite étape 3 – Récupération des informations du compte
+    System -> DB : Récupérer les informations du compte
+    activate DB
+    DB --> System : Retourner les informations du compte
+    deactivate DB
 
-else [Champs valides]
-    IHM -> SA ++ : Demander l’authentification(email, motDePasse)
+    ' Vérification du mot de passe côté Back-End
+    System -> System : Vérifier le mot de passe
 
-    SA -> RC ++ : Rechercher le compte par email
-    RC --> SA -- : Compte trouvé / aucun compte
-
-    alt [Compte introuvable]
-        SA --> IHM -- : Authentification refusée
-        IHM --> U -- : Afficher un message d’erreur
-
-    else [Compte trouvé]
-        SA -> SA : Vérifier le mot de passe
-
-        alt [Mot de passe incorrect]
-            SA --> IHM -- : Authentification refusée
-            IHM --> U -- : Afficher un message d’erreur
-
-        else [Mot de passe correct]
-            SA -> RC ++ : Consulter l’état du compte
-            RC --> SA -- : État du compte
-
-            alt [Compte non vérifié]
-                SA --> IHM -- : Vérification requise
-                IHM --> U -- : Rediriger vers la vérification du compte
-
-            else [Compte suspendu]
-                SA --> IHM -- : Accès refusé
-                IHM --> U -- : Afficher un message de compte suspendu
-
-            else [Compte actif]
-                SA -> SA : Générer une session d’accès sécurisée
-                SA --> IHM -- : Session utilisateur + profil
-                IHM --> U -- : Rediriger vers l’espace personnel
-            end
-        end
+    alt mot de passe incorrect
+        System --> App : Message d'erreur (E2)
+        App --> Utilisateur : Afficher "Mot de passe incorrect"
+    else mot de passe correct
+        ' Étape 5 – Accès autorisé
+        System -> System : Créer une session sécurisée
+        System --> App : Authentification réussie
+        App --> Utilisateur : Rediriger vers l'espace personnel
     end
 end
+
+deactivate System
+deactivate App
 @enduml

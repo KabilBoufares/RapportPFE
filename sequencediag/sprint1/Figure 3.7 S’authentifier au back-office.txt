@@ -1,95 +1,83 @@
 @startuml
-title Diagramme de séquence — S'authentifier au back-office
+actor Administrateur
+participant "Interface d'administration" as AdminUI
+participant "Back-End FESTY" as System
+database "Base de données" as DB
 
-hide footbox
 autonumber
 
-skinparam sequenceMessageAlign center
-skinparam responseMessageBelowArrow true
+' Étape 1 – Accès à l'interface
+Administrateur -> AdminUI : Accéder à l'interface de connexion du back-office
+activate AdminUI
+AdminUI --> Administrateur : Afficher le formulaire de connexion
+deactivate AdminUI
 
-skinparam SequenceGroupFontColor Black
-skinparam SequenceGroupHeaderFontColor Black
-skinparam SequenceGroupBorderColor Black
-skinparam SequenceGroupBackgroundColor White
+' Étape 2 – Saisie des identifiants
+Administrateur -> AdminUI : Saisir l'email et le mot de passe
+activate AdminUI
+AdminUI -> System : Envoyer les identifiants (email, mot de passe)
+activate System
 
-actor "Administrateur" as A
-boundary "Interface back-office FESTY" as IHM
-control "Système d'authentification" as SA
-database "Référentiel des comptes" as BD
-participant "Services de sécurité\n(2FA / Email Brevo)" as SEC
+' Étape 3 – Vérification des identifiants
+System -> DB : Vérifier l'existence de l'email
+activate DB
+DB --> System : Email trouvé / introuvable
+deactivate DB
 
-== Authentification au back-office ==
+alt email introuvable
+    System --> AdminUI : Message d'erreur (E1)
+    AdminUI --> Administrateur : Afficher "Identifiants incorrects"
+    deactivate System
+    deactivate AdminUI
 
-A -> IHM ++ : Accéder à l'interface de connexion
-IHM --> A -- : Afficher le formulaire
+else email trouvé
+    System -> DB : Récupérer les informations du compte
+    activate DB
+    DB --> System : Informations du compte (mot de passe haché, rôle)
+    deactivate DB
 
-A -> IHM ++ : Saisir email et mot de passe
-IHM -> SA ++ : Demander l'authentification
+    System -> System : Vérifier le mot de passe
 
-SA -> BD ++ : Vérifier le compte administrateur
-BD --> SA -- : Résultat de vérification
+    alt mot de passe incorrect
+        System --> AdminUI : Message d'erreur (E1)
+        AdminUI --> Administrateur : Afficher "Identifiants incorrects"
+        deactivate System
+        deactivate AdminUI
 
-alt Identifiants incorrects
-    SA --> IHM -- : Authentification refusée
-    IHM --> A -- : Afficher un message d'erreur
+    else mot de passe correct
+        ' Étape 4 – Vérification du rôle administrateur
+        System -> System : Vérifier le rôle administrateur
 
-else Identifiants corrects
-    SA -> SEC ++ : Déclencher la vérification 2FA
-    SEC --> SA -- : Vérification 2FA initialisée
+        ' Étape 5 – Demande du code 2FA
+        System --> AdminUI : Demander le code 2FA
+        deactivate System
+        AdminUI --> Administrateur : Afficher le champ de saisie du code 2FA
+        deactivate AdminUI
 
-    SA --> IHM -- : Demander le code 2FA
-    IHM --> A -- : Afficher le formulaire 2FA
-end
+        ' Étape 6 – Saisie et vérification du code 2FA
+        Administrateur -> AdminUI : Saisir le code 2FA
+        activate AdminUI
+        AdminUI -> System : Envoyer le code 2FA saisi
+        activate System
 
-== Vérification du code 2FA ==
+        System -> DB : Récupérer la configuration 2FA
+        activate DB
+        DB --> System : Configuration 2FA (secret)
+        deactivate DB
 
-A -> IHM ++ : Saisir le code 2FA
-IHM -> SA ++ : Transmettre le code
+        System -> System : Vérifier le code 2FA
 
-SA -> SEC ++ : Vérifier le code 2FA
-SEC --> SA -- : Code valide / invalide
+        alt code 2FA invalide ou expiré
+            System --> AdminUI : Message d'erreur (E2)
+            AdminUI --> Administrateur : Afficher "Code 2FA invalide ou expiré"
+        else code 2FA valide
+            System -> System : Créer une session administrateur sécurisée
+            System --> AdminUI : Authentification réussie
+            AdminUI --> Administrateur : Rediriger vers l'espace d'administration
+        end
 
-alt Code 2FA incorrect ou expiré
-    SA --> IHM -- : Accès refusé
-    IHM --> A -- : Demander un code valide
-
-else Code 2FA valide
-    SA -> BD ++ : Finaliser la session administrateur
-    BD --> SA -- : Session créée
-
-    SA --> IHM -- : Authentification confirmée
-    IHM --> A -- : Accéder au tableau de bord
-end
-
-== Mot de passe oublié ==
-
-opt Mot de passe oublié
-    A -> IHM ++ : Demander la récupération du mot de passe
-    IHM -> SA ++ : Transmettre l'adresse email
-
-    SA -> BD ++ : Vérifier le compte et enregistrer l'OTP
-    BD --> SA -- : Demande préparée
-
-    SA -> SEC ++ : Envoyer l'OTP par email
-    SEC --> A : Recevoir le code OTP
-    SEC --> SA -- : Envoi confirmé
-
-    SA --> IHM -- : Réponse neutre
-    IHM --> A -- : Afficher l'écran de réinitialisation
-
-    A -> IHM ++ : Saisir OTP et nouveau mot de passe
-    IHM -> SA ++ : Soumettre la réinitialisation
-
-    SA -> BD ++ : Vérifier l'OTP et mettre à jour le mot de passe
-    BD --> SA -- : Résultat de réinitialisation
-
-    alt OTP invalide ou expiré
-        SA --> IHM -- : Réinitialisation refusée
-        IHM --> A -- : Afficher un message d'erreur
-
-    else OTP valide
-        SA --> IHM -- : Réinitialisation confirmée
-        IHM --> A -- : Rediriger vers la connexion
+        deactivate System
+        deactivate AdminUI
     end
 end
 @enduml

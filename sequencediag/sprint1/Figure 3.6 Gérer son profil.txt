@@ -1,104 +1,53 @@
 @startuml
-title Diagramme de séquence — Gérer son profil
+actor Utilisateur
+participant "Application mobile" as App
+participant "Back-End FESTY" as System
+database "Base de données" as DB
 
-hide footbox
 autonumber
 
-skinparam sequenceMessageAlign center
-skinparam responseMessageBelowArrow true
+Utilisateur -> App : Accéder à la page de profil
+activate App
 
-skinparam SequenceGroupFontColor Black
-skinparam SequenceGroupHeaderFontColor Black
-skinparam SequenceGroupBorderColor Black
-skinparam SequenceGroupBackgroundColor White
+App -> System : Demander les informations du profil
+activate System
+System -> DB : Récupérer les informations du profil
+activate DB
+DB --> System : Informations du profil
+deactivate DB
 
-actor "Utilisateur" as U
-boundary "Interface FESTY" as IHM
-control "Système FESTY" as SF
-database "Base de données" as BD
-participant "Service OTP/SMS" as OTP
+System --> App : Envoyer les données du profil
+deactivate System
+App --> Utilisateur : Afficher les informations du profil
+deactivate App
 
-== Consultation du profil ==
+alt quitter sans enregistrer
+    Utilisateur -> App : Quitter la page sans enregistrer
+    activate App
+    App --> Utilisateur : Fin de l'interaction
+    deactivate App
+else modifier les informations
+    Utilisateur -> App : Modifier les informations souhaitées
+    activate App
+    Utilisateur -> App : Soumettre les modifications
+    App -> System : Envoyer les nouvelles données
+    activate System
 
-U -> IHM ++ : Accéder à son profil
-IHM -> SF ++ : Demander les informations du profil
-SF -> BD ++ : Charger le profil utilisateur
-BD --> SF -- : Données du profil
-SF --> IHM -- : Retourner le profil utilisateur
-IHM --> U -- : Afficher les informations personnelles
+    System -> System : Valider les données saisies
 
-== Modification des informations ==
-
-U -> IHM ++ : Modifier ses informations personnelles
-IHM -> IHM : Vérifier les données saisies
-
-alt Données invalides
-    IHM --> U -- : Afficher les erreurs de validation
-
-else Données valides
-    IHM -> SF ++ : Soumettre les modifications
-    SF -> BD ++ : Charger le profil existant
-    BD --> SF -- : Profil utilisateur
-
-    alt Téléphone inchangé
-        SF -> BD ++ : Enregistrer les modifications
-        BD --> SF -- : Profil mis à jour
-        SF --> IHM -- : Confirmer la mise à jour
-        IHM --> U -- : Afficher la confirmation
-
-    else Téléphone modifié
-        SF -> BD ++ : Enregistrer le profil\navec téléphone non vérifié
-        BD --> SF -- : Profil en attente de vérification
-
-        SF -> OTP ++ : Envoyer un code OTP
-        OTP --> U : Recevoir le code par SMS
-        OTP --> SF -- : Envoi confirmé
-
-        SF --> IHM -- : Demander la vérification du numéro
-        IHM --> U -- : Afficher l'écran de saisie du code
-
-        U -> IHM ++ : Saisir le code OTP
-        IHM -> SF ++ : Vérifier le code OTP
-        SF -> BD ++ : Contrôler le code OTP
-        BD --> SF -- : Résultat de vérification
-
-        alt Code invalide ou expiré
-            SF --> IHM -- : Refuser la vérification
-            IHM --> U -- : Afficher l'erreur ou proposer un renvoi
-
-        else Code valide
-            SF -> BD ++ : Valider le nouveau téléphone
-            BD --> SF -- : Profil mis à jour
-            SF --> IHM -- : Confirmer la mise à jour du profil
-            IHM --> U -- : Afficher la confirmation
-        end
+    alt données invalides
+        System --> App : Message d'erreur (E1)
+        App --> Utilisateur : Afficher "Données invalides"
+    else données valides
+        System -> DB : Mettre à jour les informations du profil
+        activate DB
+        DB --> System : Confirmation de mise à jour
+        deactivate DB
+        System --> App : Message de confirmation
+        App --> Utilisateur : Afficher "Profil mis à jour avec succès"
     end
-end
 
-== Modification du mot de passe ==
-
-opt Modification du mot de passe demandée
-    U -> IHM ++ : Saisir l'ancien et le nouveau mot de passe
-    IHM -> IHM : Vérifier la conformité des saisies
-
-    alt Saisies invalides
-        IHM --> U -- : Afficher les erreurs de saisie
-
-    else Saisies valides
-        IHM -> SF ++ : Demander le changement du mot de passe
-        SF -> BD ++ : Vérifier le compte et l'ancien mot de passe
-        BD --> SF -- : Changement autorisé / refusé
-
-        alt Changement refusé
-            SF --> IHM -- : Refuser la modification
-            IHM --> U -- : Afficher un message d'erreur
-
-        else Changement accepté
-            SF -> BD ++ : Enregistrer le nouveau mot de passe
-            BD --> SF -- : Mot de passe mis à jour
-            SF --> IHM -- : Confirmer le changement
-            IHM --> U -- : Afficher la confirmation
-        end
-    end
+    deactivate System
+    deactivate App
 end
 @enduml
