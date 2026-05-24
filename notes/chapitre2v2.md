@@ -6,7 +6,7 @@ Ce chapitre présente la phase d’analyse et de préparation du projet FESTY. I
 
 Nous commençons par la spécification des besoins, à travers l’identification des acteurs principaux ainsi que la présentation des besoins fonctionnels et non fonctionnels. Ensuite, nous présentons le pilotage du projet avec Scrum, en précisant l’équipe Scrum, le backlog produit et la planification des sprints.
 
-Ce chapitre présente également les diagrammes globaux de la solution, notamment le diagramme de cas d’utilisation global et le diagramme de classes global. Enfin, nous décrivons l’environnement de travail, les technologies utilisées ainsi que l’architecture générale de la plateforme.
+Ce chapitre présente également les diagrammes globaux de la solution, notamment les diagrammes de cas d’utilisation globaux et le diagramme de classes global. Enfin, nous décrivons l’environnement de travail, les technologies utilisées ainsi que l’architecture générale de la plateforme.
 
 ## 2.1 Spécification des besoins
 
@@ -24,13 +24,15 @@ Nous distinguons cinq acteurs principaux : le Visiteur, l’Utilisateur, le Part
 |---|---|
 | Visiteur | Représente une personne non authentifiée qui accède aux fonctionnalités publiques de la plateforme. Il peut explorer les événements et les artistes, consulter les informations disponibles et s’inscrire à la plateforme. |
 | Utilisateur | Représente une personne authentifiée disposant d’un compte sur la plateforme. Il peut gérer son profil et ses préférences, gérer ses billets, interagir autour des événements et soumettre une demande pour devenir partenaire organisateur. |
-| Partenaire | Représente un organisateur d’événements. Il dispose d’un espace dédié lui permettant de gérer son profil partenaire, ses événements, sa billetterie, ses sessions de scan, son activité et sa monétisation. |
+| Partenaire | Représente un organisateur d’événements. Il dispose d’un espace dédié et d’un portail partenaire lui permettant de gérer son profil professionnel, ses événements, sa billetterie, ses sessions de scan, son activité et sa monétisation. |
 | Agent de scan | Représente un acteur chargé de contrôler l’accès à un événement. Il peut vérifier les billets des participants à travers le scan et valider leur entrée. |
 | Administrateur | Représente le responsable de la supervision de la plateforme. Il assure la gestion des utilisateurs et des partenaires, le contrôle de l’offre événementielle, la gestion du référentiel, le traitement des opérations financières ainsi que la supervision des risques et des audits. |
 
 **Tableau 2.1 : Identification des acteurs principaux de FESTY**
 
-Dans le diagramme de cas d’utilisation global, nous représentons uniquement les acteurs métier principaux de la plateforme. Les services techniques externes, tels que Stripe, Twilio, Firebase Cloud Messaging ou Brevo, ne sont pas considérés comme des acteurs principaux dans ce diagramme. Ils seront présentés dans les diagrammes détaillés des sprints concernés ou dans la partie architecture de la solution. Supabase est mentionné uniquement comme environnement d’hébergement de la base PostgreSQL.
+Dans le cadre de FESTY, le terme « artiste » désigne les stars, chanteurs, DJ ou intervenants associés aux événements.
+
+Dans les diagrammes de cas d’utilisation globaux, nous représentons uniquement les acteurs métier principaux de la plateforme. Les services techniques externes, tels que Stripe, le service OTP/SMS, Firebase Cloud Messaging ou Brevo, ne sont pas considérés comme des acteurs principaux dans ces diagrammes. Ils seront présentés dans les diagrammes détaillés des sprints concernés ou dans la partie architecture de la solution. Supabase est mentionné uniquement comme environnement d’hébergement de la base PostgreSQL.
 
 ### 2.1.2 Besoins fonctionnels
 
@@ -42,9 +44,9 @@ Le tableau suivant présente les besoins fonctionnels principaux de FESTY selon 
 |---|---|
 | Visiteur | Explorer les événements et les artistes, consulter les informations publiques, s’inscrire à la plateforme et s’authentifier. |
 | Utilisateur | Gérer son profil et ses préférences, interagir autour des événements, gérer sa billetterie et soumettre une demande pour devenir partenaire organisateur. |
-| Partenaire | Gérer son profil partenaire, gérer l’exploitation de ses événements, suivre son activité, consulter sa monétisation et organiser le contrôle d’accès aux événements. |
+| Partenaire | Gérer son profil partenaire, gérer l’exploitation de ses événements, gérer le line-up, suivre son activité, consulter sa monétisation et organiser le contrôle d’accès aux événements. |
 | Agent de scan | Contrôler l’accès à un événement en vérifiant les billets des participants et en validant leur entrée. |
-| Administrateur | Gérer les utilisateurs et les partenaires, contrôler l’offre événementielle, gérer le référentiel de la plateforme, traiter les opérations financières et superviser les risques et les audits. |
+| Administrateur | Gérer les utilisateurs et les partenaires, contrôler l’offre événementielle, modérer les contenus et les stars, gérer le référentiel de la plateforme, traiter les opérations financières et superviser les risques et les audits. |
 
 **Tableau 2.2 : Besoins fonctionnels principaux de FESTY**
 
@@ -57,10 +59,10 @@ Les besoins non fonctionnels décrivent les contraintes de qualité que doit res
 | Besoin non fonctionnel | Description |
 |---|---|
 | Sécurité | La plateforme doit protéger les comptes utilisateurs, les données personnelles, les billets numériques, les paiements et les accès aux fonctionnalités sensibles. |
-| Performance | Le système doit assurer un temps de réponse acceptable lors de la consultation des événements, de l’achat des billets, du paiement et du scan à l’entrée des événements. |
+| Performance | Le système doit assurer un temps de réponse acceptable lors de la consultation des événements, de la réservation et du paiement des billets ainsi que du scan à l’entrée des événements. |
 | Disponibilité | Les fonctionnalités principales doivent rester accessibles afin de garantir une utilisation continue par les visiteurs, utilisateurs, partenaires et agents de scan. |
-| Ergonomie | L’application doit proposer une interface claire, intuitive et adaptée à une utilisation mobile. |
-| Compatibilité | La solution doit être compatible avec les plateformes mobiles ciblées et permettre une utilisation fluide sur différents appareils. |
+| Ergonomie | La plateforme doit proposer des interfaces claires, intuitives et adaptées à l’application mobile, au back-office et au portail partenaire. |
+| Compatibilité | La solution doit être compatible avec les environnements mobiles et web ciblés. |
 | Maintenabilité | L’architecture doit faciliter l’évolution de la plateforme, l’ajout de nouvelles fonctionnalités et la correction des anomalies. |
 | Scalabilité | Le système doit pouvoir supporter l’augmentation du nombre d’utilisateurs, d’événements, de billets vendus et d’opérations de scan. |
 | Traçabilité | Les opérations sensibles, telles que les paiements, les validations, les scans et les actions administratives, doivent être suivies et historisées. |
@@ -110,69 +112,75 @@ Le tableau suivant présente le Product Backlog priorisé de la plateforme FESTY
 
 | ID | Module | ID Story | User Story | Priorité |
 |---|---|---|---|---|
-| 1 | Authentification | 1.1 | En tant que visiteur, je veux créer un compte afin d’accéder à la plateforme. | M |
-| 1 | Authentification | 1.2 | En tant qu’utilisateur, je veux m’authentifier afin d’accéder à mon espace personnel. | M |
-| 1 | Authentification | 1.3 | En tant qu’utilisateur, je veux réinitialiser mon mot de passe afin de récupérer l’accès à mon compte. | S |
-| 1 | Authentification back-office | 1.4 | En tant qu’administrateur, je veux m’authentifier au back-office afin d’accéder aux fonctionnalités d’administration de la plateforme. | M |
-| 2 | Profil utilisateur | 2.1 | En tant qu’utilisateur, je veux consulter mon profil afin de vérifier mes informations personnelles. | M |
-| 2 | Profil utilisateur | 2.2 | En tant qu’utilisateur, je veux modifier mes informations personnelles afin de maintenir mon profil à jour. | M |
-| 2 | Préférences utilisateur | 2.3 | En tant qu’utilisateur, je veux gérer mes préférences afin de personnaliser mon expérience. | S |
-| 3 | Exploration | 3.1 | En tant que visiteur ou utilisateur, je veux explorer les événements afin de découvrir les offres disponibles. | M |
-| 3 | Exploration | 3.2 | En tant que visiteur ou utilisateur, je veux consulter les artistes associés aux événements afin d’obtenir plus d’informations. | S |
-| 4 | Interactions événementielles | 4.1 | En tant qu’utilisateur, je veux interagir autour des événements afin d’enrichir mon expérience. | S |
-| 5 | Billetterie | 5.1 | En tant qu’utilisateur, je veux réserver un billet afin de participer à un événement. | M |
-| 5 | Billetterie | 5.2 | En tant qu’utilisateur, je veux consulter mes billets afin de suivre mes réservations. | M |
-| 5 | Billetterie | 5.3 | En tant qu’utilisateur, je veux gérer mes billets afin de les utiliser ou les suivre. | M |
-| 6 | Espace partenaire | 6.1 | En tant qu’utilisateur, je veux soumettre une demande pour devenir partenaire organisateur. | M |
-| 6 | Espace partenaire | 6.2 | En tant que partenaire, je veux gérer mon profil partenaire afin de présenter mes informations professionnelles. | S |
-| 7 | Gestion des événements partenaire | 7.1 | En tant que partenaire, je veux créer un événement afin de le publier sur la plateforme. | M |
-| 7 | Gestion des événements partenaire | 7.2 | En tant que partenaire, je veux modifier mes événements afin de maintenir leurs informations à jour. | M |
-| 7 | Gestion des événements partenaire | 7.3 | En tant que partenaire, je veux suivre l’exploitation de mes événements afin de gérer leur déroulement. | S |
-| 8 | Suivi partenaire | 8.1 | En tant que partenaire, je veux suivre mon activité afin d’évaluer la performance de mes événements. | S |
-| 8 | Monétisation | 8.2 | En tant que partenaire, je veux consulter ma monétisation afin de suivre mes revenus. | S |
-| 9 | Contrôle d’accès | 9.1 | En tant qu’agent de scan, je veux vérifier les billets afin de contrôler l’accès à un événement. | M |
-| 9 | Contrôle d’accès | 9.2 | En tant qu’agent de scan, je veux valider l’entrée d’un participant afin de confirmer son accès à l’événement. | M |
-| 10 | Administration | 10.1 | En tant qu’administrateur, je veux gérer les utilisateurs et les partenaires afin d’assurer la supervision de la plateforme. | M |
-| 10 | Administration | 10.2 | En tant qu’administrateur, je veux contrôler l’offre événementielle afin de garantir la conformité du contenu. | M |
-| 10 | Administration | 10.3 | En tant qu’administrateur, je veux gérer le référentiel de la plateforme afin d’assurer la cohérence des données. | S |
-| 10 | Administration | 10.4 | En tant qu’administrateur, je veux traiter les opérations financières afin de contrôler les paiements et remboursements. | S |
-| 10 | Administration | 10.5 | En tant qu’administrateur, je veux superviser les risques et les audits afin de sécuriser les opérations sensibles. | C |
+| 1 | Authentification et profil | 1.1 | En tant que visiteur, je veux créer un compte afin d’accéder à la plateforme. | M |
+| 1 | Authentification et profil | 1.2 | En tant qu’utilisateur, je veux m’authentifier afin d’accéder à mon espace personnel. | M |
+| 1 | Authentification et profil | 1.3 | En tant qu’utilisateur, je veux réinitialiser mon mot de passe afin de récupérer l’accès à mon compte. | S |
+| 1 | Authentification et profil | 1.4 | En tant qu’administrateur, je veux m’authentifier au back-office afin d’accéder aux fonctionnalités d’administration de la plateforme. | M |
+| 1 | Authentification et profil | 1.5 | En tant qu’utilisateur, je veux consulter et modifier mon profil afin de maintenir mes informations à jour. | M |
+| 2 | Partenaires et événements | 2.1 | En tant qu’utilisateur, je veux soumettre une demande pour devenir partenaire organisateur. | M |
+| 2 | Partenaires et événements | 2.2 | En tant qu’administrateur, je veux traiter les demandes partenaires afin de valider ou refuser l’accès à l’espace partenaire. | M |
+| 2 | Partenaires et événements | 2.3 | En tant que partenaire, je veux gérer mon profil partenaire afin de présenter mes informations professionnelles. | S |
+| 2 | Partenaires et événements | 2.4 | En tant que partenaire, je veux créer et gérer mes événements afin de maintenir leurs informations à jour. | M |
+| 2 | Partenaires et événements | 2.5 | En tant qu’administrateur, je veux contrôler l’offre événementielle afin de garantir la conformité du contenu. | M |
+| 3 | Exploration, personnalisation, artistes et interactions | 3.1 | En tant que visiteur ou utilisateur, je veux explorer les événements afin de découvrir les offres disponibles. | M |
+| 3 | Exploration, personnalisation, artistes et interactions | 3.2 | En tant que visiteur ou utilisateur, je veux consulter les artistes associés et le line-up des événements afin d’obtenir plus d’informations. | S |
+| 3 | Exploration, personnalisation, artistes et interactions | 3.3 | En tant que partenaire, je veux gérer le line-up de mes événements afin d’associer des artistes aux événements publiés. | S |
+| 3 | Exploration, personnalisation, artistes et interactions | 3.4 | En tant qu’utilisateur, je veux gérer mes préférences afin de personnaliser mon expérience. | S |
+| 3 | Exploration, personnalisation, artistes et interactions | 3.5 | En tant qu’utilisateur, je veux interagir autour des événements afin d’enrichir mon expérience. | S |
+| 3 | Exploration, personnalisation, artistes et interactions | 3.6 | En tant qu’administrateur, je veux modérer les contenus publics et les artistes associés aux événements afin de garantir la qualité des informations diffusées. | S |
+| 4 | Billetterie, paiement, scan et supervision | 4.1 | En tant qu’utilisateur, je veux réserver et consulter mes billets afin de participer à un événement. | M |
+| 4 | Billetterie, paiement, scan et supervision | 4.2 | En tant qu’utilisateur, je veux payer mes billets afin de finaliser ma participation. | M |
+| 4 | Billetterie, paiement, scan et supervision | 4.3 | En tant qu’agent de scan, je veux vérifier les tickets et valider l’entrée d’un participant afin de contrôler l’accès à un événement. | M |
+| 4 | Billetterie, paiement, scan et supervision | 4.4 | En tant que partenaire, je veux suivre mon activité et ma monétisation afin de consulter les performances de mes événements. | S |
+| 4 | Billetterie, paiement, scan et supervision | 4.5 | En tant qu’administrateur, je veux superviser les opérations sensibles liées aux utilisateurs, partenaires et transactions afin d’assurer le bon fonctionnement de la plateforme. | M |
+| 4 | Billetterie, paiement, scan et supervision | 4.6 | En tant qu’administrateur, je veux traiter les opérations financières et superviser les opérations sensibles afin d’assurer le bon fonctionnement de la plateforme. | S |
 
 **Tableau 2.6 : Backlog du produit priorisé selon la méthode MoSCoW**
 
-Les éléments du Product Backlog représentent les fonctionnalités principales de FESTY. Ils seront ensuite utilisés pour organiser la planification des sprints selon les priorités, les dépendances fonctionnelles et l’ordre de réalisation retenu. Ils seront également représentés de manière synthétique dans le diagramme de cas d’utilisation global.
+Les éléments du Product Backlog représentent les fonctionnalités principales de FESTY. Ils seront ensuite utilisés pour organiser la planification des sprints selon les priorités et l’ordre de réalisation retenu. Ils seront également représentés de manière synthétique dans les diagrammes de cas d’utilisation globaux.
 
 Dans le cadre de cette version, aucune fonctionnalité n’a été classée comme **Won’t Have**, car le backlog présenté regroupe uniquement les fonctionnalités retenues dans le périmètre du projet.
 
 ### 2.2.3 Planification des sprints
 
-La planification des sprints permet d’organiser le développement de FESTY en plusieurs itérations cohérentes. Chaque sprint regroupe un ensemble de fonctionnalités liées entre elles, en tenant compte des priorités définies dans le Product Backlog et des dépendances fonctionnelles entre les modules.
+La planification des sprints permet d’organiser le développement de la plateforme FESTY en quatre itérations cohérentes. Chaque sprint regroupe un ensemble de fonctionnalités majeures issues du Product Backlog.
 
-Dans notre cas, le projet a été réparti en six sprints. Cette répartition permet de commencer par les fonctionnalités de base, comme l’authentification et la gestion des comptes, puis de poursuivre progressivement avec les modules liés aux partenaires, aux événements, à la billetterie, au contrôle d’accès et à l’administration avancée.
+Le tableau suivant présente une vue synthétique de cette planification.
 
-| Sprint | Objectif | Acteurs principaux | Fonctionnalités principales | Dépendances |
-|---|---|---|---|---|
-| Sprint 1 | Mettre en place les accès de base à la plateforme. | Visiteur, Utilisateur, Administrateur | Inscription, vérification OTP, authentification à la plateforme, réinitialisation du mot de passe, authentification au back-office et gestion du profil utilisateur. | Sprint initial nécessaire pour accéder aux autres modules. |
-| Sprint 2 | Gérer les partenaires et les événements. | Utilisateur, Partenaire, Administrateur | Demande pour devenir partenaire, validation des partenaires, gestion du profil partenaire, création et gestion des événements, contrôle de l’offre événementielle. | Dépend de l’authentification utilisateur et de l’accès administrateur au back-office. |
-| Sprint 3 | Permettre l’exploration, la personnalisation et les interactions autour des événements. | Visiteur, Utilisateur, Partenaire,Administrateur | Exploration des événements et des artistes, gestion des préférences, favoris, interactions et modération des contenus publics. | Dépend de l’existence des événements créés et validés. |
-| Sprint 4 | Mettre en place la billetterie et les opérations financières liées. | Utilisateur, Administrateur | Réservation des billets, consultation des billets, gestion des billets, paiement, demande de remboursement et traitement des opérations financières. | Dépend des événements publiés et consultables. |
-| Sprint 5 | Assurer le contrôle d’accès aux événements et le suivi partenaire. | Partenaire, Agent de scan | Création des sessions de scan, affectation des agents, vérification des billets, validation des entrées, suivi de l’activité et de la monétisation. | Dépend de la génération des billets et des ventes réalisées. |
-| Sprint 6 | Finaliser l’administration avancée et la supervision globale. | Administrateur | Gestion du référentiel de la plateforme, supervision des risques, audits, tableaux de bord administratifs et suivi global des opérations sensibles. | Dépend des données produites par les modules précédents. |
+| Sprint | Objectif | Acteurs principaux | Fonctionnalités principales |
+|---|---|---|---|
+| Sprint 1 | Authentification et gestion des accès | Visiteur, Utilisateur, Administrateur | Inscription, vérification OTP, authentification à la plateforme, réinitialisation du mot de passe, authentification au back-office et gestion du profil utilisateur. |
+| Sprint 2 | Gestion des partenaires et des événements | Utilisateur, Partenaire, Administrateur | Soumission et traitement des demandes partenaires, gestion du profil partenaire, création et gestion des événements, contrôle de l’offre événementielle. |
+| Sprint 3 | Exploration, personnalisation et interactions autour des événements | Visiteur, Utilisateur, Partenaire, Administrateur | Exploration des événements, consultation des artistes et du line-up, gestion des préférences, interactions et modération des contenus publics. |
+| Sprint 4 | Billetterie, paiement, tickets et contrôle d’accès | Utilisateur, Partenaire, Agent de scan, Administrateur | Réservation des billets, paiement, consultation et gestion des tickets, scan et validation des accès, suivi partenaire, monétisation et supervision des opérations sensibles. |
 
 **Tableau 2.7 : Planification des sprints du projet FESTY**
 
 Cette planification donne une vue globale de l’organisation du développement. Les détails de chaque sprint, notamment le Sprint Backlog, les diagrammes de cas d’utilisation détaillés, les descriptions textuelles, les diagrammes de séquence et les éléments de réalisation, seront présentés dans les chapitres consacrés aux sprints.
-## 2.3 Diagramme de cas d’utilisation global
 
-Le diagramme de cas d’utilisation global permet de présenter une vue générale des principales fonctionnalités offertes par la plateforme FESTY. Il met en évidence les interactions entre les acteurs principaux et le système, sans détailler les scénarios internes propres à chaque fonctionnalité.
+## 2.3 Diagrammes de cas d’utilisation globaux
 
-Dans ce diagramme, nous distinguons cinq acteurs principaux : le Visiteur, l’Utilisateur, le Partenaire, l’Agent de scan et l’Administrateur. Chaque acteur accède à un ensemble de fonctionnalités selon son rôle dans la plateforme.
+Afin de présenter une vue générale de la solution, nous distinguons deux diagrammes de cas d’utilisation globaux : l’un pour la plateforme FESTY et l’autre pour le back-office administrateur.
 
-![Diagramme de cas d’utilisation global](images/use_case_global_festy.png)
+### 2.3.1 Diagramme de cas d’utilisation global de la plateforme FESTY
 
-**Figure 2.1 : Diagramme de cas d’utilisation global de FESTY**
+Ce diagramme présente les principales fonctionnalités accessibles aux acteurs métier de la plateforme FESTY. Il conserve les relations include vers l’authentification afin de garder une lecture cohérente des accès à la plateforme.
 
-Comme le montre la figure 2.1, le Visiteur peut explorer les événements, s’inscrire à la plateforme et accéder à l’interface d’authentification. Après authentification, l’Utilisateur peut gérer son profil, ses préférences, sa billetterie et ses interactions autour des événements. Le Partenaire dispose d’un espace dédié à la gestion de ses événements, au suivi de son activité et à sa monétisation. L’Agent de scan assure le contrôle d’accès aux événements, tandis que l’Administrateur supervise les utilisateurs, les partenaires, l’offre événementielle, les opérations financières et les audits.
+![Diagramme de cas d’utilisation global de la plateforme FESTY](images/use_case_global_plateforme_festy.png)
+
+**Figure 2.1 : Diagramme de cas d’utilisation global de la plateforme FESTY**
+
+La figure 2.1 montre que le Visiteur peut explorer les événements, s’inscrire à la plateforme et accéder à l’authentification. Après connexion, l’Utilisateur peut gérer son profil, ses préférences, sa billetterie et ses interactions. Le Partenaire accède à des fonctionnalités dédiées à la gestion de son profil partenaire, à l’exploitation de ses événements, au suivi de son activité et de sa monétisation. L’Agent de scan assure le contrôle d’accès aux événements à travers la vérification des billets des participants.
+
+### 2.3.2 Diagramme de cas d’utilisation global du back-office administrateur
+
+Ce diagramme présente les principales fonctionnalités du back-office administrateur de FESTY. Il regroupe les opérations de supervision, de gestion et de contrôle accessibles après authentification au back-office.
+
+![Diagramme de cas d’utilisation global du back-office administrateur](images/use_case_global_admin_festy.png)
+
+**Figure 2.2 : Diagramme de cas d’utilisation global du back-office administrateur**
+
+La figure 2.2 présente les fonctions de gestion des utilisateurs et des partenaires, le contrôle de l’offre événementielle, la modération des contenus et des stars, le traitement des opérations financières, la gestion du référentiel ainsi que la supervision globale de la plateforme.
 
 ## 2.4 Diagramme de classes global
 
@@ -182,9 +190,9 @@ Dans notre cas, le modèle global s’articule autour de plusieurs groupes d’e
 
 ![Diagramme de classes global](images/class_diagram_global_festy.png)
 
-**Figure 2.2 : Diagramme de classes global de FESTY**
+**Figure 2.3 : Diagramme de classes global de FESTY**
 
-Comme le montre la figure 2.2, la plateforme repose principalement sur l’entité utilisateur, qui peut gérer son profil, ses préférences, ses billets et ses interactions. Un utilisateur peut également soumettre une demande pour devenir partenaire. Le partenaire peut créer et gérer des événements, définir les types de billets associés et suivre son activité. Les billets sont liés aux réservations, aux paiements et aux opérations de contrôle d’accès. L’administrateur intervient dans la supervision des utilisateurs, des partenaires, des événements, des opérations financières et des actions sensibles.
+Comme le montre la figure 2.3, la plateforme repose principalement sur l’entité utilisateur, qui peut gérer son profil, ses préférences, ses billets et ses interactions. Un utilisateur peut également soumettre une demande pour devenir partenaire. Le partenaire peut créer et gérer des événements, définir les types de billets associés et suivre son activité. Les billets sont liés aux réservations, aux paiements et aux opérations de contrôle d’accès. L’administrateur intervient dans la supervision des utilisateurs, des partenaires, des événements, des opérations financières et des actions sensibles.
 
 
 ## 2.5 Environnement de travail
@@ -232,7 +240,7 @@ Cette section présente les principales technologies utilisées pour la réalisa
 
 ### 2.6.1 Technologies Front-End et Mobile
 
-La partie Front-End de FESTY comprend l’application mobile destinée aux visiteurs, utilisateurs, partenaires et agents de scan, ainsi que les interfaces web dédiées à l’administration et au suivi partenaire.
+La partie Front-End de la plateforme FESTY comprend l’application mobile ainsi que les interfaces web du back-office administrateur et du portail partenaire.
 
 | Technologie | Rôle dans le projet |
 |---|---|
@@ -245,7 +253,9 @@ La partie Front-End de FESTY comprend l’application mobile destinée aux visit
 
 ### 2.6.2 Technologies Back-End
 
-La partie Back-End de FESTY assure la gestion de la logique métier, la sécurité, l’exposition des API REST, la persistance des données et l’intégration avec les services externes. Elle repose sur une architecture monolithique modulaire afin de séparer les domaines fonctionnels tout en conservant une application centralisée.
+Le Back-End de FESTY est développé avec Spring Boot et organisé selon une architecture modulaire. La base de données utilisée est PostgreSQL. Les services externes tels que Stripe, Firebase Cloud Messaging, Bunny.net et le service OTP/SMS interviennent dans des fonctionnalités spécifiques.
+
+Cette partie assure la gestion de la logique métier, la sécurité, l’exposition des API REST, la persistance des données et l’intégration avec les services externes. Elle repose sur une architecture monolithique modulaire afin de séparer les domaines fonctionnels tout en conservant une plateforme centralisée.
 
 | Technologie | Rôle dans le projet |
 |---|---|
@@ -259,7 +269,7 @@ La partie Back-End de FESTY assure la gestion de la logique métier, la sécurit
 
 **Tableau 2.11 : Technologies Back-End utilisées**
 
-Le choix de Spring Boot permet de développer une application Back-End structurée et évolutive. Spring Security et JWT assurent l’authentification interne, la gestion des jetons d’accès et de rafraîchissement ainsi que le contrôle des autorisations selon les rôles, tandis que Spring Data JPA et Hibernate facilitent la gestion des données. Spring Modulith permet d’organiser le code en modules métier, notamment l’authentification, les événements, la billetterie, le paiement, le scan et l’administration.
+Le choix de Spring Boot permet de développer un Back-End structuré et évolutif. Spring Security et JWT assurent l’authentification interne, la gestion des jetons d’accès et de rafraîchissement ainsi que le contrôle des autorisations selon les rôles, tandis que Spring Data JPA et Hibernate facilitent la gestion des données. Spring Modulith permet d’organiser le code en modules métier, notamment l’authentification, les événements, la billetterie, le paiement, le scan et l’administration.
 
 ### 2.6.3 Base de données
 
@@ -285,13 +295,14 @@ FESTY intègre plusieurs services externes afin de prendre en charge certaines f
 | Stripe | Gestion des paiements en ligne, des remboursements, des webhooks, des payouts et des comptes connectés des partenaires. |
 | Firebase Cloud Messaging | Envoi des notifications push aux utilisateurs de l’application mobile. |
 | Brevo | Envoi des emails transactionnels liés aux comptes, aux notifications et aux opérations importantes. |
-| Twilio | Envoi des SMS, notamment pour les scénarios de vérification OTP. |
+| Service OTP/SMS | Envoi des SMS, notamment pour les scénarios de vérification OTP. |
 | Bunny.net | Stockage et diffusion des fichiers ou médias utilisés par la plateforme. |
 
 **Tableau 2.13 : Services externes intégrés à FESTY**
+
 ## 2.7 Architecture de la solution
 
-L’architecture de la solution permet de représenter l’organisation générale de la plateforme FESTY. Elle décrit les principaux composants du système, leurs responsabilités ainsi que les échanges entre les différentes couches de l’application.
+L’architecture de la solution permet de représenter l’organisation générale de la plateforme FESTY. Elle décrit les principaux composants du système, leurs responsabilités ainsi que les échanges entre les différentes couches de la plateforme.
 
 Dans le cadre de ce projet, nous avons adopté une architecture organisée autour d’une couche présentation, d’une couche métier, d’une couche de données et de services externes. Cette séparation permet de faciliter la maintenance, l’évolution du système et la répartition des responsabilités entre les composants.
 
@@ -299,7 +310,7 @@ Dans le cadre de ce projet, nous avons adopté une architecture organisée autou
 
 L’architecture physique décrit les composants déployés ainsi que les environnements dans lesquels ils s’exécutent. Elle met en évidence les clients de la plateforme, le Back-End, la base de données et les services externes intégrés à la solution.
 
-La plateforme FESTY est composée d’une application mobile développée avec Flutter, destinée aux visiteurs, utilisateurs, partenaires et agents de scan. Elle comprend également des interfaces web développées avec React.js, notamment le portail partenaire et le tableau de bord administrateur.
+La plateforme FESTY est composée d’une application mobile développée avec Flutter, destinée principalement aux visiteurs, utilisateurs et agents de scan. Elle comprend également des interfaces web développées avec React.js, notamment le portail partenaire et le tableau de bord administrateur.
 
 Le Back-End FESTY, développé avec Spring Boot, représente le service applicatif central. Il expose des API REST sécurisées consommées par l’application mobile et les interfaces web. Il assure le traitement métier, la gestion des autorisations, l’accès aux données et l’intégration avec les services externes.
 
@@ -307,23 +318,23 @@ La base de données PostgreSQL est hébergée dans l’environnement Supabase. E
 
 Supabase n’intervient donc pas dans le processus d’authentification de la plateforme ; son rôle se limite à l’hébergement de la base PostgreSQL utilisée par le Back-End FESTY.
 
-La plateforme intègre aussi plusieurs services externes. Stripe assure les paiements, les remboursements et les opérations financières. Firebase Cloud Messaging prend en charge les notifications push. Brevo est utilisé pour les emails transactionnels, Twilio pour certains SMS, et Bunny.net pour la gestion ou la diffusion des fichiers et médias.
+La plateforme intègre aussi plusieurs services externes. Stripe assure les paiements, les remboursements et les opérations financières. Firebase Cloud Messaging prend en charge les notifications push. Brevo est utilisé pour les emails transactionnels, le service OTP/SMS pour les SMS de vérification, et Bunny.net pour la gestion ou la diffusion des fichiers et médias.
 
 La figure suivante présente l’architecture physique de la plateforme FESTY.
 
 ![Architecture physique de la plateforme FESTY](images/architecture_physique_festy.png)
 
-**Figure 2.3 : Architecture physique de la plateforme FESTY**
+**Figure 2.4 : Architecture physique de la plateforme FESTY**
 
 Cette architecture montre que le Back-End joue un rôle central dans la coordination du système. Il assure les échanges entre les interfaces clientes, la base de données et les services externes, tout en appliquant les règles métier et les contrôles de sécurité nécessaires.
 
 ### 2.7.2 Architecture logique
 
-L’architecture logique de FESTY repose sur un Back-End unique développé avec Spring Boot et organisé sous forme de monolithe modulaire. Ce choix permet de conserver une application simple à développer et à déployer, tout en structurant le code en modules métier cohérents.
+L’architecture logique de FESTY repose sur un Back-End unique développé avec Spring Boot et organisé sous forme de monolithe modulaire. Ce choix permet de conserver une solution simple à développer et à déployer, tout en structurant le code en modules métier cohérents.
 
-Afin d’assurer cette organisation, nous avons utilisé Spring Modulith. Cette approche permet de découper le Back-End selon les principaux domaines fonctionnels de la plateforme, tels que l’authentification, la gestion des utilisateurs, les partenaires, les événements, la billetterie, les paiements, le scan, les notifications et l’administration.
+Afin d’assurer cette organisation, nous avons utilisé Spring Modulith. Cette approche permet de découper le Back-End selon les principaux domaines fonctionnels de la plateforme, tels que l’authentification, les utilisateurs, les partenaires, les événements, la billetterie, le paiement, le scan, les notifications, les interactions, les stars et recommandations ainsi que l’administration.
 
-Chaque module possède un périmètre fonctionnel précis et expose uniquement les services nécessaires aux autres modules. Cette séparation permet de réduire le couplage entre les composants, d’améliorer la lisibilité du code et de faciliter la maintenance de l’application.
+Chaque module possède un périmètre fonctionnel précis et expose uniquement les services nécessaires aux autres modules. Cette séparation permet de réduire le couplage entre les composants, d’améliorer la lisibilité du code et de faciliter la maintenance de la plateforme.
 
 Les échanges entre modules peuvent être réalisés à travers des interfaces ou des événements applicatifs. Par exemple, lorsqu’une action importante est effectuée dans un module, un événement peut être publié afin d’être traité par un autre module sans créer une dépendance forte entre les deux. Cette organisation permet de rapprocher certains avantages des microservices, tout en conservant la simplicité de déploiement d’un monolithe.
 
@@ -331,17 +342,17 @@ Les principaux modules logiques de FESTY sont présentés dans le tableau suivan
 
 | Module | Rôle principal |
 |---|---|
-| Authentification | Gestion de l’inscription, de la connexion, des jetons d’accès et de la sécurisation des comptes. |
-| Utilisateurs | Gestion des profils utilisateurs, des informations personnelles et des préférences. |
-| Partenaires | Gestion des demandes partenaires, des profils professionnels et des informations liées aux organisateurs. |
-| Événements | Création, consultation, modification, recherche et gestion du cycle de vie des événements. |
-| Artistes | Gestion du catalogue des artistes et des associations entre artistes et événements. |
-| Billetterie | Gestion des types de billets, des réservations et des billets numériques. |
-| Paiement | Gestion des paiements, des remboursements et des opérations financières liées aux événements. |
-| Scan | Gestion des sessions de scan, des agents affectés et du contrôle d’accès aux événements. |
-| Notifications | Gestion des notifications push, des emails et des messages liés aux actions importantes. |
-| Interactions | Gestion des avis, des favoris, des signalements et des interactions autour des événements. |
-| Administration | Supervision des utilisateurs, des partenaires, des événements, des opérations sensibles et des paramètres globaux. |
+| Authentification | Gestion de l’inscription, de l’authentification, des jetons d’accès et de la sécurisation des comptes. |
+| Utilisateurs | Gestion des profils, préférences et centres d’intérêts. |
+| Partenaires | Gestion des candidatures, profils professionnels et documents de vérification. |
+| Événements | Gestion de la création, consultation, recherche et cycle de vie des événements. |
+| Billetterie | Gestion des types de billets, des réservations et des tickets numériques. |
+| Paiement | Gestion des paiements, remboursements, soldes et opérations financières. |
+| Scan | Gestion du contrôle d’accès, des sessions de scan et des validations d’entrée. |
+| Notifications | Gestion des notifications et préférences de notification. |
+| Interactions | Gestion des avis, favoris, chat et signalements. |
+| Stars et recommandations | Gestion des artistes, intérêts utilisateurs et recommandations personnalisées. |
+| Administration | Supervision de la plateforme, du référentiel et des opérations sensibles. |
 
 **Tableau 2.14 : Modules logiques de la plateforme FESTY**
 
@@ -349,14 +360,12 @@ La figure suivante présente une vue simplifiée de l’architecture logique mod
 
 ![Architecture logique modulaire de FESTY](images/architecture_logique_festy.png)
 
-**Figure 2.4 : Architecture logique modulaire de FESTY**
+**Figure 2.5 : Architecture logique modulaire de FESTY**
 
-Cette architecture permet de mieux organiser les responsabilités internes de l’application. Elle facilite également l’évolution future de la plateforme, car chaque module peut être modifié ou enrichi avec un impact limité sur les autres parties du système.
+Cette architecture permet de mieux organiser les responsabilités internes de la plateforme. Elle facilite également l’évolution future du système, car chaque module peut être modifié ou enrichi avec un impact limité sur les autres parties.
 
 ## Conclusion
 
-Dans ce chapitre, nous avons présenté la phase d’analyse et de préparation du projet FESTY. Nous avons commencé par identifier les acteurs principaux de la plateforme, puis nous avons défini les besoins fonctionnels et non fonctionnels du système.
+Dans ce chapitre, nous avons présenté la phase d’analyse et de préparation du projet FESTY. Nous avons identifié les acteurs principaux de la plateforme, puis défini les besoins fonctionnels et non fonctionnels du système. Nous avons également présenté le backlog produit et la planification du projet en quatre sprints.
 
-Nous avons ensuite présenté le pilotage du projet avec Scrum à travers l’équipe Scrum, le backlog du produit priorisé selon la méthode MoSCoW et la planification des sprints. Par la suite, nous avons introduit les diagrammes globaux de la solution, notamment le diagramme de cas d’utilisation global et le diagramme de classes global.
-
-Enfin, nous avons présenté l’environnement de travail, les technologies utilisées ainsi que l’architecture logique et physique de la plateforme. Le chapitre suivant sera consacré à l’étude et à la réalisation du premier sprint, portant sur l’authentification et la gestion des accès.
+Nous avons ensuite introduit les deux diagrammes de cas d’utilisation globaux, le diagramme de classes global, ainsi que l’environnement de travail, les technologies utilisées et l’architecture de la plateforme. Le chapitre suivant sera consacré à l’étude et à la réalisation du premier sprint, portant sur l’authentification et la gestion des accès.
