@@ -67,8 +67,6 @@ Cette section présente les descriptions textuelles des principaux cas d’utili
 | Scénario nominal | 1. Le visiteur accède au formulaire d’inscription.<br>2. Il saisit ses informations personnelles, son email, son mot de passe et son numéro de téléphone.<br>3. Le système vérifie les informations saisies.<br>4. Le système crée le compte et envoie un code OTP au numéro indiqué.<br>5. Le visiteur saisit le code OTP reçu.<br>6. Le système vérifie le code et active le compte. |
 | Exceptions | E1 : Les informations saisies sont invalides.<br>E2 : L’email est déjà utilisé.<br>E3 : Le code OTP est incorrect ou expiré. |
 
-**Tableau 3.2 : Description textuelle du cas d’utilisation « S’inscrire à la plateforme »**
-
 #### Cas d’utilisation : S’authentifier à la plateforme
 
 | Élément | Description |
@@ -76,10 +74,10 @@ Cette section présente les descriptions textuelles des principaux cas d’utili
 | Cas d’utilisation | S’authentifier à la plateforme |
 | Acteur principal | Utilisateur |
 | Objectif | Permettre à l’utilisateur d’accéder à son espace personnel. |
-| Précondition | L’utilisateur possède un compte enregistré sur la plateforme. |
+| Précondition | L’utilisateur possède un compte actif sur la plateforme. |
 | Postcondition | L’utilisateur est authentifié et peut accéder aux fonctionnalités privées de la plateforme. |
-| Scénario nominal | 1. L’utilisateur accède à l’interface de connexion.<br>2. Il saisit son email et son mot de passe.<br>3. Le système vérifie les identifiants saisis.<br>4. Le système valide la demande d’authentification.<br>5. Le système autorise l’accès à l’espace personnel. |
-| Exceptions | E1 : En cas d’échec de l’authentification, le système affiche un message d’erreur et demande de réessayer. |
+| Scénario nominal | 1. L’utilisateur accède à l’interface de connexion.<br>2. Il saisit son email et son mot de passe.<br>3. Le système vérifie les identifiants saisis.<br>4. Le système vérifie l’état du compte utilisateur.<br>5. Le système autorise l’accès à l’espace personnel. |
+| Exceptions | E1 : L’adresse email saisie est introuvable.<br>E2 : Le mot de passe saisi est incorrect. |
 
 **Tableau 3.3 : Description textuelle du cas d’utilisation « S’authentifier à la plateforme »**
 
