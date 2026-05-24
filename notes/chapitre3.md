@@ -79,7 +79,7 @@ Cette section présente les descriptions textuelles des principaux cas d’utili
 | Précondition | L’utilisateur possède un compte actif et vérifié. |
 | Postcondition | L’utilisateur est authentifié et peut accéder aux fonctionnalités privées de la plateforme. |
 | Scénario nominal | 1. L’utilisateur accède à l’interface de connexion.<br>2. Il saisit son email et son mot de passe.<br>3. Le système vérifie les identifiants saisis.<br>4. Le système vérifie l’état du compte utilisateur.<br>5. Le système autorise l’accès à l’espace personnel. |
-| Exceptions | E1 : Les identifiants saisis sont incorrects.<br>E2 : Le compte est non vérifié, désactivé ou suspendu. |
+| Exceptions | E1 : Les identifiants saisis sont incorrects.<br>E2 : le système affiche un message d’erreur et demande de réessayer. |
 
 **Tableau 3.3 : Description textuelle du cas d’utilisation « S’authentifier à la plateforme »**
 

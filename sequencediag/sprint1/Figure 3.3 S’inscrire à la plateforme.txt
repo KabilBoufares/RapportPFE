@@ -1,106 +1,57 @@
 @startuml
+actor Visiteur
+participant "Système" as System
+database "Base de données" as DB
+participant "Service SMS" as SMS
 
-
-hide footbox
 autonumber
 
-actor "Visiteur" as V
-boundary "Interface FESTY" as IHM
-control "Système d'inscription" as SI
-database "Référentiel des comptes" as RC
-participant "Service OTP/SMS" as OTP
+Visiteur -> System : Demande le formulaire d'inscription
+activate System
+System --> Visiteur : Affiche le formulaire
+deactivate System
 
+Visiteur -> System : Soumet les informations\n(nom, email, mot de passe, téléphone)
+activate System
 
+System -> System : Valide les champs saisis
+alt informations invalides
+    System --> Visiteur : Message d'erreur (E1)
+else informations valides
+    System -> DB : Vérifier l'unicité de l'email
+    activate DB
+    DB --> System : Email disponible / indisponible
+    deactivate DB
+    alt email déjà utilisé
+        System --> Visiteur : Message d'erreur (E2)
+    else email disponible
+        System -> DB : Créer le compte utilisateur (statut inactif)
+        activate DB
+        DB --> System : Confirmation
+        deactivate DB
+        System -> SMS : Demander l'envoi du code OTP\n(au numéro de téléphone)
+        activate SMS
+        SMS --> System : OTP envoyé
+        deactivate SMS
+        System --> Visiteur : Demander la saisie du code OTP
+        deactivate System
 
-V -> IHM ++ : Accéder à l'interface d'inscription
-IHM --> V -- : Afficher le formulaire d'inscription
-
-V -> IHM ++ : Saisir les informations d'inscription\n(email, mot de passe, téléphone, nom)
-IHM -> IHM : Vérifier le format des champs
-
-alt [Champs invalides]
-    IHM --> V -- : Afficher les erreurs de saisie
-
-else [Champs valides]
-    IHM -> SI ++ : Soumettre la demande d'inscription(données)
-
-    SI -> RC ++ : Vérifier la disponibilité\n(email, téléphone)
-    RC --> SI -- : Disponible / déjà utilisé
-
-    alt [Email ou téléphone déjà utilisé]
-        SI --> IHM -- : Inscription refusée
-        IHM --> V -- : Afficher un message d'erreur
-
-    else [Informations disponibles]
-        SI -> SI : Générer un code OTP
-
-        SI -> RC ++ : Enregistrer la préinscription\net le code OTP temporaire
-        RC --> SI -- : Préinscription enregistrée
-
-        SI -> OTP ++ : Demander l'envoi du code OTP
-        OTP -> V : Envoyer le code par SMS
-        OTP --> SI -- : Envoi confirmé
-
-        SI --> IHM -- : Vérification téléphonique requise
-        IHM --> V -- : Afficher l'écran de saisie du code
+        Visiteur -> System : Saisit le code OTP
+        activate System
+        System -> SMS : Vérifier le code OTP
+        activate SMS
+        SMS --> System : Code valide / invalide
+        deactivate SMS
+        alt code OTP incorrect ou expiré
+            System --> Visiteur : Message d'erreur (E3)
+        else code OTP valide
+            System -> DB : Activer le compte (mettre à jour statut)
+            activate DB
+            DB --> System : Confirmation
+            deactivate DB
+            System --> Visiteur : Confirmation de l'inscription réussie
+        end
+        deactivate System
     end
-end
-
-
-
-opt [Renvoi du code OTP]
-    V -> IHM ++ : Demander le renvoi du code
-    IHM -> SI ++ : Demander un nouveau code OTP
-
-    SI -> RC ++ : Générer et enregistrer\nun nouveau code OTP
-    RC --> SI -- : Nouveau code enregistré
-
-    SI -> OTP ++ : Demander l'envoi du nouveau code
-    OTP -> V : Envoyer le nouveau code par SMS
-    OTP --> SI -- : Envoi confirmé
-
-    SI --> IHM -- : Renvoi confirmé
-    IHM --> V -- : Afficher la confirmation du renvoi
-end
-
-opt [Modification du numéro]
-    V -> IHM ++ : Saisir un nouveau numéro
-    IHM -> IHM : Vérifier le format du numéro
-
-    alt [Nouveau numéro invalide]
-        IHM --> V -- : Afficher les erreurs de saisie
-
-    else [Nouveau numéro valide]
-        IHM -> SI ++ : Modifier le numéro(nouveauNuméro)
-
-        SI -> RC ++ : Mettre à jour le numéro\net générer un nouveau code OTP
-        RC --> SI -- : Numéro mis à jour
-
-        SI -> OTP ++ : Demander l'envoi du nouveau code
-        OTP -> V : Envoyer le nouveau code par SMS
-        OTP --> SI -- : Envoi confirmé
-
-        SI --> IHM -- : Modification confirmée
-        IHM --> V -- : Afficher l'écran de saisie du code
-    end
-end
-
-V -> IHM ++ : Saisir le code OTP reçu
-IHM -> SI ++ : Vérifier le code OTP
-
-SI -> RC ++ : Contrôler le code et sa validité
-RC --> SI -- : Code valide / invalide
-
-alt [Code invalide ou expiré]
-    SI --> IHM -- : Vérification refusée
-    IHM --> V -- : Afficher un message d'erreur
-
-else [Code valide]
-    SI -> RC ++ : Activer le compte utilisateur
-    RC --> SI -- : Compte activé
-
-    SI -> SI : Générer une session d'accès
-    SI --> IHM -- : Inscription confirmée + session
-    IHM --> V -- : Rediriger vers l'espace personnel
 end
 @enduml
