@@ -1,0 +1,102 @@
+@startuml
+actor Administrateur
+boundary "Interface d'administration" as AdminUI
+control "Back-End FESTY" as Backend
+database "Base de données" as DB
+
+autonumber
+
+' Étape 1 – Accès à l'interface
+Administrateur -> AdminUI : Accéder à l'interface de connexion du back-office
+activate AdminUI
+AdminUI --> Administrateur : Afficher le formulaire de connexion
+deactivate AdminUI
+
+' Étape 2 – Saisie des identifiants
+Administrateur -> AdminUI : Saisir l'email et le mot de passe
+activate AdminUI
+AdminUI -> Backend : Envoyer les identifiants (email, mot de passe)
+deactivate AdminUI
+activate Backend
+
+' Étape 3 – Vérification des identifiants
+
+Backend -> DB : Vérifier l'existence de l'email
+deactivate Backend
+activate DB
+DB --> Backend : Email trouvé / introuvable
+deactivate DB
+
+alt email introuvable
+activate Backend
+    Backend --> AdminUI : Message d'erreur (E1)
+deactivate Backend
+activate AdminUI
+    AdminUI --> Administrateur : Afficher "Identifiants incorrects"
+    
+    deactivate AdminUI
+else email trouvé
+    Backend -> DB : Récupérer les informations du compte
+    activate DB
+    DB --> Backend : Informations du compte (mot de passe haché, rôle)
+activate Backend
+    deactivate DB
+
+    Backend -> Backend : Vérifier le mot de passe
+
+    alt mot de passe incorrect
+        Backend --> AdminUI : Message d'erreur (E1)
+activate AdminUI
+deactivate Backend
+        AdminUI --> Administrateur : Afficher "Identifiants incorrects"
+        deactivate Backend
+        deactivate AdminUI
+    else mot de passe correct
+        ' Étape 4 – Vérification du rôle administrateur
+
+        Backend -> Backend : Vérifier le rôle administrateur
+activate Backend
+        ' Étape 5 – Demande du code 2FA
+        Backend --> AdminUI : Demander le code 2FA
+deactivate Backend
+activate AdminUI
+        deactivate Backend
+        AdminUI --> Administrateur : Afficher le champ de saisie du code 2FA
+        deactivate AdminUI
+
+        ' Étape 6 – Saisie et vérification du code 2FA
+        Administrateur -> AdminUI : Saisir le code 2FA
+        activate AdminUI
+        AdminUI -> Backend : Envoyer le code 2FA saisi
+deactivate AdminUI
+        activate Backend
+
+        Backend -> DB : Récupérer la configuration 2FA
+deactivate Backend
+        activate DB
+        DB --> Backend : Configuration 2FA (secret)
+        deactivate DB
+activate Backend
+        Backend -> Backend : Vérifier le code 2FA
+
+        alt code 2FA invalide ou expiré
+            Backend --> AdminUI : Message d'erreur (E2)
+deactivate Backend
+activate AdminUI
+            AdminUI --> Administrateur : Afficher "Code 2FA invalide ou expiré"
+            deactivate Backend
+            deactivate AdminUI
+        else code 2FA valide
+
+            Backend -> Backend : Créer une session administrateur sécurisée
+activate Backend
+            Backend --> AdminUI : Authentification réussie
+deactivate Backend
+activate AdminUI
+
+            AdminUI --> Administrateur : Rediriger vers l'espace d'administration
+            deactivate AdminUI
+        end
+    end
+end
+@enduml
