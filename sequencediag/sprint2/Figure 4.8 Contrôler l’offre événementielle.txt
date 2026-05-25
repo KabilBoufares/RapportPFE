@@ -1,6 +1,29 @@
 @startuml
-start
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam DefaultFontName Arial
+skinparam DefaultFontSize 12
 
+skinparam activity {
+  BackgroundColor #FFFDE7
+  BorderColor #E53935
+  BorderThickness 2
+  FontColor #1A1A1A
+  FontSize 12
+  ArrowColor #E53935
+  ArrowFontColor #1A1A1A
+  ArrowThickness 2
+  DiamondBackgroundColor #FFFDE7
+  DiamondBorderColor #E53935
+  DiamondBorderThickness 2
+  DiamondFontColor #1A1A1A
+  StartColor #1A1A1A
+  EndColor #1A1A1A
+}
+
+
+
+start
 :Consulter la liste des événements\nen attente de validation;
 :Sélectionner un événement;
 :Afficher les informations de l'événement;
