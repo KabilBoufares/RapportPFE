@@ -1,0 +1,70 @@
+@startuml
+actor Utilisateur
+boundary "Application mobile" as App
+control "Back-End FESTY" as Backend
+database "Base de données" as DB
+
+autonumber
+
+' Étape 1 – Accès à l'interface
+Utilisateur -> App : Accéder à l'interface de connexion
+activate App
+App --> Utilisateur : Afficher le formulaire de connexion
+deactivate App
+
+' Étape 2 – Saisie des identifiants
+Utilisateur -> App : Saisir l'email et le mot de passe
+activate App
+App -> Backend : Envoyer les identifiants (email, mot de passe)
+deactivate App
+activate Backend
+
+
+' Étape 3 – Vérification de l'email
+
+Backend -> DB : Vérifier l'existence de l'email
+deactivate Backend
+activate DB
+DB --> Backend : Email trouvé / introuvable
+activate Backend
+deactivate DB
+
+alt email introuvable
+
+    Backend --> App : Message d'erreur (E1)
+deactivate Backend
+activate App
+    App --> Utilisateur : Afficher "Email introuvable"
+    
+    deactivate App
+else email trouvé
+    ' Suite étape 3 – Récupération des informations du compte
+    Backend -> DB : Récupérer les informations du compte
+    activate DB
+    DB --> Backend : Retourner les informations du compte
+    deactivate DB
+activate Backend
+    ' Vérification du mot de passe côté Back-End
+    Backend -> Backend : Vérifier le mot de passe
+
+    alt mot de passe incorrect
+        Backend --> App : Message d'erreur (E2)
+deactivate Backend
+activate App
+        App --> Utilisateur : Afficher "Mot de passe incorrect"
+        
+        deactivate App
+    else mot de passe correct
+        ' Étape 5 – Accès autorisé
+        Backend -> Backend : Créer une session sécurisée
+activate Backend
+
+        Backend --> App : Authentification réussie
+deactivate Backend
+activate App
+        App --> Utilisateur : Rediriger vers l'espace personnel
+        deactivate Backend
+        deactivate App
+    end
+end
+@enduml
