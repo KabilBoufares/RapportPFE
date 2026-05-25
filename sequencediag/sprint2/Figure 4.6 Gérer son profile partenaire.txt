@@ -1,64 +1,55 @@
 @startuml
-hide footbox
-autonumber
-
-actor "Partenaire" as U
-boundary "Interface partenaire FESTY" as IHM
-control "Back-End FESTY" as BE
+actor Partenaire
+participant "Interface partenaire" as PartnerUI
+participant "Back-End FESTY" as System
 database "Base de données" as DB
 
-== Consultation du profil ==
+autonumber
 
-U -> IHM ++ : Accéder à son profil partenaire
-IHM -> BE ++ : Demander les informations du profil
+' Étape 1 – Accès au profil
+Partenaire -> PartnerUI : Accéder à son profil professionnel
+activate PartnerUI
+PartnerUI -> System : Demander les informations du profil partenaire
+activate System
+System -> DB : Récupérer les informations du profil partenaire
+activate DB
+DB --> System : Informations du profil partenaire
+deactivate DB
+System --> PartnerUI : Envoyer les informations du profil partenaire
+deactivate System
+PartnerUI --> Partenaire : Afficher les informations du profil
+deactivate PartnerUI
 
-BE -> BE : Vérifier l'accès partenaire
-BE -> DB ++ : Récupérer les informations professionnelles
-DB --> BE -- : Informations professionnelles
+' Alternative après affichage : quitter ou modifier
+alt partenaire quitte la page (E2)
+    Partenaire -> PartnerUI : Quitter la page sans enregistrer
+    activate PartnerUI
+    PartnerUI --> Partenaire : Fin de l'interaction
+    deactivate PartnerUI
+else partenaire modifie ses informations
+    ' Étape 3 – Saisie des modifications
+    Partenaire -> PartnerUI : Modifier les informations souhaitées
+    activate PartnerUI
+    Partenaire -> PartnerUI : Soumettre les modifications
+    PartnerUI -> System : Envoyer les nouvelles données
+    activate System
 
-BE --> IHM -- : Profil partenaire
-IHM --> U : Afficher les informations professionnelles
-deactivate IHM
+    ' Étape 4 – Vérification
+    System -> System : Valider les données saisies
 
-== Modification du profil ==
-
-U -> IHM ++ : Choisir de modifier le profil
-IHM --> U : Afficher le formulaire prérempli
-
-U -> IHM : Saisir les nouvelles informations
-IHM -> IHM : Vérifier les champs saisis
-
-alt Modification annulée
-    U -> IHM : Annuler les modifications
-    IHM --> U : Restaurer les informations précédentes
-    deactivate IHM
-
-else Données invalides
-    IHM --> U : Afficher les erreurs de validation
-    deactivate IHM
-
-else Données valides
-    IHM -> BE ++ : Envoyer les nouvelles informations
-
-    BE -> BE : Vérifier l'accès partenaire
-    BE -> BE : Normaliser les données
-    BE -> DB ++ : Mettre à jour le profil partenaire
-
-    alt Erreur d'enregistrement
-        DB --> BE -- : Échec de la mise à jour
-        BE --> IHM -- : Erreur technique
-        IHM --> U : Afficher "Une erreur est survenue,\nveuillez réessayer"
-        deactivate IHM
-
-    else Mise à jour réussie
-        DB --> BE -- : Profil mis à jour
-
-        BE -> DB ++ : Recharger le profil actualisé
-        DB --> BE -- : Profil actualisé
-
-        BE --> IHM -- : Profil mis à jour
-        IHM --> U : Afficher la confirmation\net le profil actualisé
-        deactivate IHM
+    alt données invalides (E1)
+        System --> PartnerUI : Message d'erreur (E1)
+        PartnerUI --> Partenaire : Afficher "Données invalides"
+    else données valides
+        ' Étape 5 – Enregistrement
+        System -> DB : Mettre à jour les informations du profil partenaire
+        activate DB
+        DB --> System : Confirmation de mise à jour
+        deactivate DB
+        System --> PartnerUI : Message de confirmation
+        PartnerUI --> Partenaire : Afficher "Profil mis à jour avec succès"
     end
+    deactivate System
+    deactivate PartnerUI
 end
 @enduml

@@ -62,7 +62,7 @@ Cette section présente les descriptions textuelles des principaux cas d’utili
 | Objectif | Permettre à l’utilisateur de déposer une demande afin de devenir partenaire organisateur. |
 | Précondition | L’utilisateur est authentifié sur la plateforme. |
 | Postcondition | La demande partenaire est enregistrée et transmise pour traitement administratif. |
-| Scénario nominal | 1. L’utilisateur accède au formulaire de demande partenaire.<br>2. Il saisit ses informations professionnelles.<br>3. Il téléverse les documents requis.<br>4. Le système vérifie les informations saisies.<br>5. Le système enregistre la demande avec le statut en attente.<br>6. Le système affiche un message de confirmation. |
+| Scénario nominal | 1. L’utilisateur accède au formulaire de demande partenaire.<br>2. Il saisit ses informations professionnelles.<br>3. Il joint les documents requis.<br>4. Le système vérifie les informations saisies.<br>5. Le système stocke les documents et enregistre la demande avec le statut en attente.<br>6. Le système affiche un message de confirmation. |
 | Exceptions | E1 : Les informations saisies sont incomplètes ou invalides.<br>E2 : Le téléversement d’un document échoue. |
 
 **Tableau 4.2 : Description textuelle du cas d’utilisation « Soumettre une demande partenaire »**
@@ -76,8 +76,8 @@ Cette section présente les descriptions textuelles des principaux cas d’utili
 | Objectif | Permettre à l’administrateur d’examiner une demande partenaire et de prendre une décision. |
 | Précondition | L’administrateur est authentifié au back-office. |
 | Postcondition | Le statut de la demande est mis à jour. |
-| Scénario nominal | 1. L’administrateur consulte la liste des demandes partenaires.<br>2. Il sélectionne une demande à traiter.<br>3. Le système affiche les informations et les documents associés.<br>4. L’administrateur vérifie le dossier.<br>5. Il accepte ou refuse la demande.<br>6. Le système met à jour le statut de la demande. |
-| Exceptions | E1 : Les informations de la demande sont incomplètes.<br>E2 : L’administrateur demande des informations complémentaires. |
+| Scénario nominal | 1. L’administrateur consulte la liste des demandes partenaires.<br>2. Il sélectionne une demande à traiter.<br>3. Le système affiche les informations et les documents associés.<br>4. L’administrateur examine le dossier.<br>5. Il accepte ou refuse la demande.<br>6. Le système met à jour le statut de la demande. |
+| Exceptions | E1 : Le dossier est incomplet, l’administrateur demande des informations complémentaires. |
 
 **Tableau 4.3 : Description textuelle du cas d’utilisation « Traiter une demande partenaire »**
 
@@ -89,29 +89,43 @@ Cette section présente les descriptions textuelles des principaux cas d’utili
 | Acteur principal | Partenaire |
 | Objectif | Permettre au partenaire de consulter et mettre à jour ses informations professionnelles. |
 | Précondition | Le partenaire est authentifié et dispose d’un accès à l’espace partenaire. |
-| Postcondition | Les informations du profil partenaire sont mises à jour. |
-| Scénario nominal | 1. Le partenaire accède à son profil professionnel.<br>2. Le système affiche les informations du profil.<br>3. Le partenaire modifie les informations souhaitées.<br>4. Le système vérifie les données saisies.<br>5. Le système enregistre les modifications.<br>6. Le système affiche un message de confirmation. |
+| Postcondition | Les informations du profil partenaire sont mises à jour si les données saisies sont valides. |
+| Scénario nominal | 1. Le partenaire accède à son profil professionnel.<br>2. Le système affiche les informations du profil partenaire.<br>3. Le partenaire modifie les informations souhaitées.<br>4. Le système vérifie les données saisies.<br>5. Le système enregistre les modifications.<br>6. Le système affiche un message de confirmation. |
 | Exceptions | E1 : Les données saisies sont invalides.<br>E2 : Le partenaire quitte la page sans enregistrer les modifications. |
 
 **Tableau 4.4 : Description textuelle du cas d’utilisation « Gérer son profil partenaire »**
 
-#### Cas d’utilisation : Créer et gérer un événement
+##### Cas d’utilisation : Créer un événement
 
 | Élément | Description |
 |---|---|
-| Cas d’utilisation | Créer et gérer un événement |
+| Cas d’utilisation | Créer un événement |
 | Acteur principal | Partenaire |
-| Objectif | Permettre au partenaire de créer un événement et de maintenir ses informations à jour. |
+| Objectif | Permettre au partenaire de créer un événement et de le soumettre à la validation administrative. |
 | Précondition | Le partenaire est authentifié et dispose d’un accès à l’espace partenaire. |
-| Postcondition | L’événement est enregistré ou mis à jour dans la plateforme. |
-| Scénario nominal | 1. Le partenaire accède à l’espace de gestion des événements.<br>2. Il crée un nouvel événement ou sélectionne un événement existant.<br>3. Il saisit ou modifie les informations de l’événement.<br>4. Le système vérifie les données saisies.<br>5. Le système enregistre l’événement.<br>6. Le système affiche un message de confirmation. |
+| Postcondition | L’événement est enregistré dans la plateforme avec le statut en attente de validation. |
+| Scénario nominal | 1. Le partenaire accède à l’espace de création d’événement.<br>2. Il saisit les informations principales de l’événement.<br>3. Il ajoute les médias et les informations complémentaires nécessaires.<br>4. Le système vérifie les données saisies.<br>5. Le système enregistre l’événement avec le statut en attente de validation.<br>6. Le système affiche un message de confirmation. |
 | Exceptions | E1 : Les informations saisies sont incomplètes ou invalides.<br>E2 : Le partenaire annule l’opération avant l’enregistrement. |
 
-**Tableau 4.5 : Description textuelle du cas d’utilisation « Créer et gérer un événement »**
+**Tableau 4.5 : Description textuelle du cas d’utilisation « Créer un événement »**
+
+#### Cas d’utilisation : Contrôler l’offre événementielle
+
+| Élément | Description |
+|---|---|
+| Cas d’utilisation | Contrôler l’offre événementielle |
+| Acteur principal | Administrateur |
+| Objectif | Permettre à l’administrateur de vérifier les événements soumis avant leur publication. |
+| Précondition | L’administrateur est authentifié au back-office. |
+| Postcondition | Le statut de l’événement est mis à jour en approuvé ou rejeté selon la décision de l’administrateur. |
+| Scénario nominal | 1. L’administrateur consulte la liste des événements en attente de validation.<br>2. Il sélectionne un événement à contrôler.<br>3. Le système affiche les informations de l’événement.<br>4. L’administrateur examine le contenu de l’événement.<br>5. Il approuve l’événement ou décide de le rejeter.<br>6. En cas de rejet, l’administrateur saisit le motif du rejet.<br>7. Le système met à jour le statut de l’événement.<br>8. Le système notifie le partenaire de la décision.<br>9. Le système affiche un message de confirmation. |
+| Exceptions | E1 : L’administrateur annule l’opération avant la validation de sa décision.<br>E2 : La mise à jour du statut échoue. |
+
+**Tableau 4.6 : Description textuelle du cas d’utilisation « Contrôler l’offre événementielle »**
 
 ## 4.3 Conception
 
-Cette section présente les éléments de conception du Sprint 2. Elle comprend le diagramme de classes partiel ainsi que les diagrammes de séquence associés aux principaux scénarios du sprint.
+Cette section présente les éléments de conception du Sprint 2. Elle comprend le diagramme de classes partiel ainsi que les diagrammes dynamiques associés aux principaux scénarios du sprint.
 
 ### 4.3.1 Diagramme de classes du Sprint 2
 
@@ -123,20 +137,21 @@ Le diagramme de classes du Sprint 2 présente les principales classes liées à 
 
 Ce diagramme montre qu’un utilisateur peut soumettre une demande partenaire contenant des documents justificatifs. Après validation, le partenaire peut gérer son profil et ses événements. L’administrateur intervient pour traiter les demandes partenaires et contrôler les événements soumis.
 
-### 4.3.2 Diagrammes de séquence
+### 4.3.2 Diagrammes dynamiques
 
-Les diagrammes de séquence présentent les échanges entre les acteurs, les interfaces, le back-end et la base de données pour les principaux scénarios du Sprint 2.
+Les diagrammes dynamiques présentent les échanges et les enchaînements liés aux principaux scénarios du Sprint 2. Nous utilisons des diagrammes de séquence pour représenter les interactions entre les acteurs, les interfaces, le back-end et la base de données. Nous utilisons également un diagramme d’activité pour modéliser le processus décisionnel lié au contrôle de l’offre événementielle.
 
-Dans ce sprint, nous retenons quatre scénarios principaux :
+Dans ce sprint, nous retenons cinq scénarios principaux :
 
 - la soumission d’une demande partenaire ;
 - le traitement d’une demande partenaire ;
+- la gestion du profil partenaire ;
 - la création d’un événement ;
 - le contrôle de l’offre événementielle.
 
 #### Diagramme de séquence : Soumission d’une demande partenaire
 
-La figure 4.3 présente le scénario de soumission d’une demande partenaire. L’utilisateur remplit le formulaire de candidature, ajoute les documents requis, puis soumet sa demande. Le système vérifie les données saisies, enregistre la demande et affiche une confirmation.
+La figure 4.3 présente le scénario de soumission d’une demande partenaire. L’utilisateur remplit le formulaire de candidature, ajoute les documents requis, puis soumet sa demande. Le système vérifie les données saisies, stocke les documents, enregistre la demande et affiche une confirmation.
 
 ![Diagramme de séquence du scénario de soumission d’une demande partenaire](images/sequence_demande_partenaire.png)
 
@@ -144,30 +159,35 @@ La figure 4.3 présente le scénario de soumission d’une demande partenaire. L
 
 #### Diagramme de séquence : Traitement d’une demande partenaire
 
-La figure 4.4 présente le scénario de traitement d’une demande partenaire. L’administrateur consulte les demandes reçues, sélectionne une demande, vérifie les informations et les documents associés, puis accepte ou refuse la demande.
+La figure 4.4 présente le scénario de traitement d’une demande partenaire. L’administrateur consulte les demandes reçues, sélectionne une demande, vérifie les informations et les documents associés, puis accepte, refuse ou demande des informations complémentaires.
 
 ![Diagramme de séquence du scénario de traitement d’une demande partenaire](images/sequence_traitement_demande_partenaire.png)
 
 **Figure 4.4 : Diagramme de séquence du scénario de traitement d’une demande partenaire**
 
+#### Diagramme de séquence : Gestion du profil partenaire
+
+La figure 4.5 présente le scénario de gestion du profil partenaire. Le partenaire consulte ses informations professionnelles, modifie les données souhaitées, puis le système vérifie les données saisies avant de mettre à jour le profil.
+
+![Diagramme de séquence du scénario de gestion du profil partenaire](images/sequence_profil_partenaire.png)
+
+**Figure 4.5 : Diagramme de séquence du scénario de gestion du profil partenaire**
+
 #### Diagramme de séquence : Création d’un événement
 
-La figure 4.5 présente le scénario de création d’un événement par le partenaire. Le partenaire saisit les informations principales de l’événement, puis le système vérifie les données avant d’enregistrer l’événement.
+La figure 4.6 présente le scénario de création d’un événement par le partenaire. Le partenaire saisit les informations principales de l’événement et ajoute les médias nécessaires. Le système vérifie ensuite les données, stocke les médias, enregistre l’événement avec le statut en attente de validation et affiche une confirmation.
 
 ![Diagramme de séquence du scénario de création d’un événement](images/sequence_creation_evenement.png)
 
-**Figure 4.5 : Diagramme de séquence du scénario de création d’un événement**
+**Figure 4.6 : Diagramme de séquence du scénario de création d’un événement**
 
+#### Diagramme d’activité : Contrôle de l’offre événementielle
 
-#### Diagramme de séquence : Contrôle de l’offre événementielle
+La figure 4.7 présente le processus de contrôle de l’offre événementielle. L’administrateur consulte les événements en attente de validation, examine les informations publiées, puis prend une décision. Si l’événement est conforme, il est approuvé. Dans le cas contraire, il est rejeté.
 
-La figure 4.6 présente le scénario de contrôle de l’offre événementielle. L’administrateur consulte les événements soumis, vérifie les informations publiées, puis approuve ou rejette l’événement.
+![Diagramme d’activité du contrôle de l’offre événementielle](images/activity_controle_offre_evenementielle.png)
 
-![Diagramme de séquence du scénario de contrôle de l’offre événementielle](images/sequence_controle_offre_evenementielle.png)
-
-**Figure 4.6 : Diagramme de séquence du scénario de contrôle de l’offre événementielle**
-
-
+**Figure 4.7 : Diagramme d’activité du contrôle de l’offre événementielle**
 ## 4.4 Réalisation
 
 Cette section présente les principales interfaces réalisées durant le Sprint 2. Ces interfaces couvrent le parcours partenaire, la gestion des événements et le contrôle administratif.

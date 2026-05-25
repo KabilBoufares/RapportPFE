@@ -1,103 +1,29 @@
 @startuml
-hide footbox
-autonumber
+start
 
-actor "Administrateur" as A
-boundary "Interface back-office" as IHM
-control "Back-End FESTY" as BE
-database "Base de données" as DB
+:Consulter la liste des événements\nen attente de validation;
+:Sélectionner un événement;
+:Afficher les informations de l'événement;
+:Examiner le contenu;
 
-== Accès à la file de modération ==
+if (Approuver l'événement ?) then (Oui)
+  :Mettre à jour le statut\nde l'événement en "approuvé";
+else (Non)
+  if (Rejeter l'événement ?) then (Oui)
+    :Saisir le motif du rejet;
+    :Mettre à jour le statut\nde l'événement en "rejeté";
+  else (Non)
+    :Annuler l'opération;
+    stop
+  endif
+endif
 
-A -> IHM : Accéder au contrôle des événements
-activate IHM
-IHM -> BE : Charger les événements soumis
-activate BE
-BE -> DB : Récupérer les événements\n(statut SOUMIS, modération NON_CONTROLE)
-activate DB
-DB --> BE : Liste des événements
-deactivate DB
-BE --> IHM : Liste des événements
-deactivate BE
-IHM --> A : Afficher la file de modération
-deactivate IHM
+if (Mise à jour réussie ?) then (Oui)
+  :Notifier le partenaire de la décision;
+  :Afficher un message de confirmation;
+else (Non)
+  :Afficher un message d'erreur de mise à jour;
+endif
 
-== Examen d'un événement ==
-
-A -> IHM : Sélectionner un événement
-activate IHM
-IHM -> BE : Charger le détail et l'historique
-activate BE
-BE -> DB : Récupérer les informations\net les décisions précédentes
-activate DB
-DB --> BE : Fiche complète
-deactivate DB
-BE --> IHM : Détail de l'événement
-deactivate BE
-IHM --> A : Afficher toutes les informations
-deactivate IHM
-
-== Prise de décision ==
-
-A -> IHM : Choisir une action de contrôle
-activate IHM
-IHM -> BE : Transmettre la décision
-activate BE
-
-alt Approuver l'événement
-    BE -> DB : Mettre à jour les statuts\n(événement PUBLIE, modération APPROUVE)
-    activate DB
-    DB --> BE : OK
-    deactivate DB
-    BE --> IHM : Confirmation
-    deactivate BE
-    IHM --> A : "Événement approuvé et publié"
-
-else Rejeter l'événement
-    BE -> DB : Mettre à jour les statuts\n(événement BROUILLON, modération REJETE, motif)
-    activate DB
-    DB --> BE : OK
-    deactivate DB
-    BE --> IHM : Confirmation
-    deactivate BE
-    IHM --> A : "Événement rejeté"
-
-else Mettre en pause
-    BE -> DB : Mettre à jour le statut\n(modération EN_PAUSE, motif)
-    activate DB
-    DB --> BE : OK
-    deactivate DB
-    BE --> IHM : Confirmation
-    deactivate BE
-    IHM --> A : "Événement mis en pause"
-
-else Signaler
-    BE -> DB : Mettre à jour le statut\n(modération SIGNALE, motif)
-    activate DB
-    DB --> BE : OK
-    deactivate DB
-    BE --> IHM : Confirmation
-    deactivate BE
-    IHM --> A : "Événement signalé"
-
-else Archiver
-    BE -> DB : Mettre à jour les statuts\n(événement ARCHIVE, modération ARCHIVE)
-    activate DB
-    DB --> BE : OK
-    deactivate DB
-    BE --> IHM : Confirmation
-    deactivate BE
-    IHM --> A : "Événement archivé"
-
-else Erreur lors de la mise à jour
-    BE -> DB : Tentative de mise à jour
-    activate DB
-    DB --> BE : Échec
-    deactivate DB
-    BE --> IHM : Échec de l'opération
-    deactivate BE
-    IHM --> A : "Une erreur est survenue,\nveuillez réessayer"
-end
-
-deactivate IHM
+stop
 @enduml

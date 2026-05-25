@@ -1,89 +1,56 @@
 @startuml
-hide footbox
+actor Utilisateur
+participant "Application mobile" as App
+participant "Back-End FESTY" as System
+database "Base de données" as DB
+participant "Service de stockage" as Storage
+
 autonumber
 
-actor "Utilisateur" as U
-boundary "Interface FESTY" as IHM
-control "Back-End FESTY" as BE
-database "Base de données" as DB
+' Étape 1 – Accès au formulaire
+Utilisateur -> App : Demander le formulaire de demande partenaire
+activate App
+App --> Utilisateur : Afficher le formulaire
+deactivate App
 
-U -> IHM ++ : Accéder à l'espace demande partenaire
-IHM -> BE ++ : Récupérer le dossier partenaire
+' Étapes 2-3 – Saisie des informations et ajout des documents
+Utilisateur -> App : Saisir les informations professionnelles et joindre les documents
+activate App
+App -> System : Envoyer la demande (informations, documents)
+activate System
 
-BE -> DB ++ : Charger le dossier partenaire
-DB --> BE -- : Statut et brouillon éventuel
+' Étape 4 – Vérification des informations
+System -> System : Valider les informations saisies
 
-alt Demande soumise ou en révision
-    BE --> IHM : Retourner le statut de la demande
-    deactivate BE
-    IHM --> U : Afficher "Demande en cours de traitement"
-    deactivate IHM
+alt informations incomplètes ou invalides (E1)
+    System --> App : Message d'erreur (E1)
+    App --> Utilisateur : Afficher "Informations invalides"
+else informations valides
+    ' Étape 3 (suite) – Téléversement des documents
+    System -> Storage : Téléverser les documents
+    activate Storage
 
-else Brouillon existant ou complément demandé
-    BE --> IHM : Retourner le dossier prérempli
-    deactivate BE
-    IHM --> U : Afficher le formulaire prérempli
-    deactivate IHM
+    alt échec du téléversement (E2)
+        Storage --> System : Échec du téléversement
+        deactivate Storage
+        System --> App : Message d'erreur (E2)
+        App --> Utilisateur : Afficher "Échec du téléversement d'un document"
+    else téléversement réussi
+        Storage --> System : Confirmation de stockage
+        deactivate Storage
 
-else Aucune demande
-    BE --> IHM : Aucun dossier existant
-    deactivate BE
-    IHM --> U : Afficher le formulaire vierge
-    deactivate IHM
-end
+        ' Étape 5 – Enregistrement de la demande
+        System -> DB : Enregistrer la demande partenaire (statut : en attente)
+        activate DB
+        DB --> System : Confirmation
+        deactivate DB
 
-U -> IHM ++ : Saisir les informations professionnelles
-IHM -> IHM : Vérifier les champs
-
-alt Données invalides
-    IHM --> U : Afficher les erreurs de saisie
-    deactivate IHM
-
-else Données valides
-    IHM -> BE ++ : Sauvegarder le brouillon
-    BE -> DB ++ : Enregistrer le brouillon\n(statut BROUILLON)
-    DB --> BE -- : Brouillon enregistré
-    BE --> IHM -- : Brouillon sauvegardé
-    IHM --> U : Afficher "Informations enregistrées"
-    deactivate IHM
-end
-
-loop Pour chaque document requis
-    U -> IHM ++ : Déposer un document
-    IHM -> IHM : Vérifier le format et la taille
-
-    alt Fichier non conforme
-        IHM --> U : Afficher une erreur
-        deactivate IHM
-
-    else Fichier valide
-        IHM -> BE ++ : Transmettre le document
-        BE -> DB ++ : Enregistrer le document\net sa référence\n(statut EN_ATTENTE)
-        DB --> BE -- : Document enregistré
-
-        BE --> IHM -- : Document ajouté
-        IHM --> U : Afficher la confirmation
-        deactivate IHM
+        ' Étape 6 – Confirmation
+        System --> App : Confirmation de la demande
+        App --> Utilisateur : Afficher "Demande enregistrée avec succès"
     end
 end
 
-U -> IHM ++ : Soumettre la candidature
-IHM -> BE ++ : Déclencher la soumission
-
-BE -> DB ++ : Vérifier l'exhaustivité du dossier
-DB --> BE -- : Dossier complet / incomplet
-
-alt Dossier incomplet
-    BE --> IHM -- : Retourner les éléments manquants
-    IHM --> U : Afficher "Complétez votre dossier"
-    deactivate IHM
-
-else Dossier complet
-    BE -> DB ++ : Passer la demande au statut SOUMISE
-    DB --> BE -- : Statut mis à jour
-
-    BE --> IHM -- : Soumission confirmée
-    IHM --> U : Afficher "Candidature enregistrée"
-    deactivate IHM
-end
+deactivate System
+deactivate App
 @enduml
