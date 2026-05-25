@@ -6,8 +6,7 @@ Ce chapitre présente l’étude et la réalisation du deuxième sprint du proje
 
 Ce sprint introduit également le contrôle administratif des demandes partenaires et de l’offre événementielle. L’administrateur peut ainsi examiner les candidatures reçues, accepter ou refuser les demandes, puis contrôler les événements soumis avant leur publication sur la plateforme.
 
-Dans ce chapitre, nous présentons d’abord le backlog du sprint. Ensuite, nous détaillons l’analyse fonctionnelle à travers le diagramme de cas d’utilisation et les descriptions textuelles des principaux cas. La partie conception présente le diagramme de classes partiel ainsi que les diagrammes de séquence associés. Enfin, nous exposons les principales interfaces réalisées durant ce sprint.
-
+Dans ce chapitre, nous présentons d’abord le backlog du sprint. Ensuite, nous détaillons l’analyse fonctionnelle à travers le diagramme de cas d’utilisation et les descriptions textuelles des principaux cas. La partie conception présente le diagramme de classes partiel ainsi que les diagrammes dynamiques associés aux principaux scénarios du sprint. Enfin, nous exposons les principales interfaces réalisées durant ce sprint.
 
 ## 4.1 Backlog du Sprint 2
 
@@ -26,7 +25,7 @@ Le tableau suivant présente les user stories retenues pour le deuxième sprint.
 | ID | User Story | Tâches principales | Priorité |
 |---|---|---|---|
 | US-2.1 | En tant qu’utilisateur, je veux soumettre une demande pour devenir partenaire organisateur afin de proposer des événements sur la plateforme. | Créer le formulaire de candidature ; saisir les informations professionnelles ; téléverser les documents requis ; envoyer la demande ; suivre son statut. | Must Have |
-| US-2.2 | En tant qu’administrateur, je veux traiter les demandes partenaires afin de valider ou refuser l’accès à l’espace partenaire. | Consulter les demandes reçues ; afficher le dossier partenaire ; vérifier les informations ; accepter ou refuser la demande. | Must Have |
+| US-2.2 | En tant qu’administrateur, je veux traiter les demandes partenaires afin de valider ou refuser l’accès à l’espace partenaire. | Consulter les demandes reçues ; afficher le dossier partenaire ; vérifier les informations ; accepter, refuser ou demander des informations complémentaires. | Must Have |
 | US-2.3 | En tant que partenaire, je veux gérer mon profil partenaire afin de présenter mes informations professionnelles. | Afficher le profil partenaire ; modifier les informations professionnelles ; mettre à jour les coordonnées et la description. | Should Have |
 | US-2.4 | En tant que partenaire, je veux créer et gérer mes événements afin de maintenir leurs informations à jour. | Créer un événement ; saisir les informations générales ; définir la date et la localisation ; consulter, modifier ou annuler un événement. | Must Have |
 | US-2.5 | En tant qu’administrateur, je veux contrôler l’offre événementielle afin de garantir la conformité du contenu publié. | Consulter les événements soumis ; afficher les détails ; approuver ou rejeter un événement. | Must Have |
@@ -95,7 +94,9 @@ Cette section présente les descriptions textuelles des principaux cas d’utili
 
 **Tableau 4.4 : Description textuelle du cas d’utilisation « Gérer son profil partenaire »**
 
-##### Cas d’utilisation : Créer un événement
+Dans ce chapitre, le cas « Gérer ses événements » est présenté comme une fonctionnalité globale du partenaire. Le scénario détaillé retenu concerne la création d’un événement, car il représente l’étape principale avant le contrôle administratif.
+
+#### Cas d’utilisation : Créer un événement
 
 | Élément | Description |
 |---|---|
@@ -183,11 +184,12 @@ La figure 4.6 présente le scénario de création d’un événement par le part
 
 #### Diagramme d’activité : Contrôle de l’offre événementielle
 
-La figure 4.7 présente le processus de contrôle de l’offre événementielle. L’administrateur consulte les événements en attente de validation, examine les informations publiées, puis prend une décision. Si l’événement est conforme, il est approuvé. Dans le cas contraire, il est rejeté.
+La figure 4.7 présente le processus de contrôle de l’offre événementielle. L’administrateur consulte les événements en attente de validation, examine les informations publiées, puis prend une décision. Il peut approuver l’événement, le rejeter en saisissant un motif, ou annuler l’opération. Après la mise à jour du statut, le partenaire est notifié de la décision.
 
 ![Diagramme d’activité du contrôle de l’offre événementielle](images/activity_controle_offre_evenementielle.png)
 
 **Figure 4.7 : Diagramme d’activité du contrôle de l’offre événementielle**
+
 ## 4.4 Réalisation
 
 Cette section présente les principales interfaces réalisées durant le Sprint 2. Ces interfaces couvrent le parcours partenaire, la gestion des événements et le contrôle administratif.
@@ -198,7 +200,7 @@ Cette interface permet à l’utilisateur de remplir les informations nécessair
 
 ![Interface de soumission d’une demande partenaire](images/interface_demande_partenaire.png)
 
-**Figure 4.7 : Interface de soumission d’une demande partenaire**
+**Figure 4.8 : Interface de soumission d’une demande partenaire**
 
 ### 4.4.2 Interface de traitement des demandes partenaires
 
@@ -206,7 +208,7 @@ Cette interface permet à l’administrateur de consulter les demandes partenair
 
 ![Interface de traitement des demandes partenaires](images/interface_traitement_demandes.png)
 
-**Figure 4.8 : Interface de traitement des demandes partenaires**
+**Figure 4.9 : Interface de traitement des demandes partenaires**
 
 ### 4.4.3 Interface de gestion du profil partenaire
 
@@ -214,7 +216,7 @@ Cette interface permet au partenaire de consulter et modifier ses informations p
 
 ![Interface de gestion du profil partenaire](images/interface_profil_partenaire.png)
 
-**Figure 4.9 : Interface de gestion du profil partenaire**
+**Figure 4.10 : Interface de gestion du profil partenaire**
 
 ### 4.4.4 Interface de création d’un événement
 
@@ -222,7 +224,7 @@ Cette interface permet au partenaire de créer un événement en saisissant les 
 
 ![Interface de création d’un événement](images/interface_creation_evenement.png)
 
-**Figure 4.10 : Interface de création d’un événement**
+**Figure 4.11 : Interface de création d’un événement**
 
 ### 4.4.5 Interface de gestion des événements
 
@@ -230,7 +232,7 @@ Cette interface permet au partenaire de consulter la liste de ses événements, 
 
 ![Interface de gestion des événements](images/interface_gestion_evenements.png)
 
-**Figure 4.11 : Interface de gestion des événements**
+**Figure 4.12 : Interface de gestion des événements**
 
 ### 4.4.6 Interface de contrôle de l’offre événementielle
 
@@ -238,12 +240,12 @@ Cette interface permet à l’administrateur de consulter les événements soumi
 
 ![Interface de contrôle de l’offre événementielle](images/interface_controle_evenements.png)
 
-**Figure 4.12 : Interface de contrôle de l’offre événementielle**
+**Figure 4.13 : Interface de contrôle de l’offre événementielle**
 
 ## Conclusion
 
 Dans ce chapitre, nous avons présenté l’étude et la réalisation du Sprint 2, consacré à la gestion des partenaires et des événements. Ce sprint a permis de mettre en place le parcours de demande partenaire, la gestion du profil professionnel, la création et la gestion des événements ainsi que le contrôle administratif de l’offre événementielle.
 
-Nous avons également présenté le diagramme de cas d’utilisation, les descriptions textuelles, le diagramme de classes partiel et les diagrammes de séquence associés aux principaux scénarios du sprint.
+Nous avons également présenté le diagramme de cas d’utilisation, les descriptions textuelles, le diagramme de classes partiel ainsi que les diagrammes dynamiques associés aux principaux scénarios du sprint.
 
 Le sprint suivant sera consacré à l’exploration, à la personnalisation et aux interactions autour des événements.
