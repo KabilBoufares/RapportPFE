@@ -67,11 +67,11 @@ Dans cette section, nous présentons les descriptions textuelles des principaux 
 |---|---|
 | Cas d’utilisation | Participer au chat d’un événement |
 | Acteur principal | Utilisateur |
-| Objectif | Permettre à l’utilisateur d’interagir avec les autres participants autour d’un événement. |
-| Précondition | L’utilisateur est authentifié et consulte un événement. |
-| Postcondition | Le message est enregistré et affiché dans le chat. |
-| Scénario nominal | 1. L’utilisateur accède au détail d’un événement.<br>2. Il ouvre le chat de l’événement.<br>3. Il saisit un message.<br>4. Le système enregistre le message.<br>5. Le système affiche le message dans le chat. |
-| Exceptions | E1 : Le message est vide.<br>E2 : L’envoi du message échoue. |
+| Objectif | Permettre à l’utilisateur de rejoindre le chat d’un événement, consulter les messages existants et envoyer un message afin d’interagir avec les autres participants. |
+| Précondition | L’utilisateur est authentifié et consulte le détail d’un événement. |
+| Postcondition | L’utilisateur rejoint le chat de l’événement et, en cas d’envoi réussi, le message est enregistré puis affiché dans le chat. |
+| Scénario nominal | 1. L’utilisateur accède au détail d’un événement.<br>2. Il ouvre le chat de l’événement.<br>3. Le système vérifie ou enregistre son accès au chat.<br>4. Le système charge les messages actifs du chat.<br>5. Le système affiche l’interface de chat avec les messages existants.<br>6. L’utilisateur saisit un message et l’envoie.<br>7. Le système vérifie le contenu du message et l’accès au chat.<br>8. Le système enregistre le message.<br>9. Le système affiche le message dans le chat. |
+| Exceptions | E1 : Le message saisi est vide.<br>E2 : L’enregistrement du message échoue.<br>E3 : L’utilisateur n’est pas autorisé à envoyer le message. |
 
 **Tableau 5.3 : Description textuelle du cas d’utilisation « Participer au chat d’un événement »**
 
