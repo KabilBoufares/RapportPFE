@@ -1,0 +1,57 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam DefaultFontName Arial
+skinparam DefaultFontSize 12
+
+skinparam activity {
+  BackgroundColor #FFFDE7
+  BorderColor #E53935
+  BorderThickness 2
+  FontColor #1A1A1A
+  FontSize 12
+  ArrowColor #E53935
+  ArrowFontColor #1A1A1A
+  ArrowThickness 2
+  DiamondBackgroundColor #FFFDE7
+  DiamondBorderColor #E53935
+  DiamondBorderThickness 2
+  DiamondFontColor #1A1A1A
+  StartColor #1A1A1A
+  EndColor #1A1A1A
+}
+|Administrateur|
+start
+:Accéder au catalogue artistique;
+
+|Système|
+:Afficher la liste des stars disponibles et proposées;
+
+|Administrateur|
+:Sélectionner une star proposée à traiter;
+
+|Système|
+:Afficher les informations détaillées
+de la star proposée;
+
+|Administrateur|
+:Choisir une décision;
+if (Décision ?) then (Approuver)
+  |Système|
+  :Mettre à jour le statut de la star
+  en "Approuvée";
+else (Rejeter)
+  |Système|
+  :Mettre à jour le statut de la star
+  en "Rejetée";
+endif
+
+if (Mise à jour réussie ?) then (non : E2)
+  :Afficher un message d'erreur
+  "Échec de la mise à jour";
+  stop
+else (oui)
+  :Afficher un message de confirmation;
+  stop
+endif
+@enduml
