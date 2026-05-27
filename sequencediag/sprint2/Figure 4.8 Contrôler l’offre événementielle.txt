@@ -1,8 +1,19 @@
 @startuml
+' ==================================================
+' Diagramme d'activité — Validation d'un événement
+' Avec swimlanes : Administrateur / Système
+' Logique inchangée
+' ==================================================
+
+!pragma useVerticalIf on
+
 skinparam backgroundColor #FFFFFF
 skinparam shadowing false
 skinparam DefaultFontName Arial
 skinparam DefaultFontSize 12
+skinparam dpi 300
+
+scale 0.82
 
 skinparam activity {
   BackgroundColor #FFFDE7
@@ -21,31 +32,59 @@ skinparam activity {
   EndColor #1A1A1A
 }
 
+skinparam partition {
+  BackgroundColor #FFFFFF
+  BorderColor #444444
+  FontColor #1A1A1A
+  FontSize 12
+  FontStyle bold
+}
 
-
+|Administrateur|
 start
 :Consulter la liste des événements\nen attente de validation;
 :Sélectionner un événement;
-:Afficher les informations de l'événement;
+
+|Système|
+:Afficher les informations\nde l'événement;
+
+|Administrateur|
 :Examiner le contenu;
 
 if (Approuver l'événement ?) then (Oui)
+
+  |Système|
   :Mettre à jour le statut\nde l'événement en "approuvé";
+
 else (Non)
+
+  |Administrateur|
   if (Rejeter l'événement ?) then (Oui)
+
     :Saisir le motif du rejet;
+
+    |Système|
     :Mettre à jour le statut\nde l'événement en "rejeté";
+
   else (Non)
+
+    |Administrateur|
     :Annuler l'opération;
     stop
+
   endif
 endif
 
+|Système|
 if (Mise à jour réussie ?) then (Oui)
-  :Notifier le partenaire de la décision;
-  :Afficher un message de confirmation;
+
+  :Notifier le partenaire\nde la décision;
+  :Afficher un message\nde confirmation;
+
 else (Non)
-  :Afficher un message d'erreur de mise à jour;
+
+  :Afficher un message d'erreur\nde mise à jour;
+
 endif
 
 stop

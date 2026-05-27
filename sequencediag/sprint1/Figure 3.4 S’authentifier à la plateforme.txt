@@ -1,7 +1,7 @@
 @startuml
 actor Utilisateur
-participant "Application mobile" as App
-participant "Back-End FESTY" as System
+boundary "Application mobile" as App
+control "Back-End FESTY" as Backend
 database "Base de données" as DB
 
 autonumber
@@ -15,39 +15,46 @@ deactivate App
 ' Étape 2 – Saisie des identifiants
 Utilisateur -> App : Saisir l'email et le mot de passe
 activate App
-App -> System : Envoyer les identifiants (email, mot de passe)
-activate System
+App -> Backend : Envoyer les identifiants (email, mot de passe)
+deactivate App
 
-' Étape 3 – Vérification de l'email
-System -> DB : Vérifier l'existence de l'email
+activate Backend
+Backend -> DB : Vérifier l'existence de l'email
+deactivate Backend
 activate DB
-DB --> System : Email trouvé / introuvable
+DB --> Backend : Email trouvé / introuvable
 deactivate DB
 
 alt email introuvable
-    System --> App : Message d'erreur (E1)
+    activate Backend
+    Backend --> App : Message d'erreur (E1)
+    deactivate Backend
+    activate App
     App --> Utilisateur : Afficher "Email introuvable"
+    deactivate App
 else email trouvé
-    ' Suite étape 3 – Récupération des informations du compte
-    System -> DB : Récupérer les informations du compte
+    activate Backend
+    Backend -> DB : Récupérer les informations du compte
+    deactivate Backend
     activate DB
-    DB --> System : Retourner les informations du compte
+    DB --> Backend : Retourner les informations du compte
     deactivate DB
-
-    ' Vérification du mot de passe côté Back-End
-    System -> System : Vérifier le mot de passe
+    activate Backend
+    Backend -> Backend : Vérifier le mot de passe
 
     alt mot de passe incorrect
-        System --> App : Message d'erreur (E2)
+        Backend --> App : Message d'erreur (E2)
+        deactivate Backend
+        activate App
         App --> Utilisateur : Afficher "Mot de passe incorrect"
+        deactivate App
     else mot de passe correct
-        ' Étape 5 – Accès autorisé
-        System -> System : Créer une session sécurisée
-        System --> App : Authentification réussie
+        Backend -> Backend : Créer une session sécurisée
+        Backend --> App : Authentification réussie
+        deactivate Backend
+        activate App
         App --> Utilisateur : Rediriger vers l'espace personnel
+        deactivate App
     end
 end
-
-deactivate System
-deactivate App
 @enduml

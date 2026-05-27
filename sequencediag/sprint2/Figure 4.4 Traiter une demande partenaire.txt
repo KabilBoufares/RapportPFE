@@ -1,7 +1,7 @@
 @startuml
 actor Administrateur
-participant "Interface d'administration" as AdminUI
-participant "Back-End FESTY" as System
+boundary "Interface d'administration" as AdminUI
+control "Back-End FESTY" as Backend
 database "Base de données" as DB
 
 autonumber
@@ -9,28 +9,44 @@ autonumber
 ' Étape 1 – Consultation de la liste des demandes
 Administrateur -> AdminUI : Demander la liste des demandes partenaires
 activate AdminUI
-AdminUI -> System : Demander la liste des demandes
-activate System
-System -> DB : Récupérer les demandes partenaires
+AdminUI -> Backend : Demander la liste des demandes
+deactivate AdminUI
+
+activate Backend
+Backend -> DB : Récupérer les demandes partenaires
+deactivate Backend
+
 activate DB
-DB --> System : Liste des demandes
+DB --> Backend : Liste des demandes
 deactivate DB
-System --> AdminUI : Envoyer la liste
-deactivate System
+
+activate Backend
+Backend --> AdminUI : Envoyer la liste
+deactivate Backend
+
+activate AdminUI
 AdminUI --> Administrateur : Afficher la liste des demandes
 deactivate AdminUI
 
 ' Étape 2 – Sélection d'une demande
 Administrateur -> AdminUI : Sélectionner une demande à traiter
 activate AdminUI
-AdminUI -> System : Demander le détail de la demande
-activate System
-System -> DB : Récupérer les informations et documents
+AdminUI -> Backend : Demander le détail de la demande
+deactivate AdminUI
+
+activate Backend
+Backend -> DB : Récupérer les informations et documents
+deactivate Backend
+
 activate DB
-DB --> System : Détail de la demande
+DB --> Backend : Détail de la demande
 deactivate DB
-System --> AdminUI : Envoyer le détail
-deactivate System
+
+activate Backend
+Backend --> AdminUI : Envoyer le détail
+deactivate Backend
+
+activate AdminUI
 AdminUI --> Administrateur : Afficher les informations et documents
 deactivate AdminUI
 
@@ -41,28 +57,44 @@ alt dossier incomplet (E1)
     ' L'administrateur demande des informations complémentaires
     Administrateur -> AdminUI : Demander des informations complémentaires
     activate AdminUI
-    AdminUI -> System : Signaler la demande de compléments
-    activate System
-    System -> DB : Mettre à jour le statut (en attente de compléments)
+    AdminUI -> Backend : Signaler la demande de compléments
+    deactivate AdminUI
+
+    activate Backend
+    Backend -> DB : Mettre à jour le statut (en attente de compléments)
+    deactivate Backend
+
     activate DB
-    DB --> System : Confirmation
+    DB --> Backend : Confirmation
     deactivate DB
-    System --> AdminUI : Confirmation
-    deactivate System
+
+    activate Backend
+    Backend --> AdminUI : Confirmation
+    deactivate Backend
+
+    activate AdminUI
     AdminUI --> Administrateur : Afficher "Demande de compléments envoyée"
     deactivate AdminUI
 else dossier complet
     ' Étape 5 – Décision (accepter ou refuser)
     Administrateur -> AdminUI : Accepter ou refuser la demande
     activate AdminUI
-    AdminUI -> System : Envoyer la décision (acceptée/refusée)
-    activate System
-    System -> DB : Mettre à jour le statut (acceptée/refusée)
+    AdminUI -> Backend : Envoyer la décision (acceptée/refusée)
+    deactivate AdminUI
+
+    activate Backend
+    Backend -> DB : Mettre à jour le statut (acceptée/refusée)
+    deactivate Backend
+
     activate DB
-    DB --> System : Confirmation
+    DB --> Backend : Confirmation
     deactivate DB
-    System --> AdminUI : Confirmation
-    deactivate System
+
+    activate Backend
+    Backend --> AdminUI : Confirmation
+    deactivate Backend
+
+    activate AdminUI
     AdminUI --> Administrateur : Afficher "Statut mis à jour"
     deactivate AdminUI
 end

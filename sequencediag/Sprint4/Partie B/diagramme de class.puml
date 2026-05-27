@@ -1,0 +1,341 @@
+@startuml
+' ==================================================
+' Diagramme de classes — Partie B
+' Contrôle d'accès, suivi partenaire et supervision financière
+' Version finale UI corrigée
+' ==================================================
+
+hide circle
+skinparam shadowing false
+skinparam linetype ortho
+skinparam dpi 300
+skinparam roundcorner 6
+skinparam classAttributeIconSize 0
+
+scale 0.78
+
+skinparam defaultFontName "Verdana"
+skinparam defaultFontSize 12
+
+skinparam ArrowThickness 1.1
+skinparam ArrowFontSize 7
+skinparam nodesep 40
+skinparam ranksep 40
+
+<style>
+classDiagram {
+  class {
+    BackGroundColor #FFFFFF
+    LineColor #6C8EBF
+    LineThickness 1.4
+    FontColor #000000
+    FontName "Verdana"
+    FontSize 11
+    Padding 5
+    Margin 2
+  }
+
+  note {
+    BackGroundColor #FFF9C4
+    LineColor #B8A000
+    FontColor #000000
+    FontName "Verdana"
+    FontSize 11
+    Padding 5
+    Margin 2
+  }
+
+  arrow {
+    LineColor #6C8EBF
+    LineThickness 1.1
+    FontColor #000000
+    FontName "Verdana"
+    FontSize 7
+  }
+}
+</style>
+
+skinparam class {
+  BackgroundColor          #FFFFFF
+  BorderColor              #6C8EBF
+  BorderThickness          1.4
+  HeaderBackgroundColor    #DAE8FC
+  FontColor                #000000
+  FontStyle                Bold
+  AttributeFontColor       #000000
+  AttributeFontStyle       Plain
+  ArrowColor               #6C8EBF
+  StereotypeFontColor      #000000
+}
+
+skinparam note {
+  BackgroundColor          #FFF9C4
+  BorderColor              #B8A000
+  FontColor                #000000
+}
+
+' ==================================================
+' PROFILS UTILISATEURS
+' ==================================================
+
+class Utilisateur {
+- id                  : Long
+- nomComplet          : String
+- email               : String
+- motDePasseHache     : String
+- numeroTelephone     : String
+- bio                 : String
+- photoProfil         : String
+- pays                : String
+- ville               : String
+- emailVerifie        : Boolean
+- telephoneVerifie    : Boolean
+- statutCompte        : StatutCompte
+- dateCreation        : DateTime
+- dateModification    : DateTime
+- statutPartenaire    : PartnerStatus
+}
+
+class Partenaire {
+- nomEntreprise       : String
+- description         : String
+- secteurActivite     : String
+- adresse             : String
+- logoUrl             : String
+--
++ gererSessionsScan()
++ suivreMonetisation()
+}
+
+class AgentScan {
+--
++ scannerTicket()
++ verifierTicket()
+}
+
+class Administrateur {
+--
++ superviserOperations()
++ traiterOperationsFinancieres()
+}
+
+' ==================================================
+' CONTRÔLE D'ACCÈS
+' ==================================================
+
+class Evenement {
+- id                      : Long
+- titre                   : String
+- description             : String
+- imageCouverture         : String
+- dateDebut               : DateTime
+- dateFin                 : DateTime
+- lieu                    : String
+- adresse                 : String
+- ville                   : String
+- pays                    : String
+- capaciteMax             : Integer
+- statut                  : EventStatus
+- statutModeration        : ModerationStatus
+- typeBilletterie         : TicketingType
+- lienBilletterieExterne  : String
+--
++ consulterDetails()
+}
+
+class Ticket {
+- id                       : Long
+- codeTicket               : String
+- statut                   : TicketStatus
+- dateEmission             : DateTime
+- titreEvenementSnapshot   : String
+- dateEvenementSnapshot    : DateTime
+- lieuSnapshot             : String
+- nomParticipantSnapshot   : String
+- montantTotalSnapshot     : Decimal
+--
++ afficher()
++ validerAcces()
+}
+
+class ScanSession {
+- id                : Long
+- nom               : String
+- statut            : ScanSessionStatus
+- dateOuverture     : DateTime
+- dateFermeture     : DateTime
+--
++ ouvrir()
++ fermer()
+}
+
+class EventStaffAssignment {
+- id                : Long
+- statut            : StaffAssignmentStatus
+- dateAffectation   : DateTime
+- dateRevocation    : DateTime
+--
++ affecter()
++ revoquer()
+}
+
+class TicketCheckInHistory {
+- id                : Long
+- dateScan          : DateTime
+- resultat          : CheckInResult
+--
++ enregistrerScan()
+}
+
+' ==================================================
+' SUIVI FINANCIER / ESCROW / SETTLEMENT / PAYOUT
+' ==================================================
+
+class EscrowHold {
+- id                : Long
+- montantBloque     : Decimal
+- statut            : EscrowStatus
+- dateLiberation    : DateTime
+--
++ marquerPret()
++ liberer()
++ appliquerRemboursement()
+}
+
+class SettlementLedger {
+- id                : Long
+- montantBrut       : Decimal
+- montantRembourse  : Decimal
+- commission        : Decimal
+- montantNet        : Decimal
+- statut            : SettlementStatus
+--
++ calculerNet()
++ verrouiller()
++ marquerPaye()
+}
+
+class PayoutRequest {
+- id                : Long
+- montant           : Decimal
+- devise            : String
+- statut            : PayoutRequestStatus
+- stripePayoutId    : String
+- dateDemande       : DateTime
+- dateTraitement    : DateTime
+--
++ soumettre()
++ approuver()
++ rejeter()
+}
+
+' ==================================================
+' ORGANISATION VISUELLE
+' ==================================================
+
+together {
+  class Utilisateur
+  class Partenaire
+  class AgentScan
+  class Administrateur
+}
+
+together {
+  class Evenement
+  class ScanSession
+  class EventStaffAssignment
+  class Ticket
+  class TicketCheckInHistory
+}
+
+together {
+  class EscrowHold
+  class SettlementLedger
+  class PayoutRequest
+}
+
+' Liens invisibles pour stabiliser le placement
+Utilisateur -[hidden]down- Partenaire
+Partenaire -[hidden]right- AgentScan
+AgentScan -[hidden]right- Administrateur
+
+Partenaire -[hidden]down- Evenement
+Evenement -[hidden]down- ScanSession
+ScanSession -[hidden]right- Ticket
+ScanSession -[hidden]down- TicketCheckInHistory
+EventStaffAssignment -[hidden]right- ScanSession
+Ticket -[hidden]down- TicketCheckInHistory
+
+EscrowHold -[hidden]right- SettlementLedger
+SettlementLedger -[hidden]right- PayoutRequest
+TicketCheckInHistory -[hidden]down- EscrowHold
+
+' ==================================================
+' HÉRITAGE
+' ==================================================
+
+Utilisateur <|-down- Partenaire
+Utilisateur <|-down- AgentScan
+Utilisateur <|-down- Administrateur
+
+' ==================================================
+' RELATIONS CONTRÔLE D'ACCÈS
+' ==================================================
+
+Partenaire "1" -down- "0..*" Evenement : organise
+
+Evenement "1" -down-  "0..*" Ticket : concerne
+Evenement "1" -down-  "0..*" ScanSession : possède
+Evenement "1" -left-  "0..*" EventStaffAssignment : affecte
+
+Partenaire "1" -down- "0..*" ScanSession : gère
+Partenaire "1" -left- "0..*" EventStaffAssignment : assigne
+
+AgentScan "1" -down- "0..*" EventStaffAssignment : reçoit
+AgentScan "1" -down- "0..*" TicketCheckInHistory : effectue
+
+ScanSession "1" -down- "0..*" TicketCheckInHistory : contient
+Ticket "1" -down- "0..*" TicketCheckInHistory : historise
+
+' ==================================================
+' RELATIONS FINANCIÈRES
+' ==================================================
+
+Evenement "1" -down- "0..*" EscrowHold : concerne
+Partenaire "1" -down- "0..*" EscrowHold : bénéficie de
+
+Evenement "1" -down- "0..1" SettlementLedger : possède
+Partenaire "1" -down- "0..*" SettlementLedger : reçoit
+
+Administrateur "1" -down- "0..*" EscrowHold : supervise
+Administrateur "1" -down- "0..*" SettlementLedger : supervise
+Administrateur "1" -down- "0..*" PayoutRequest : traite
+
+' ==================================================
+' NOTES DÉSACTIVÉES POUR LE RAPPORT
+' ==================================================
+
+' note right of EscrowHold
+' L'EscrowHold est créé après une commande payée.
+' La classe UserOrder est modélisée dans la partie A.
+'
+' Les fonds destinés au partenaire peuvent être
+' retenus jusqu'à une date de libération calculée
+' après la fin de l'événement.
+' end note
+
+' note right of SettlementLedger
+' Le SettlementLedger calcule le montant net
+' à verser au partenaire :
+' montant brut - remboursements - commission.
+' end note
+
+' note right of PayoutRequest
+' La demande de payout représente une opération
+' financière traitée par l'administrateur.
+'
+' Le solde vendeur détaillé n'est pas représenté ici
+' afin de garder la partie B centrée sur la supervision.
+' end note
+
+@enduml

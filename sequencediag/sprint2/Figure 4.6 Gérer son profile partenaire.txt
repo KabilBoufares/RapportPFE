@@ -1,7 +1,7 @@
 @startuml
 actor Partenaire
-participant "Interface partenaire" as PartnerUI
-participant "Back-End FESTY" as System
+boundary "Interface partenaire" as PartnerUI
+control "Back-End FESTY" as Backend
 database "Base de données" as DB
 
 autonumber
@@ -9,14 +9,22 @@ autonumber
 ' Étape 1 – Accès au profil
 Partenaire -> PartnerUI : Accéder à son profil professionnel
 activate PartnerUI
-PartnerUI -> System : Demander les informations du profil partenaire
-activate System
-System -> DB : Récupérer les informations du profil partenaire
+PartnerUI -> Backend : Demander les informations du profil partenaire
+deactivate PartnerUI
+
+activate Backend
+Backend -> DB : Récupérer les informations du profil partenaire
+deactivate Backend
+
 activate DB
-DB --> System : Informations du profil partenaire
+DB --> Backend : Informations du profil partenaire
 deactivate DB
-System --> PartnerUI : Envoyer les informations du profil partenaire
-deactivate System
+
+activate Backend
+Backend --> PartnerUI : Envoyer les informations du profil partenaire
+deactivate Backend
+
+activate PartnerUI
 PartnerUI --> Partenaire : Afficher les informations du profil
 deactivate PartnerUI
 
@@ -31,25 +39,30 @@ else partenaire modifie ses informations
     Partenaire -> PartnerUI : Modifier les informations souhaitées
     activate PartnerUI
     Partenaire -> PartnerUI : Soumettre les modifications
-    PartnerUI -> System : Envoyer les nouvelles données
-    activate System
+    PartnerUI -> Backend : Envoyer les nouvelles données
+    deactivate PartnerUI
 
-    ' Étape 4 – Vérification
-    System -> System : Valider les données saisies
+    activate Backend
+    Backend -> Backend : Valider les données saisies
 
     alt données invalides (E1)
-        System --> PartnerUI : Message d'erreur (E1)
+        Backend --> PartnerUI : Message d'erreur (E1)
+        deactivate Backend
+        activate PartnerUI
         PartnerUI --> Partenaire : Afficher "Données invalides"
+        deactivate PartnerUI
     else données valides
-        ' Étape 5 – Enregistrement
-        System -> DB : Mettre à jour les informations du profil partenaire
+        Backend -> DB : Mettre à jour les informations du profil partenaire
+        deactivate Backend
         activate DB
-        DB --> System : Confirmation de mise à jour
+        DB --> Backend : Confirmation de mise à jour
         deactivate DB
-        System --> PartnerUI : Message de confirmation
+        activate Backend
+        Backend --> PartnerUI : Message de confirmation
+        deactivate Backend
+        activate PartnerUI
         PartnerUI --> Partenaire : Afficher "Profil mis à jour avec succès"
+        deactivate PartnerUI
     end
-    deactivate System
-    deactivate PartnerUI
 end
 @enduml

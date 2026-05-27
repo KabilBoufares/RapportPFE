@@ -1,0 +1,74 @@
+@startuml
+
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam DefaultFontName Arial
+skinparam DefaultFontSize 12
+
+skinparam activity {
+  BackgroundColor #FFFDE7
+  BorderColor #E53935
+  BorderThickness 2
+  FontColor #1A1A1A
+  FontSize 12
+  ArrowColor #E53935
+  ArrowFontColor #1A1A1A
+  ArrowThickness 2
+  DiamondBackgroundColor #FFFDE7
+  DiamondBorderColor #E53935
+  DiamondBorderThickness 2
+  DiamondFontColor #1A1A1A
+  StartColor #1A1A1A
+  EndColor #1A1A1A
+}
+
+|Partenaire|
+start
+:Rechercher une star dans
+le catalogue artistique;
+
+|Système|
+:Vérifier si la star existe
+dans le catalogue;
+
+if (Star trouvée ?) then (Oui)
+  :Afficher la star existante
+  dans le catalogue;
+  stop
+else (Non)
+
+  |Partenaire|
+  :Choisir de proposer
+  une nouvelle star;
+  :Saisir les informations
+  de la star;
+  :Soumettre la proposition;
+
+  |Système|
+  :Vérifier les informations saisies;
+
+  if (Informations valides ?) then (Oui)
+    :Vérifier si la star
+    existe déjà;
+
+    if (Star déjà existante ?) then (Oui)
+      :Afficher un message d'erreur
+      "Cette star existe déjà dans le catalogue";
+      stop
+    else (Non)
+      :Enregistrer la proposition
+      avec le statut "en attente";
+      :Afficher un message
+      de confirmation;
+      stop
+    endif
+
+  else (Non)
+    :Afficher un message d'erreur
+    "Informations incomplètes ou invalides";
+    stop
+  endif
+
+endif
+
+@enduml

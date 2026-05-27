@@ -1,23 +1,30 @@
 @startuml
 actor Utilisateur
-participant "Application mobile" as App
-participant "Back-End FESTY" as System
+boundary "Application mobile" as App
+control "Back-End FESTY" as Backend
 database "Base de données" as DB
 
 autonumber
 
+' Étape 1 – Accès au profil
 Utilisateur -> App : Accéder à la page de profil
 activate App
+App -> Backend : Demander les informations du profil
+deactivate App
 
-App -> System : Demander les informations du profil
-activate System
-System -> DB : Récupérer les informations du profil
+activate Backend
+Backend -> DB : Récupérer les informations du profil
+deactivate Backend
+
 activate DB
-DB --> System : Informations du profil
+DB --> Backend : Informations du profil
 deactivate DB
 
-System --> App : Envoyer les données du profil
-deactivate System
+activate Backend
+Backend --> App : Envoyer les données du profil
+deactivate Backend
+
+activate App
 App --> Utilisateur : Afficher les informations du profil
 deactivate App
 
@@ -30,24 +37,30 @@ else modifier les informations
     Utilisateur -> App : Modifier les informations souhaitées
     activate App
     Utilisateur -> App : Soumettre les modifications
-    App -> System : Envoyer les nouvelles données
-    activate System
+    App -> Backend : Envoyer les nouvelles données
+    deactivate App
 
-    System -> System : Valider les données saisies
+    activate Backend
+    Backend -> Backend : Valider les données saisies
 
     alt données invalides
-        System --> App : Message d'erreur (E1)
+        Backend --> App : Message d'erreur (E1)
+        deactivate Backend
+        activate App
         App --> Utilisateur : Afficher "Données invalides"
+        deactivate App
     else données valides
-        System -> DB : Mettre à jour les informations du profil
+        Backend -> DB : Mettre à jour les informations du profil
+        deactivate Backend
         activate DB
-        DB --> System : Confirmation de mise à jour
+        DB --> Backend : Confirmation de mise à jour
         deactivate DB
-        System --> App : Message de confirmation
+        activate Backend
+        Backend --> App : Message de confirmation
+        deactivate Backend
+        activate App
         App --> Utilisateur : Afficher "Profil mis à jour avec succès"
+        deactivate App
     end
-
-    deactivate System
-    deactivate App
 end
 @enduml

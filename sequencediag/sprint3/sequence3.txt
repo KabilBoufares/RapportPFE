@@ -1,0 +1,117 @@
+@startuml
+actor Partenaire
+boundary "Interface partenaire" as PartnerUI
+control "Back-End FESTY" as Backend
+database "Base de données" as DB
+
+autonumber
+
+' Étape 1 – Accès à l'espace de gestion des événements
+Partenaire -> PartnerUI : Accéder à l'espace de gestion de ses événements
+activate PartnerUI
+PartnerUI -> Backend : Demander les événements du partenaire
+deactivate PartnerUI
+
+activate Backend
+Backend -> DB : Récupérer les événements du partenaire
+deactivate Backend
+
+activate DB
+DB --> Backend : Liste des événements
+deactivate DB
+
+activate Backend
+Backend --> PartnerUI : Envoyer la liste des événements
+deactivate Backend
+
+activate PartnerUI
+PartnerUI --> Partenaire : Afficher la liste des événements
+deactivate PartnerUI
+
+' Étape 2 – Sélection d'un événement
+Partenaire -> PartnerUI : Sélectionner un événement à modifier
+activate PartnerUI
+PartnerUI -> Backend : Demander les détails de l'événement
+deactivate PartnerUI
+
+activate Backend
+Backend -> DB : Récupérer les informations et le line-up actuel
+deactivate Backend
+
+activate DB
+DB --> Backend : Détails de l'événement et line-up actuel
+deactivate DB
+
+activate Backend
+Backend --> PartnerUI : Envoyer les détails et le line-up
+deactivate Backend
+
+activate PartnerUI
+PartnerUI --> Partenaire : Afficher les informations et le line-up actuel
+deactivate PartnerUI
+
+' Étape 3 – Consultation du catalogue artistique
+Partenaire -> PartnerUI : Consulter le catalogue artistique
+activate PartnerUI
+PartnerUI -> Backend : Demander le catalogue artistique
+deactivate PartnerUI
+
+activate Backend
+Backend -> DB : Récupérer les stars actives et approuvées
+deactivate Backend
+
+activate DB
+DB --> Backend : Catalogue des stars
+deactivate DB
+
+activate Backend
+Backend --> PartnerUI : Envoyer le catalogue artistique
+deactivate Backend
+
+activate PartnerUI
+PartnerUI --> Partenaire : Afficher le catalogue artistique
+deactivate PartnerUI
+
+' Étape 4 – Ajout d'une star au line-up
+Partenaire -> PartnerUI : Ajouter une star au line-up
+activate PartnerUI
+PartnerUI -> Backend : Envoyer la star sélectionnée
+deactivate PartnerUI
+
+activate Backend
+Backend -> Backend : Vérifier que la star n'est pas déjà associée
+
+alt star déjà associée (E1)
+    Backend --> PartnerUI : Message d'erreur (E1)
+    deactivate Backend
+    activate PartnerUI
+    PartnerUI --> Partenaire : Afficher "Star déjà associée à l'événement"
+    deactivate PartnerUI
+else star non associée
+    Backend -> Backend : Vérifier que la star est active et approuvée
+
+    Backend -> DB : Enregistrer l'association événement-star
+    deactivate Backend
+    activate DB
+
+    alt échec de l'enregistrement (E2)
+        DB --> Backend : Erreur
+        deactivate DB
+        activate Backend
+        Backend --> PartnerUI : Message d'erreur (E2)
+        deactivate Backend
+        activate PartnerUI
+        PartnerUI --> Partenaire : Afficher "Échec de l'enregistrement du line-up"
+        deactivate PartnerUI
+    else enregistrement réussi
+        DB --> Backend : Confirmation
+        deactivate DB
+        activate Backend
+        Backend --> PartnerUI : Message de confirmation
+        deactivate Backend
+        activate PartnerUI
+        PartnerUI --> Partenaire : Afficher "Line-up mis à jour avec succès"
+        deactivate PartnerUI
+    end
+end
+@enduml

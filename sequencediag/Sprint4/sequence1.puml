@@ -1,0 +1,132 @@
+@startuml
+actor Utilisateur
+boundary "Application mobile" as App
+control "Back-End FESTY" as Backend
+database "Base de données" as DB
+participant "Service de paiement" as Paiement
+
+autonumber
+
+' Étape 1 – Consultation du détail de l'événement
+Utilisateur -> App : Consulter le détail d'un événement
+activate App
+App -> Backend : Récupérer les détails de l'événement
+deactivate App
+
+activate Backend
+Backend -> DB : Récupérer les informations et la billetterie
+deactivate Backend
+
+activate DB
+DB --> Backend : Détails de l'événement avec types de billets
+deactivate DB
+
+activate Backend
+Backend --> App : Envoyer les détails et les billets disponibles
+deactivate Backend
+
+activate App
+App --> Utilisateur : Afficher le détail de l'événement
+deactivate App
+
+' Étape 2 – Sélection du type de billet
+Utilisateur -> App : Sélectionner un type de billet
+activate App
+App -> Backend : Demander la disponibilité du billet sélectionné
+deactivate App
+
+activate Backend
+Backend -> DB : Vérifier la disponibilité (stock restant)
+deactivate Backend
+
+activate DB
+DB --> Backend : Disponibilité (oui/non)
+deactivate DB
+
+alt billet non disponible (E1)
+    activate Backend
+    Backend --> App : Message d'erreur (E1)
+    deactivate Backend
+    activate App
+    App --> Utilisateur : Afficher "Billet non disponible"
+    deactivate App
+else billet disponible
+    ' Étape 3-4 – Création de la réservation temporaire
+    activate Backend
+    Backend -> DB : Créer une réservation temporaire\n(statut "réservé", avec expiration)
+    deactivate Backend
+    activate DB
+    DB --> Backend : Réservation créée (ID, timer)
+    deactivate DB
+
+    activate Backend
+    Backend --> App : Afficher la réservation et proposer le paiement
+    deactivate Backend
+    activate App
+    App --> Utilisateur : Afficher "Réservation temporaire, procéder au paiement"
+    deactivate App
+
+    ' Étape 5 – Lancement du paiement
+    Utilisateur -> App : Procéder au paiement
+    activate App
+    App -> Backend : Initier le paiement pour la réservation
+    deactivate App
+
+    activate Backend
+    ' Vérification de l'expiration via la base de données
+    Backend -> DB : Vérifier l'état de la réservation
+    deactivate Backend
+    activate DB
+    DB --> Backend : État de la réservation (valide / expirée)
+    deactivate DB
+
+    alt réservation expirée (E2)
+        activate Backend
+        Backend --> App : Message d'erreur (E2)
+        deactivate Backend
+        activate App
+        App --> Utilisateur : Afficher "Réservation expirée"
+        deactivate App
+    else réservation valide
+        activate Backend
+        Backend -> Paiement : Demander la confirmation du paiement
+        deactivate Backend
+
+        activate Paiement
+        Paiement --> Backend : Réponse du paiement (succès/échec)
+        deactivate Paiement
+
+        alt échec du paiement (E3)
+            activate Backend
+            Backend --> App : Message d'erreur (E3)
+            deactivate Backend
+            activate App
+            App --> Utilisateur : Afficher "Paiement échoué"
+            deactivate App
+        else paiement réussi
+            ' Étapes 7-8 – Conversion de la réservation et génération du ticket
+            activate Backend
+            Backend -> DB : Convertir la réservation en commande payée
+            deactivate Backend
+            activate DB
+            DB --> Backend : Commande confirmée
+            deactivate DB
+
+            activate Backend
+            Backend -> DB : Générer et enregistrer le ticket
+            deactivate Backend
+            activate DB
+            DB --> Backend : Ticket généré
+            deactivate DB
+
+            ' Étape 9 – Confirmation
+            activate Backend
+            Backend --> App : Envoyer la confirmation et le ticket
+            deactivate Backend
+            activate App
+            App --> Utilisateur : Afficher "Achat confirmé" avec le ticket
+            deactivate App
+        end
+    end
+end
+@enduml

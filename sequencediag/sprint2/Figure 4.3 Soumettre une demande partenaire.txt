@@ -1,7 +1,7 @@
 @startuml
 actor Utilisateur
-participant "Application mobile" as App
-participant "Back-End FESTY" as System
+boundary "Front-End" as App
+control "Back-End FESTY" as Backend
 database "Base de données" as DB
 participant "Service de stockage" as Storage
 
@@ -16,41 +16,51 @@ deactivate App
 ' Étapes 2-3 – Saisie des informations et ajout des documents
 Utilisateur -> App : Saisir les informations professionnelles et joindre les documents
 activate App
-App -> System : Envoyer la demande (informations, documents)
-activate System
+App -> Backend : Envoyer la demande (informations, documents)
+deactivate App
 
-' Étape 4 – Vérification des informations
-System -> System : Valider les informations saisies
+activate Backend
+Backend -> Backend : Valider les informations saisies
 
 alt informations incomplètes ou invalides (E1)
-    System --> App : Message d'erreur (E1)
+    Backend --> App : Message d'erreur (E1)
+    deactivate Backend
+    activate App
     App --> Utilisateur : Afficher "Informations invalides"
+    deactivate App
 else informations valides
-    ' Étape 3 (suite) – Téléversement des documents
-    System -> Storage : Téléverser les documents
+    Backend -> Storage : Téléverser les documents
+    deactivate Backend
+
     activate Storage
-
     alt échec du téléversement (E2)
-        Storage --> System : Échec du téléversement
+        Storage --> Backend : Échec du téléversement
         deactivate Storage
-        System --> App : Message d'erreur (E2)
+        activate Backend
+        Backend --> App : Message d'erreur (E2)
+        deactivate Backend
+        activate App
         App --> Utilisateur : Afficher "Échec du téléversement d'un document"
+        deactivate App
     else téléversement réussi
-        Storage --> System : Confirmation de stockage
+        Storage --> Backend : Confirmation de stockage
         deactivate Storage
 
-        ' Étape 5 – Enregistrement de la demande
-        System -> DB : Enregistrer la demande partenaire (statut : en attente)
+        activate Backend
+        Backend -> DB : Enregistrer la demande partenaire (statut : en attente)
+        deactivate Backend
+
         activate DB
-        DB --> System : Confirmation
+        DB --> Backend : Confirmation
         deactivate DB
 
-        ' Étape 6 – Confirmation
-        System --> App : Confirmation de la demande
+        activate Backend
+        Backend --> App : Confirmation de la demande
+        deactivate Backend
+
+        activate App
         App --> Utilisateur : Afficher "Demande enregistrée avec succès"
+        deactivate App
     end
 end
-
-deactivate System
-deactivate App
 @enduml

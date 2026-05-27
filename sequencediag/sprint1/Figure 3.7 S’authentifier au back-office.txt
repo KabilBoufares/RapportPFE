@@ -1,7 +1,7 @@
 @startuml
 actor Administrateur
-participant "Interface d'administration" as AdminUI
-participant "Back-End FESTY" as System
+boundary "Interface d'administration" as AdminUI
+control "Back-End FESTY" as Backend
 database "Base de données" as DB
 
 autonumber
@@ -15,69 +15,81 @@ deactivate AdminUI
 ' Étape 2 – Saisie des identifiants
 Administrateur -> AdminUI : Saisir l'email et le mot de passe
 activate AdminUI
-AdminUI -> System : Envoyer les identifiants (email, mot de passe)
-activate System
+AdminUI -> Backend : Envoyer les identifiants (email, mot de passe)
+deactivate AdminUI
 
-' Étape 3 – Vérification des identifiants
-System -> DB : Vérifier l'existence de l'email
+activate Backend
+Backend -> DB : Vérifier l'existence de l'email
+deactivate Backend
+
 activate DB
-DB --> System : Email trouvé / introuvable
+DB --> Backend : Email trouvé / introuvable
 deactivate DB
 
 alt email introuvable
-    System --> AdminUI : Message d'erreur (E1)
+    activate Backend
+    Backend --> AdminUI : Message d'erreur (E1)
+    deactivate Backend
+    activate AdminUI
     AdminUI --> Administrateur : Afficher "Identifiants incorrects"
-    deactivate System
     deactivate AdminUI
-
 else email trouvé
-    System -> DB : Récupérer les informations du compte
+    activate Backend
+    Backend -> DB : Récupérer les informations du compte
+    deactivate Backend
     activate DB
-    DB --> System : Informations du compte (mot de passe haché, rôle)
+    DB --> Backend : Informations du compte (mot de passe haché, rôle)
     deactivate DB
 
-    System -> System : Vérifier le mot de passe
+    activate Backend
+    Backend -> Backend : Vérifier le mot de passe
 
     alt mot de passe incorrect
-        System --> AdminUI : Message d'erreur (E1)
+        Backend --> AdminUI : Message d'erreur (E1)
+        deactivate Backend
+        activate AdminUI
         AdminUI --> Administrateur : Afficher "Identifiants incorrects"
-        deactivate System
         deactivate AdminUI
-
     else mot de passe correct
-        ' Étape 4 – Vérification du rôle administrateur
-        System -> System : Vérifier le rôle administrateur
+        Backend -> Backend : Vérifier le rôle administrateur
 
         ' Étape 5 – Demande du code 2FA
-        System --> AdminUI : Demander le code 2FA
-        deactivate System
+        Backend --> AdminUI : Demander le code 2FA
+        deactivate Backend
+        activate AdminUI
         AdminUI --> Administrateur : Afficher le champ de saisie du code 2FA
         deactivate AdminUI
 
         ' Étape 6 – Saisie et vérification du code 2FA
         Administrateur -> AdminUI : Saisir le code 2FA
         activate AdminUI
-        AdminUI -> System : Envoyer le code 2FA saisi
-        activate System
+        AdminUI -> Backend : Envoyer le code 2FA saisi
+        deactivate AdminUI
 
-        System -> DB : Récupérer la configuration 2FA
+        activate Backend
+        Backend -> DB : Récupérer la configuration 2FA
+        deactivate Backend
         activate DB
-        DB --> System : Configuration 2FA (secret)
+        DB --> Backend : Configuration 2FA (secret)
         deactivate DB
 
-        System -> System : Vérifier le code 2FA
+        activate Backend
+        Backend -> Backend : Vérifier le code 2FA
 
         alt code 2FA invalide ou expiré
-            System --> AdminUI : Message d'erreur (E2)
+            Backend --> AdminUI : Message d'erreur (E2)
+            deactivate Backend
+            activate AdminUI
             AdminUI --> Administrateur : Afficher "Code 2FA invalide ou expiré"
+            deactivate AdminUI
         else code 2FA valide
-            System -> System : Créer une session administrateur sécurisée
-            System --> AdminUI : Authentification réussie
+            Backend -> Backend : Créer une session administrateur sécurisée
+            Backend --> AdminUI : Authentification réussie
+            deactivate Backend
+            activate AdminUI
             AdminUI --> Administrateur : Rediriger vers l'espace d'administration
+            deactivate AdminUI
         end
-
-        deactivate System
-        deactivate AdminUI
     end
 end
 @enduml

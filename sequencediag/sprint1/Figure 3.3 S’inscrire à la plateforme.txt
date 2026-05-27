@@ -1,7 +1,7 @@
 @startuml
 actor Visiteur
-participant "Application mobile" as App
-participant "Système" as System
+boundary "Application mobile" as App
+control "Back-End FESTY" as Backend
 database "Base de données" as DB
 participant "Service OTP/SMS" as SMS
 
@@ -16,78 +16,89 @@ deactivate App
 ' Soumission des informations
 Visiteur -> App : Soumettre les informations d'inscription
 activate App
-App -> System : Envoyer les informations
-activate System
+App -> Backend : Envoyer les informations
+deactivate App
 
-' Validation des champs
-System -> System : Valider les champs saisis
+activate Backend
+Backend -> Backend : Valider les champs saisis
 alt informations invalides
-    System --> App : Message d'erreur (E1)
+    Backend --> App : Message d'erreur (E1)
+    deactivate Backend
+    activate App
     App --> Visiteur : Afficher l'erreur
+    deactivate App
 else informations valides
-    ' Vérification unicité email
-    System -> DB : Vérifier l'unicité de l'email
+    Backend -> DB : Vérifier l'unicité de l'email
+    deactivate Backend
     activate DB
-    DB --> System : Email disponible / indisponible
+    DB --> Backend : Email disponible / indisponible
     deactivate DB
-
     alt email déjà utilisé
-        System --> App : Message d'erreur (E2)
+        activate Backend
+        Backend --> App : Message d'erreur (E2)
+        deactivate Backend
+        activate App
         App --> Visiteur : Afficher l'erreur
+        deactivate App
     else email disponible
-        ' Création du compte
-        System -> DB : Créer le compte utilisateur (statut en attente)
+        activate Backend
+        Backend -> DB : Créer le compte utilisateur (statut en attente)
+        deactivate Backend
         activate DB
-        DB --> System : Confirmation création
+        DB --> Backend : Confirmation création
         deactivate DB
-
-        ' Génération et enregistrement du code OTP
-        System -> System : Générer le code OTP
-        System -> DB : Enregistrer le code OTP
+        activate Backend
+        Backend -> Backend : Générer le code OTP
+        Backend -> DB : Enregistrer le code OTP
+        deactivate Backend
         activate DB
-        DB --> System : Code enregistré
+        DB --> Backend : Code enregistré
         deactivate DB
-
-        ' Envoi du code OTP par SMS
-        System -> SMS : Envoyer le code OTP (au numéro)
+        activate Backend
+        Backend -> SMS : Envoyer le code OTP (au numéro)
+        deactivate Backend
         activate SMS
-        SMS --> System : Confirmation d'envoi
+        SMS --> Backend : Confirmation d'envoi
         deactivate SMS
-
-        ' Demande de saisie à l'utilisateur
-        System --> App : Demander la saisie du code OTP
-        deactivate System
+        activate Backend
+        Backend --> App : Demander la saisie du code OTP
+        deactivate Backend
+        activate App
         App --> Visiteur : Afficher le champ de saisie OTP
         deactivate App
 
         ' Saisie du code OTP
         Visiteur -> App : Saisir le code OTP
         activate App
-        App -> System : Envoyer le code OTP saisi
-        activate System
-
-        ' Vérification du code OTP via la base de données
-        System -> DB : Vérifier le code OTP
-        activate DB
-        DB --> System : Code valide / invalide
-        deactivate DB
-
-        alt code OTP incorrect ou expiré
-            System --> App : Message d'erreur (E3)
-            App --> Visiteur : Afficher l'erreur
-        else code OTP valide
-            ' Activation du compte
-            System -> DB : Activer le compte (statut actif)
-            activate DB
-            DB --> System : Confirmation activation
-            deactivate DB
-
-            ' Confirmation finale
-            System --> App : Confirmation d'inscription réussie
-            App --> Visiteur : Afficher le succès
-        end
-        deactivate System
+        App -> Backend : Envoyer le code OTP saisi
         deactivate App
+        activate Backend
+        Backend -> DB : Vérifier le code OTP
+        deactivate Backend
+        activate DB
+        DB --> Backend : Code valide / invalide
+        deactivate DB
+        alt code OTP incorrect ou expiré
+            activate Backend
+            Backend --> App : Message d'erreur (E3)
+            deactivate Backend
+            activate App
+            App --> Visiteur : Afficher l'erreur
+            deactivate App
+        else code OTP valide
+            activate Backend
+            Backend -> DB : Activer le compte (statut actif)
+            deactivate Backend
+            activate DB
+            DB --> Backend : Confirmation activation
+            deactivate DB
+            activate Backend
+            Backend --> App : Confirmation d'inscription réussie
+            deactivate Backend
+            activate App
+            App --> Visiteur : Afficher le succès
+            deactivate App
+        end
     end
 end
 @enduml

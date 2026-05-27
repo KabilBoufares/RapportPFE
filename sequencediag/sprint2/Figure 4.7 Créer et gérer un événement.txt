@@ -1,7 +1,7 @@
 @startuml
 actor Partenaire
-participant "Interface partenaire" as PartnerUI
-participant "Back-End FESTY" as System
+boundary "Interface partenaire" as PartnerUI
+control "Back-End FESTY" as Backend
 database "Base de données" as DB
 participant "Service de stockage" as Storage
 
@@ -24,33 +24,38 @@ alt partenaire annule l'opération (E2)
     deactivate PartnerUI
 else partenaire soumet l'événement
     Partenaire -> PartnerUI : Soumettre l'événement
-    PartnerUI -> System : Envoyer les données (informations, médias)
-    activate System
+    PartnerUI -> Backend : Envoyer les données (informations, médias)
+    deactivate PartnerUI
 
-    ' Étape 4 – Validation des données
-    System -> System : Valider les données saisies
+    activate Backend
+    Backend -> Backend : Valider les données saisies
 
     alt données invalides (E1)
-        System --> PartnerUI : Message d'erreur (E1)
+        Backend --> PartnerUI : Message d'erreur (E1)
+        deactivate Backend
+        activate PartnerUI
         PartnerUI --> Partenaire : Afficher "Informations invalides"
+        deactivate PartnerUI
     else données valides
-        ' Téléversement des médias
-        System -> Storage : Stocker les médias
+        Backend -> Storage : Stocker les médias
+        deactivate Backend
         activate Storage
-        Storage --> System : Confirmation de stockage
+        Storage --> Backend : Confirmation de stockage
         deactivate Storage
 
-        ' Étape 5 – Enregistrement de l'événement
-        System -> DB : Enregistrer l’événement (statut : en attente de validation)
+        activate Backend
+        Backend -> DB : Enregistrer l’événement (statut : en attente de validation)
+        deactivate Backend
         activate DB
-        DB --> System : Confirmation d'enregistrement
+        DB --> Backend : Confirmation d'enregistrement
         deactivate DB
 
-        ' Étape 6 – Confirmation
-        System --> PartnerUI : Message de confirmation
+        activate Backend
+        Backend --> PartnerUI : Message de confirmation
+        deactivate Backend
+        activate PartnerUI
         PartnerUI --> Partenaire : Afficher "Événement soumis avec succès"
+        deactivate PartnerUI
     end
-    deactivate System
-    deactivate PartnerUI
 end
 @enduml

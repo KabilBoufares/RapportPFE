@@ -1,0 +1,144 @@
+@startuml
+actor "Agent de scan" as AgentScan
+boundary "Application de scan" as ScanApp
+control "Back-End FESTY" as Backend
+database "Base de données" as DB
+
+autonumber
+
+' Étape 1 – Accès à la session de scan
+AgentScan -> ScanApp : Accéder à la session de scan (événement)
+activate ScanApp
+ScanApp -> Backend : Demander l'accès à la session de scan
+deactivate ScanApp
+
+activate Backend
+Backend -> DB : Vérifier l'affectation de l'agent à l'événement
+deactivate Backend
+activate DB
+DB --> Backend : Agent autorisé / non autorisé
+deactivate DB
+
+alt agent non autorisé (E3)
+    activate Backend
+    Backend --> ScanApp : Erreur d'autorisation (E3)
+    deactivate Backend
+    activate ScanApp
+    ScanApp --> AgentScan : Afficher "Agent non autorisé pour cet événement"
+    deactivate ScanApp
+else agent autorisé
+    ' Vérification de l'état de la session de scan (E4)
+    activate Backend
+    Backend -> DB : Vérifier l'état de la session de scan
+    deactivate Backend
+    activate DB
+    DB --> Backend : État de la session (ouverte / fermée)
+    deactivate DB
+
+    alt session fermée (E4)
+        activate Backend
+        Backend --> ScanApp : Erreur (E4)
+        deactivate Backend
+        activate ScanApp
+        ScanApp --> AgentScan : Afficher "Session de scan fermée"
+        deactivate ScanApp
+    else session ouverte
+        activate Backend
+        Backend --> ScanApp : Confirmation d'accès à la session
+        deactivate Backend
+        activate ScanApp
+        ScanApp --> AgentScan : Afficher l'interface de scan
+        deactivate ScanApp
+
+        ' Étape 2 – Scan du ticket
+        AgentScan -> ScanApp : Scanner le ticket (identifiant)
+        activate ScanApp
+        ScanApp -> Backend : Envoyer l'identifiant du ticket
+        deactivate ScanApp
+
+        activate Backend
+        ' Étape 3 – Vérification du ticket
+        Backend -> DB : Vérifier l'existence et la validité du ticket
+        deactivate Backend
+        activate DB
+        DB --> Backend : Ticket valide / invalide
+        deactivate DB
+
+        alt ticket invalide (E1)
+            activate Backend
+            ' Enregistrer l'historique du scan (accès refusé)
+            Backend -> DB : Enregistrer l'historique du scan (accès refusé)
+            deactivate Backend
+            activate DB
+            DB --> Backend : Confirmation
+            deactivate DB
+            activate Backend
+            Backend --> ScanApp : Erreur (E1)
+            deactivate Backend
+            activate ScanApp
+            ScanApp --> AgentScan : Afficher "Ticket invalide"
+            deactivate ScanApp
+        else ticket valide
+            ' Étape 4 – Vérifier la correspondance avec l'événement
+            activate Backend
+            Backend -> DB : Vérifier la correspondance du ticket avec l'événement
+            deactivate Backend
+            activate DB
+            DB --> Backend : Correspondance OK / non
+            deactivate DB
+
+            alt ticket ne correspond pas à l'événement (E1)
+                activate Backend
+                Backend -> DB : Enregistrer l'historique du scan (accès refusé)
+                deactivate Backend
+                activate DB
+                DB --> Backend : Confirmation
+                deactivate DB
+                activate Backend
+                Backend --> ScanApp : Erreur (E1)
+                deactivate Backend
+                activate ScanApp
+                ScanApp --> AgentScan : Afficher "Ticket invalide"
+                deactivate ScanApp
+            else ticket correspondant
+                ' Vérification si déjà utilisé (E2)
+                activate Backend
+                Backend -> DB : Vérifier si le ticket a déjà été utilisé
+                deactivate Backend
+                activate DB
+                DB --> Backend : Ticket déjà utilisé / non utilisé
+                deactivate DB
+
+                alt ticket déjà utilisé (E2)
+                    activate Backend
+                    Backend -> DB : Enregistrer l'historique du scan (accès refusé)
+                    deactivate Backend
+                    activate DB
+                    DB --> Backend : Confirmation
+                    deactivate DB
+                    activate Backend
+                    Backend --> ScanApp : Erreur (E2)
+                    deactivate Backend
+                    activate ScanApp
+                    ScanApp --> AgentScan : Afficher "Ticket déjà utilisé"
+                    deactivate ScanApp
+                else ticket non utilisé
+                    ' Succès : enregistrer l'historique et autoriser l'accès
+                    activate Backend
+                    Backend -> DB : Enregistrer l'historique du scan (accès autorisé)
+                    deactivate Backend
+                    activate DB
+                    DB --> Backend : Confirmation
+                    deactivate DB
+                    activate Backend
+                    Backend --> ScanApp : Résultat : accès autorisé
+                    deactivate Backend
+                    activate ScanApp
+                    ScanApp --> AgentScan : Afficher "Accès autorisé"
+                    deactivate ScanApp
+                end
+            end
+        end
+    end
+end
+@enduml
