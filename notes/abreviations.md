@@ -2,21 +2,22 @@
 
 | Abréviation | Signification |
 |---|---|
+| 2FA | Two-Factor Authentication |
 | API | Application Programming Interface |
-| BD | Base de données |
-| CRUD | Create, Read, Update, Delete |
-| DB | Database |
-| FST | Faculté des Sciences de Tunis |
-| HTTP | HyperText Transfer Protocol |
-| IT | Information Technology |
-| JSON | JavaScript Object Notation |
+| CLI | Command-Line Interface |
+| CPU | Central Processing Unit |
+| DJ | Disc Jockey |
+| DTO | Data Transfer Object |
+| iOS | iPhone Operating System |
+| JPA | Java Persistence API |
 | JWT | JSON Web Token |
-| MVC | Model View Controller |
-| PFE | Projet de Fin d’Études |
-| QR | Quick Response |
+| MoSCoW | Must Have, Should Have, Could Have, Won’t Have |
+| OTP | One-Time Password |
+| RAM | Random Access Memory |
 | REST | Representational State Transfer |
-| SDK | Software Development Kit |
 | SQL | Structured Query Language |
+| SMS | Short Message Service |
+| SSD | Solid-State Drive |
 | UI | User Interface |
-| UML | Unified Modeling Language |
-| UX | User Experience |
+| US | User Story |
+| XP | Extreme Programming |

@@ -28,7 +28,7 @@ Grâce à ces compétences, l’entreprise contribue à la réalisation de solut
 
 Dans le cadre de ce projet de fin d’études, TEKSIGHT a assuré l’encadrement technique et le suivi du développement de FESTY. Elle a fourni le cadre professionnel nécessaire à la réalisation du projet et a contribué au suivi des choix fonctionnels et techniques de l’application.
 
-FESTY représente le projet applicatif développé dans le cadre de ce stage. Il s’agit d’une plateforme dédiée à la gestion des événements, composée d’une application mobile et d’un back-office d’administration.
+FESTY représente le projet applicatif développé dans le cadre de ce stage. Il s’agit d’une plateforme dédiée à la gestion des événements, composée d’une application mobile, d’un espace partenaire et d’un back-office d’administration.
 
 | Élément | Description |
 |---|---|
@@ -37,7 +37,7 @@ FESTY représente le projet applicatif développé dans le cadre de ce stage. Il
 | Localisation | Pépinière des entreprises, campus universitaire Zarroug, Gafsa |
 | Activités principales | Développement web et mobile, bases de données, cloud, IoT et systèmes embarqués |
 | Rôle dans le projet | Organisme d’accueil et encadrement technique |
-| Projet réalisé | FESTY, plateforme de gestion des événements avec application mobile et back-office d’administration |
+| Projet réalisé | FESTY, plateforme de gestion des événements avec application mobile, espace partenaire et back-office d’administration |
 
 **Tableau 1.1 : Présentation générale de TEKSIGHT**
 
@@ -55,7 +55,7 @@ Le secteur événementiel connaît une évolution importante grâce à la digita
 
 De leur côté, les organisateurs ont besoin d’outils numériques leur permettant de créer, gérer et suivre leurs événements de manière efficace. Cette évolution met en évidence la nécessité de disposer d’une solution centralisée capable de répondre aux besoins des participants, des organisateurs et des administrateurs.
 
-Dans ce contexte, le projet FESTY consiste à concevoir et développer une application mobile multiplateforme dédiée à la gestion des événements.
+Dans ce contexte, le projet FESTY consiste à concevoir et développer une plateforme numérique de gestion événementielle, composée d’une application mobile, d’un espace partenaire et d’un back-office d’administration.
 
 Ainsi, la digitalisation du secteur ne se limite plus à la vente de billets, mais couvre également la découverte, la personnalisation, la gestion organisationnelle, le paiement, le contrôle d’accès et le suivi des activités.
 
@@ -71,7 +71,7 @@ La problématique principale peut donc être formulée ainsi :
 
 ### 1.2.3 Objectifs du projet
 
-L’objectif principal du projet FESTY est de mettre en place une plateforme de gestion événementielle composée d’une application mobile destinée aux utilisateurs et partenaires, ainsi que d’un back-office d’administration permettant la supervision et la modération de la plateforme.
+L’objectif principal du projet FESTY est de mettre en place une plateforme de gestion événementielle composée d’une application mobile destinée aux visiteurs, utilisateurs et agents de scan, d’un espace partenaire pour les organisateurs et d’un back-office d’administration permettant la supervision de la plateforme.
 
 Les objectifs spécifiques du projet sont les suivants :
 
@@ -79,7 +79,7 @@ Les objectifs spécifiques du projet sont les suivants :
 * permettre aux utilisateurs de réserver, payer et gérer leurs billets ;
 * offrir aux partenaires un espace de gestion de leurs événements ;
 * assurer le contrôle d’accès aux événements à travers le scan des billets ;
-* fournir à l’administrateur un espace de supervision, de modération et de suivi.
+* fournir à l’administrateur un espace de supervision, de contrôle de l’offre événementielle, de gestion du catalogue artistique et de suivi des opérations sensibles.
 
 Ainsi, FESTY vise à améliorer l’expérience des participants, à simplifier le travail des organisateurs et à renforcer la sécurité des opérations liées aux événements.
 

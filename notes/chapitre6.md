@@ -57,9 +57,9 @@ Les principaux cas d’utilisation du Sprint 4 sont décrits ci-dessous.
 | Cas d’utilisation | Réserver et payer un billet |
 | Acteur principal | Utilisateur |
 | Objectif | Permettre à l’utilisateur de réserver temporairement un billet, de le payer et d’obtenir son ticket après confirmation. |
-| Précondition | L’utilisateur est authentifié et consulte le détail d’un événement disposant d’une billetterie active. |
+| Précondition | L’utilisateur est authentifié et consulte la billetterie d’un événement actif. |
 | Postcondition | La commande est confirmée et le ticket est généré pour l’utilisateur. |
-| Scénario nominal | 1. L’utilisateur consulte le détail d’un événement.<br>2. Il sélectionne un type de billet.<br>3. Le système vérifie la disponibilité du billet.<br>4. Le système crée une réservation temporaire.<br>5. L’utilisateur procède au paiement.<br>6. Le système confirme le paiement.<br>7. Le système convertit la réservation en commande payée.<br>8. Le système génère le ticket.<br>9. Le système affiche la confirmation de l’achat. |
+| Scénario nominal | 1. L’utilisateur consulte la billetterie d’un événement.<br>2. Il sélectionne un type de billet.<br>3. Le système vérifie la disponibilité du billet.<br>4. Le système crée une réservation temporaire.<br>5. L’utilisateur procède au paiement.<br>6. Le système confirme le paiement.<br>7. Le système convertit la réservation en commande payée.<br>8. Le système génère le ticket.<br>9. Le système affiche la confirmation de l’achat. |
 | Exceptions | E1 : Le billet n’est plus disponible.<br>E2 : La réservation temporaire a expiré.<br>E3 : Le paiement échoue. |
 
 **Tableau 6.2 : Description textuelle du cas d’utilisation « Réserver et payer un billet »**
