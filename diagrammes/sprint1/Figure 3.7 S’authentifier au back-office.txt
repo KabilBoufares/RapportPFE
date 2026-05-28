@@ -19,24 +19,27 @@ AdminUI -> Backend : Envoyer les identifiants (email, mot de passe)
 deactivate AdminUI
 
 activate Backend
-Backend -> DB : Vérifier l'existence de l'email
+Backend -> DB : Rechercher le compte par email
 deactivate Backend
 
 activate DB
-DB --> Backend : Email trouvé / introuvable
+DB --> Backend : Compte trouvé / introuvable
 deactivate DB
 
-alt email introuvable
+alt compte introuvable
     activate Backend
     Backend --> AdminUI : Message d'erreur (E1)
     deactivate Backend
+
     activate AdminUI
     AdminUI --> Administrateur : Afficher "Identifiants incorrects"
     deactivate AdminUI
-else email trouvé
+
+else compte trouvé
     activate Backend
     Backend -> DB : Récupérer les informations du compte
     deactivate Backend
+
     activate DB
     DB --> Backend : Informations du compte (mot de passe haché, rôle)
     deactivate DB
@@ -47,49 +50,65 @@ else email trouvé
     alt mot de passe incorrect
         Backend --> AdminUI : Message d'erreur (E1)
         deactivate Backend
+
         activate AdminUI
         AdminUI --> Administrateur : Afficher "Identifiants incorrects"
         deactivate AdminUI
+
     else mot de passe correct
         Backend -> Backend : Vérifier le rôle administrateur
 
-        ' Étape 5 – Demande du code 2FA
-        Backend --> AdminUI : Demander le code 2FA
-        deactivate Backend
-        activate AdminUI
-        AdminUI --> Administrateur : Afficher le champ de saisie du code 2FA
-        deactivate AdminUI
-
-        ' Étape 6 – Saisie et vérification du code 2FA
-        Administrateur -> AdminUI : Saisir le code 2FA
-        activate AdminUI
-        AdminUI -> Backend : Envoyer le code 2FA saisi
-        deactivate AdminUI
-
-        activate Backend
-        Backend -> DB : Récupérer la configuration 2FA
-        deactivate Backend
-        activate DB
-        DB --> Backend : Configuration 2FA (secret)
-        deactivate DB
-
-        activate Backend
-        Backend -> Backend : Vérifier le code 2FA
-
-        alt code 2FA invalide ou expiré
-            Backend --> AdminUI : Message d'erreur (E2)
+        alt rôle non administrateur
+            Backend --> AdminUI : Message d'erreur (E3)
             deactivate Backend
+
             activate AdminUI
-            AdminUI --> Administrateur : Afficher "Code 2FA invalide ou expiré"
+            AdminUI --> Administrateur : Afficher "Accès non autorisé"
             deactivate AdminUI
-        else code 2FA valide
-            Backend -> Backend : Créer une session administrateur sécurisée
-            Backend --> AdminUI : Authentification réussie
+
+        else rôle administrateur
+            Backend --> AdminUI : Demander le code 2FA
             deactivate Backend
+
             activate AdminUI
-            AdminUI --> Administrateur : Rediriger vers l'espace d'administration
+            AdminUI --> Administrateur : Afficher le champ de saisie du code 2FA
             deactivate AdminUI
+
+            Administrateur -> AdminUI : Saisir le code 2FA
+            activate AdminUI
+            AdminUI -> Backend : Envoyer le code 2FA saisi
+            deactivate AdminUI
+
+            activate Backend
+            Backend -> DB : Récupérer la configuration 2FA
+            deactivate Backend
+
+            activate DB
+            DB --> Backend : Configuration 2FA
+            deactivate DB
+
+            activate Backend
+            Backend -> Backend : Vérifier le code 2FA
+
+            alt code 2FA invalide ou expiré
+                Backend --> AdminUI : Message d'erreur (E2)
+                deactivate Backend
+
+                activate AdminUI
+                AdminUI --> Administrateur : Afficher "Code 2FA invalide ou expiré"
+                deactivate AdminUI
+
+            else code 2FA valide
+                Backend -> Backend : Générer un jeton administrateur sécurisé
+                Backend --> AdminUI : Authentification réussie
+                deactivate Backend
+
+                activate AdminUI
+                AdminUI --> Administrateur : Rediriger vers l'espace d'administration
+                deactivate AdminUI
+            end
         end
     end
 end
+
 @enduml

@@ -26,7 +26,7 @@ Nous distinguons cinq acteurs principaux : le Visiteur, l’Utilisateur, le Part
 | Utilisateur | Représente une personne authentifiée disposant d’un compte sur la plateforme. Il peut gérer son profil et ses préférences, gérer ses billets, interagir autour des événements et soumettre une demande pour devenir partenaire organisateur. |
 | Partenaire | Représente un organisateur d’événements. Il dispose d’un espace dédié et d’un portail partenaire lui permettant de gérer son profil professionnel, ses événements, sa billetterie, ses sessions de scan, son activité et sa monétisation. |
 | Agent de scan | Représente un acteur chargé de contrôler l’accès à un événement. Il peut vérifier les billets des participants à travers le scan et valider leur entrée. |
-| Administrateur | Représente le responsable de la supervision de la plateforme. Il assure la gestion des utilisateurs et des partenaires, le contrôle de l’offre événementielle, la gestion du référentiel, le traitement des opérations financières ainsi que la supervision des risques et des audits. |
+| Administrateur | Représente le responsable de la supervision de la plateforme. Il assure la gestion des utilisateurs et des partenaires, le contrôle de l’offre événementielle, la gestion du catalogue artistique, le traitement des opérations financières ainsi que la supervision des risques et des audits. |
 
 **Tableau 2.1 : Identification des acteurs principaux de FESTY**
 
@@ -46,7 +46,7 @@ Le tableau suivant présente les besoins fonctionnels principaux de FESTY selon 
 | Utilisateur | Gérer son profil et ses préférences, interagir autour des événements, gérer sa billetterie et soumettre une demande pour devenir partenaire organisateur. |
 | Partenaire | Gérer son profil partenaire, gérer l’exploitation de ses événements, gérer le line-up, suivre son activité, consulter sa monétisation et organiser le contrôle d’accès aux événements. |
 | Agent de scan | Contrôler l’accès à un événement en vérifiant les billets des participants et en validant leur entrée. |
-| Administrateur | Gérer les utilisateurs et les partenaires, contrôler l’offre événementielle, modérer les contenus et les stars, gérer le référentiel de la plateforme, traiter les opérations financières et superviser les risques et les audits. |
+| Administrateur | Gérer les utilisateurs et les partenaires, contrôler l’offre événementielle, gérer le catalogue artistique, traiter les opérations financières et superviser les risques et les audits. |
 
 **Tableau 2.2 : Besoins fonctionnels principaux de FESTY**
 
@@ -127,13 +127,16 @@ Le tableau suivant présente le Product Backlog priorisé de la plateforme FESTY
 | 3 | Exploration, personnalisation, artistes et interactions | 3.3 | En tant que partenaire, je veux gérer le line-up de mes événements afin d’associer des artistes aux événements publiés. | S |
 | 3 | Exploration, personnalisation, artistes et interactions | 3.4 | En tant qu’utilisateur, je veux gérer mes préférences afin de personnaliser mon expérience. | S |
 | 3 | Exploration, personnalisation, artistes et interactions | 3.5 | En tant qu’utilisateur, je veux interagir autour des événements afin d’enrichir mon expérience. | S |
-| 3 | Exploration, personnalisation, artistes et interactions | 3.6 | En tant qu’administrateur, je veux modérer les contenus publics et les artistes associés aux événements afin de garantir la qualité des informations diffusées. | S |
-| 4 | Billetterie, paiement, scan et supervision | 4.1 | En tant qu’utilisateur, je veux réserver et consulter mes billets afin de participer à un événement. | M |
-| 4 | Billetterie, paiement, scan et supervision | 4.2 | En tant qu’utilisateur, je veux payer mes billets afin de finaliser ma participation. | M |
-| 4 | Billetterie, paiement, scan et supervision | 4.3 | En tant qu’agent de scan, je veux vérifier les tickets et valider l’entrée d’un participant afin de contrôler l’accès à un événement. | M |
-| 4 | Billetterie, paiement, scan et supervision | 4.4 | En tant que partenaire, je veux suivre mon activité et ma monétisation afin de consulter les performances de mes événements. | S |
-| 4 | Billetterie, paiement, scan et supervision | 4.5 | En tant qu’administrateur, je veux superviser les opérations sensibles liées aux utilisateurs, partenaires et transactions afin d’assurer le bon fonctionnement de la plateforme. | M |
-| 4 | Billetterie, paiement, scan et supervision | 4.6 | En tant qu’administrateur, je veux traiter les opérations financières et superviser les opérations sensibles afin d’assurer le bon fonctionnement de la plateforme. | S |
+| 3 | Exploration, personnalisation, artistes et interactions | 3.6 | En tant qu’administrateur, je veux gérer le catalogue artistique afin de contrôler les stars disponibles et les propositions soumises par les partenaires. | M |
+| 4 | Billetterie, paiement, scan et supervision | 4.1 | En tant qu’utilisateur, je veux réserver et payer un billet afin de participer à un événement. | M |
+| 4 | Billetterie, paiement, scan et supervision | 4.2 | En tant qu’utilisateur, je veux consulter mes tickets afin d’accéder aux informations de mes achats. | M |
+| 4 | Billetterie, paiement, scan et supervision | 4.3 | En tant qu’utilisateur, je veux demander un remboursement lorsque cela est possible. | S |
+| 4 | Billetterie, paiement, scan et supervision | 4.4 | En tant qu’utilisateur, je veux mettre un ticket en revente ou acheter un ticket revendu via la marketplace. | S |
+| 4 | Billetterie, paiement, scan et supervision | 4.5 | En tant qu’utilisateur, je veux proposer un ticket externe à la vente afin de le publier dans la marketplace. | C |
+| 4 | Billetterie, paiement, scan et supervision | 4.6 | En tant que partenaire, je veux gérer les sessions de scan et affecter des agents afin d’organiser le contrôle d’accès. | M |
+| 4 | Billetterie, paiement, scan et supervision | 4.7 | En tant qu’agent de scan, je veux vérifier les tickets et valider l’entrée d’un participant afin de contrôler l’accès à un événement. | M |
+| 4 | Billetterie, paiement, scan et supervision | 4.8 | En tant que partenaire, je veux suivre mon activité et ma monétisation afin de consulter les performances de mes événements. | S |
+| 4 | Billetterie, paiement, scan et supervision | 4.9 | En tant qu’administrateur, je veux traiter les opérations financières et superviser les opérations sensibles afin d’assurer le bon fonctionnement de la plateforme. | S |
 
 **Tableau 2.6 : Backlog du produit priorisé selon la méthode MoSCoW**
 
@@ -152,7 +155,7 @@ Le tableau suivant présente une vue synthétique de cette planification.
 | Sprint 1 | Authentification et gestion des accès | Visiteur, Utilisateur, Administrateur | Inscription, vérification OTP, authentification à la plateforme, réinitialisation du mot de passe, authentification au back-office et gestion du profil utilisateur. |
 | Sprint 2 | Gestion des partenaires et des événements | Utilisateur, Partenaire, Administrateur | Soumission et traitement des demandes partenaires, gestion du profil partenaire, création et gestion des événements, contrôle de l’offre événementielle. |
 | Sprint 3 | Exploration, personnalisation et interactions autour des événements | Visiteur, Utilisateur, Partenaire, Administrateur | Exploration des événements, consultation des artistes et du line-up, gestion des préférences, interactions et modération des contenus publics. |
-| Sprint 4 | Billetterie, paiement, tickets et contrôle d’accès | Utilisateur, Partenaire, Agent de scan, Administrateur | Réservation des billets, paiement, consultation et gestion des tickets, scan et validation des accès, suivi partenaire, monétisation et supervision des opérations sensibles. |
+| Sprint 4 | Billetterie, paiement, revente et contrôle d’accès | Utilisateur, Partenaire, Agent de scan, Administrateur | Réservation des billets, paiement, consultation et gestion des tickets, remboursement, revente, marketplace, scan et validation des accès, suivi partenaire, monétisation et supervision des opérations sensibles. |
 
 **Tableau 2.7 : Planification des sprints du projet FESTY**
 
@@ -180,7 +183,7 @@ Ce diagramme présente les principales fonctionnalités du back-office administr
 
 **Figure 2.2 : Diagramme de cas d’utilisation global du back-office administrateur**
 
-La figure 2.2 présente les fonctions de gestion des utilisateurs et des partenaires, le contrôle de l’offre événementielle, la modération des contenus et des stars, le traitement des opérations financières, la gestion du référentiel ainsi que la supervision globale de la plateforme.
+La figure 2.2 présente les fonctions de gestion des utilisateurs et des partenaires, le contrôle de l’offre événementielle, la gestion du catalogue artistique, le traitement des opérations financières ainsi que la supervision des risques et des audits.
 
 ## 2.4 Diagramme de classes global
 
@@ -352,7 +355,7 @@ Les principaux modules logiques de FESTY sont présentés dans le tableau suivan
 | Notifications | Gestion des notifications et préférences de notification. |
 | Interactions | Gestion des avis, favoris, chat et signalements. |
 | Stars et recommandations | Gestion des artistes, intérêts utilisateurs et recommandations personnalisées. |
-| Administration | Supervision de la plateforme, du référentiel et des opérations sensibles. |
+| Administration | Supervision de la plateforme, gestion du catalogue artistique, traitement des opérations financières et contrôle des opérations sensibles. |
 
 **Tableau 2.14 : Modules logiques de la plateforme FESTY**
 
