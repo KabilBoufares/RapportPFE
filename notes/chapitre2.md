@@ -171,7 +171,7 @@ Afin de présenter une vue générale de la solution, nous distinguons deux diag
 
 Ce diagramme présente les principales fonctionnalités accessibles aux acteurs métier de la plateforme FESTY. Il conserve les relations include vers l’authentification afin de garder une lecture cohérente des accès à la plateforme.
 
-![Diagramme de cas d’utilisation global de la plateforme FESTY](images/use_case_global_plateforme_festy.png)
+![Diagramme de cas d’utilisation global de la plateforme FESTY](<images/chapitre2/Figure 2.1 Diagramme de cas d’utilisation global de la plateforme FESTY.png>)
 
 **Figure 2.1 : Diagramme de cas d’utilisation global de la plateforme FESTY**
 
@@ -181,7 +181,7 @@ La figure 2.1 montre que le Visiteur peut explorer les événements, s’inscrir
 
 Ce diagramme présente les principales fonctionnalités du back-office administrateur de FESTY. Il regroupe les opérations de supervision, de gestion et de contrôle accessibles après authentification au back-office.
 
-![Diagramme de cas d’utilisation global du back-office administrateur](images/use_case_global_admin_festy.png)
+![Diagramme de cas d’utilisation global du back-office administrateur](<images/chapitre2/Figure 2.2 Diagramme de cas d’utilisation global du back-office administrateur.png>)
 
 **Figure 2.2 : Diagramme de cas d’utilisation global du back-office administrateur**
 
@@ -193,7 +193,7 @@ Le diagramme de classes global permet de représenter la structure générale de
 
 Dans notre cas, le modèle global s’articule autour de plusieurs groupes d’entités : les utilisateurs, les partenaires, les événements, la billetterie, le contrôle d’accès, les interactions et l’administration. Cette vue permet de mieux comprendre l’organisation des données avant de passer aux conceptions détaillées propres à chaque sprint.
 
-![Diagramme de classes global](images/class_diagram_global_festy.png)
+![Diagramme de classes global](<images/chapitre2/Figure 2.3 Diagramme de classes global de FESTY.png>)
 
 **Figure 2.3 : Diagramme de classes global de FESTY**
 
@@ -327,7 +327,7 @@ La plateforme intègre aussi plusieurs services externes. Stripe assure les paie
 
 La figure suivante présente l’architecture physique de la plateforme FESTY.
 
-![Architecture physique de la plateforme FESTY](images/architecture_physique_festy.png)
+![Architecture physique de la plateforme FESTY](<images/chapitre2/Figure 2.4 Architecture physique de la plateforme FESTY.png>)
 
 **Figure 2.4 : Architecture physique de la plateforme FESTY**
 
@@ -363,7 +363,7 @@ Les principaux modules logiques de FESTY sont présentés dans le tableau suivan
 
 La figure suivante présente une vue simplifiée de l’architecture logique modulaire du Back-End FESTY.
 
-![Architecture logique modulaire de FESTY](images/architecture_logique_festy.png)
+![Architecture logique modulaire de FESTY](<images/chapitre2/Figure 2.5 Architecture logique modulaire de FESTY.png>)
 
 **Figure 2.5 : Architecture logique modulaire de FESTY**
 

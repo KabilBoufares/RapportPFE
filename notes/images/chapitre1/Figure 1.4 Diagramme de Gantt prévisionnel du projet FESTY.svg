@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1900" height="940" viewBox="0 0 1900 940">
+<rect width="1900" height="940" fill="#FAFAFD"/>
+<style>
+text{font-family:DejaVu Sans,Arial,sans-serif}
+.hdr{font-size:22px;font-weight:700;fill:white}
+.week{font-size:18px;font-weight:700;fill:#4C2FB0}
+.task{font-size:20px;font-weight:700;fill:#1F1A2E}
+.small{font-size:17px;fill:#6D627A}
+.legend{font-size:17px;fill:#4D425F}
+</style>
+
+<!-- HEADER : colonnes mois -->
+<rect x="70" y="30" width="411" height="46" rx="15" fill="#4C2FB0"/>
+<text x="275.5" y="61" class="hdr" text-anchor="middle">Tâches / Activités</text>
+
+<rect x="505" y="30" width="318.25" height="44" rx="16" fill="#4C2FB0"/>
+<text x="664.12" y="60" class="hdr" text-anchor="middle">Mois 1</text>
+<rect x="831.25" y="30" width="318.25" height="44" rx="16" fill="#5C3CC4"/>
+<text x="990.38" y="60" class="hdr" text-anchor="middle">Mois 2</text>
+<rect x="1157.50" y="30" width="318.25" height="44" rx="16" fill="#6D4DD3"/>
+<text x="1316.62" y="60" class="hdr" text-anchor="middle">Mois 3</text>
+<rect x="1483.75" y="30" width="318.25" height="44" rx="16" fill="#7B5BE0"/>
+<text x="1642.88" y="60" class="hdr" text-anchor="middle">Mois 4</text>
+
+<!-- SEMAINES S1–S16 -->
+<rect x="514.78" y="87" width="62" height="38" rx="19" fill="#ECE6FA" stroke="#DACFF5"/>
+<text x="545.78" y="112" class="week" text-anchor="middle">S1</text>
+<rect x="596.34" y="87" width="62" height="38" rx="19" fill="#ECE6FA" stroke="#DACFF5"/>
+<text x="627.34" y="112" class="week" text-anchor="middle">S2</text>
+<rect x="677.91" y="87" width="62" height="38" rx="19" fill="#ECE6FA" stroke="#DACFF5"/>
+<text x="708.91" y="112" class="week" text-anchor="middle">S3</text>
+<rect x="759.47" y="87" width="62" height="38" rx="19" fill="#ECE6FA" stroke="#DACFF5"/>
+<text x="790.47" y="112" class="week" text-anchor="middle">S4</text>
+<rect x="841.03" y="87" width="62" height="38" rx="19" fill="#ECE6FA" stroke="#DACFF5"/>
+<text x="872.03" y="112" class="week" text-anchor="middle">S5</text>
+<rect x="922.59" y="87" width="62" height="38" rx="19" fill="#ECE6FA" stroke="#DACFF5"/>
+<text x="953.59" y="112" class="week" text-anchor="middle">S6</text>
+<rect x="1004.16" y="87" width="62" height="38" rx="19" fill="#ECE6FA" stroke="#DACFF5"/>
+<text x="1035.16" y="112" class="week" text-anchor="middle">S7</text>
+<rect x="1085.72" y="87" width="62" height="38" rx="19" fill="#ECE6FA" stroke="#DACFF5"/>
+<text x="1116.72" y="112" class="week" text-anchor="middle">S8</text>
+<rect x="1167.28" y="87" width="62" height="38" rx="19" fill="#ECE6FA" stroke="#DACFF5"/>
+<text x="1198.28" y="112" class="week" text-anchor="middle">S9</text>
+<rect x="1248.84" y="87" width="62" height="38" rx="19" fill="#ECE6FA" stroke="#DACFF5"/>
+<text x="1279.84" y="112" class="week" text-anchor="middle">S10</text>
+<rect x="1330.41" y="87" width="62" height="38" rx="19" fill="#ECE6FA" stroke="#DACFF5"/>
+<text x="1361.41" y="112" class="week" text-anchor="middle">S11</text>
+<rect x="1411.97" y="87" width="62" height="38" rx="19" fill="#ECE6FA" stroke="#DACFF5"/>
+<text x="1442.97" y="112" class="week" text-anchor="middle">S12</text>
+<rect x="1493.53" y="87" width="62" height="38" rx="19" fill="#ECE6FA" stroke="#DACFF5"/>
+<text x="1524.53" y="112" class="week" text-anchor="middle">S13</text>
+<rect x="1575.09" y="87" width="62" height="38" rx="19" fill="#ECE6FA" stroke="#DACFF5"/>
+<text x="1606.09" y="112" class="week" text-anchor="middle">S14</text>
+<rect x="1656.66" y="87" width="62" height="38" rx="19" fill="#ECE6FA" stroke="#DACFF5"/>
+<text x="1687.66" y="112" class="week" text-anchor="middle">S15</text>
+<rect x="1738.22" y="87" width="62" height="38" rx="19" fill="#ECE6FA" stroke="#DACFF5"/>
+<text x="1769.22" y="112" class="week" text-anchor="middle">S16</text>
+
+<!-- LIGNES VERTICALES -->
+<line x1="505.00"  y1="150" x2="505.00"  y2="905" stroke="#E7E2F1" stroke-width="2"/>
+<line x1="586.56"  y1="150" x2="586.56"  y2="905" stroke="#F1EEF7" stroke-width="1"/>
+<line x1="668.12"  y1="150" x2="668.12"  y2="905" stroke="#F1EEF7" stroke-width="1"/>
+<line x1="749.69"  y1="150" x2="749.69"  y2="905" stroke="#F1EEF7" stroke-width="1"/>
+<line x1="831.25"  y1="150" x2="831.25"  y2="905" stroke="#E7E2F1" stroke-width="2"/>
+<line x1="912.81"  y1="150" x2="912.81"  y2="905" stroke="#F1EEF7" stroke-width="1"/>
+<line x1="994.38"  y1="150" x2="994.38"  y2="905" stroke="#F1EEF7" stroke-width="1"/>
+<line x1="1075.94" y1="150" x2="1075.94" y2="905" stroke="#F1EEF7" stroke-width="1"/>
+<line x1="1157.50" y1="150" x2="1157.50" y2="905" stroke="#E7E2F1" stroke-width="2"/>
+<line x1="1239.06" y1="150" x2="1239.06" y2="905" stroke="#F1EEF7" stroke-width="1"/>
+<line x1="1320.62" y1="150" x2="1320.62" y2="905" stroke="#F1EEF7" stroke-width="1"/>
+<line x1="1402.19" y1="150" x2="1402.19" y2="905" stroke="#F1EEF7" stroke-width="1"/>
+<line x1="1483.75" y1="150" x2="1483.75" y2="905" stroke="#E7E2F1" stroke-width="2"/>
+<line x1="1565.31" y1="150" x2="1565.31" y2="905" stroke="#F1EEF7" stroke-width="1"/>
+<line x1="1646.88" y1="150" x2="1646.88" y2="905" stroke="#F1EEF7" stroke-width="1"/>
+<line x1="1728.44" y1="150" x2="1728.44" y2="905" stroke="#F1EEF7" stroke-width="1"/>
+<line x1="1810.00" y1="150" x2="1810.00" y2="905" stroke="#E7E2F1" stroke-width="2"/>
+
+<!-- ROW 1 : Cadrage & objectifs -->
+<rect x="70" y="160" width="411" height="76" rx="20" fill="#F2E3FA"/>
+<text x="275.5" y="191" class="task" text-anchor="middle">Cadrage &amp; objectifs</text>
+<text x="275.5" y="222" class="small" text-anchor="middle">besoins, périmètre</text>
+<rect x="505" y="183" width="1305" height="30" rx="15" fill="#FFFFFF" stroke="#DED7EC"/>
+<rect x="512" y="183" width="149.12" height="30" rx="15" fill="#BE8CE5"/>
+
+<!-- ROW 2 : Analyse & conception globale -->
+<rect x="70" y="253" width="411" height="76" rx="20" fill="#EDE6FF"/>
+<text x="275.5" y="284" class="task" text-anchor="middle">Analyse &amp; conception globale</text>
+<text x="275.5" y="315" class="small" text-anchor="middle">backlog, architecture, UI/UX</text>
+<rect x="505" y="276" width="1305" height="30" rx="15" fill="#FFFFFF" stroke="#DED7EC"/>
+<rect x="512" y="276" width="312.25" height="30" rx="15" fill="#9B7BEA"/>
+<text x="668.12" y="297" style="font-size:18px;font-weight:700;fill:white" text-anchor="middle">S1–S4</text>
+
+<!-- ROW 3 : Sprint 1 -->
+<rect x="70" y="346" width="411" height="76" rx="20" fill="#E7E4FF"/>
+<text x="275.5" y="377" class="task" text-anchor="middle">Sprint 1</text>
+<text x="275.5" y="408" class="small" text-anchor="middle"></text>
+<rect x="505" y="369" width="1305" height="30" rx="15" fill="#FFFFFF" stroke="#DED7EC"/>
+<rect x="512" y="369" width="312.25" height="30" rx="15" fill="#5B4AC7"/>
+<text x="668.12" y="390" style="font-size:18px;font-weight:700;fill:white" text-anchor="middle">S1–S4</text>
+
+<!-- ROW 4 : Sprint 2 -->
+<rect x="70" y="439" width="411" height="76" rx="20" fill="#F1DCE1"/>
+<text x="275.5" y="470" class="task" text-anchor="middle">Sprint 2</text>
+<text x="275.5" y="501" class="small" text-anchor="middle"></text>
+<rect x="505" y="462" width="1305" height="30" rx="15" fill="#FFFFFF" stroke="#DED7EC"/>
+<rect x="838.25" y="462" width="312.25" height="30" rx="15" fill="#B87686"/>
+<text x="994.38" y="483" style="font-size:18px;font-weight:700;fill:white" text-anchor="middle">S5–S8</text>
+
+<!-- ROW 5 : Sprint 3 -->
+<rect x="70" y="532" width="411" height="76" rx="20" fill="#FBE5E8"/>
+<text x="275.5" y="563" class="task" text-anchor="middle">Sprint 3</text>
+<text x="275.5" y="594" class="small" text-anchor="middle"></text>
+<rect x="505" y="555" width="1305" height="30" rx="15" fill="#FFFFFF" stroke="#DED7EC"/>
+<rect x="1164.50" y="555" width="312.25" height="30" rx="15" fill="#D4758A"/>
+<text x="1320.62" y="576" style="font-size:18px;font-weight:700;fill:white" text-anchor="middle">S9–S12</text>
+
+<!-- ROW 6 : Sprint 4 -->
+<rect x="70" y="625" width="411" height="76" rx="20" fill="#E3F4E2"/>
+<text x="275.5" y="656" class="task" text-anchor="middle">Sprint 4</text>
+<text x="275.5" y="687" class="small" text-anchor="middle"></text>
+<rect x="505" y="648" width="1305" height="30" rx="15" fill="#FFFFFF" stroke="#DED7EC"/>
+<rect x="1490.75" y="648" width="312.25" height="30" rx="15" fill="#78B978"/>
+<text x="1646.88" y="669" style="font-size:18px;font-weight:700;fill:white" text-anchor="middle">S13–S16</text>
+
+<!-- ROW 7 : Tests finaux & validation -->
+<rect x="70" y="718" width="411" height="76" rx="20" fill="#F3E1F7"/>
+<text x="275.5" y="749" class="task" text-anchor="middle">Tests finaux &amp; validation</text>
+<text x="275.5" y="780" class="small" text-anchor="middle">recette, corrections</text>
+<rect x="505" y="741" width="1305" height="30" rx="15" fill="#FFFFFF" stroke="#DED7EC"/>
+<rect x="1572.31" y="741" width="230.69" height="30" rx="15" fill="#D28BE0"/>
+<text x="1687.66" y="762" style="font-size:18px;font-weight:700;fill:white" text-anchor="middle">S14–S16</text>
+
+<!-- ROW 8 : Documentation & rapport -->
+<rect x="70" y="811" width="411" height="76" rx="20" fill="#F0F7C2"/>
+<text x="275.5" y="842" class="task" text-anchor="middle">Documentation &amp; rapport</text>
+<text x="275.5" y="873" class="small" text-anchor="middle">rédaction continue</text>
+<rect x="505" y="834" width="1305" height="30" rx="15" fill="#FFFFFF" stroke="#DED7EC"/>
+<rect x="593.56" y="834" width="1209.44" height="30" rx="15" fill="#C8DD6A"/>
+<text x="1198.28" y="855" style="font-size:18px;font-weight:700;fill:#2D3416" text-anchor="middle">S2–S16</text>
+
+<!-- LÉGENDE -->
+     
+</svg>

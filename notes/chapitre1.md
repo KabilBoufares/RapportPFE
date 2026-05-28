@@ -14,7 +14,7 @@ TEKSIGHT est une société tunisienne spécialisée dans les services informatiq
 
 L’entreprise est implantée à la pépinière des entreprises du campus universitaire Zarroug à Gafsa. Cette implantation lui permet d’évoluer dans un environnement favorable à l’innovation, à l’entrepreneuriat et à la collaboration avec le milieu universitaire.
 
-![Logo TEKSIGHT](images/logo_teksight.png)
+![Logo TEKSIGHT](<images/chapitre1/Figure 1.1 Logo de TEKSIGHT.png>)
 
 **Figure 1.1 : Logo de TEKSIGHT**
 
@@ -44,6 +44,10 @@ FESTY représente le projet applicatif développé dans le cadre de ce stage. Il
 ## 1.2 Présentation du projet FESTY
 
 Cette section présente le projet FESTY, son contexte, sa problématique ainsi que les objectifs visés par la solution proposée.
+
+![Logo de FESTY](<images/chapitre1/Figure 1.2 Logo de FESTY.png>)
+
+**Figure 1.2 : Logo de FESTY**
 
 ### 1.2.1 Contexte du projet
 
@@ -165,6 +169,10 @@ Scrum permet de structurer le développement en sprints. Chaque sprint regroupe 
 
 Scrum est un framework agile qui organise le développement d’un produit en cycles courts appelés sprints. Il repose principalement sur des rôles, des événements et des artefacts permettant de suivre l’évolution du projet et de livrer progressivement des fonctionnalités exploitables.
 
+![Processus de la méthode Scrum](<images/chapitre1/Figure 1.3 Processus de la méthode Scrum.png>)
+
+**Figure 1.3 : Processus de la méthode Scrum**
+
 Dans ce rapport, l’application concrète de Scrum sera détaillée dans le chapitre suivant à travers la définition de l’équipe, du backlog produit et de la planification des sprints.
 
 ## 1.5 Planification prévisionnelle
@@ -177,9 +185,9 @@ Ce diagramme de Gantt est utilisé comme outil de visualisation globale du déro
 
 La planification détaillée des sprints sera présentée dans le chapitre suivant.
 
-![Diagramme de Gantt prévisionnel](images/gantt_festy.png)
+![Diagramme de Gantt prévisionnel](<images/chapitre1/Figure 1.4 Diagramme de Gantt prévisionnel du projet FESTY.svg>)
 
-**Figure 1.2 : Diagramme de Gantt prévisionnel du projet FESTY**
+**Figure 1.4 : Diagramme de Gantt prévisionnel du projet FESTY**
 
 ## Conclusion
 
