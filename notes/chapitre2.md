@@ -154,7 +154,7 @@ Le tableau suivant présente une vue synthétique de cette planification.
 |---|---|---|---|
 | Sprint 1 | Authentification et gestion des accès | Visiteur, Utilisateur, Administrateur | Inscription, vérification OTP, authentification à la plateforme, réinitialisation du mot de passe, authentification au back-office et gestion du profil utilisateur. |
 | Sprint 2 | Gestion des partenaires et des événements | Utilisateur, Partenaire, Administrateur | Soumission et traitement des demandes partenaires, gestion du profil partenaire, création et gestion des événements, contrôle de l’offre événementielle. |
-| Sprint 3 | Exploration, personnalisation et interactions autour des événements | Visiteur, Utilisateur, Partenaire, Administrateur | Exploration des événements, consultation des artistes et du line-up, gestion des préférences, interactions et modération des contenus publics. |
+| Sprint 3 | Exploration, personnalisation et interactions autour des événements | Visiteur, Utilisateur, Partenaire, Administrateur | Exploration des événements, consultation des artistes et du line-up, gestion des préférences, recommandations, favoris, chat événementiel, gestion du line-up artistique et gestion du catalogue artistique. |
 | Sprint 4 | Billetterie, paiement, revente et contrôle d’accès | Utilisateur, Partenaire, Agent de scan, Administrateur | Réservation des billets, paiement, consultation et gestion des tickets, remboursement, revente, marketplace, scan et validation des accès, suivi partenaire, monétisation et supervision des opérations sensibles. |
 
 **Tableau 2.7 : Planification des sprints du projet FESTY**

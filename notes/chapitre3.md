@@ -67,6 +67,8 @@ Cette section présente les descriptions textuelles des principaux cas d’utili
 | Scénario nominal | 1. Le visiteur accède au formulaire d’inscription.<br>2. Il saisit ses informations personnelles, son email, son mot de passe et son numéro de téléphone.<br>3. Le système vérifie les informations saisies.<br>4. Le système crée le compte et envoie un code OTP au numéro indiqué.<br>5. Le visiteur saisit le code OTP reçu.<br>6. Le système vérifie le code et active le compte. |
 | Exceptions | E1 : Les informations saisies sont invalides.<br>E2 : L’email est déjà utilisé.<br>E3 : Le code OTP est incorrect ou expiré. |
 
+**Tableau 3.2 : Description textuelle du cas d’utilisation « S’inscrire à la plateforme »**
+
 #### Cas d’utilisation : S’authentifier à la plateforme
 
 | Élément | Description |

@@ -22,7 +22,7 @@ Le tableau suivant présente les user stories retenues pour ce sprint.
 
 | ID | User Story | Tâches principales | Priorité |
 |---|---|---|---|
-| US-4.1 | En tant qu’utilisateur, je veux consulter le détail d’un événement afin de choisir un billet adapté. | Afficher les informations de l’événement ; afficher les types de billets disponibles ; consulter les prix et les disponibilités. | Must Have |
+| US-4.1 | En tant qu’utilisateur, je veux consulter la billetterie d’un événement afin de choisir un billet adapté. | Afficher les types de billets disponibles ; consulter les prix ; vérifier les disponibilités. | Must Have |
 | US-4.2 | En tant qu’utilisateur, je veux réserver et payer un billet afin de participer à un événement. | Sélectionner un type de billet ; vérifier la disponibilité ; créer une réservation temporaire ; effectuer le paiement ; générer le ticket après confirmation. | Must Have |
 | US-4.3 | En tant qu’utilisateur, je veux consulter mes tickets afin d’accéder aux informations de mes achats. | Afficher la liste des tickets ; consulter le détail d’un ticket ; afficher le code du ticket. | Must Have |
 | US-4.4 | En tant qu’utilisateur, je veux demander un remboursement lorsque cela est possible. | Sélectionner un ticket ou une commande ; saisir la raison ; soumettre la demande ; suivre son statut. | Should Have |
@@ -44,7 +44,7 @@ Le tableau suivant présente les user stories retenues pour ce sprint.
 
 **Figure 6.1 : Diagramme de cas d’utilisation du Sprint 4**
 
-La figure 6.1 présente les principaux cas d’utilisation du Sprint 4. L’utilisateur peut consulter le détail d’un événement, réserver et payer un billet, consulter ses tickets, demander un remboursement, mettre un ticket FESTY en revente, acheter un ticket revendu ou proposer un ticket externe à la vente. Le partenaire gère les sessions de scan et suit son activité, tandis que l’agent de scan contrôle l’accès à l’événement. L’administrateur intervient dans le traitement des opérations financières et la supervision des opérations sensibles.
+La figure 6.1 présente les principaux cas d’utilisation du Sprint 4. L’utilisateur peut consulter la billetterie d’un événement, réserver et payer un billet, consulter ses tickets, demander un remboursement, mettre un ticket FESTY en revente, acheter un ticket revendu ou proposer un ticket externe à la vente. Le partenaire gère les sessions de scan et suit son activité, tandis que l’agent de scan contrôle l’accès à l’événement. L’administrateur intervient dans le traitement des opérations financières et la supervision des opérations sensibles.
 
 ### 6.2.4 Description textuelle des cas d’utilisation
 

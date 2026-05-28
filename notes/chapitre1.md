@@ -115,7 +115,7 @@ Ces limites justifient la mise en place d’une solution centralisée capable de
 
 Pour répondre à ces limites, nous proposons FESTY, une plateforme dédiée à la gestion des événements. Elle vise à centraliser les principales fonctionnalités nécessaires à la découverte, à la réservation, à la gestion, au contrôle d’accès et à la supervision des événements.
 
-La solution permet aux utilisateurs de découvrir les événements, consulter les artistes associés, gérer leurs billets et interagir autour des événements. Elle offre aux partenaires un espace de gestion de leurs événements et de leur activité. Elle met également à disposition de l’administrateur un back-office permettant de superviser la plateforme, modérer les contenus et suivre les opérations sensibles.
+La solution permet aux utilisateurs de découvrir les événements, consulter les artistes associés, gérer leurs billets et interagir autour des événements. Elle offre aux partenaires un espace de gestion de leurs événements et de leur activité. Elle met également à disposition de l’administrateur un back-office permettant de superviser la plateforme, contrôler l’offre événementielle, gérer le catalogue artistique et suivre les opérations sensibles.
 
 La richesse fonctionnelle de cette solution nécessite une organisation progressive du développement, d’où le choix d’une méthodologie agile adaptée aux projets évolutifs.
 
