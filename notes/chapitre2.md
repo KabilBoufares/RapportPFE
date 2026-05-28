@@ -74,9 +74,9 @@ Ces contraintes permettent d’orienter les choix techniques et architecturaux d
 
 ## 2.2 Pilotage du projet avec Scrum
 
-Le pilotage du projet avec Scrum permet d’organiser le développement de FESTY de manière itérative et progressive. Après avoir présenté le choix de Scrum dans le premier chapitre, cette section décrit son application concrète dans le cadre du projet.
+Le pilotage du projet avec Scrum permet d’organiser le développement de FESTY de manière progressive et itérative. Après le choix de Scrum présenté dans le chapitre précédent, cette section précise son application dans le cadre du projet.
 
-Dans notre cas, Scrum est utilisé afin de répartir les fonctionnalités de la plateforme en éléments de travail organisés dans un backlog produit. Ce backlog permet de regrouper les besoins du projet, de définir les priorités et de préparer la planification des sprints.
+Dans notre cas, Scrum est utilisé afin de découper le projet en plusieurs sprints cohérents. Chaque sprint regroupe un ensemble de fonctionnalités liées à un objectif précis, ce qui permet de suivre l’avancement du développement, de prioriser les besoins et de construire progressivement la plateforme.
 
 ### 2.2.1 Équipe et rôles Scrum
 
@@ -124,9 +124,9 @@ Le tableau suivant présente le Product Backlog priorisé de la plateforme FESTY
 | 2 | Partenaires et événements | 2.5 | En tant qu’administrateur, je veux contrôler l’offre événementielle afin de garantir la conformité du contenu. | M |
 | 3 | Exploration, personnalisation, artistes et interactions | 3.1 | En tant que visiteur ou utilisateur, je veux explorer les événements afin de découvrir les offres disponibles. | M |
 | 3 | Exploration, personnalisation, artistes et interactions | 3.2 | En tant que visiteur ou utilisateur, je veux consulter les artistes associés et le line-up des événements afin d’obtenir plus d’informations. | S |
-| 3 | Exploration, personnalisation, artistes et interactions | 3.3 | En tant que partenaire, je veux gérer le line-up de mes événements afin d’associer des artistes aux événements publiés. | S |
-| 3 | Exploration, personnalisation, artistes et interactions | 3.4 | En tant qu’utilisateur, je veux gérer mes préférences afin de personnaliser mon expérience. | S |
-| 3 | Exploration, personnalisation, artistes et interactions | 3.5 | En tant qu’utilisateur, je veux interagir autour des événements afin d’enrichir mon expérience. | S |
+| 3 | Exploration, personnalisation, artistes et interactions | 3.3 | En tant que partenaire, je veux gérer le line-up de mes événements afin d’associer des artistes aux événements publiés. | M |
+| 3 | Exploration, personnalisation, artistes et interactions | 3.4 | En tant qu’utilisateur, je veux gérer mes préférences afin de personnaliser mon expérience. | M |
+| 3 | Exploration, personnalisation, artistes et interactions | 3.5 | En tant qu’utilisateur, je veux interagir autour des événements afin d’enrichir mon expérience. | M |
 | 3 | Exploration, personnalisation, artistes et interactions | 3.6 | En tant qu’administrateur, je veux gérer le catalogue artistique afin de contrôler les stars disponibles et les propositions soumises par les partenaires. | M |
 | 4 | Billetterie, paiement, scan et supervision | 4.1 | En tant qu’utilisateur, je veux réserver et payer un billet afin de participer à un événement. | M |
 | 4 | Billetterie, paiement, scan et supervision | 4.2 | En tant qu’utilisateur, je veux consulter mes tickets afin d’accéder aux informations de mes achats. | M |
