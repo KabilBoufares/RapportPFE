@@ -34,7 +34,7 @@ Le tableau suivant présente les principales user stories retenues pour le Sprin
 
 La figure 5.1 présente le diagramme de cas d’utilisation du Sprint 3. Ce diagramme met en évidence les principales interactions entre les acteurs et la plateforme FESTY dans le cadre de l’exploration, de la personnalisation et des interactions événementielles.
 
-![Diagramme de cas d’utilisation du Sprint 3](images/use_case_sprint3.png)
+![Diagramme de cas d’utilisation du Sprint 3](<images/chapitre5/Figure 5.1 Diagramme de cas d’utilisation du Sprint 3.png>)
 
 **Figure 5.1 : Diagramme de cas d’utilisation du Sprint 3**
 
@@ -126,7 +126,7 @@ Cette section présente les éléments de conception du Sprint 3. Elle comprend 
 
 Le diagramme de classes du Sprint 3 présente les principales classes liées à l’exploration des événements, à la personnalisation de l’expérience utilisateur, aux favoris, aux stars, au line-up artistique et au chat événementiel.
 
-![Diagramme de classes du Sprint 3](images/class_diagram_sprint3.png)
+![Diagramme de classes du Sprint 3](<images/chapitre5/Figure 5.2 Diagramme de classes du Sprint 3.png>)
 
 **Figure 5.2 : Diagramme de classes du Sprint 3**
 
@@ -150,7 +150,7 @@ Ces scénarios ont été choisis car ils représentent les principaux flux dynam
 
 La figure 5.3 présente le scénario de personnalisation de l’expérience utilisateur. L’utilisateur accède à l’espace de préférences, sélectionne ses catégories et centres d’intérêt, puis le système enregistre ces informations afin de proposer des recommandations adaptées.
 
-![Diagramme de séquence du scénario de personnalisation et recommandations](images/sequence_personnalisation_recommandations.png)
+![Diagramme de séquence du scénario de personnalisation et recommandations](<images/chapitre5/Figure 5.3 Diagramme de séquence du scénario de personnalisation et recommandations.png>)
 
 **Figure 5.3 : Diagramme de séquence du scénario de personnalisation et recommandations**
 
@@ -158,7 +158,7 @@ La figure 5.3 présente le scénario de personnalisation de l’expérience util
 
 La figure 5.4 présente le scénario de participation au chat d’un événement. L’utilisateur accède au détail d’un événement, ouvre l’espace de discussion, saisit un message, puis le système vérifie et enregistre ce message avant de l’afficher dans le chat.
 
-![Diagramme de séquence du scénario de participation au chat d’un événement](images/sequence_chat_evenement.png)
+![Diagramme de séquence du scénario de participation au chat d’un événement](<images/chapitre5/Figure 5.4 Diagramme de séquence du scénario de participation au chat d’un événement.png>)
 
 **Figure 5.4 : Diagramme de séquence du scénario de participation au chat d’un événement**
 
@@ -166,7 +166,7 @@ La figure 5.4 présente le scénario de participation au chat d’un événement
 
 La figure 5.5 présente le scénario de gestion du line-up artistique par le partenaire. Le partenaire sélectionne un événement, consulte le catalogue artistique, puis associe une star à l’événement. Si la star n’existe pas encore dans le catalogue, ce traitement est détaillé dans le diagramme d’activité « Proposer une nouvelle star ».
 
-![Diagramme de séquence du scénario de gestion du line-up artistique](images/sequence_lineup_artistique.png)
+![Diagramme de séquence du scénario de gestion du line-up artistique](<images/chapitre5/Figure 5.5 Diagramme de séquence du scénario de gestion du line-up artistique.png>)
 
 **Figure 5.5 : Diagramme de séquence du scénario de gestion du line-up artistique**
 
@@ -178,7 +178,7 @@ Cette section complète les diagrammes de séquence par deux diagrammes d’acti
 
 La figure 5.6 présente le processus permettant au partenaire de proposer une star absente du catalogue artistique. Le partenaire recherche d’abord la star. Si elle existe, le système l’affiche. Sinon, le partenaire saisit les informations nécessaires, puis le système vérifie les données et enregistre la proposition avec un statut en attente de validation.
 
-![Diagramme d’activité du scénario de proposition d’une nouvelle star](images/activity_proposer_nouvelle_star.png)
+![Diagramme d’activité du scénario de proposition d’une nouvelle star](<images/chapitre5/Figure 5.6 Diagramme d’activité du scénario de proposition d’une nouvelle star.png>)
 
 **Figure 5.6 : Diagramme d’activité du scénario de proposition d’une nouvelle star**
 
@@ -186,7 +186,7 @@ La figure 5.6 présente le processus permettant au partenaire de proposer une st
 
 La figure 5.7 présente le processus de traitement d’une star proposée par un partenaire. L’administrateur consulte le catalogue artistique, sélectionne une star proposée, puis choisit de l’approuver ou de la rejeter. Le système met ensuite à jour son statut et affiche un message de confirmation ou d’erreur.
 
-![Diagramme d’activité du scénario de gestion du catalogue artistique](images/activity_catalogue_artistique.png)
+![Diagramme d’activité du scénario de gestion du catalogue artistique](<images/chapitre5/Figure 5.7 Diagramme d’activité du scénario de gestion du catalogue artistique.png>)
 
 **Figure 5.7 : Diagramme d’activité du scénario de gestion du catalogue artistique**
 

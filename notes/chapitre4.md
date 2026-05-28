@@ -42,7 +42,7 @@ L’Utilisateur peut soumettre une demande pour devenir partenaire organisateur 
 
 La figure 4.1 présente le diagramme de cas d’utilisation du Sprint 2. Il regroupe les fonctionnalités principales liées au parcours partenaire et à la gestion des événements.
 
-![Diagramme de cas d’utilisation du Sprint 2](images/use_case_sprint2.png)
+![Diagramme de cas d’utilisation du Sprint 2](<images/chapitre4/Figure 4.1 Diagramme de cas d’utilisation du Sprint 2.png>)
 
 **Figure 4.1 : Diagramme de cas d’utilisation du Sprint 2**
 
@@ -132,7 +132,7 @@ Cette section présente les éléments de conception du Sprint 2. Elle comprend 
 
 Le diagramme de classes du Sprint 2 présente les principales classes liées à la gestion des partenaires et des événements. Il met en évidence la relation entre l’utilisateur, le partenaire, la demande partenaire, les documents justificatifs et les événements.
 
-![Diagramme de classes du Sprint 2](images/class_diagram_sprint2.png)
+![Diagramme de classes du Sprint 2](<images/chapitre4/Figure 4.2 Diagramme de classes du Sprint 2.png>)
 
 **Figure 4.2 : Diagramme de classes du Sprint 2**
 
@@ -154,7 +154,7 @@ Dans ce sprint, nous retenons cinq scénarios principaux :
 
 La figure 4.3 présente le scénario de soumission d’une demande partenaire. L’utilisateur remplit le formulaire de candidature, ajoute les documents requis, puis soumet sa demande. Le système vérifie les données saisies, stocke les documents, enregistre la demande et affiche une confirmation.
 
-![Diagramme de séquence du scénario de soumission d’une demande partenaire](images/sequence_demande_partenaire.png)
+![Diagramme de séquence du scénario de soumission d’une demande partenaire](<images/chapitre4/Figure 4.3 Diagramme de séquence du scénario de soumission d’une demande partenaire.png>)
 
 **Figure 4.3 : Diagramme de séquence du scénario de soumission d’une demande partenaire**
 
@@ -162,7 +162,7 @@ La figure 4.3 présente le scénario de soumission d’une demande partenaire. L
 
 La figure 4.4 présente le scénario de traitement d’une demande partenaire. L’administrateur consulte les demandes reçues, sélectionne une demande, vérifie les informations et les documents associés, puis accepte, refuse ou demande des informations complémentaires.
 
-![Diagramme de séquence du scénario de traitement d’une demande partenaire](images/sequence_traitement_demande_partenaire.png)
+![Diagramme de séquence du scénario de traitement d’une demande partenaire](<images/chapitre4/Figure 4.4 Diagramme de séquence du scénario de traitement d’une demande partenaire.png>)
 
 **Figure 4.4 : Diagramme de séquence du scénario de traitement d’une demande partenaire**
 
@@ -170,7 +170,7 @@ La figure 4.4 présente le scénario de traitement d’une demande partenaire. L
 
 La figure 4.5 présente le scénario de gestion du profil partenaire. Le partenaire consulte ses informations professionnelles, modifie les données souhaitées, puis le système vérifie les données saisies avant de mettre à jour le profil.
 
-![Diagramme de séquence du scénario de gestion du profil partenaire](images/sequence_profil_partenaire.png)
+![Diagramme de séquence du scénario de gestion du profil partenaire](<images/chapitre4/Figure 4.5 Diagramme de séquence du scénario de gestion du profil partenaire.png>)
 
 **Figure 4.5 : Diagramme de séquence du scénario de gestion du profil partenaire**
 
@@ -178,7 +178,7 @@ La figure 4.5 présente le scénario de gestion du profil partenaire. Le partena
 
 La figure 4.6 présente le scénario de création d’un événement par le partenaire. Le partenaire saisit les informations principales de l’événement et ajoute les médias nécessaires. Le système vérifie ensuite les données, stocke les médias, enregistre l’événement avec le statut en attente de validation et affiche une confirmation.
 
-![Diagramme de séquence du scénario de création d’un événement](images/sequence_creation_evenement.png)
+![Diagramme de séquence du scénario de création d’un événement](<images/chapitre4/Figure 4.6 Diagramme de séquence du scénario de création d’un événement.png>)
 
 **Figure 4.6 : Diagramme de séquence du scénario de création d’un événement**
 
@@ -186,7 +186,7 @@ La figure 4.6 présente le scénario de création d’un événement par le part
 
 La figure 4.7 présente le processus de contrôle de l’offre événementielle. L’administrateur consulte les événements en attente de validation, examine les informations publiées, puis prend une décision. Il peut approuver l’événement, le rejeter en saisissant un motif, ou annuler l’opération. Après la mise à jour du statut, le partenaire est notifié de la décision.
 
-![Diagramme d’activité du contrôle de l’offre événementielle](images/activity_controle_offre_evenementielle.png)
+![Diagramme d’activité du contrôle de l’offre événementielle](<images/chapitre4/Figure 4.7 Diagramme d’activité du contrôle de l’offre événementielle.png>)
 
 **Figure 4.7 : Diagramme d’activité du contrôle de l’offre événementielle**
 

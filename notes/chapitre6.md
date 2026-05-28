@@ -40,7 +40,7 @@ Le tableau suivant présente les user stories retenues pour ce sprint.
 
 ### 6.2.3 Diagramme de cas d’utilisation du Sprint 4
 
-![Diagramme de cas d’utilisation du Sprint 4](images/use_case_sprint4.png)
+![Diagramme de cas d’utilisation du Sprint 4](<images/chapitre6/Figure 6.1 Diagramme de cas d’utilisation du Sprint 4.png>)
 
 **Figure 6.1 : Diagramme de cas d’utilisation du Sprint 4**
 
@@ -112,7 +112,7 @@ Dans le cas d’un ticket externe, l’utilisateur ajoute les informations du ti
 
 ### 6.3.1 Diagramme de classes principal du Sprint 4
 
-![Diagramme de classes — Billetterie, paiement et revente](images/class_sprint4_billetterie_revente.png)
+![Diagramme de classes — Billetterie, paiement et revente](<images/chapitre6/Figure 6.2 Diagramme de classes — Billetterie, paiement et revente.png>)
 
 **Figure 6.2 : Diagramme de classes — Billetterie, paiement et revente**
 
@@ -126,7 +126,7 @@ Les diagrammes de séquence retenus correspondent aux scénarios les plus priori
 
 #### Diagramme de séquence : Réserver et payer un billet
 
-![Diagramme de séquence — Réserver et payer un billet](images/sequence_reserver_payer_billet.png)
+![Diagramme de séquence — Réserver et payer un billet](<images/chapitre6/Figure 6.3 Diagramme de séquence du scénario « Réserver et payer un billet ».png>)
 
 **Figure 6.3 : Diagramme de séquence du scénario « Réserver et payer un billet »**
 
@@ -134,7 +134,7 @@ La figure 6.3 présente le déroulement de la réservation et du paiement d’un
 
 #### Diagramme de séquence : Contrôler l’accès à un événement
 
-![Diagramme de séquence — Contrôler l’accès à un événement](images/sequence_controler_acces_evenement.png)
+![Diagramme de séquence — Contrôler l’accès à un événement](<images/chapitre6/Figure 6.4 Diagramme de séquence du scénario « Contrôler l’accès à un événement ».png>)
 
 **Figure 6.4 : Diagramme de séquence du scénario « Contrôler l’accès à un événement »**
 
