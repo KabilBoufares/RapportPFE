@@ -1,4 +1,4 @@
-# Chapitre 6 : Sprint 4 — Billetterie, paiement, revente et contrôle d’accès
+# Chapitre 6 : Étude et réalisation du Sprint 4 — Billetterie, paiement, revente et contrôle d’accès
 
 ## 6.1 Introduction
 
@@ -64,11 +64,11 @@ Les principaux cas d’utilisation du Sprint 4 sont décrits ci-dessous.
 
 **Tableau 6.2 : Description textuelle du cas d’utilisation « Réserver et payer un billet »**
 
-#### Cas d’utilisation : Gérer la revente d’un ticket
+#### Cas d’utilisation : Gérer la marketplace de revente
 
 | Élément | Description |
 |---|---|
-| Cas d’utilisation | Gérer la revente d’un ticket |
+| Cas d’utilisation | Gérer la marketplace de revente |
 | Acteur principal | Utilisateur |
 | Objectif | Permettre à l’utilisateur de publier un ticket FESTY ou un ticket externe dans la marketplace, et permettre à un autre utilisateur d’acheter un ticket revendu. |
 | Précondition | L’utilisateur est authentifié et accède à ses tickets ou à la marketplace. |
@@ -76,7 +76,7 @@ Les principaux cas d’utilisation du Sprint 4 sont décrits ci-dessous.
 | Scénario nominal | 1. L’utilisateur accède à ses tickets ou à la marketplace.<br>2. Il choisit de mettre un ticket FESTY en revente ou de proposer un ticket externe.<br>3. Il saisit les informations nécessaires.<br>4. Le système vérifie les informations saisies.<br>5. Le système publie l’annonce de revente.<br>6. Un autre utilisateur consulte la marketplace.<br>7. Il sélectionne une annonce et procède au paiement.<br>8. Le système confirme l’achat du ticket revendu. |
 | Exceptions | E1 : Le ticket FESTY n’est pas revendable.<br>E2 : Les informations du ticket externe sont incomplètes.<br>E3 : Le paiement du ticket en revente échoue. |
 
-**Tableau 6.3 : Description textuelle du cas d’utilisation « Gérer la revente d’un ticket »**
+**Tableau 6.3 : Description textuelle du cas d’utilisation « Gérer la marketplace de revente »**
 
 Dans le cas d’un ticket externe, l’utilisateur ajoute les informations du ticket ainsi qu’une image justificative. Cette fonctionnalité est présentée comme une extension de la marketplace.
 

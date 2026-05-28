@@ -142,6 +142,8 @@ Le tableau suivant présente le Product Backlog priorisé de la plateforme FESTY
 
 Les éléments du Product Backlog représentent les fonctionnalités principales de FESTY. Ils seront ensuite utilisés pour organiser la planification des sprints selon les priorités et l’ordre de réalisation retenu. Ils seront également représentés de manière synthétique dans les diagrammes de cas d’utilisation globaux.
 
+Le Product Backlog présente une vue synthétique des fonctionnalités principales de la plateforme. Les Sprint Backlogs détaillés, présentés dans les chapitres suivants, peuvent décomposer ces fonctionnalités en user stories plus précises selon le périmètre de chaque sprint.
+
 Dans le cadre de cette version, aucune fonctionnalité n’a été classée comme **Won’t Have**, car le backlog présenté regroupe uniquement les fonctionnalités retenues dans le périmètre du projet.
 
 ### 2.2.3 Planification des sprints

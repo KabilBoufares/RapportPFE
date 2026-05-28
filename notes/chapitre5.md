@@ -1,4 +1,4 @@
-# Chapitre 5 : Sprint 3 – Exploration, personnalisation et interactions événementielles
+# Chapitre 5 : Étude et réalisation du Sprint 3 — Exploration, personnalisation et interactions événementielles
 
 ## 5.1 Introduction
 

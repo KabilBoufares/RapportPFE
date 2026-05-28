@@ -63,7 +63,7 @@ Cette fragmentation complique également le travail des organisateurs, qui ont b
 
 La problématique principale peut donc être formulée ainsi :
 
-> Comment concevoir une plateforme mobile centralisée permettant de simplifier la découverte, la réservation, la gestion et le contrôle des événements, tout en assurant une expérience sécurisée pour les utilisateurs, les partenaires et les administrateurs ?
+> Comment concevoir une plateforme numérique centralisée permettant de simplifier la découverte, la réservation, la gestion et le contrôle des événements, tout en assurant une expérience sécurisée pour les utilisateurs, les partenaires et les administrateurs ?
 
 ### 1.2.3 Objectifs du projet
 
