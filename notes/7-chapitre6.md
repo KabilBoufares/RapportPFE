@@ -1,24 +1,16 @@
-﻿# Chapitre 6 : Étude et réalisation du Sprint 4 — Billetterie, paiement, revente et contrôle d’accès
+# Chapitre 6 : Sprint 4 — Billetterie, paiement, revente et contrôle d’accès
 
 ## 6.1 Introduction
 
-Ce chapitre présente l’étude et la réalisation du quatrième sprint du projet FESTY. Il porte sur les fonctionnalités liées à la billetterie, au paiement, à la gestion des tickets, à la revente et au contrôle d’accès aux événements.
+Ce chapitre présente l’étude et la réalisation du Sprint 4 du projet FESTY. Ce sprint est consacré à la billetterie, au paiement, à la gestion des tickets, à la revente et au contrôle d’accès aux événements.
 
-Ce sprint regroupe les fonctionnalités transactionnelles et opérationnelles nécessaires à la participation à un événement. Il permet à l’utilisateur de réserver et payer un billet, de consulter ses tickets, de demander un remboursement et d’utiliser la marketplace de revente. Il couvre également le scan des tickets, le suivi partenaire et la supervision des opérations financières sensibles.
+Il complète le parcours événementiel en permettant à l’utilisateur de réserver et payer un billet, de consulter ses tickets, de demander un remboursement et d’utiliser la marketplace de revente. Il couvre aussi le scan des tickets, le suivi partenaire et la supervision des opérations financières sensibles.
 
-Dans ce chapitre, nous présentons d’abord le backlog et les principaux cas d’utilisation du sprint. Nous détaillons ensuite la conception à travers les diagrammes de classes et de séquence, avant de présenter les interfaces réalisées.
+Nous présentons d’abord le Sprint Backlog, puis l’analyse fonctionnelle à travers le diagramme de cas d’utilisation et les descriptions textuelles. Ensuite, la conception est détaillée à l’aide du diagramme de classes et des diagrammes de séquence. Enfin, la partie réalisation expose les principales interfaces développées durant ce sprint.
 
-## 6.2 Analyse du Sprint 4
+## 6.2 Sprint Backlog
 
-### 6.2.1 Objectif du Sprint 4
-
-L’objectif du Sprint 4 est de compléter le parcours événementiel en permettant à l’utilisateur de réserver et payer un billet, de consulter ses tickets, de demander un remboursement et d’utiliser la marketplace de revente. Ce sprint couvre également la vérification des tickets à l’entrée des événements, le suivi partenaire et la supervision des opérations financières sensibles.
-
-### 6.2.2 Backlog du Sprint 4
-
-Le Sprint Backlog regroupe les user stories [REF-SCRUM] sélectionnées pour le quatrième sprint. Les user stories US-4.1 à US-4.7 concernent la billetterie, les tickets, le remboursement et la marketplace de revente, tandis que les user stories US-4.8 à US-4.13 portent sur le scan, le suivi partenaire et la supervision.
-
-Le tableau suivant présente les user stories retenues pour ce sprint.
+Le Sprint 4 vise à finaliser les fonctionnalités transactionnelles et opérationnelles liées à la participation à un événement. Les user stories US-4.1 à US-4.7 concernent la billetterie, les tickets, le remboursement et la marketplace de revente. Les user stories US-4.8 à US-4.13 portent sur le scan, le suivi partenaire et la supervision. Le tableau 6.1 présente les user stories [REF-SCRUM] retenues pour ce sprint.
 
 | ID | User Story | Tâches principales | Priorité |
 |---|---|---|---|
@@ -38,17 +30,23 @@ Le tableau suivant présente les user stories retenues pour ce sprint.
 
 **Tableau 6.1 : Backlog du Sprint 4**
 
-### 6.2.3 Diagramme de cas d’utilisation du Sprint 4
+## 6.3 Analyse fonctionnelle
+
+L’analyse fonctionnelle précise les interactions entre les acteurs du Sprint 4 et les fonctionnalités réalisées. L’Utilisateur interagit avec la billetterie, les tickets et la marketplace. Le Partenaire organise le contrôle d’accès et suit son activité. L’Agent de scan vérifie les tickets à l’entrée des événements. L’Administrateur supervise les opérations financières et les actions sensibles.
+
+### 6.3.1 Diagramme de cas d’utilisation
+
+La figure 6.1 présente les principaux cas d’utilisation du Sprint 4.
 
 ![Diagramme de cas d’utilisation du Sprint 4](<images/chapitre6/Figure 6.1 Diagramme de cas d’utilisation du Sprint 4.png>)
 
 **Figure 6.1 : Diagramme de cas d’utilisation du Sprint 4**
 
-La figure 6.1 présente les principaux cas d’utilisation du Sprint 4. L’utilisateur peut consulter la billetterie d’un événement, réserver et payer un billet, consulter ses tickets, demander un remboursement, mettre un ticket FESTY en revente, acheter un ticket revendu ou proposer un ticket externe à la vente. Le partenaire gère les sessions de scan et suit son activité, tandis que l’agent de scan contrôle l’accès à l’événement. L’administrateur intervient dans le traitement des opérations financières et la supervision des opérations sensibles.
+Ce diagramme regroupe les fonctionnalités liées à la réservation, au paiement, à la consultation des tickets, au remboursement, à la revente et au contrôle d’accès. Il met également en évidence le suivi partenaire et la supervision des opérations financières.
 
-### 6.2.4 Description textuelle des cas d’utilisation
+### 6.3.2 Description textuelle des cas d’utilisation
 
-Les principaux cas d’utilisation du Sprint 4 sont décrits ci-dessous.
+Les tableaux suivants décrivent les principaux cas d’utilisation du Sprint 4.
 
 #### Cas d’utilisation : Réserver et payer un billet
 
@@ -78,7 +76,7 @@ Les principaux cas d’utilisation du Sprint 4 sont décrits ci-dessous.
 
 **Tableau 6.3 : Description textuelle du cas d’utilisation « Gérer la marketplace de revente »**
 
-Dans le cas d’un ticket externe, l’utilisateur ajoute les informations du ticket ainsi qu’une image justificative. Cette fonctionnalité est présentée comme une extension de la marketplace.
+Dans le cas d’un ticket externe, l’utilisateur ajoute les informations du ticket ainsi qu’une image justificative. Cette fonctionnalité constitue une extension de la marketplace.
 
 #### Cas d’utilisation : Contrôler l’accès à un événement
 
@@ -108,84 +106,76 @@ Dans le cas d’un ticket externe, l’utilisateur ajoute les informations du ti
 
 **Tableau 6.5 : Description textuelle du cas d’utilisation « Traiter les opérations financières »**
 
-## 6.3 Conception
+## 6.4 Conception
 
-### 6.3.1 Diagramme de classes principal du Sprint 4
+La conception présente les éléments structurels et dynamiques nécessaires à la billetterie, au paiement, à la revente et au contrôle d’accès.
+
+### 6.4.1 Diagramme de classes
+
+La figure 6.2 présente les principales classes liées à la billetterie, au paiement, à la gestion des tickets, aux remboursements et à la revente.
 
 ![Diagramme de classes — Billetterie, paiement et revente](<images/chapitre6/Figure 6.2 Diagramme de classes — Billetterie, paiement et revente.png>)
 
 **Figure 6.2 : Diagramme de classes — Billetterie, paiement et revente**
 
-La figure 6.2 présente les principales classes liées à la billetterie, au paiement, à la gestion des tickets, aux remboursements et à la revente. Elle met en évidence la réservation temporaire, la commande, le paiement, le ticket, la demande de remboursement, la mise en revente d’un ticket FESTY et la proposition d’un ticket externe.
+Ce diagramme met en évidence la réservation temporaire, la commande, le paiement, le ticket, la demande de remboursement, la mise en revente d’un ticket FESTY et la proposition d’un ticket externe. Les classes complémentaires liées au contrôle d’accès, au suivi partenaire et à la supervision financière sont détaillées dans l’Annexe A.
 
-Afin de conserver une présentation lisible dans le chapitre, les classes complémentaires liées au contrôle d’accès, au suivi partenaire et à la supervision financière sont détaillées dans l’Annexe A, intitulée « Diagramme de classes — Contrôle d’accès, suivi partenaire et supervision financière ».
+### 6.4.2 Diagrammes de séquence
 
-### 6.3.2 Diagrammes de séquence du Sprint 4
-
-Les diagrammes de séquence retenus correspondent aux scénarios les plus prioritaires du Sprint 4 : la réservation avec paiement d’un billet et le contrôle d’accès à un événement.
+Les diagrammes de séquence retenus correspondent aux scénarios prioritaires du Sprint 4 : la réservation avec paiement d’un billet et le contrôle d’accès à un événement.
 
 #### Diagramme de séquence : Réserver et payer un billet
+
+La figure 6.3 décrit la réservation et le paiement d’un billet. L’utilisateur sélectionne un billet, le système vérifie sa disponibilité, crée une réservation temporaire, confirme le paiement et génère le ticket.
 
 ![Diagramme de séquence — Réserver et payer un billet](<images/chapitre6/Figure 6.3 Diagramme de séquence du scénario « Réserver et payer un billet ».png>)
 
 **Figure 6.3 : Diagramme de séquence du scénario « Réserver et payer un billet »**
 
-La figure 6.3 présente le déroulement de la réservation et du paiement d’un billet. L’utilisateur sélectionne un billet, le système vérifie sa disponibilité, crée une réservation temporaire, confirme le paiement puis génère le ticket.
-
 #### Diagramme de séquence : Contrôler l’accès à un événement
+
+La figure 6.4 présente le contrôle d’accès à un événement. L’agent de scan scanne le ticket, puis le système vérifie sa validité et retourne le résultat du contrôle.
 
 ![Diagramme de séquence — Contrôler l’accès à un événement](<images/chapitre6/Figure 6.4 Diagramme de séquence du scénario « Contrôler l’accès à un événement ».png>)
 
 **Figure 6.4 : Diagramme de séquence du scénario « Contrôler l’accès à un événement »**
 
-La figure 6.4 présente le contrôle d’accès à un événement. L’agent de scan scanne le ticket, le système vérifie sa validité et retourne un résultat permettant d’autoriser ou de refuser l’accès.
+## 6.5 Réalisation
 
-## 6.4 Réalisation
+Cette section présente les principales interfaces réalisées durant le Sprint 4.
 
-Cette section présente les principales interfaces réalisées durant le Sprint 4. Les emplacements des figures de réalisation sont préparés pour ajout manuel des captures.
-
-### 6.4.1 Interface de détail d’un événement et choix du billet
-
-Cette interface présente les informations d’un événement et les billets disponibles. Elle permet à l’utilisateur de choisir le type de billet souhaité.
+La figure 6.5 illustre l’interface de détail d’un événement et de choix du billet. Elle permet à l’utilisateur de consulter les informations de l’événement et de sélectionner un billet.
 
 ![Interface de détail d’un événement et choix du billet](<images/chapitre6/Figure 6.5 Interface de détail d’un événement et choix du billet.png>)
 
 **Figure 6.5 : Interface de détail d’un événement et choix du billet**
 
-### 6.4.2 Interface de paiement
-
-Cette interface affiche les informations nécessaires à la validation de la commande. Elle permet à l’utilisateur de confirmer son achat après la sélection du billet.
+La figure 6.6 présente l’interface de paiement, utilisée pour valider la commande après la sélection du billet.
 
 ![Interface de paiement](<images/chapitre6/Figure 6.6 Interface de paiement.png>)
 
 **Figure 6.6 : Interface de paiement**
 
-### 6.4.3 Interface de consultation des tickets
-
-Cette interface affiche la liste des tickets de l’utilisateur, leurs détails et les actions associées.
+La figure 6.7 montre l’interface de consultation des tickets. Elle affiche la liste des tickets de l’utilisateur, leurs détails et les actions associées.
 
 ![Interface de consultation des tickets](<images/chapitre6/Figure 6.7 Interface de consultation des tickets.png>)
 
 **Figure 6.7 : Interface de consultation des tickets**
 
-### 6.4.4 Interface de la marketplace
-
-Cette interface affiche la marketplace et les tickets proposés à la revente. Elle permet aussi de publier un ticket FESTY ou de proposer un ticket externe avec une image justificative.
+La figure 6.8 présente l’interface de la marketplace. Elle permet de consulter les tickets en revente, de publier un ticket FESTY ou de proposer un ticket externe avec une image justificative.
 
 ![Interface de la marketplace](<images/chapitre6/Figure 6.8 Interface de la marketplace.png>)
 
 **Figure 6.8 : Interface de la marketplace**
 
-### 6.4.5 Interface de scan des tickets
-
-Cette interface permet à l’agent de scan de vérifier rapidement le ticket présenté à l’entrée. Le résultat du contrôle s’affiche immédiatement afin d’autoriser ou non l’accès.
+La figure 6.9 illustre l’interface de scan des tickets. Elle permet à l’agent de scan de vérifier rapidement un ticket et d’afficher le résultat du contrôle.
 
 ![Interface de scan des tickets](<images/chapitre6/Figure 6.9 Interface de scan des tickets.png>)
 
 **Figure 6.9 : Interface de scan des tickets**
 
-## 6.5 Conclusion
+## 6.6 Conclusion
 
-Ce chapitre a présenté l’étude et la réalisation du Sprint 4 du projet FESTY. Ce sprint a permis de couvrir les fonctionnalités liées à la billetterie, au paiement, à la consultation des tickets, à la revente et au contrôle d’accès aux événements.
+Dans ce chapitre, nous avons présenté l’étude et la réalisation du Sprint 4, consacré à la billetterie, au paiement, à la revente et au contrôle d’accès. Nous avons commencé par le Sprint Backlog, puis l’analyse fonctionnelle et la conception.
 
-Il a également introduit le suivi partenaire et la supervision financière. Le Sprint 4 complète ainsi le parcours événementiel en reliant l’achat du billet, la gestion du ticket, la revente et la validation de l’accès à l’événement.
+Ce sprint a permis de compléter le parcours événementiel en reliant l’achat du billet, la gestion du ticket, la marketplace de revente et la validation de l’accès à l’événement. Il a également introduit le suivi partenaire et la supervision financière.

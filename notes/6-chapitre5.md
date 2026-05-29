@@ -1,20 +1,14 @@
-﻿# Chapitre 5 : Étude et réalisation du Sprint 3 — Exploration, personnalisation et interactions événementielles
+# Chapitre 5 : Sprint 3 — Exploration, personnalisation et interactions événementielles
 
 ## 5.1 Introduction
 
-Ce chapitre présente le Sprint 3 du projet FESTY. Il porte sur l’exploration des événements et des stars, la personnalisation de l’expérience, les recommandations, les favoris, le suivi des stars et le chat événementiel.
+Ce chapitre présente l’étude et la réalisation du Sprint 3 du projet FESTY. Ce sprint est consacré à l’exploration des événements et des stars, à la personnalisation de l’expérience utilisateur, aux recommandations, aux favoris, au suivi des stars et au chat événementiel.
 
-Ce sprint couvre également la gestion du line-up artistique par le partenaire, la proposition de nouvelles stars et la gestion du catalogue artistique par l’administrateur. Son objectif est de renforcer l’interactivité de la plateforme tout en améliorant la pertinence du contenu proposé aux utilisateurs.
+Il couvre également la gestion du line-up artistique par le partenaire, la proposition de nouvelles stars et la gestion du catalogue artistique par l’administrateur. Nous présentons d’abord le Sprint Backlog, puis l’analyse fonctionnelle à travers le diagramme de cas d’utilisation et les descriptions textuelles. Ensuite, la conception est détaillée à l’aide du diagramme de classes, des diagrammes de séquence et des diagrammes d’activité. Enfin, la partie réalisation expose les principales interfaces développées durant ce sprint.
 
-## 5.2 Analyse du Sprint 3
+## 5.2 Sprint Backlog
 
-Cette section présente l’analyse fonctionnelle du Sprint 3. Elle met en évidence les interactions liées à l’exploration, à la personnalisation et aux échanges autour des événements.
-
-Le visiteur peut explorer les événements et les stars. Après authentification, l’utilisateur personnalise son expérience, consulte des recommandations, gère ses favoris, suit des stars et participe au chat événementiel. Le partenaire gère le line-up artistique et peut proposer une nouvelle star, tandis que l’administrateur traite les stars proposées afin d’assurer la cohérence du catalogue artistique.
-
-### 5.2.1 Backlog du Sprint 3
-
-Le tableau suivant présente les principales user stories retenues pour le Sprint 3 [REF-SCRUM].
+Le Sprint 3 vise à renforcer l’interactivité de FESTY et à améliorer la pertinence du contenu proposé aux utilisateurs. Le tableau 5.1 présente les principales user stories retenues pour ce sprint [REF-SCRUM].
 
 | ID | User Story | Tâches principales | Priorité |
 |---|---|---|---|
@@ -30,21 +24,23 @@ Le tableau suivant présente les principales user stories retenues pour le Sprin
 
 **Tableau 5.1 : Backlog du Sprint 3**
 
-### 5.2.2 Diagramme de cas d’utilisation du Sprint 3
+## 5.3 Analyse fonctionnelle
 
-La figure 5.1 présente le diagramme de cas d’utilisation du Sprint 3. Ce diagramme met en évidence les principales interactions entre les acteurs et la plateforme FESTY dans le cadre de l’exploration, de la personnalisation et des interactions événementielles.
+L’analyse fonctionnelle précise les interactions entre les acteurs du Sprint 3 et les fonctionnalités liées à l’exploration, à la personnalisation et aux échanges autour des événements. Le Visiteur explore les événements et les stars. L’Utilisateur personnalise son expérience, consulte les recommandations, gère ses favoris, suit des stars et participe au chat événementiel. Le Partenaire gère le line-up artistique et propose de nouvelles stars, tandis que l’Administrateur contrôle le catalogue artistique.
+
+### 5.3.1 Diagramme de cas d’utilisation
+
+La figure 5.1 présente les principales interactions entre les acteurs et la plateforme FESTY durant le Sprint 3.
 
 ![Diagramme de cas d’utilisation du Sprint 3](<images/chapitre5/Figure 5.1 Diagramme de cas d’utilisation du Sprint 3.png>)
 
 **Figure 5.1 : Diagramme de cas d’utilisation du Sprint 3**
 
-Ce diagramme montre que le visiteur peut explorer les événements et les stars, consulter le détail d’un événement ainsi que le profil d’une star. Après authentification, l’utilisateur peut personnaliser son expérience, consulter les recommandations, gérer ses favoris, suivre une star et participer au chat d’un événement.
+Ce diagramme montre que le visiteur peut consulter les événements et les stars. Après authentification, l’utilisateur accède aux fonctionnalités personnalisées et interactives. Le partenaire intervient dans la gestion artistique des événements, tandis que l’administrateur assure la cohérence du catalogue artistique.
 
-Le partenaire intervient principalement dans la gestion du line-up artistique d’un événement et peut proposer une nouvelle star. L’administrateur, quant à lui, assure la gestion du catalogue artistique de la plateforme.
+### 5.3.2 Description textuelle des cas d’utilisation
 
-### 5.2.3 Description textuelle des cas d’utilisation
-
-Dans cette section, nous présentons les descriptions textuelles des principaux cas d’utilisation du Sprint 3.
+Les tableaux suivants décrivent les principaux cas d’utilisation du Sprint 3.
 
 #### Cas d’utilisation : Personnaliser son expérience
 
@@ -116,39 +112,27 @@ Dans cette section, nous présentons les descriptions textuelles des principaux 
 
 **Tableau 5.6 : Description textuelle du cas d’utilisation « Gérer le catalogue artistique »**
 
-Dans le diagramme d’activité correspondant, seule l’exception liée à l’échec de mise à jour est représentée afin de conserver une figure simple et lisible.
+## 5.4 Conception
 
-## 5.3 Conception
+La conception présente les éléments structurels et dynamiques nécessaires à l’exploration, à la personnalisation et aux interactions événementielles.
 
-Cette section présente les éléments de conception du Sprint 3. Elle comprend le diagramme de classes partiel, les diagrammes de séquence et les diagrammes d’activité associés aux principaux scénarios du sprint.
+### 5.4.1 Diagramme de classes
 
-### 5.3.1 Diagramme de classes du Sprint 3
-
-Le diagramme de classes du Sprint 3 présente les principales classes liées à l’exploration des événements, à la personnalisation de l’expérience utilisateur, aux favoris, aux stars, au line-up artistique et au chat événementiel.
+La figure 5.2 présente les classes liées aux événements, aux préférences, aux recommandations, aux favoris, aux stars, au line-up artistique et au chat événementiel.
 
 ![Diagramme de classes du Sprint 3](<images/chapitre5/Figure 5.2 Diagramme de classes du Sprint 3.png>)
 
 **Figure 5.2 : Diagramme de classes du Sprint 3**
 
-Ce diagramme montre que l’utilisateur peut gérer ses préférences, consulter des recommandations, ajouter des événements aux favoris, suivre des stars et participer au chat d’un événement. Les catégories et les centres d’intérêt permettent d’affiner les recommandations proposées à l’utilisateur.
+L’utilisateur peut gérer ses préférences, consulter des recommandations, ajouter des événements aux favoris, suivre des stars et participer au chat. Le partenaire gère le line-up artistique et peut proposer une nouvelle star. L’administrateur assure la validation et la cohérence du catalogue artistique.
 
-Le partenaire intervient dans l’organisation des événements et dans la gestion du line-up artistique. Il peut également proposer une nouvelle star afin d’enrichir le catalogue artistique. L’administrateur assure la gestion de ce catalogue afin de maintenir la cohérence des informations affichées sur la plateforme.
+### 5.4.2 Diagrammes de séquence
 
-### 5.3.2 Diagrammes de séquence
-
-Les diagrammes de séquence permettent de représenter les échanges entre les acteurs, les interfaces, le back-end et la base de données pour les principaux scénarios du Sprint 3.
-
-Dans ce sprint, nous retenons trois scénarios principaux :
-
-- la personnalisation de l’expérience et la consultation des recommandations ;
-- la participation au chat d’un événement ;
-- la gestion du line-up artistique d’un événement.
-
-Ces scénarios ont été choisis car ils représentent les principaux flux dynamiques du Sprint 3. Ils couvrent à la fois l’expérience utilisateur, les interactions autour des événements et l’intervention du partenaire dans la gestion artistique de ses événements.
+Les diagrammes de séquence représentent les principaux échanges entre les acteurs, les interfaces, le back-end et la base de données.
 
 #### Diagramme de séquence : Personnalisation de l’expérience et recommandations
 
-La figure 5.3 présente le scénario de personnalisation de l’expérience utilisateur. L’utilisateur accède à l’espace de préférences, sélectionne ses catégories et centres d’intérêt, puis le système enregistre ces informations afin de proposer des recommandations adaptées.
+La figure 5.3 décrit la personnalisation de l’expérience. L’utilisateur sélectionne ses catégories et centres d’intérêt, puis le système enregistre ces données afin de proposer des recommandations adaptées.
 
 ![Diagramme de séquence du scénario de personnalisation et recommandations](<images/chapitre5/Figure 5.3 Diagramme de séquence du scénario de personnalisation et recommandations.png>)
 
@@ -156,7 +140,7 @@ La figure 5.3 présente le scénario de personnalisation de l’expérience util
 
 #### Diagramme de séquence : Participation au chat d’un événement
 
-La figure 5.4 présente le scénario de participation au chat d’un événement. L’utilisateur accède au détail d’un événement, ouvre l’espace de discussion, saisit un message, puis le système vérifie et enregistre ce message avant de l’afficher dans le chat.
+La figure 5.4 présente la participation au chat d’un événement. L’utilisateur ouvre l’espace de discussion, envoie un message, puis le système vérifie et enregistre ce message.
 
 ![Diagramme de séquence du scénario de participation au chat d’un événement](<images/chapitre5/Figure 5.4 Diagramme de séquence du scénario de participation au chat d’un événement.png>)
 
@@ -164,19 +148,19 @@ La figure 5.4 présente le scénario de participation au chat d’un événement
 
 #### Diagramme de séquence : Gestion du line-up artistique
 
-La figure 5.5 présente le scénario de gestion du line-up artistique par le partenaire. Le partenaire sélectionne un événement, consulte le catalogue artistique, puis associe une star à l’événement. Si la star n’existe pas encore dans le catalogue, ce traitement est détaillé dans le diagramme d’activité « Proposer une nouvelle star ».
+La figure 5.5 présente la gestion du line-up artistique. Le partenaire sélectionne un événement, consulte le catalogue artistique et associe une star à l’événement.
 
 ![Diagramme de séquence du scénario de gestion du line-up artistique](<images/chapitre5/Figure 5.5 Diagramme de séquence du scénario de gestion du line-up artistique.png>)
 
 **Figure 5.5 : Diagramme de séquence du scénario de gestion du line-up artistique**
 
-### 5.3.3 Diagrammes d’activité du Sprint 3
+### 5.4.3 Diagrammes d’activité
 
-Cette section complète les diagrammes de séquence par deux diagrammes d’activité liés à la proposition d’une nouvelle star et au traitement administratif du catalogue artistique.
+Les diagrammes d’activité complètent la conception en décrivant la proposition d’une nouvelle star et le traitement administratif du catalogue artistique.
 
 #### Diagramme d’activité : Proposer une nouvelle star
 
-La figure 5.6 présente le processus permettant au partenaire de proposer une star absente du catalogue artistique. Le partenaire recherche d’abord la star. Si elle existe, le système l’affiche. Sinon, le partenaire saisit les informations nécessaires, puis le système vérifie les données et enregistre la proposition avec un statut en attente de validation.
+La figure 5.6 présente le processus de proposition d’une star absente du catalogue. Le partenaire saisit les informations nécessaires, puis le système vérifie les données et enregistre la proposition en attente de validation.
 
 ![Diagramme d’activité du scénario de proposition d’une nouvelle star](<images/chapitre5/Figure 5.6 Diagramme d’activité du scénario de proposition d’une nouvelle star.png>)
 
@@ -184,50 +168,42 @@ La figure 5.6 présente le processus permettant au partenaire de proposer une st
 
 #### Diagramme d’activité : Gérer le catalogue artistique
 
-La figure 5.7 présente le processus de traitement d’une star proposée par un partenaire. L’administrateur consulte le catalogue artistique, sélectionne une star proposée, puis choisit de l’approuver ou de la rejeter. Le système met ensuite à jour son statut et affiche un message de confirmation ou d’erreur.
+La figure 5.7 présente le traitement d’une star proposée. L’administrateur sélectionne la proposition, puis l’approuve ou la rejette avant la mise à jour du catalogue.
 
 ![Diagramme d’activité du scénario de gestion du catalogue artistique](<images/chapitre5/Figure 5.7 Diagramme d’activité du scénario de gestion du catalogue artistique.png>)
 
 **Figure 5.7 : Diagramme d’activité du scénario de gestion du catalogue artistique**
 
-## 5.4 Réalisation
+## 5.5 Réalisation
 
-Cette section présente les principales interfaces réalisées dans le cadre du Sprint 3. Les emplacements des figures de réalisation sont préparés pour ajout manuel des captures.
+Cette section présente les principales interfaces réalisées durant le Sprint 3.
 
-### 5.4.1 Interface d’exploration des événements
-
-Cette interface permet au visiteur ou à l’utilisateur de consulter les événements disponibles sur la plateforme. Elle donne accès aux informations principales et au détail d’un événement.
+La figure 5.8 illustre l’interface d’exploration des événements. Elle permet au visiteur ou à l’utilisateur de consulter les événements disponibles et d’accéder à leurs détails.
 
 ![Interface d’exploration des événements](<images/chapitre5/Figure 5.8 Interface d’exploration des événements.png>)
 
 **Figure 5.8 : Interface d’exploration des événements**
 
-### 5.4.2 Interface de personnalisation de l’expérience
-
-Cette interface permet à l’utilisateur de sélectionner ses catégories et centres d’intérêt. Ces préférences servent à personnaliser l’expérience et les recommandations.
+La figure 5.9 présente l’interface de personnalisation de l’expérience, utilisée pour sélectionner les catégories et centres d’intérêt.
 
 ![Interface de personnalisation de l’expérience](<images/chapitre5/Figure 5.9 Interface de personnalisation de l’expérience.png>)
 
 **Figure 5.9 : Interface de personnalisation de l’expérience**
 
-### 5.4.3 Interface du chat événementiel
-
-Cette interface permet à l’utilisateur de participer à une discussion autour d’un événement. Il peut consulter les messages existants et envoyer un nouveau message.
+La figure 5.10 montre l’interface du chat événementiel, qui permet à l’utilisateur de consulter les messages et d’envoyer de nouveaux messages.
 
 ![Interface du chat événementiel](<images/chapitre5/Figure 5.10 Interface du chat événementiel.png>)
 
 **Figure 5.10 : Interface du chat événementiel**
 
-### 5.4.4 Interface de gestion du line-up artistique
-
-Cette interface permet au partenaire de gérer les stars associées à son événement. Il peut consulter le line-up actuel et ajouter une star existante ou proposer une nouvelle star.
+La figure 5.11 présente l’interface de gestion du line-up artistique. Elle permet au partenaire de consulter les stars associées à son événement, d’ajouter une star existante ou d’en proposer une nouvelle.
 
 ![Interface de gestion du line-up artistique](<images/chapitre5/Figure 5.11 Interface de gestion du line-up artistique.png>)
 
 **Figure 5.11 : Interface de gestion du line-up artistique**
 
-## Conclusion
+## 5.6 Conclusion
 
-Au cours de ce chapitre, nous avons présenté l’étude et la réalisation du Sprint 3 du projet FESTY. Ce sprint a permis de couvrir l’exploration des événements et des stars, la personnalisation de l’expérience, les recommandations, la gestion des favoris, le suivi des stars, le chat événementiel, la gestion du line-up artistique, la proposition de nouvelles stars et la gestion du catalogue artistique par l’administrateur.
+Dans ce chapitre, nous avons présenté l’étude et la réalisation du Sprint 3, consacré à l’exploration, à la personnalisation et aux interactions événementielles. Nous avons commencé par le Sprint Backlog, puis l’analyse fonctionnelle et la conception.
 
-Ce sprint constitue ainsi une étape importante dans l’amélioration de l’interactivité et de la personnalisation de FESTY. Le chapitre suivant sera consacré aux fonctionnalités liées à la billetterie, à la réservation, au paiement et au contrôle d’accès aux événements.
+Ce sprint a permis d’améliorer l’expérience utilisateur grâce aux recommandations, aux favoris, au suivi des stars et au chat événementiel. Il a également introduit la gestion du line-up artistique et du catalogue des stars. Le chapitre suivant sera consacré à la billetterie, au paiement, à la revente et au contrôle d’accès.

@@ -1,26 +1,14 @@
-﻿# Chapitre 4 : Étude et réalisation du Sprint 2 — Gestion des partenaires et des événements
+# Chapitre 4 : Sprint 2 — Gestion des partenaires et des événements
 
-## Introduction
+## 4.1 Introduction
 
-Ce chapitre présente l’étude et la réalisation du deuxième sprint du projet FESTY. Ce sprint est consacré à la gestion des partenaires et des événements. Il couvre le parcours permettant à un utilisateur de soumettre une demande pour devenir partenaire organisateur, ainsi que les fonctionnalités permettant au partenaire de gérer son profil professionnel et ses événements.
+Ce chapitre présente l’étude et la réalisation du Sprint 2 du projet FESTY. Ce sprint est consacré à la gestion des partenaires et des événements, depuis la demande d’accès partenaire jusqu’au contrôle administratif de l’offre événementielle.
 
-Ce sprint introduit également le contrôle administratif des demandes partenaires et de l’offre événementielle. L’administrateur peut ainsi examiner les candidatures reçues, accepter ou refuser les demandes, puis contrôler les événements soumis avant leur publication sur la plateforme.
+Nous présentons d’abord le Sprint Backlog, puis l’analyse fonctionnelle à travers le diagramme de cas d’utilisation et les descriptions textuelles. Ensuite, la conception est détaillée à l’aide du diagramme de classes, des diagrammes de séquence et du diagramme d’activité. Enfin, la partie réalisation expose les principales interfaces développées durant ce sprint.
 
-Dans ce chapitre, nous présentons d’abord le backlog du sprint. Ensuite, nous détaillons l’analyse fonctionnelle à travers le diagramme de cas d’utilisation et les descriptions textuelles des principaux cas. La partie conception présente le diagramme de classes partiel ainsi que les diagrammes dynamiques associés aux principaux scénarios du sprint. Enfin, nous exposons les principales interfaces réalisées durant ce sprint.
+## 4.2 Sprint Backlog
 
-## 4.1 Backlog du Sprint 2
-
-Le Sprint Backlog regroupe les user stories [REF-SCRUM] sélectionnées pour le deuxième sprint. Ces fonctionnalités permettent de mettre en place le parcours partenaire et la gestion initiale des événements.
-
-### 4.1.1 Objectif du sprint
-
-L’objectif du Sprint 2 est de permettre à un utilisateur de soumettre une demande pour devenir partenaire organisateur. Il permet également au partenaire de gérer son profil professionnel et ses événements.
-
-Ce sprint introduit aussi le contrôle administratif des demandes partenaires et des événements soumis avant leur publication.
-
-### 4.1.2 Backlog du sprint
-
-Le tableau suivant présente les user stories retenues pour le deuxième sprint.
+Le Sprint 2 vise à permettre à un utilisateur de devenir partenaire organisateur, à gérer son profil professionnel et à créer des événements soumis à validation. Il introduit aussi le traitement administratif des demandes partenaires et le contrôle des événements avant leur publication. Le tableau 4.1 présente les user stories [REF-SCRUM] retenues pour ce sprint.
 
 | ID | User Story | Tâches principales | Priorité |
 |---|---|---|---|
@@ -32,25 +20,23 @@ Le tableau suivant présente les user stories retenues pour le deuxième sprint.
 
 **Tableau 4.1 : Backlog du Sprint 2**
 
-## 4.2 Analyse fonctionnelle
+## 4.3 Analyse fonctionnelle
 
-L’analyse fonctionnelle du Sprint 2 présente les principales interactions entre les acteurs et la plateforme. Les acteurs concernés sont l’Utilisateur, le Partenaire et l’Administrateur.
+L’analyse fonctionnelle précise les interactions entre les acteurs du Sprint 2 et les fonctionnalités réalisées. L’Utilisateur peut soumettre une demande partenaire et suivre son statut. Le Partenaire peut gérer son profil professionnel, créer un événement et gérer ses événements. L’Administrateur traite les demandes partenaires et contrôle l’offre événementielle.
 
-L’Utilisateur peut soumettre une demande pour devenir partenaire organisateur et suivre son statut. Le Partenaire peut gérer son profil professionnel, créer un événement et gérer ses événements. L’Administrateur intervient pour traiter les demandes partenaires et contrôler l’offre événementielle.
+### 4.3.1 Diagramme de cas d’utilisation
 
-### 4.2.1 Diagramme de cas d’utilisation du Sprint 2
-
-La figure 4.1 présente le diagramme de cas d’utilisation du Sprint 2. Il regroupe les fonctionnalités principales liées au parcours partenaire et à la gestion des événements.
+La figure 4.1 présente les principales fonctionnalités liées au parcours partenaire et à la gestion des événements.
 
 ![Diagramme de cas d’utilisation du Sprint 2](<images/chapitre4/Figure 4.1 Diagramme de cas d’utilisation du Sprint 2.png>)
 
 **Figure 4.1 : Diagramme de cas d’utilisation du Sprint 2**
 
-Ce diagramme montre que le cas « Devenir partenaire organisateur » inclut la soumission d’une demande partenaire. L’utilisateur peut également suivre le statut de sa demande. Une fois accepté, le partenaire peut gérer son profil professionnel, créer un événement et gérer ses événements. L’administrateur assure le traitement des demandes partenaires et le contrôle de l’offre événementielle.
+Le diagramme montre que le cas « Devenir partenaire organisateur » inclut la soumission d’une demande partenaire. Après validation, le partenaire peut gérer son profil et ses événements, tandis que l’administrateur assure le traitement des demandes et la validation de l’offre événementielle.
 
-### 4.2.2 Description textuelle des cas d’utilisation
+### 4.3.2 Description textuelle des cas d’utilisation
 
-Cette section présente les descriptions textuelles des principaux cas d’utilisation du Sprint 2. Chaque description précise l’acteur principal, l’objectif, les préconditions, les postconditions, le scénario nominal ainsi que les exceptions possibles.
+Les tableaux suivants décrivent les principaux cas d’utilisation du Sprint 2.
 
 #### Cas d’utilisation : Soumettre une demande partenaire
 
@@ -94,8 +80,6 @@ Cette section présente les descriptions textuelles des principaux cas d’utili
 
 **Tableau 4.4 : Description textuelle du cas d’utilisation « Gérer son profil partenaire »**
 
-Dans ce chapitre, le cas « Gérer ses événements » est présenté comme une fonctionnalité globale du partenaire. Le scénario détaillé retenu concerne la création d’un événement, car il représente l’étape principale avant le contrôle administratif.
-
 #### Cas d’utilisation : Créer un événement
 
 | Élément | Description |
@@ -124,35 +108,27 @@ Dans ce chapitre, le cas « Gérer ses événements » est présenté comme une 
 
 **Tableau 4.6 : Description textuelle du cas d’utilisation « Contrôler l’offre événementielle »**
 
-## 4.3 Conception
+## 4.4 Conception
 
-Cette section présente les éléments de conception du Sprint 2. Elle comprend le diagramme de classes partiel ainsi que les diagrammes dynamiques associés aux principaux scénarios du sprint.
+La conception présente les éléments structurels et dynamiques nécessaires à la gestion des partenaires et des événements.
 
-### 4.3.1 Diagramme de classes du Sprint 2
+### 4.4.1 Diagramme de classes
 
-Le diagramme de classes du Sprint 2 présente les principales classes liées à la gestion des partenaires et des événements. Il met en évidence la relation entre l’utilisateur, le partenaire, la demande partenaire, les documents justificatifs et les événements.
+La figure 4.2 présente les classes liées à l’utilisateur, au partenaire, à la demande partenaire, aux documents justificatifs et aux événements.
 
 ![Diagramme de classes du Sprint 2](<images/chapitre4/Figure 4.2 Diagramme de classes du Sprint 2.png>)
 
 **Figure 4.2 : Diagramme de classes du Sprint 2**
 
-Ce diagramme montre qu’un utilisateur peut soumettre une demande partenaire contenant des documents justificatifs. Après validation, le partenaire peut gérer son profil et ses événements. L’administrateur intervient pour traiter les demandes partenaires et contrôler les événements soumis.
+Un utilisateur peut soumettre une demande partenaire contenant des documents justificatifs. Après validation, le partenaire peut gérer son profil et ses événements. L’administrateur intervient pour traiter les demandes et contrôler les événements soumis.
 
-### 4.3.2 Diagrammes dynamiques
+### 4.4.2 Diagrammes de séquence
 
-Les diagrammes dynamiques présentent les échanges et les enchaînements liés aux principaux scénarios du Sprint 2. Nous utilisons des diagrammes de séquence pour représenter les interactions entre les acteurs, les interfaces, le back-end et la base de données. Nous utilisons également un diagramme d’activité pour modéliser le processus décisionnel lié au contrôle de l’offre événementielle.
-
-Dans ce sprint, nous retenons cinq scénarios principaux :
-
-- la soumission d’une demande partenaire ;
-- le traitement d’une demande partenaire ;
-- la gestion du profil partenaire ;
-- la création d’un événement ;
-- le contrôle de l’offre événementielle.
+Les diagrammes de séquence décrivent les échanges entre les acteurs, les interfaces, le back-end et la base de données pour les principaux scénarios du sprint.
 
 #### Diagramme de séquence : Soumission d’une demande partenaire
 
-La figure 4.3 présente le scénario de soumission d’une demande partenaire. L’utilisateur remplit le formulaire de candidature, ajoute les documents requis, puis soumet sa demande. Le système vérifie les données saisies, stocke les documents, enregistre la demande et affiche une confirmation.
+La figure 4.3 décrit la soumission d’une demande partenaire. L’utilisateur remplit le formulaire, ajoute les documents requis, puis le système vérifie les données et enregistre la demande.
 
 ![Diagramme de séquence du scénario de soumission d’une demande partenaire](<images/chapitre4/Figure 4.3 Diagramme de séquence du scénario de soumission d’une demande partenaire.png>)
 
@@ -160,7 +136,7 @@ La figure 4.3 présente le scénario de soumission d’une demande partenaire. L
 
 #### Diagramme de séquence : Traitement d’une demande partenaire
 
-La figure 4.4 présente le scénario de traitement d’une demande partenaire. L’administrateur consulte les demandes reçues, sélectionne une demande, vérifie les informations et les documents associés, puis accepte, refuse ou demande des informations complémentaires.
+La figure 4.4 présente le traitement d’une demande partenaire. L’administrateur consulte le dossier, vérifie les informations et prend une décision.
 
 ![Diagramme de séquence du scénario de traitement d’une demande partenaire](<images/chapitre4/Figure 4.4 Diagramme de séquence du scénario de traitement d’une demande partenaire.png>)
 
@@ -168,7 +144,7 @@ La figure 4.4 présente le scénario de traitement d’une demande partenaire. L
 
 #### Diagramme de séquence : Gestion du profil partenaire
 
-La figure 4.5 présente le scénario de gestion du profil partenaire. Le partenaire consulte ses informations professionnelles, modifie les données souhaitées, puis le système vérifie les données saisies avant de mettre à jour le profil.
+La figure 4.5 décrit la mise à jour du profil partenaire. Le partenaire modifie ses informations professionnelles, puis le système valide et enregistre les données.
 
 ![Diagramme de séquence du scénario de gestion du profil partenaire](<images/chapitre4/Figure 4.5 Diagramme de séquence du scénario de gestion du profil partenaire.png>)
 
@@ -176,60 +152,50 @@ La figure 4.5 présente le scénario de gestion du profil partenaire. Le partena
 
 #### Diagramme de séquence : Création d’un événement
 
-La figure 4.6 présente le scénario de création d’un événement par le partenaire. Le partenaire saisit les informations principales de l’événement et ajoute les médias nécessaires. Le système vérifie ensuite les données, stocke les médias, enregistre l’événement avec le statut en attente de validation et affiche une confirmation.
+La figure 4.6 présente la création d’un événement. Le partenaire saisit les informations nécessaires, ajoute les médias, puis le système enregistre l’événement avec le statut en attente de validation.
 
 ![Diagramme de séquence du scénario de création d’un événement](<images/chapitre4/Figure 4.6 Diagramme de séquence du scénario de création d’un événement.png>)
 
 **Figure 4.6 : Diagramme de séquence du scénario de création d’un événement**
 
-#### Diagramme d’activité : Contrôle de l’offre événementielle
+### 4.4.3 Diagramme d’activité
 
-La figure 4.7 présente le processus de contrôle de l’offre événementielle. L’administrateur consulte les événements en attente de validation, examine les informations publiées, puis prend une décision. Il peut approuver l’événement, le rejeter en saisissant un motif, ou annuler l’opération. Après la mise à jour du statut, le partenaire est notifié de la décision.
+La figure 4.7 modélise le contrôle de l’offre événementielle. L’administrateur examine l’événement soumis, puis l’approuve ou le rejette avec un motif.
 
 ![Diagramme d’activité du contrôle de l’offre événementielle](<images/chapitre4/Figure 4.7 Diagramme d’activité du contrôle de l’offre événementielle.png>)
 
 **Figure 4.7 : Diagramme d’activité du contrôle de l’offre événementielle**
 
-## 4.4 Réalisation
+## 4.5 Réalisation
 
-Cette section présente les principales interfaces réalisées durant le Sprint 2. Les emplacements des figures de réalisation sont préparés pour ajout manuel des captures.
+Cette section présente les principales interfaces réalisées durant le Sprint 2.
 
-### 4.4.1 Interface de soumission d’une demande partenaire
-
-Cette interface permet à l’utilisateur de remplir les informations nécessaires pour devenir partenaire organisateur. Il peut saisir ses informations professionnelles et ajouter les documents requis avant d’envoyer sa demande.
+La figure 4.8 illustre l’interface de soumission d’une demande partenaire. Elle permet à l’utilisateur de saisir ses informations professionnelles et d’ajouter les documents requis.
 
 ![Interface de soumission d’une demande partenaire](<images/chapitre4/Figure 4.8 Interface de soumission d’une demande partenaire.png>)
 
 **Figure 4.8 : Interface de soumission d’une demande partenaire**
 
-### 4.4.2 Interface de traitement des demandes partenaires
-
-Cette interface permet à l’administrateur de consulter les demandes partenaires reçues, d’afficher les détails d’un dossier et de prendre une décision.
+La figure 4.9 présente l’interface de traitement des demandes partenaires, utilisée par l’administrateur pour consulter les dossiers et prendre une décision.
 
 ![Interface de traitement des demandes partenaires](<images/chapitre4/Figure 4.9 Interface de traitement des demandes partenaires.png>)
 
 **Figure 4.9 : Interface de traitement des demandes partenaires**
 
-### 4.4.3 Interface de création d’un événement
-
-Cette interface permet au partenaire de créer un événement en saisissant les informations principales : titre, description, date, localisation et image de couverture.
+La figure 4.10 montre l’interface de création d’un événement, dans laquelle le partenaire renseigne les informations principales de l’événement.
 
 ![Interface de création d’un événement](<images/chapitre4/Figure 4.10 Interface de création d’un événement.png>)
 
 **Figure 4.10 : Interface de création d’un événement**
 
-### 4.4.4 Interface de contrôle de l’offre événementielle
-
-Cette interface permet à l’administrateur de consulter les événements soumis, de vérifier leurs informations et de prendre une décision d’approbation ou de rejet.
+La figure 4.11 présente l’interface de contrôle de l’offre événementielle. Elle permet à l’administrateur de vérifier les événements soumis et de les approuver ou les rejeter.
 
 ![Interface de contrôle de l’offre événementielle](<images/chapitre4/Figure 4.11 Interface de contrôle de l’offre événementielle.png>)
 
 **Figure 4.11 : Interface de contrôle de l’offre événementielle**
 
-## Conclusion
+## 4.6 Conclusion
 
-Dans ce chapitre, nous avons présenté l’étude et la réalisation du Sprint 2, consacré à la gestion des partenaires et des événements. Ce sprint a permis de mettre en place le parcours de demande partenaire, la gestion du profil professionnel, la création et la gestion des événements ainsi que le contrôle administratif de l’offre événementielle.
+Dans ce chapitre, nous avons présenté l’étude et la réalisation du Sprint 2, consacré à la gestion des partenaires et des événements. Nous avons commencé par le Sprint Backlog, puis l’analyse fonctionnelle et la conception.
 
-Nous avons également présenté le diagramme de cas d’utilisation, les descriptions textuelles, le diagramme de classes partiel ainsi que les diagrammes dynamiques associés aux principaux scénarios du sprint.
-
-Le sprint suivant sera consacré à l’exploration, à la personnalisation et aux interactions autour des événements.
+Ce sprint a permis de mettre en place le parcours de demande partenaire, la gestion du profil professionnel, la création d’événements et le contrôle administratif de l’offre événementielle. Le chapitre suivant sera consacré à l’exploration, à la personnalisation et aux interactions autour des événements.
