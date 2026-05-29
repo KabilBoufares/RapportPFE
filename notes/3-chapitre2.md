@@ -40,7 +40,7 @@ Le tableau suivant présente les besoins fonctionnels principaux de FESTY selon 
 
 | Acteur | Besoins fonctionnels principaux |
 |---|---|
-| Visiteur | Explorer les événements et les artistes, consulter les informations publiques, s’inscrire à la plateforme et s’authentifier. |
+| Visiteur | Explorer les événements et les artistes, consulter les informations publiques, s’inscrire à la plateforme et vérifier son compte. |
 | Utilisateur | Gérer son profil et ses préférences, interagir autour des événements, gérer sa billetterie et soumettre une demande pour devenir partenaire organisateur. |
 | Partenaire | Gérer son profil partenaire, gérer l’exploitation de ses événements, gérer le line-up, suivre son activité, consulter sa monétisation et organiser le contrôle d’accès aux événements. |
 | Agent de scan | Contrôler l’accès à un événement en vérifiant les billets des participants et en validant leur entrée. |
@@ -111,10 +111,11 @@ Le tableau suivant présente le Product Backlog priorisé de la plateforme FESTY
 | ID | Module | ID Story | User Story | Priorité |
 |---|---|---|---|---|
 | 1 | Authentification et profil | 1.1 | En tant que visiteur, je veux créer un compte afin d’accéder à la plateforme. | M |
-| 1 | Authentification et profil | 1.2 | En tant qu’utilisateur, je veux m’authentifier afin d’accéder à mon espace personnel. | M |
-| 1 | Authentification et profil | 1.3 | En tant qu’utilisateur, je veux réinitialiser mon mot de passe afin de récupérer l’accès à mon compte. | S |
-| 1 | Authentification et profil | 1.4 | En tant qu’administrateur, je veux m’authentifier au back-office afin d’accéder aux fonctionnalités d’administration de la plateforme. | M |
-| 1 | Authentification et profil | 1.5 | En tant qu’utilisateur, je veux consulter et modifier mon profil afin de maintenir mes informations à jour. | M |
+| 1 | Authentification et profil | 1.2 | En tant que visiteur, je veux vérifier mon numéro de téléphone afin d’activer mon compte. | M |
+| 1 | Authentification et profil | 1.3 | En tant qu’utilisateur, je veux m’authentifier afin d’accéder à mon espace personnel. | M |
+| 1 | Authentification et profil | 1.4 | En tant qu’utilisateur, je veux consulter mon profil afin de visualiser mes informations personnelles. | M |
+| 1 | Authentification et profil | 1.5 | En tant qu’utilisateur, je veux modifier mes informations personnelles afin de maintenir mon profil à jour. | M |
+| 1 | Authentification et profil | 1.6 | En tant qu’administrateur, je veux m’authentifier au back-office afin d’accéder aux fonctionnalités d’administration de la plateforme. | M |
 | 2 | Partenaires et événements | 2.1 | En tant qu’utilisateur, je veux soumettre une demande pour devenir partenaire organisateur. | M |
 | 2 | Partenaires et événements | 2.2 | En tant qu’administrateur, je veux traiter les demandes partenaires afin de valider ou refuser l’accès à l’espace partenaire. | M |
 | 2 | Partenaires et événements | 2.3 | En tant que partenaire, je veux gérer mon profil partenaire afin de présenter mes informations professionnelles. | S |
