@@ -2,21 +2,19 @@
 
 ## Introduction
 
-Ce chapitre présente la phase d’analyse et de préparation du projet FESTY. Il a pour objectif de définir les besoins de la plateforme, d’identifier les acteurs qui interagissent avec le système et de préparer les éléments nécessaires à la conception et au développement.
+Ce chapitre présente la phase d’analyse et de préparation du projet FESTY. Il permet de définir les besoins de la plateforme, d’identifier les acteurs du système et de préparer les éléments nécessaires à la conception et au développement.
 
-Nous commençons par la spécification des besoins, à travers l’identification des acteurs principaux ainsi que la présentation des besoins fonctionnels et non fonctionnels. Ensuite, nous présentons le pilotage du projet avec Scrum, en précisant l’équipe Scrum, le backlog produit et la planification des sprints.
-
-Ce chapitre présente également les diagrammes de cas d’utilisation globaux de la solution. Enfin, nous décrivons l’environnement de travail, les technologies utilisées ainsi que l’architecture générale de la plateforme.
+Il aborde d’abord la spécification des besoins, puis le pilotage du projet avec Scrum à travers l’équipe projet, le backlog produit et la planification des sprints. Il présente ensuite les diagrammes de cas d’utilisation globaux, l’environnement de travail, les technologies utilisées et l’architecture générale de la plateforme.
 
 ## 2.1 Spécification des besoins
 
 La spécification des besoins constitue une étape importante dans la préparation du projet. Elle permet de définir les fonctionnalités attendues de la plateforme ainsi que les contraintes que le système doit respecter.
 
-Dans le cadre du projet FESTY, les besoins sont organisés autour des différents acteurs qui interagissent avec la plateforme. Cette section présente les acteurs principaux, les besoins fonctionnels et les besoins non fonctionnels du système.
+Les besoins sont organisés autour des différents acteurs qui interagissent avec la plateforme.
 
 ### 2.1.1 Identification des acteurs
 
-Un acteur représente une entité externe qui interagit avec le système afin d’atteindre un objectif précis. Dans le cadre de FESTY, les acteurs correspondent aux différents profils qui utilisent la plateforme selon des rôles et des droits distincts.
+Dans FESTY, les acteurs représentent les profils qui interagissent avec la plateforme selon des rôles et des droits distincts.
 
 Nous distinguons cinq acteurs principaux : le Visiteur, l’Utilisateur, le Partenaire, l’Agent de scan et l’Administrateur.
 
@@ -48,7 +46,7 @@ Le tableau suivant présente les besoins fonctionnels principaux de FESTY selon 
 
 **Tableau 2.2 : Besoins fonctionnels principaux de FESTY**
 
-Ces besoins sont présentés à un niveau global afin de donner une vue synthétique du périmètre fonctionnel de la plateforme. Les détails de chaque fonctionnalité seront précisés dans les chapitres de sprint à travers les diagrammes de cas d’utilisation détaillés, les descriptions textuelles et les éléments de conception.
+Ces besoins donnent une vue globale du périmètre fonctionnel. Les chapitres de sprint détailleront chaque fonctionnalité à travers les cas d’utilisation, les descriptions textuelles et les éléments de conception.
 
 ### 2.1.3 Besoins non fonctionnels
 
@@ -72,9 +70,7 @@ Ces contraintes permettent d’orienter les choix techniques et architecturaux d
 
 ## 2.2 Pilotage du projet avec Scrum
 
-Le pilotage du projet avec Scrum permet d’organiser le développement de FESTY de manière progressive et itérative. Après le choix de Scrum présenté dans le chapitre précédent, cette section précise son application dans le cadre du projet.
-
-Dans notre cas, Scrum est utilisé afin de découper le projet en plusieurs sprints cohérents. Chaque sprint regroupe un ensemble de fonctionnalités liées à un objectif précis, ce qui permet de suivre l’avancement du développement, de prioriser les besoins et de construire progressivement la plateforme.
+Le pilotage avec Scrum permet d’organiser le développement de FESTY en sprints cohérents, chacun associé à un objectif fonctionnel précis. Cette organisation facilite le suivi de l’avancement, la priorisation des besoins et la construction progressive de la plateforme.
 
 ### 2.2.1 Équipe et rôles Scrum
 
@@ -95,7 +91,7 @@ Cette répartition permet d’adapter Scrum au contexte réel du projet. L’ét
 
 Le backlog du produit regroupe l’ensemble des fonctionnalités à réaliser dans le cadre du projet FESTY. Il permet de structurer les besoins sous forme de modules et de user stories, tout en définissant leur niveau de priorité.
 
-Afin de prioriser les fonctionnalités, nous avons adopté la méthode MoSCoW [REF-MOSCOW] [REF-MOSCOW]. Cette méthode permet de classer les besoins selon leur importance dans la version actuelle du produit.
+Afin de prioriser les fonctionnalités, nous avons adopté la méthode MoSCoW [REF-MOSCOW]. Cette méthode permet de classer les besoins selon leur importance dans la version actuelle du produit.
 
 | Priorité | Signification |
 |---|---|
@@ -137,11 +133,9 @@ Le tableau suivant présente le Product Backlog priorisé de la plateforme FESTY
 | 4 | Billetterie, paiement, scan et supervision | 4.8 | En tant que partenaire, je veux suivre mon activité et ma monétisation afin de consulter les performances de mes événements. | S |
 | 4 | Billetterie, paiement, scan et supervision | 4.9 | En tant qu’administrateur, je veux traiter les opérations financières et superviser les opérations sensibles afin d’assurer le bon fonctionnement de la plateforme. | S |
 
-**Tableau 2.6 : Backlog du produit priorisé selon la méthode MoSCoW [REF-MOSCOW] [REF-MOSCOW]**
+**Tableau 2.6 : Backlog du produit priorisé selon la méthode MoSCoW [REF-MOSCOW]**
 
-Les éléments du Product Backlog représentent les fonctionnalités principales de FESTY. Ils seront ensuite utilisés pour organiser la planification des sprints selon les priorités et l’ordre de réalisation retenu. Ils seront également représentés de manière synthétique dans les diagrammes de cas d’utilisation globaux.
-
-Le Product Backlog présente une vue synthétique des fonctionnalités principales de la plateforme. Les Sprint Backlogs détaillés, présentés dans les chapitres suivants, peuvent décomposer ces fonctionnalités en user stories plus précises selon le périmètre de chaque sprint.
+Le Product Backlog présente une vue synthétique des fonctionnalités principales de FESTY. Il sert de base à la planification des sprints selon les priorités et l’ordre de réalisation retenu. Les Sprint Backlogs détaillés, présentés dans les chapitres suivants, peuvent ensuite décomposer ces fonctionnalités en user stories plus précises selon le périmètre de chaque sprint.
 
 Dans le cadre de cette version, aucune fonctionnalité n’a été classée comme **Won’t Have**, car le backlog présenté regroupe uniquement les fonctionnalités retenues dans le périmètre du projet.
 
@@ -160,7 +154,9 @@ Le tableau suivant présente une vue synthétique de cette planification.
 
 **Tableau 2.7 : Planification des sprints du projet FESTY**
 
-Cette planification donne une vue globale de l’organisation du développement. Les détails de chaque sprint, notamment le Sprint Backlog, les diagrammes de cas d’utilisation détaillés, les descriptions textuelles, les diagrammes de séquence et les éléments de réalisation, seront présentés dans les chapitres consacrés aux sprints.
+Afin de conserver une organisation claire, les sprints sont regroupés par objectifs fonctionnels. Les deux derniers sprints rassemblent plusieurs fonctionnalités complémentaires, mais elles restent organisées autour de blocs cohérents : l’exploration et les interactions pour le Sprint 3, puis la billetterie, la revente, le contrôle d’accès et la supervision pour le Sprint 4.
+
+Les détails de chaque sprint seront présentés dans les chapitres suivants à travers les backlogs, les cas d’utilisation, les diagrammes et les interfaces réalisées.
 
 ## 2.3 Diagrammes de cas d’utilisation globaux
 
@@ -188,11 +184,11 @@ La figure 2.2 présente les fonctions de gestion des utilisateurs et des partena
 
 ## 2.4 Environnement de travail
 
-L’environnement de travail regroupe les ressources matérielles et logicielles utilisées pour concevoir, développer, tester et documenter la plateforme FESTY. Cette section présente les principaux éléments ayant permis d’assurer le bon déroulement du projet.
+L’environnement de travail regroupe les ressources matérielles et logicielles utilisées pour le développement, les tests, la modélisation et la documentation du projet.
 
 ### 2.4.1 Environnement matériel
 
-Le développement de FESTY a été réalisé à l’aide d’un ordinateur portable utilisé pour le développement, les tests et la modélisation. Des appareils mobiles ont également été utilisés pour vérifier le comportement de l’application dans un contexte proche de l’utilisation réelle.
+Le développement de FESTY a été réalisé à l’aide d’un ordinateur portable. Des appareils mobiles ont également été utilisés pour vérifier le comportement de l’application dans un contexte proche de l’utilisation réelle.
 
 | Caractéristique | Description |
 |---|---|
@@ -227,7 +223,7 @@ Le tableau suivant présente les principaux outils logiciels utilisés durant la
 
 ## 2.5 Technologies utilisées
 
-Cette section présente les principales technologies utilisées pour la réalisation de la plateforme FESTY. Elles sont regroupées selon leur rôle dans le projet : technologies Front-End et Mobile, technologies Back-End, base de données et services externes.
+Cette section présente les principales technologies utilisées pour réaliser FESTY. Elles sont regroupées selon leur rôle : Front-End et Mobile, Back-End, base de données et services externes.
 
 ### 2.5.1 Technologies Front-End et Mobile
 
@@ -244,9 +240,7 @@ La partie Front-End de la plateforme FESTY comprend l’application mobile ainsi
 
 ### 2.5.2 Technologies Back-End
 
-Le Back-End de FESTY est développé avec Spring Boot et organisé selon une architecture modulaire. La base de données utilisée est PostgreSQL. Les services externes tels que Stripe, Firebase Cloud Messaging, Twilio et Bunny.net interviennent dans des fonctionnalités spécifiques.
-
-Cette partie assure la gestion de la logique métier, la sécurité, l’exposition des API REST, la persistance des données et l’intégration avec les services externes. Elle repose sur une architecture monolithique modulaire afin de séparer les domaines fonctionnels tout en conservant une plateforme centralisée.
+Le Back-End de FESTY est développé avec Spring Boot selon une architecture monolithique modulaire. Il assure la logique métier, la sécurité, l’exposition des API REST, la persistance des données et l’intégration avec les services externes.
 
 | Technologie | Rôle dans le projet |
 |---|---|
@@ -279,22 +273,22 @@ Dans cette architecture, Supabase [REF-SUPABASE] est utilisé uniquement comme e
 
 ### 2.5.4 Services externes
 
-FESTY intègre plusieurs services externes afin de prendre en charge certaines fonctionnalités spécifiques, notamment les paiements, les notifications, les emails, la vérification téléphonique et la gestion des fichiers.
+FESTY intègre plusieurs services externes afin de prendre en charge certaines fonctionnalités spécifiques, notamment les paiements, les notifications push, la vérification téléphonique et la gestion des fichiers.
 
 | Service externe | Rôle dans le projet |
 |---|---|
 | Stripe [REF-STRIPE] | Gestion des paiements en ligne, des remboursements, des webhooks, des payouts et des comptes connectés des partenaires. |
 | Firebase Cloud Messaging | Envoi des notifications push aux utilisateurs de l’application mobile. |
-| Twilio | Envoi des SMS pour la vérification OTP et des emails transactionnels liés aux comptes, aux notifications et aux opérations importantes. |
+| Twilio | Envoi des SMS nécessaires à la vérification OTP et à la sécurisation de certaines actions liées aux comptes. |
 | Bunny.net | Stockage et diffusion des fichiers ou médias utilisés par la plateforme. |
 
 **Tableau 2.13 : Services externes intégrés à FESTY**
 
 ## 2.6 Architecture de la solution
 
-L’architecture de la solution permet de représenter l’organisation générale de la plateforme FESTY. Elle décrit les principaux composants du système, leurs responsabilités ainsi que les échanges entre les différentes couches de la plateforme.
+L’architecture de la solution représente l’organisation générale de FESTY. Elle décrit les principaux composants du système, leurs responsabilités et les échanges entre les différentes couches.
 
-Dans le cadre de ce projet, nous avons adopté une architecture organisée autour d’une couche présentation, d’une couche métier, d’une couche de données et de services externes. Cette séparation permet de faciliter la maintenance, l’évolution du système et la répartition des responsabilités entre les composants.
+L’architecture adoptée repose sur une couche présentation, une couche métier, une couche de données et des services externes. Cette séparation facilite la maintenance, l’évolution du système et la répartition des responsabilités.
 
 ### 2.6.1 Architecture physique
 
@@ -306,7 +300,7 @@ Le Back-End FESTY, développé avec Spring Boot, représente le service applicat
 
 La base de données PostgreSQL [REF-POSTGRESQL] est hébergée dans l’environnement Supabase. Elle permet de stocker les données principales de la plateforme, telles que les utilisateurs, les partenaires, les événements, les billets, les paiements et les opérations de scan. L’extension PostGIS [REF-POSTGIS] est utilisée pour gérer les données géographiques liées à la localisation des événements.
 
-La plateforme intègre aussi plusieurs services externes. Stripe assure les paiements, les remboursements et les opérations financières. Firebase Cloud Messaging [REF-FIREBASE-FCM] prend en charge les notifications push. Twilio [REF-BREVO] est utilisé pour les SMS de vérification OTP ainsi que pour les emails transactionnels, et Bunny.net [REF-BUNNY] pour la gestion ou la diffusion des fichiers et médias.
+La plateforme intègre aussi plusieurs services externes. Stripe assure les paiements, les remboursements et les opérations financières. Firebase Cloud Messaging [REF-FIREBASE-FCM] prend en charge les notifications push. Twilio est utilisé pour les SMS de vérification OTP, et Bunny.net [REF-BUNNY] assure la gestion ou la diffusion des fichiers et médias.
 
 La figure suivante présente l’architecture physique de la plateforme FESTY.
 
@@ -324,7 +318,7 @@ Afin d’assurer cette organisation, nous avons utilisé Spring Modulith. Cette 
 
 Chaque module possède un périmètre fonctionnel précis et expose uniquement les services nécessaires aux autres modules. Cette séparation permet de réduire le couplage entre les composants, d’améliorer la lisibilité du code et de faciliter la maintenance de la plateforme.
 
-Les échanges entre modules peuvent être réalisés à travers des interfaces ou des événements applicatifs. Par exemple, lorsqu’une action importante est effectuée dans un module, un événement peut être publié afin d’être traité par un autre module sans créer une dépendance forte entre les deux. Cette organisation permet de rapprocher certains avantages des microservices, tout en conservant la simplicité de déploiement d’un monolithe.
+Les modules peuvent communiquer à travers des interfaces ou des événements applicatifs. Cette organisation limite les dépendances fortes entre modules et conserve la simplicité de déploiement d’un monolithe.
 
 Les principaux modules logiques de FESTY sont présentés dans le tableau suivant.
 
@@ -354,6 +348,6 @@ Cette architecture permet de mieux organiser les responsabilités internes de la
 
 ## Conclusion
 
-Dans ce chapitre, nous avons présenté la phase d’analyse et de préparation du projet FESTY. Nous avons identifié les acteurs principaux de la plateforme, puis défini les besoins fonctionnels et non fonctionnels du système. Nous avons également présenté le backlog produit et la planification du projet en quatre sprints.
+Ce chapitre a présenté l’analyse et la préparation du projet FESTY : acteurs, besoins, backlog produit, planification des sprints, diagrammes globaux, environnement de travail, technologies et architecture générale.
 
-Nous avons ensuite introduit les deux diagrammes de cas d’utilisation globaux, ainsi que l’environnement de travail, les technologies utilisées et l’architecture de la plateforme. Le chapitre suivant sera consacré à l’étude et à la réalisation du premier sprint, portant sur l’authentification et la gestion des accès.
+Le chapitre suivant sera consacré à l’étude et à la réalisation du premier sprint, portant sur l’authentification et la gestion des accès.
