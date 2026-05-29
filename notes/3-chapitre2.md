@@ -6,7 +6,7 @@ Ce chapitre présente la phase d’analyse et de préparation du projet FESTY. I
 
 Nous commençons par la spécification des besoins, à travers l’identification des acteurs principaux ainsi que la présentation des besoins fonctionnels et non fonctionnels. Ensuite, nous présentons le pilotage du projet avec Scrum, en précisant l’équipe Scrum, le backlog produit et la planification des sprints.
 
-Ce chapitre présente également les diagrammes globaux de la solution, notamment les diagrammes de cas d’utilisation globaux et le diagramme de classes global. Enfin, nous décrivons l’environnement de travail, les technologies utilisées ainsi que l’architecture générale de la plateforme.
+Ce chapitre présente également les diagrammes de cas d’utilisation globaux de la solution. Enfin, nous décrivons l’environnement de travail, les technologies utilisées ainsi que l’architecture générale de la plateforme.
 
 ## 2.1 Spécification des besoins
 
@@ -31,8 +31,6 @@ Nous distinguons cinq acteurs principaux : le Visiteur, l’Utilisateur, le Part
 **Tableau 2.1 : Identification des acteurs principaux de FESTY**
 
 Dans le cadre de FESTY, le terme « artiste » désigne les stars, chanteurs, DJ ou intervenants associés aux événements.
-
-Dans les diagrammes de cas d’utilisation globaux, nous représentons uniquement les acteurs métier principaux de la plateforme. Les services techniques externes, tels que Stripe, le service OTP/SMS, Firebase Cloud Messaging ou Brevo, ne sont pas considérés comme des acteurs principaux dans ces diagrammes. Ils seront présentés dans les diagrammes détaillés des sprints concernés ou dans la partie architecture de la solution. Supabase est mentionné uniquement comme environnement d’hébergement de la base PostgreSQL.
 
 ### 2.1.2 Besoins fonctionnels
 
@@ -187,24 +185,11 @@ Ce diagramme présente les principales fonctionnalités du back-office administr
 
 La figure 2.2 présente les fonctions de gestion des utilisateurs et des partenaires, le contrôle de l’offre événementielle, la gestion du catalogue artistique, le traitement des opérations financières ainsi que la supervision des risques et des audits.
 
-## 2.4 Diagramme de classes global
-
-Le diagramme de classes global permet de représenter la structure générale de la plateforme FESTY. Il met en évidence les principales entités du système, leurs attributs essentiels ainsi que les relations existantes entre elles.
-
-Dans notre cas, le modèle global s’articule autour de plusieurs groupes d’entités : les utilisateurs, les partenaires, les événements, la billetterie, le contrôle d’accès, les interactions et l’administration. Cette vue permet de mieux comprendre l’organisation des données avant de passer aux conceptions détaillées propres à chaque sprint.
-
-![Diagramme de classes global](<images/chapitre2/Figure 2.3 Diagramme de classes global de FESTY.png>)
-
-**Figure 2.3 : Diagramme de classes global de FESTY**
-
-Comme le montre la figure 2.3, la plateforme repose principalement sur l’entité utilisateur, qui peut gérer son profil, ses préférences, ses billets et ses interactions. Un utilisateur peut également soumettre une demande pour devenir partenaire. Le partenaire peut créer et gérer des événements, définir les types de billets associés et suivre son activité. Les billets sont liés aux réservations, aux paiements et aux opérations de contrôle d’accès. L’administrateur intervient dans la supervision des utilisateurs, des partenaires, des événements, des opérations financières et des actions sensibles.
-
-
-## 2.5 Environnement de travail
+## 2.4 Environnement de travail
 
 L’environnement de travail regroupe les ressources matérielles et logicielles utilisées pour concevoir, développer, tester et documenter la plateforme FESTY. Cette section présente les principaux éléments ayant permis d’assurer le bon déroulement du projet.
 
-### 2.5.1 Environnement matériel
+### 2.4.1 Environnement matériel
 
 Le développement de FESTY a été réalisé à l’aide d’un ordinateur portable utilisé pour le développement, les tests et la modélisation. Des appareils mobiles ont également été utilisés pour vérifier le comportement de l’application dans un contexte proche de l’utilisation réelle.
 
@@ -221,7 +206,7 @@ Le développement de FESTY a été réalisé à l’aide d’un ordinateur porta
 
 **Tableau 2.8 : Environnement matériel utilisé**
 
-### 2.5.2 Environnement logiciel
+### 2.4.2 Environnement logiciel
 
 Le tableau suivant présente les principaux outils logiciels utilisés durant la réalisation du projet. Ces outils couvrent le développement, les tests, la modélisation, la gestion du code source et la documentation.
 
@@ -239,11 +224,11 @@ Le tableau suivant présente les principaux outils logiciels utilisés durant la
 
 **Tableau 2.9 : Environnement logiciel utilisé**
 
-## 2.6 Technologies utilisées
+## 2.5 Technologies utilisées
 
 Cette section présente les principales technologies utilisées pour la réalisation de la plateforme FESTY. Elles sont regroupées selon leur rôle dans le projet : technologies Front-End et Mobile, technologies Back-End, base de données et services externes.
 
-### 2.6.1 Technologies Front-End et Mobile
+### 2.5.1 Technologies Front-End et Mobile
 
 La partie Front-End de la plateforme FESTY comprend l’application mobile ainsi que les interfaces web du back-office administrateur et du portail partenaire.
 
@@ -256,7 +241,7 @@ La partie Front-End de la plateforme FESTY comprend l’application mobile ainsi
 
 **Tableau 2.10 : Technologies Front-End et Mobile utilisées**
 
-### 2.6.2 Technologies Back-End
+### 2.5.2 Technologies Back-End
 
 Le Back-End de FESTY est développé avec Spring Boot et organisé selon une architecture modulaire. La base de données utilisée est PostgreSQL. Les services externes tels que Stripe, Firebase Cloud Messaging, Twilio et Bunny.net interviennent dans des fonctionnalités spécifiques.
 
@@ -276,7 +261,7 @@ Cette partie assure la gestion de la logique métier, la sécurité, l’exposit
 
 Le choix de Spring Boot permet de développer un Back-End structuré et évolutif. Spring Security et JWT assurent l’authentification interne, la gestion des jetons d’accès et de rafraîchissement ainsi que le contrôle des autorisations selon les rôles, tandis que Spring Data JPA et Hibernate facilitent la gestion des données. Spring Modulith permet d’organiser le code en modules métier, notamment l’authentification, les événements, la billetterie, le paiement, le scan et l’administration.
 
-### 2.6.3 Base de données
+### 2.5.3 Base de données
 
 La plateforme FESTY utilise une base de données relationnelle afin de stocker les informations nécessaires au fonctionnement du système, notamment les utilisateurs, les partenaires, les événements, les billets, les paiements, les opérations de scan et les données d’administration.
 
@@ -291,7 +276,7 @@ La plateforme FESTY utilise une base de données relationnelle afin de stocker l
 
 Dans cette architecture, Supabase est utilisé uniquement comme environnement d’hébergement de la base PostgreSQL. L’authentification, la gestion des utilisateurs, les rôles et les sessions sécurisées sont assurés par le Back-End FESTY à travers Spring Security et JWT.
 
-### 2.6.4 Services externes
+### 2.5.4 Services externes
 
 FESTY intègre plusieurs services externes afin de prendre en charge certaines fonctionnalités spécifiques, notamment les paiements, les notifications, les emails, la vérification téléphonique et la gestion des fichiers.
 
@@ -304,13 +289,13 @@ FESTY intègre plusieurs services externes afin de prendre en charge certaines f
 
 **Tableau 2.13 : Services externes intégrés à FESTY**
 
-## 2.7 Architecture de la solution
+## 2.6 Architecture de la solution
 
 L’architecture de la solution permet de représenter l’organisation générale de la plateforme FESTY. Elle décrit les principaux composants du système, leurs responsabilités ainsi que les échanges entre les différentes couches de la plateforme.
 
 Dans le cadre de ce projet, nous avons adopté une architecture organisée autour d’une couche présentation, d’une couche métier, d’une couche de données et de services externes. Cette séparation permet de faciliter la maintenance, l’évolution du système et la répartition des responsabilités entre les composants.
 
-### 2.7.1 Architecture physique
+### 2.6.1 Architecture physique
 
 L’architecture physique décrit les composants déployés ainsi que les environnements dans lesquels ils s’exécutent. Elle met en évidence les clients de la plateforme, le Back-End, la base de données et les services externes intégrés à la solution.
 
@@ -324,13 +309,13 @@ La plateforme intègre aussi plusieurs services externes. Stripe assure les paie
 
 La figure suivante présente l’architecture physique de la plateforme FESTY.
 
-![Architecture physique de la plateforme FESTY](<images/chapitre2/Figure 2.4 Architecture physique de la plateforme FESTY.png>)
+![Architecture physique de la plateforme FESTY](<images/chapitre2/Figure 2.3 Architecture physique de la plateforme FESTY.png>)
 
-**Figure 2.4 : Architecture physique de la plateforme FESTY**
+**Figure 2.3 : Architecture physique de la plateforme FESTY**
 
 Cette architecture montre que le Back-End joue un rôle central dans la coordination du système. Il assure les échanges entre les interfaces clientes, la base de données et les services externes, tout en appliquant les règles métier et les contrôles de sécurité nécessaires.
 
-### 2.7.2 Architecture logique
+### 2.6.2 Architecture logique
 
 L’architecture logique de FESTY repose sur un Back-End unique développé avec Spring Boot et organisé sous forme de monolithe modulaire. Ce choix permet de conserver une solution simple à développer et à déployer, tout en structurant le code en modules métier cohérents.
 
@@ -360,9 +345,9 @@ Les principaux modules logiques de FESTY sont présentés dans le tableau suivan
 
 La figure suivante présente une vue simplifiée de l’architecture logique modulaire du Back-End FESTY.
 
-![Architecture logique modulaire de FESTY](<images/chapitre2/Figure 2.5 Architecture logique modulaire de FESTY.png>)
+![Architecture logique modulaire de FESTY](<images/chapitre2/Figure 2.4 Architecture logique modulaire de FESTY.png>)
 
-**Figure 2.5 : Architecture logique modulaire de FESTY**
+**Figure 2.4 : Architecture logique modulaire de FESTY**
 
 Cette architecture permet de mieux organiser les responsabilités internes de la plateforme. Elle facilite également l’évolution future du système, car chaque module peut être modifié ou enrichi avec un impact limité sur les autres parties.
 
@@ -370,4 +355,4 @@ Cette architecture permet de mieux organiser les responsabilités internes de la
 
 Dans ce chapitre, nous avons présenté la phase d’analyse et de préparation du projet FESTY. Nous avons identifié les acteurs principaux de la plateforme, puis défini les besoins fonctionnels et non fonctionnels du système. Nous avons également présenté le backlog produit et la planification du projet en quatre sprints.
 
-Nous avons ensuite introduit les deux diagrammes de cas d’utilisation globaux, le diagramme de classes global, ainsi que l’environnement de travail, les technologies utilisées et l’architecture de la plateforme. Le chapitre suivant sera consacré à l’étude et à la réalisation du premier sprint, portant sur l’authentification et la gestion des accès.
+Nous avons ensuite introduit les deux diagrammes de cas d’utilisation globaux, ainsi que l’environnement de travail, les technologies utilisées et l’architecture de la plateforme. Le chapitre suivant sera consacré à l’étude et à la réalisation du premier sprint, portant sur l’authentification et la gestion des accès.
