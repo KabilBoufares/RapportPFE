@@ -9,6 +9,12 @@
 [REF-SCRUM] Scrum Guide. Disponible sur : <https://scrumguides.org/>  
 Consulté le : 14/02/2026.
 
+[REF-KANBAN] Kanban Guides. Disponible sur : <https://kanbanguides.org/>  
+Consulté le : 15/02/2026.
+
+[REF-XP] Kent Beck, *Extreme Programming Explained*. Disponible sur : <https://www.extremeprogramming.org/>  
+Consulté le : 18/02/2026.
+
 [REF-MOSCOW] Agile Business Consortium, MoSCoW Prioritisation. Disponible sur : <https://www.agilebusiness.org/dsdm-project-framework/moscow-prioritisation.html>  
 Consulté le : 21/02/2026.
 
@@ -101,7 +107,7 @@ Consulté le : 01/03/2026.
 ### Chapitre 1
 
 - Méthodologie Scrum : [REF-SCRUM]
-- Comparaison Scrum/Kanban/XP : [REF-SCRUM]
+- Comparaison Scrum/Kanban/XP : [REF-SCRUM], [REF-KANBAN], [REF-XP]
 - Référence UML générale : [REF-UML]
 - Étude de l'existant événementiel : [REF-EVENTBRITE], [REF-TICKETMASTER], [REF-SHOTGUN], [REF-TESKERTI], [REF-FACEBOOK-EVENTS]
 

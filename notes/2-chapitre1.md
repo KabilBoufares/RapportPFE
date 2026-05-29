@@ -146,9 +146,9 @@ Les méthodes agiles, quant à elles, favorisent un développement itératif et 
 
 ### 1.4.2 Comparaison des frameworks agiles
 
-Parmi les approches agiles, plusieurs frameworks peuvent être utilisés selon la nature du projet. Le tableau suivant présente une comparaison synthétique entre Scrum, Kanban et XP.
+Parmi les approches agiles, plusieurs frameworks peuvent être utilisés selon la nature du projet. Le tableau suivant présente une comparaison synthétique entre Scrum [REF-SCRUM], Kanban [REF-KANBAN] et XP [REF-XP].
 
-| Critère | Scrum | Kanban | XP |
+| Critère | Scrum [REF-SCRUM] | Kanban [REF-KANBAN] | XP [REF-XP] |
 |---|---|---|---|
 | Organisation | Sprints | Flux continu | Itérations courtes |
 | Rôles | Product Owner, Scrum Master, équipe de développement | Rôles non imposés | Équipe de développement |
