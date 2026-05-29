@@ -23,7 +23,7 @@ Le tableau 3.1 présente les user stories retenues pour ce premier sprint.
 
 **Tableau 3.1 : Backlog du Sprint 1**
 
-Le Sprint 1 se concentre sur les parcours principaux d’accès à la plateforme. Les actions complémentaires liées à l’OTP ou à la récupération d’accès sont intégrées aux scénarios correspondants lorsqu’elles sont nécessaires.
+Le Sprint 1 se concentre sur les parcours principaux d’accès à la plateforme. Les actions complémentaires liées à l’OTP, comme le renvoi du code, sont intégrées aux scénarios correspondants lorsqu’elles sont nécessaires.
 
 ## 3.3 Analyse fonctionnelle
 
