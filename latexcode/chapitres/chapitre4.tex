@@ -1,0 +1,444 @@
+﻿% Generated from source-md/5-chapitre4.md. Keep content changes in the Markdown source.
+
+\chapter{Étude et réalisation du Sprint 2 — Gestion des partenaires et des événements}
+\label{chap:sprint2-partenaires-evenements}
+
+
+\section{Introduction}
+
+
+Ce chapitre présente l’étude et la réalisation du deuxième sprint du projet FESTY. Ce sprint est consacré à la gestion des partenaires et des événements. Il couvre le parcours permettant à un utilisateur de soumettre une demande pour devenir partenaire organisateur, ainsi que les fonctionnalités permettant au partenaire de gérer son profil professionnel et ses événements.
+
+
+Ce sprint introduit également le contrôle administratif des demandes partenaires et de l’offre événementielle. L’administrateur peut ainsi examiner les candidatures reçues, accepter ou refuser les demandes, puis contrôler les événements soumis avant leur publication sur la plateforme.
+
+
+Dans ce chapitre, nous présentons d’abord le backlog du sprint. Ensuite, nous détaillons l’analyse fonctionnelle à travers le diagramme de cas d’utilisation et les descriptions textuelles des principaux cas. La partie conception présente le diagramme de classes partiel ainsi que les diagrammes dynamiques associés aux principaux scénarios du sprint. Enfin, nous exposons les principales interfaces réalisées durant ce sprint.
+
+
+\section{Backlog du Sprint 2}
+
+
+Le Sprint Backlog regroupe les user stories [2] sélectionnées pour le deuxième sprint. Ces fonctionnalités permettent de mettre en place le parcours partenaire et la gestion initiale des événements.
+
+
+\subsection{Objectif du sprint}
+
+
+L’objectif du Sprint 2 est de permettre à un utilisateur de soumettre une demande pour devenir partenaire organisateur. Il permet également au partenaire de gérer son profil professionnel et ses événements.
+
+
+Ce sprint introduit aussi le contrôle administratif des demandes partenaires et des événements soumis avant leur publication.
+
+
+\subsection{Backlog du sprint}
+
+
+Le tableau suivant présente les user stories retenues pour le deuxième sprint.
+
+
+\begin{table}[H]
+\centering
+\caption{Backlog du Sprint 2}
+\label{tableau:4-1}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+\hline
+\rowcolor[HTML]{ECF4FF}
+\textbf{ID} & \textbf{User Story} & \textbf{Tâches principales} & \textbf{Priorité} \\
+\hline
+US-2.1 & En tant qu’utilisateur, je veux soumettre une demande pour devenir partenaire organisateur afin de proposer des événements sur la plateforme. & Créer le formulaire de candidature ; saisir les informations professionnelles ; téléverser les documents requis ; envoyer la demande ; suivre son statut. & Must Have \\
+\hline
+US-2.2 & En tant qu’administrateur, je veux traiter les demandes partenaires afin de valider ou refuser l’accès à l’espace partenaire. & Consulter les demandes reçues ; afficher le dossier partenaire ; vérifier les informations ; accepter, refuser ou demander des informations complémentaires. & Must Have \\
+\hline
+US-2.3 & En tant que partenaire, je veux gérer mon profil partenaire afin de présenter mes informations professionnelles. & Afficher le profil partenaire ; modifier les informations professionnelles ; mettre à jour les coordonnées et la description. & Should Have \\
+\hline
+US-2.4 & En tant que partenaire, je veux créer et gérer mes événements afin de maintenir leurs informations à jour. & Créer un événement ; saisir les informations générales ; définir la date et la localisation ; consulter, modifier ou annuler un événement. & Must Have \\
+\hline
+US-2.5 & En tant qu’administrateur, je veux contrôler l’offre événementielle afin de garantir la conformité du contenu publié. & Consulter les événements soumis ; afficher les détails ; approuver ou rejeter un événement. & Must Have \\
+\hline
+\end{tabularx}
+\end{table}
+
+
+\section{Analyse fonctionnelle}
+
+
+L’analyse fonctionnelle du Sprint 2 présente les principales interactions entre les acteurs et la plateforme. Les acteurs concernés sont l’Utilisateur, le Partenaire et l’Administrateur.
+
+
+L’Utilisateur peut soumettre une demande pour devenir partenaire organisateur et suivre son statut. Le Partenaire peut gérer son profil professionnel, créer un événement et gérer ses événements. L’Administrateur intervient pour traiter les demandes partenaires et contrôler l’offre événementielle.
+
+
+\subsection{Diagramme de cas d’utilisation du Sprint 2}
+
+
+La figure 4.1 présente le diagramme de cas d’utilisation du Sprint 2. Il regroupe les fonctionnalités principales liées au parcours partenaire et à la gestion des événements.
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{\detokenize{images/chapitre4/Figure 4.1 Diagramme de cas d’utilisation du Sprint 2.png}}
+\caption{Diagramme de cas d’utilisation du Sprint 2.}
+\label{figure:4-1}
+\end{figure}
+
+
+Ce diagramme montre que le cas « Devenir partenaire organisateur » inclut la soumission d’une demande partenaire. L’utilisateur peut également suivre le statut de sa demande. Une fois accepté, le partenaire peut gérer son profil professionnel, créer un événement et gérer ses événements. L’administrateur assure le traitement des demandes partenaires et le contrôle de l’offre événementielle.
+
+
+\subsection{Description textuelle des cas d’utilisation}
+
+
+Cette section présente les descriptions textuelles des principaux cas d’utilisation du Sprint 2. Chaque description précise l’acteur principal, l’objectif, les préconditions, les postconditions, le scénario nominal ainsi que les exceptions possibles.
+
+
+\subsubsection{Cas d’utilisation : Soumettre une demande partenaire}
+
+
+\begin{table}[H]
+\centering
+\caption{Description textuelle du cas d’utilisation « Soumettre une demande partenaire »}
+\label{tableau:4-2}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+\hline
+\rowcolor[HTML]{ECF4FF}
+\textbf{Élément} & \textbf{Description} \\
+\hline
+Cas d’utilisation & Soumettre une demande partenaire \\
+\hline
+Acteur principal & Utilisateur \\
+\hline
+Objectif & Permettre à l’utilisateur de déposer une demande afin de devenir partenaire organisateur. \\
+\hline
+Précondition & L’utilisateur est authentifié sur la plateforme. \\
+\hline
+Postcondition & La demande partenaire est enregistrée et transmise pour traitement administratif. \\
+\hline
+Scénario nominal & 1. L’utilisateur accède au formulaire de demande partenaire.\newline{} 2. Il saisit ses informations professionnelles.\newline{} 3. Il joint les documents requis.\newline{} 4. Le système vérifie les informations saisies.\newline{} 5. Le système stocke les documents et enregistre la demande avec le statut en attente.\newline{} 6. Le système affiche un message de confirmation. \\
+\hline
+Exceptions & E1 : Les informations saisies sont incomplètes ou invalides.\newline{} E2 : Le téléversement d’un document échoue. \\
+\hline
+\end{tabularx}
+\end{table}
+
+
+\subsubsection{Cas d’utilisation : Traiter une demande partenaire}
+
+
+\begin{table}[H]
+\centering
+\caption{Description textuelle du cas d’utilisation « Traiter une demande partenaire »}
+\label{tableau:4-3}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+\hline
+\rowcolor[HTML]{ECF4FF}
+\textbf{Élément} & \textbf{Description} \\
+\hline
+Cas d’utilisation & Traiter une demande partenaire \\
+\hline
+Acteur principal & Administrateur \\
+\hline
+Objectif & Permettre à l’administrateur d’examiner une demande partenaire et de prendre une décision. \\
+\hline
+Précondition & L’administrateur est authentifié au back-office. \\
+\hline
+Postcondition & Le statut de la demande est mis à jour. \\
+\hline
+Scénario nominal & 1. L’administrateur consulte la liste des demandes partenaires.\newline{} 2. Il sélectionne une demande à traiter.\newline{} 3. Le système affiche les informations et les documents associés.\newline{} 4. L’administrateur examine le dossier.\newline{} 5. Il accepte ou refuse la demande.\newline{} 6. Le système met à jour le statut de la demande. \\
+\hline
+Exceptions & E1 : Le dossier est incomplet, l’administrateur demande des informations complémentaires. \\
+\hline
+\end{tabularx}
+\end{table}
+
+
+\subsubsection{Cas d’utilisation : Gérer son profil partenaire}
+
+
+\begin{table}[H]
+\centering
+\caption{Description textuelle du cas d’utilisation « Gérer son profil partenaire »}
+\label{tableau:4-4}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+\hline
+\rowcolor[HTML]{ECF4FF}
+\textbf{Élément} & \textbf{Description} \\
+\hline
+Cas d’utilisation & Gérer son profil partenaire \\
+\hline
+Acteur principal & Partenaire \\
+\hline
+Objectif & Permettre au partenaire de consulter et mettre à jour ses informations professionnelles. \\
+\hline
+Précondition & Le partenaire est authentifié et dispose d’un accès à l’espace partenaire. \\
+\hline
+Postcondition & Les informations du profil partenaire sont mises à jour si les données saisies sont valides. \\
+\hline
+Scénario nominal & 1. Le partenaire accède à son profil professionnel.\newline{} 2. Le système affiche les informations du profil partenaire.\newline{} 3. Le partenaire modifie les informations souhaitées.\newline{} 4. Le système vérifie les données saisies.\newline{} 5. Le système enregistre les modifications.\newline{} 6. Le système affiche un message de confirmation. \\
+\hline
+Exceptions & E1 : Les données saisies sont invalides.\newline{} E2 : Le partenaire quitte la page sans enregistrer les modifications. \\
+\hline
+\end{tabularx}
+\end{table}
+
+
+Dans ce chapitre, le cas « Gérer ses événements » est présenté comme une fonctionnalité globale du partenaire. Le scénario détaillé retenu concerne la création d’un événement, car il représente l’étape principale avant le contrôle administratif.
+
+
+\subsubsection{Cas d’utilisation : Créer un événement}
+
+
+\begin{table}[H]
+\centering
+\caption{Description textuelle du cas d’utilisation « Créer un événement »}
+\label{tableau:4-5}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+\hline
+\rowcolor[HTML]{ECF4FF}
+\textbf{Élément} & \textbf{Description} \\
+\hline
+Cas d’utilisation & Créer un événement \\
+\hline
+Acteur principal & Partenaire \\
+\hline
+Objectif & Permettre au partenaire de créer un événement et de le soumettre à la validation administrative. \\
+\hline
+Précondition & Le partenaire est authentifié et dispose d’un accès à l’espace partenaire. \\
+\hline
+Postcondition & L’événement est enregistré dans la plateforme avec le statut en attente de validation. \\
+\hline
+Scénario nominal & 1. Le partenaire accède à l’espace de création d’événement.\newline{} 2. Il saisit les informations principales de l’événement.\newline{} 3. Il ajoute les médias et les informations complémentaires nécessaires.\newline{} 4. Le système vérifie les données saisies.\newline{} 5. Le système enregistre l’événement avec le statut en attente de validation.\newline{} 6. Le système affiche un message de confirmation. \\
+\hline
+Exceptions & E1 : Les informations saisies sont incomplètes ou invalides.\newline{} E2 : Le partenaire annule l’opération avant l’enregistrement. \\
+\hline
+\end{tabularx}
+\end{table}
+
+
+\subsubsection{Cas d’utilisation : Contrôler l’offre événementielle}
+
+
+\begin{table}[H]
+\centering
+\caption{Description textuelle du cas d’utilisation « Contrôler l’offre événementielle »}
+\label{tableau:4-6}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+\hline
+\rowcolor[HTML]{ECF4FF}
+\textbf{Élément} & \textbf{Description} \\
+\hline
+Cas d’utilisation & Contrôler l’offre événementielle \\
+\hline
+Acteur principal & Administrateur \\
+\hline
+Objectif & Permettre à l’administrateur de vérifier les événements soumis avant leur publication. \\
+\hline
+Précondition & L’administrateur est authentifié au back-office. \\
+\hline
+Postcondition & Le statut de l’événement est mis à jour en approuvé ou rejeté selon la décision de l’administrateur. \\
+\hline
+Scénario nominal & 1. L’administrateur consulte la liste des événements en attente de validation.\newline{} 2. Il sélectionne un événement à contrôler.\newline{} 3. Le système affiche les informations de l’événement.\newline{} 4. L’administrateur examine le contenu de l’événement.\newline{} 5. Il approuve l’événement ou décide de le rejeter.\newline{} 6. En cas de rejet, l’administrateur saisit le motif du rejet.\newline{} 7. Le système met à jour le statut de l’événement.\newline{} 8. Le système notifie le partenaire de la décision.\newline{} 9. Le système affiche un message de confirmation. \\
+\hline
+Exceptions & E1 : L’administrateur annule l’opération avant la validation de sa décision.\newline{} E2 : La mise à jour du statut échoue. \\
+\hline
+\end{tabularx}
+\end{table}
+
+
+\section{Conception}
+
+
+Cette section présente les éléments de conception du Sprint 2. Elle comprend le diagramme de classes partiel ainsi que les diagrammes dynamiques associés aux principaux scénarios du sprint.
+
+
+\subsection{Diagramme de classes du Sprint 2}
+
+
+Le diagramme de classes du Sprint 2 présente les principales classes liées à la gestion des partenaires et des événements. Il met en évidence la relation entre l’utilisateur, le partenaire, la demande partenaire, les documents justificatifs et les événements.
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{\detokenize{images/chapitre4/Figure 4.2 Diagramme de classes du Sprint 2.png}}
+\caption{Diagramme de classes du Sprint 2.}
+\label{figure:4-2}
+\end{figure}
+
+
+Ce diagramme montre qu’un utilisateur peut soumettre une demande partenaire contenant des documents justificatifs. Après validation, le partenaire peut gérer son profil et ses événements. L’administrateur intervient pour traiter les demandes partenaires et contrôler les événements soumis.
+
+
+\subsection{Diagrammes dynamiques}
+
+
+Les diagrammes dynamiques présentent les échanges et les enchaînements liés aux principaux scénarios du Sprint 2. Nous utilisons des diagrammes de séquence pour représenter les interactions entre les acteurs, les interfaces, le back-end et la base de données. Nous utilisons également un diagramme d’activité pour modéliser le processus décisionnel lié au contrôle de l’offre événementielle.
+
+
+Dans ce sprint, nous retenons cinq scénarios principaux :
+
+
+- la soumission d’une demande partenaire ;
+
+- le traitement d’une demande partenaire ;
+
+- la gestion du profil partenaire ;
+
+- la création d’un événement ;
+
+- le contrôle de l’offre événementielle.
+
+
+\subsubsection{Diagramme de séquence : Soumission d’une demande partenaire}
+
+
+La figure 4.3 présente le scénario de soumission d’une demande partenaire. L’utilisateur remplit le formulaire de candidature, ajoute les documents requis, puis soumet sa demande. Le système vérifie les données saisies, stocke les documents, enregistre la demande et affiche une confirmation.
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{\detokenize{images/chapitre4/Figure 4.3 Diagramme de séquence du scénario de soumission d’une demande partenaire.png}}
+\caption{Diagramme de séquence du scénario de soumission d’une demande partenaire.}
+\label{figure:4-3}
+\end{figure}
+
+
+\subsubsection{Diagramme de séquence : Traitement d’une demande partenaire}
+
+
+La figure 4.4 présente le scénario de traitement d’une demande partenaire. L’administrateur consulte les demandes reçues, sélectionne une demande, vérifie les informations et les documents associés, puis accepte, refuse ou demande des informations complémentaires.
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{\detokenize{images/chapitre4/Figure 4.4 Diagramme de séquence du scénario de traitement d’une demande partenaire.png}}
+\caption{Diagramme de séquence du scénario de traitement d’une demande partenaire.}
+\label{figure:4-4}
+\end{figure}
+
+
+\subsubsection{Diagramme de séquence : Gestion du profil partenaire}
+
+
+La figure 4.5 présente le scénario de gestion du profil partenaire. Le partenaire consulte ses informations professionnelles, modifie les données souhaitées, puis le système vérifie les données saisies avant de mettre à jour le profil.
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{\detokenize{images/chapitre4/Figure 4.5 Diagramme de séquence du scénario de gestion du profil partenaire.png}}
+\caption{Diagramme de séquence du scénario de gestion du profil partenaire.}
+\label{figure:4-5}
+\end{figure}
+
+
+\subsubsection{Diagramme de séquence : Création d’un événement}
+
+
+La figure 4.6 présente le scénario de création d’un événement par le partenaire. Le partenaire saisit les informations principales de l’événement et ajoute les médias nécessaires. Le système vérifie ensuite les données, stocke les médias, enregistre l’événement avec le statut en attente de validation et affiche une confirmation.
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{\detokenize{images/chapitre4/Figure 4.6 Diagramme de séquence du scénario de création d’un événement.png}}
+\caption{Diagramme de séquence du scénario de création d’un événement.}
+\label{figure:4-6}
+\end{figure}
+
+
+\subsubsection{Diagramme d’activité : Contrôle de l’offre événementielle}
+
+
+La figure 4.7 présente le processus de contrôle de l’offre événementielle. L’administrateur consulte les événements en attente de validation, examine les informations publiées, puis prend une décision. Il peut approuver l’événement, le rejeter en saisissant un motif, ou annuler l’opération. Après la mise à jour du statut, le partenaire est notifié de la décision.
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{\detokenize{images/chapitre4/Figure 4.7 Diagramme d’activité du contrôle de l’offre événementielle.png}}
+\caption{Diagramme d’activité du contrôle de l’offre événementielle.}
+\label{figure:4-7}
+\end{figure}
+
+
+\section{Réalisation}
+
+
+Cette section présente les principales interfaces réalisées durant le Sprint 2. Les emplacements des figures de réalisation sont préparés pour ajout manuel des captures.
+
+
+\subsection{Interface de soumission d’une demande partenaire}
+
+
+Cette interface permet à l’utilisateur de remplir les informations nécessaires pour devenir partenaire organisateur. Il peut saisir ses informations professionnelles et ajouter les documents requis avant d’envoyer sa demande.
+
+
+\begin{figure}[H]
+\centering
+\fbox{\parbox{0.9\textwidth}{\centering Image a inserer : Figure 4.8 Interface de soumission d’une demande partenaire.png}}
+% TODO: Ajouter l'image manquante dans images/chapitre4/Figure 4.8 Interface de soumission d’une demande partenaire.png
+\caption{Interface de soumission d’une demande partenaire.}
+\label{figure:4-8}
+\end{figure}
+
+
+\subsection{Interface de traitement des demandes partenaires}
+
+
+Cette interface permet à l’administrateur de consulter les demandes partenaires reçues, d’afficher les détails d’un dossier et de prendre une décision.
+
+
+\begin{figure}[H]
+\centering
+\fbox{\parbox{0.9\textwidth}{\centering Image a inserer : Figure 4.9 Interface de traitement des demandes partenaires.png}}
+% TODO: Ajouter l'image manquante dans images/chapitre4/Figure 4.9 Interface de traitement des demandes partenaires.png
+\caption{Interface de traitement des demandes partenaires.}
+\label{figure:4-9}
+\end{figure}
+
+
+\subsection{Interface de création d’un événement}
+
+
+Cette interface permet au partenaire de créer un événement en saisissant les informations principales : titre, description, date, localisation et image de couverture.
+
+
+\begin{figure}[H]
+\centering
+\fbox{\parbox{0.9\textwidth}{\centering Image a inserer : Figure 4.10 Interface de création d’un événement.png}}
+% TODO: Ajouter l'image manquante dans images/chapitre4/Figure 4.10 Interface de création d’un événement.png
+\caption{Interface de création d’un événement.}
+\label{figure:4-10}
+\end{figure}
+
+
+\subsection{Interface de contrôle de l’offre événementielle}
+
+
+Cette interface permet à l’administrateur de consulter les événements soumis, de vérifier leurs informations et de prendre une décision d’approbation ou de rejet.
+
+
+\begin{figure}[H]
+\centering
+\fbox{\parbox{0.9\textwidth}{\centering Image a inserer : Figure 4.11 Interface de contrôle de l’offre événementielle.png}}
+% TODO: Ajouter l'image manquante dans images/chapitre4/Figure 4.11 Interface de contrôle de l’offre événementielle.png
+\caption{Interface de contrôle de l’offre événementielle.}
+\label{figure:4-11}
+\end{figure}
+
+
+\section{Conclusion}
+
+
+Dans ce chapitre, nous avons présenté l’étude et la réalisation du Sprint 2, consacré à la gestion des partenaires et des événements. Ce sprint a permis de mettre en place le parcours de demande partenaire, la gestion du profil professionnel, la création et la gestion des événements ainsi que le contrôle administratif de l’offre événementielle.
+
+
+Nous avons également présenté le diagramme de cas d’utilisation, les descriptions textuelles, le diagramme de classes partiel ainsi que les diagrammes dynamiques associés aux principaux scénarios du sprint.
+
+
+Le sprint suivant sera consacré à l’exploration, à la personnalisation et aux interactions autour des événements.
+
+

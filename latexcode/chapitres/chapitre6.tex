@@ -1,0 +1,383 @@
+﻿% Generated from source-md/7-chapitre6.md. Keep content changes in the Markdown source.
+
+\chapter{Étude et réalisation du Sprint 4 — Billetterie, paiement, revente et contrôle d’accès}
+\label{chap:sprint4-billetterie-paiement}
+
+
+\section{Introduction}
+
+
+Ce chapitre présente l’étude et la réalisation du quatrième sprint du projet FESTY. Il porte sur les fonctionnalités liées à la billetterie, au paiement, à la gestion des tickets, à la revente et au contrôle d’accès aux événements.
+
+
+Ce sprint regroupe les fonctionnalités transactionnelles et opérationnelles nécessaires à la participation à un événement. Il permet à l’utilisateur de réserver et payer un billet, de consulter ses tickets, de demander un remboursement et d’utiliser la marketplace de revente. Il couvre également le scan des tickets, le suivi partenaire et la supervision des opérations financières sensibles.
+
+
+Dans ce chapitre, nous présentons d’abord le backlog et les principaux cas d’utilisation du sprint. Nous détaillons ensuite la conception à travers les diagrammes de classes et de séquence, avant de présenter les interfaces réalisées.
+
+
+\section{Analyse du Sprint 4}
+
+
+\subsection{Objectif du Sprint 4}
+
+
+L’objectif du Sprint 4 est de compléter le parcours événementiel en permettant à l’utilisateur de réserver et payer un billet, de consulter ses tickets, de demander un remboursement et d’utiliser la marketplace de revente. Ce sprint couvre également la vérification des tickets à l’entrée des événements, le suivi partenaire et la supervision des opérations financières sensibles.
+
+
+\subsection{Backlog du Sprint 4}
+
+
+Le Sprint Backlog regroupe les user stories [2] sélectionnées pour le quatrième sprint. Les user stories US-4.1 à US-4.7 concernent la billetterie, les tickets, le remboursement et la marketplace de revente, tandis que les user stories US-4.8 à US-4.13 portent sur le scan, le suivi partenaire et la supervision.
+
+
+Le tableau suivant présente les user stories retenues pour ce sprint.
+
+
+{\footnotesize
+\renewcommand{\arraystretch}{1.2}
+\setlength{\tabcolsep}{4pt}
+\begin{xltabular}{\textwidth}{|>{\centering\arraybackslash}p{1.4cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|>{\centering\arraybackslash}p{1.8cm}|}
+\caption{Backlog du Sprint 4}
+\label{tableau:6-1}\\
+\hline
+\rowcolor[HTML]{ECF4FF}
+\textbf{ID} & \textbf{User Story} & \textbf{Tâches principales} & \textbf{Priorité} \\
+\hline
+\endfirsthead
+
+\hline
+\rowcolor[HTML]{ECF4FF}
+\textbf{ID} & \textbf{User Story} & \textbf{Tâches principales} & \textbf{Priorité} \\
+\hline
+\endhead
+
+\hline
+\multicolumn{4}{r}{\textit{Suite de la page suivante}} \\
+\hline
+\endfoot
+
+\hline
+\endlastfoot
+
+US-4.1 & En tant qu’utilisateur, je veux consulter la billetterie d’un événement afin de choisir un billet adapté. & Afficher les types de billets disponibles ; consulter les prix ; vérifier les disponibilités. & Must Have \\
+\hline
+US-4.2 & En tant qu’utilisateur, je veux réserver et payer un billet afin de participer à un événement. & Sélectionner un type de billet ; vérifier la disponibilité ; créer une réservation temporaire ; effectuer le paiement [25] ; générer le ticket après confirmation. & Must Have \\
+\hline
+US-4.3 & En tant qu’utilisateur, je veux consulter mes tickets afin d’accéder aux informations de mes achats. & Afficher la liste des tickets ; consulter le détail d’un ticket ; afficher le code du ticket. & Must Have \\
+\hline
+US-4.4 & En tant qu’utilisateur, je veux demander un remboursement lorsque cela est possible. & Sélectionner un ticket ou une commande ; saisir la raison ; soumettre la demande ; suivre son statut. & Should Have \\
+\hline
+US-4.5 & En tant qu’utilisateur, je veux mettre un ticket FESTY en revente afin de le céder à un autre utilisateur. & Sélectionner un ticket ; vérifier qu’il est revendable ; définir le prix ; publier l’annonce. & Should Have \\
+\hline
+US-4.6 & En tant qu’utilisateur, je veux consulter la marketplace afin d’acheter un ticket revendu. & Afficher les annonces disponibles ; consulter une annonce ; effectuer le paiement ; confirmer l’achat. & Should Have \\
+\hline
+US-4.7 & En tant qu’utilisateur, je veux proposer un ticket externe à la vente afin de le publier dans la marketplace. & Saisir les informations du ticket externe ; ajouter une image justificative ; définir le prix ; publier l’annonce. & Could Have \\
+\hline
+US-4.8 & En tant que partenaire, je veux gérer les sessions de scan afin d’organiser le contrôle d’accès à mes événements. & Créer une session de scan ; ouvrir la session ; fermer la session ; consulter son statut. & Must Have \\
+\hline
+US-4.9 & En tant que partenaire, je veux affecter des agents de scan à un événement afin de déléguer le contrôle d’accès. & Sélectionner un événement ; sélectionner un agent ; créer l’affectation ; révoquer l’affectation si nécessaire. & Must Have \\
+\hline
+US-4.10 & En tant qu’agent de scan, je veux contrôler l’accès à un événement afin de vérifier les tickets des participants. & Scanner le ticket ; vérifier le ticket ; enregistrer le résultat ; afficher l’autorisation ou le refus d’accès. & Must Have \\
+\hline
+US-4.11 & En tant que partenaire, je veux suivre mon activité et ma monétisation afin de consulter les résultats de mes événements. & Consulter les ventes ; consulter les fonds en attente ; suivre les montants à recevoir ; consulter les règlements. & Should Have \\
+\hline
+US-4.12 & En tant qu’administrateur, je veux traiter les opérations financières afin de suivre les transactions sensibles de la plateforme. & Consulter les opérations ; vérifier les demandes financières ; approuver ou rejeter une opération ; mettre à jour son statut. & Should Have \\
+\hline
+US-4.13 & En tant qu’administrateur, je veux superviser les opérations sensibles afin de limiter les risques liés aux paiements et aux accès. & Suivre les opérations sensibles ; contrôler les opérations échouées ; vérifier les actions nécessitant une supervision. & Should Have \\
+\hline
+\end{xltabular}
+}
+
+
+\subsection{Diagramme de cas d’utilisation du Sprint 4}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{\detokenize{images/chapitre6/Figure 6.1 Diagramme de cas d’utilisation du Sprint 4.png}}
+\caption{Diagramme de cas d’utilisation du Sprint 4.}
+\label{figure:6-1}
+\end{figure}
+
+
+La figure 6.1 présente les principaux cas d’utilisation du Sprint 4. L’utilisateur peut consulter la billetterie d’un événement, réserver et payer un billet, consulter ses tickets, demander un remboursement, mettre un ticket FESTY en revente, acheter un ticket revendu ou proposer un ticket externe à la vente. Le partenaire gère les sessions de scan et suit son activité, tandis que l’agent de scan contrôle l’accès à l’événement. L’administrateur intervient dans le traitement des opérations financières et la supervision des opérations sensibles.
+
+
+\subsection{Description textuelle des cas d’utilisation}
+
+
+Les principaux cas d’utilisation du Sprint 4 sont décrits ci-dessous.
+
+
+\subsubsection{Cas d’utilisation : Réserver et payer un billet}
+
+
+\begin{table}[H]
+\centering
+\caption{Description textuelle du cas d’utilisation « Réserver et payer un billet »}
+\label{tableau:6-2}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+\hline
+\rowcolor[HTML]{ECF4FF}
+\textbf{Élément} & \textbf{Description} \\
+\hline
+Cas d’utilisation & Réserver et payer un billet \\
+\hline
+Acteur principal & Utilisateur \\
+\hline
+Objectif & Permettre à l’utilisateur de réserver temporairement un billet, de le payer et d’obtenir son ticket après confirmation. \\
+\hline
+Précondition & L’utilisateur est authentifié et consulte la billetterie d’un événement actif. \\
+\hline
+Postcondition & La commande est confirmée et le ticket est généré pour l’utilisateur. \\
+\hline
+Scénario nominal & 1. L’utilisateur consulte la billetterie d’un événement.\newline{} 2. Il sélectionne un type de billet.\newline{} 3. Le système vérifie la disponibilité du billet.\newline{} 4. Le système crée une réservation temporaire.\newline{} 5. L’utilisateur procède au paiement.\newline{} 6. Le système confirme le paiement.\newline{} 7. Le système convertit la réservation en commande payée.\newline{} 8. Le système génère le ticket.\newline{} 9. Le système affiche la confirmation de l’achat. \\
+\hline
+Exceptions & E1 : Le billet n’est plus disponible.\newline{} E2 : La réservation temporaire a expiré.\newline{} E3 : Le paiement échoue. \\
+\hline
+\end{tabularx}
+\end{table}
+
+
+\subsubsection{Cas d’utilisation : Gérer la marketplace de revente}
+
+
+\begin{table}[H]
+\centering
+\caption{Description textuelle du cas d’utilisation « Gérer la marketplace de revente »}
+\label{tableau:6-3}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+\hline
+\rowcolor[HTML]{ECF4FF}
+\textbf{Élément} & \textbf{Description} \\
+\hline
+Cas d’utilisation & Gérer la marketplace de revente \\
+\hline
+Acteur principal & Utilisateur \\
+\hline
+Objectif & Permettre à l’utilisateur de publier un ticket FESTY ou un ticket externe dans la marketplace, et permettre à un autre utilisateur d’acheter un ticket revendu. \\
+\hline
+Précondition & L’utilisateur est authentifié et accède à ses tickets ou à la marketplace. \\
+\hline
+Postcondition & L’annonce est publiée dans la marketplace ou l’achat du ticket revendu est confirmé. \\
+\hline
+Scénario nominal & 1. L’utilisateur accède à ses tickets ou à la marketplace.\newline{} 2. Il choisit de mettre un ticket FESTY en revente ou de proposer un ticket externe.\newline{} 3. Il saisit les informations nécessaires.\newline{} 4. Le système vérifie les informations saisies.\newline{} 5. Le système publie l’annonce de revente.\newline{} 6. Un autre utilisateur consulte la marketplace.\newline{} 7. Il sélectionne une annonce et procède au paiement.\newline{} 8. Le système confirme l’achat du ticket revendu. \\
+\hline
+Exceptions & E1 : Le ticket FESTY n’est pas revendable.\newline{} E2 : Les informations du ticket externe sont incomplètes.\newline{} E3 : Le paiement du ticket en revente échoue. \\
+\hline
+\end{tabularx}
+\end{table}
+
+
+Dans le cas d’un ticket externe, l’utilisateur ajoute les informations du ticket ainsi qu’une image justificative. Cette fonctionnalité est présentée comme une extension de la marketplace.
+
+
+\subsubsection{Cas d’utilisation : Contrôler l’accès à un événement}
+
+
+\begin{table}[H]
+\centering
+\caption{Description textuelle du cas d’utilisation « Contrôler l’accès à un événement »}
+\label{tableau:6-4}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+\hline
+\rowcolor[HTML]{ECF4FF}
+\textbf{Élément} & \textbf{Description} \\
+\hline
+Cas d’utilisation & Contrôler l’accès à un événement \\
+\hline
+Acteur principal & Agent de scan \\
+\hline
+Objectif & Permettre à l’agent de scan de vérifier la validité d’un ticket présenté à l’entrée d’un événement. \\
+\hline
+Précondition & L’agent de scan est authentifié, affecté à l’événement et une session de scan est ouverte. \\
+\hline
+Postcondition & Le scan est enregistré et l’accès est autorisé ou refusé. \\
+\hline
+Scénario nominal & 1. L’agent de scan accède à la session de scan.\newline{} 2. Il scanne le ticket présenté par le participant.\newline{} 3. Le système vérifie le ticket.\newline{} 4. Le système vérifie que le ticket correspond à l’événement.\newline{} 5. Le système enregistre l’historique du scan.\newline{} 6. Le système retourne le résultat du contrôle.\newline{} 7. L’agent autorise ou refuse l’accès selon le résultat. \\
+\hline
+Exceptions & E1 : Le ticket est invalide.\newline{} E2 : Le ticket a déjà été utilisé.\newline{} E3 : L’agent n’est pas autorisé à scanner pour cet événement.\newline{} E4 : La session de scan est fermée. \\
+\hline
+\end{tabularx}
+\end{table}
+
+
+\subsubsection{Cas d’utilisation : Traiter les opérations financières}
+
+
+\begin{table}[H]
+\centering
+\caption{Description textuelle du cas d’utilisation « Traiter les opérations financières »}
+\label{tableau:6-5}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+\hline
+\rowcolor[HTML]{ECF4FF}
+\textbf{Élément} & \textbf{Description} \\
+\hline
+Cas d’utilisation & Traiter les opérations financières \\
+\hline
+Acteur principal & Administrateur \\
+\hline
+Objectif & Permettre à l’administrateur de suivre et traiter les opérations financières sensibles de la plateforme. \\
+\hline
+Précondition & L’administrateur est authentifié au back-office. \\
+\hline
+Postcondition & L’opération financière est traitée ou son statut est mis à jour. \\
+\hline
+Scénario nominal & 1. L’administrateur accède à l’espace de supervision financière.\newline{} 2. Le système affiche les opérations financières à suivre.\newline{} 3. L’administrateur consulte les détails d’une opération.\newline{} 4. Le système affiche les informations nécessaires au traitement.\newline{} 5. L’administrateur traite l’opération si nécessaire.\newline{} 6. Le système met à jour le statut de l’opération.\newline{} 7. Le système affiche un message de confirmation. \\
+\hline
+Exceptions & E1 : L’opération financière est introuvable.\newline{} E2 : L’opération ne peut pas être traitée dans son état actuel.\newline{} E3 : La mise à jour du statut échoue. \\
+\hline
+\end{tabularx}
+\end{table}
+
+
+\section{Conception}
+
+
+\subsection{Diagramme de classes principal du Sprint 4}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{\detokenize{images/chapitre6/Figure 6.2 Diagramme de classes — Billetterie, paiement et revente.png}}
+\caption{Diagramme de classes — Billetterie, paiement et revente.}
+\label{figure:6-2}
+\end{figure}
+
+
+La figure 6.2 présente les principales classes liées à la billetterie, au paiement, à la gestion des tickets, aux remboursements et à la revente. Elle met en évidence la réservation temporaire, la commande, le paiement, le ticket, la demande de remboursement, la mise en revente d’un ticket FESTY et la proposition d’un ticket externe.
+
+
+Afin de conserver une présentation lisible dans le chapitre, les classes complémentaires liées au contrôle d’accès, au suivi partenaire et à la supervision financière sont détaillées dans l’Annexe A, intitulée « Diagramme de classes — Contrôle d’accès, suivi partenaire et supervision financière ».
+
+
+\subsection{Diagrammes de séquence du Sprint 4}
+
+
+Les diagrammes de séquence retenus correspondent aux scénarios les plus prioritaires du Sprint 4 : la réservation avec paiement d’un billet et le contrôle d’accès à un événement.
+
+
+\subsubsection{Diagramme de séquence : Réserver et payer un billet}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{\detokenize{images/chapitre6/Figure 6.3 Diagramme de séquence du scénario « Réserver et payer un billet ».png}}
+\caption{Diagramme de séquence du scénario « Réserver et payer un billet ».}
+\label{figure:6-3}
+\end{figure}
+
+
+La figure 6.3 présente le déroulement de la réservation et du paiement d’un billet. L’utilisateur sélectionne un billet, le système vérifie sa disponibilité, crée une réservation temporaire, confirme le paiement puis génère le ticket.
+
+
+\subsubsection{Diagramme de séquence : Contrôler l’accès à un événement}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{\detokenize{images/chapitre6/Figure 6.4 Diagramme de séquence du scénario « Contrôler l’accès à un événement ».png}}
+\caption{Diagramme de séquence du scénario « Contrôler l’accès à un événement ».}
+\label{figure:6-4}
+\end{figure}
+
+
+La figure 6.4 présente le contrôle d’accès à un événement. L’agent de scan scanne le ticket, le système vérifie sa validité et retourne un résultat permettant d’autoriser ou de refuser l’accès.
+
+
+\section{Réalisation}
+
+
+Cette section présente les principales interfaces réalisées durant le Sprint 4. Les emplacements des figures de réalisation sont préparés pour ajout manuel des captures.
+
+
+\subsection{Interface de détail d’un événement et choix du billet}
+
+
+Cette interface présente les informations d’un événement et les billets disponibles. Elle permet à l’utilisateur de choisir le type de billet souhaité.
+
+
+\begin{figure}[H]
+\centering
+\fbox{\parbox{0.9\textwidth}{\centering Image a inserer : Figure 6.5 Interface de détail d’un événement et choix du billet.png}}
+% TODO: Ajouter l'image manquante dans images/chapitre6/Figure 6.5 Interface de détail d’un événement et choix du billet.png
+\caption{Interface de détail d’un événement et choix du billet.}
+\label{figure:6-5}
+\end{figure}
+
+
+\subsection{Interface de paiement}
+
+
+Cette interface affiche les informations nécessaires à la validation de la commande. Elle permet à l’utilisateur de confirmer son achat après la sélection du billet.
+
+
+\begin{figure}[H]
+\centering
+\fbox{\parbox{0.9\textwidth}{\centering Image a inserer : Figure 6.6 Interface de paiement.png}}
+% TODO: Ajouter l'image manquante dans images/chapitre6/Figure 6.6 Interface de paiement.png
+\caption{Interface de paiement.}
+\label{figure:6-6}
+\end{figure}
+
+
+\subsection{Interface de consultation des tickets}
+
+
+Cette interface affiche la liste des tickets de l’utilisateur, leurs détails et les actions associées.
+
+
+\begin{figure}[H]
+\centering
+\fbox{\parbox{0.9\textwidth}{\centering Image a inserer : Figure 6.7 Interface de consultation des tickets.png}}
+% TODO: Ajouter l'image manquante dans images/chapitre6/Figure 6.7 Interface de consultation des tickets.png
+\caption{Interface de consultation des tickets.}
+\label{figure:6-7}
+\end{figure}
+
+
+\subsection{Interface de la marketplace}
+
+
+Cette interface affiche la marketplace et les tickets proposés à la revente. Elle permet aussi de publier un ticket FESTY ou de proposer un ticket externe avec une image justificative.
+
+
+\begin{figure}[H]
+\centering
+\fbox{\parbox{0.9\textwidth}{\centering Image a inserer : Figure 6.8 Interface de la marketplace.png}}
+% TODO: Ajouter l'image manquante dans images/chapitre6/Figure 6.8 Interface de la marketplace.png
+\caption{Interface de la marketplace.}
+\label{figure:6-8}
+\end{figure}
+
+
+\subsection{Interface de scan des tickets}
+
+
+Cette interface permet à l’agent de scan de vérifier rapidement le ticket présenté à l’entrée. Le résultat du contrôle s’affiche immédiatement afin d’autoriser ou non l’accès.
+
+
+\begin{figure}[H]
+\centering
+\fbox{\parbox{0.9\textwidth}{\centering Image a inserer : Figure 6.9 Interface de scan des tickets.png}}
+% TODO: Ajouter l'image manquante dans images/chapitre6/Figure 6.9 Interface de scan des tickets.png
+\caption{Interface de scan des tickets.}
+\label{figure:6-9}
+\end{figure}
+
+
+\section{Conclusion}
+
+
+Ce chapitre a présenté l’étude et la réalisation du Sprint 4 du projet FESTY. Ce sprint a permis de couvrir les fonctionnalités liées à la billetterie, au paiement, à la consultation des tickets, à la revente et au contrôle d’accès aux événements.
+
+
+Il a également introduit le suivi partenaire et la supervision financière. Le Sprint 4 complète ainsi le parcours événementiel en reliant l’achat du billet, la gestion du ticket, la revente et la validation de l’accès à l’événement.
+
+
