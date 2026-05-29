@@ -1,4 +1,4 @@
-# Chapitre 2 : Analyse et préparation du projet
+﻿# Chapitre 2 : Analyse et préparation du projet
 
 ## Introduction
 
@@ -95,7 +95,7 @@ Cette répartition permet d’adapter Scrum au contexte réel du projet. L’ét
 
 Le backlog du produit regroupe l’ensemble des fonctionnalités à réaliser dans le cadre du projet FESTY. Il permet de structurer les besoins sous forme de modules et de user stories, tout en définissant leur niveau de priorité.
 
-Afin de prioriser les fonctionnalités, nous avons adopté la méthode MoSCoW. Cette méthode permet de classer les besoins selon leur importance dans la version actuelle du produit.
+Afin de prioriser les fonctionnalités, nous avons adopté la méthode MoSCoW [REF-MOSCOW] [REF-MOSCOW]. Cette méthode permet de classer les besoins selon leur importance dans la version actuelle du produit.
 
 | Priorité | Signification |
 |---|---|
@@ -136,7 +136,7 @@ Le tableau suivant présente le Product Backlog priorisé de la plateforme FESTY
 | 4 | Billetterie, paiement, scan et supervision | 4.8 | En tant que partenaire, je veux suivre mon activité et ma monétisation afin de consulter les performances de mes événements. | S |
 | 4 | Billetterie, paiement, scan et supervision | 4.9 | En tant qu’administrateur, je veux traiter les opérations financières et superviser les opérations sensibles afin d’assurer le bon fonctionnement de la plateforme. | S |
 
-**Tableau 2.6 : Backlog du produit priorisé selon la méthode MoSCoW**
+**Tableau 2.6 : Backlog du produit priorisé selon la méthode MoSCoW [REF-MOSCOW] [REF-MOSCOW]**
 
 Les éléments du Product Backlog représentent les fonctionnalités principales de FESTY. Ils seront ensuite utilisés pour organiser la planification des sprints selon les priorités et l’ordre de réalisation retenu. Ils seront également représentés de manière synthétique dans les diagrammes de cas d’utilisation globaux.
 
@@ -235,9 +235,9 @@ La partie Front-End de la plateforme FESTY comprend l’application mobile ainsi
 | Technologie | Rôle dans le projet |
 |---|---|
 | Flutter | Framework utilisé pour développer l’application mobile multiplateforme de FESTY. |
-| Dart | Langage utilisé avec Flutter pour développer les interfaces mobiles et la logique côté client. |
-| React.js | Bibliothèque utilisée pour développer les interfaces web, notamment le tableau de bord administrateur et le portail partenaire. |
-| TypeScript / JavaScript | Langages utilisés pour structurer la logique des interfaces web et améliorer la maintenabilité du code Front-End. |
+| Dart [REF-DART] | Langage utilisé avec Flutter pour développer les interfaces mobiles et la logique côté client. |
+| React.js [REF-REACT] | Bibliothèque utilisée pour développer les interfaces web, notamment le tableau de bord administrateur et le portail partenaire. |
+| TypeScript [REF-TYPESCRIPT] / JavaScript [REF-JAVASCRIPT] | Langages utilisés pour structurer la logique des interfaces web et améliorer la maintenabilité du code Front-End. |
 
 **Tableau 2.10 : Technologies Front-End et Mobile utilisées**
 
@@ -249,17 +249,17 @@ Cette partie assure la gestion de la logique métier, la sécurité, l’exposit
 
 | Technologie | Rôle dans le projet |
 |---|---|
-| Java 17 | Langage principal utilisé pour le développement de la partie Back-End. |
-| Spring Boot | Framework principal utilisé pour développer les services Back-End et exposer les API REST. |
+| Java 17 [REF-JAVA17] | Langage principal utilisé pour le développement de la partie Back-End. |
+| Spring Boot [REF-SPRING-BOOT] | Framework principal utilisé pour développer les services Back-End et exposer les API REST. |
 | Spring Security / JWT | Technologies utilisées pour gérer l’authentification, la sécurité et les autorisations selon les rôles. |
 | Spring Data JPA / Hibernate | Technologies utilisées pour assurer la persistance des données et la communication avec la base PostgreSQL. |
-| Spring Modulith | Technologie utilisée pour structurer le Back-End en modules métier cohérents. |
-| Flyway | Outil utilisé pour gérer les migrations SQL et suivre l’évolution du schéma de la base de données. |
-| Springdoc OpenAPI / Swagger UI | Outil utilisé pour documenter et tester les API REST exposées par le Back-End. |
+| Spring Modulith [REF-SPRING-MODULITH] | Technologie utilisée pour structurer le Back-End en modules métier cohérents. |
+| Flyway [REF-FLYWAY] | Outil utilisé pour gérer les migrations SQL et suivre l’évolution du schéma de la base de données. |
+| Springdoc OpenAPI [REF-SPRINGDOC] / Swagger UI | Outil utilisé pour documenter et tester les API REST exposées par le Back-End. |
 
 **Tableau 2.11 : Technologies Back-End utilisées**
 
-Le choix de Spring Boot permet de développer un Back-End structuré et évolutif. Spring Security et JWT assurent l’authentification interne, la gestion des jetons d’accès et de rafraîchissement ainsi que le contrôle des autorisations selon les rôles, tandis que Spring Data JPA et Hibernate facilitent la gestion des données. Spring Modulith permet d’organiser le code en modules métier, notamment l’authentification, les événements, la billetterie, le paiement, le scan et l’administration.
+Le choix de Spring Boot permet de développer un Back-End structuré et évolutif. Spring Security et JWT assurent l’authentification interne, la gestion des jetons d’accès et de rafraîchissement ainsi que le contrôle des autorisations selon les rôles, tandis que Spring Data JPA [REF-SPRING-DATA-JPA] et Hibernate [REF-HIBERNATE] facilitent la gestion des données. Spring Modulith permet d’organiser le code en modules métier, notamment l’authentification, les événements, la billetterie, le paiement, le scan et l’administration.
 
 ### 2.5.3 Base de données
 
@@ -270,11 +270,11 @@ La plateforme FESTY utilise une base de données relationnelle afin de stocker l
 | PostgreSQL | Système de gestion de base de données relationnelle utilisé pour stocker les données principales de la plateforme. |
 | Supabase | Plateforme utilisée pour l’hébergement de la base PostgreSQL. |
 | PostGIS | Extension de PostgreSQL utilisée pour gérer les données géographiques liées aux événements. |
-| Hibernate Spatial | Extension utilisée avec Hibernate pour manipuler les données géographiques côté Back-End. |
+| Hibernate Spatial [REF-HIBERNATE-SPATIAL] | Extension utilisée avec Hibernate pour manipuler les données géographiques côté Back-End. |
 
 **Tableau 2.12 : Technologies liées à la base de données**
 
-Dans cette architecture, Supabase est utilisé uniquement comme environnement d’hébergement de la base PostgreSQL. L’authentification, la gestion des utilisateurs, les rôles et les sessions sécurisées sont assurés par le Back-End FESTY à travers Spring Security et JWT.
+Dans cette architecture, Supabase [REF-SUPABASE] est utilisé uniquement comme environnement d’hébergement de la base PostgreSQL. L’authentification, la gestion des utilisateurs, les rôles et les sessions sécurisées sont assurés par le Back-End FESTY à travers Spring Security et JWT.
 
 ### 2.5.4 Services externes
 
@@ -282,7 +282,7 @@ FESTY intègre plusieurs services externes afin de prendre en charge certaines f
 
 | Service externe | Rôle dans le projet |
 |---|---|
-| Stripe | Gestion des paiements en ligne, des remboursements, des webhooks, des payouts et des comptes connectés des partenaires. |
+| Stripe [REF-STRIPE] | Gestion des paiements en ligne, des remboursements, des webhooks, des payouts et des comptes connectés des partenaires. |
 | Firebase Cloud Messaging | Envoi des notifications push aux utilisateurs de l’application mobile. |
 | Twilio | Envoi des SMS pour la vérification OTP et des emails transactionnels liés aux comptes, aux notifications et aux opérations importantes. |
 | Bunny.net | Stockage et diffusion des fichiers ou médias utilisés par la plateforme. |
@@ -303,9 +303,9 @@ La plateforme FESTY est composée d’une application mobile développée avec F
 
 Le Back-End FESTY, développé avec Spring Boot, représente le service applicatif central. Il expose des API REST sécurisées consommées par l’application mobile et les interfaces web. Il assure le traitement métier, la gestion des autorisations, l’accès aux données et l’intégration avec les services externes.
 
-La base de données PostgreSQL est hébergée dans l’environnement Supabase. Elle permet de stocker les données principales de la plateforme, telles que les utilisateurs, les partenaires, les événements, les billets, les paiements et les opérations de scan. L’extension PostGIS est utilisée pour gérer les données géographiques liées à la localisation des événements.
+La base de données PostgreSQL [REF-POSTGRESQL] est hébergée dans l’environnement Supabase. Elle permet de stocker les données principales de la plateforme, telles que les utilisateurs, les partenaires, les événements, les billets, les paiements et les opérations de scan. L’extension PostGIS [REF-POSTGIS] est utilisée pour gérer les données géographiques liées à la localisation des événements.
 
-La plateforme intègre aussi plusieurs services externes. Stripe assure les paiements, les remboursements et les opérations financières. Firebase Cloud Messaging prend en charge les notifications push. Twilio est utilisé pour les SMS de vérification OTP ainsi que pour les emails transactionnels, et Bunny.net pour la gestion ou la diffusion des fichiers et médias.
+La plateforme intègre aussi plusieurs services externes. Stripe assure les paiements, les remboursements et les opérations financières. Firebase Cloud Messaging [REF-FIREBASE-FCM] prend en charge les notifications push. Twilio [REF-BREVO] est utilisé pour les SMS de vérification OTP ainsi que pour les emails transactionnels, et Bunny.net [REF-BUNNY] pour la gestion ou la diffusion des fichiers et médias.
 
 La figure suivante présente l’architecture physique de la plateforme FESTY.
 

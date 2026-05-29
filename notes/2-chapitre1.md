@@ -1,4 +1,4 @@
-# Chapitre 1 : Contexte général du projet
+﻿# Chapitre 1 : Contexte général du projet
 
 ## Introduction
 
@@ -10,7 +10,7 @@ Cette section présente l’organisme d’accueil dans lequel le projet de fin d
 
 ### 1.1.1 Présentation de TEKSIGHT
 
-TEKSIGHT est une société tunisienne spécialisée dans les services informatiques et les solutions numériques. Elle accompagne ses clients dans la conception, le développement et le déploiement de solutions technologiques adaptées à leurs besoins.
+TEKSIGHT [REF-TEKSIGHT] est une société tunisienne spécialisée dans les services informatiques et les solutions numériques. Elle accompagne ses clients dans la conception, le développement et le déploiement de solutions technologiques adaptées à leurs besoins.
 
 L’entreprise est implantée à la pépinière des entreprises du campus universitaire Zarroug à Gafsa. Cette implantation lui permet d’évoluer dans un environnement favorable à l’innovation, à l’entrepreneuriat et à la collaboration avec le milieu universitaire.
 
@@ -161,7 +161,7 @@ Parmi les approches agiles, plusieurs frameworks peuvent être utilisés selon l
 
 ### 1.4.3 Choix de Scrum
 
-D’après les comparaisons précédentes, nous avons retenu Scrum comme framework de travail. Ce choix s’explique par la nature progressive du projet FESTY, qui regroupe plusieurs blocs fonctionnels à développer de manière incrémentale : la gestion des accès, l’espace partenaire, l’exploration des événements, la billetterie, le paiement et le contrôle d’accès.
+D’après les comparaisons précédentes, nous avons retenu Scrum [REF-SCRUM] comme framework de travail. Ce choix s’explique par la nature progressive du projet FESTY, qui regroupe plusieurs blocs fonctionnels à développer de manière incrémentale : la gestion des accès, l’espace partenaire, l’exploration des événements, la billetterie, le paiement et le contrôle d’accès.
 
 Scrum permet de structurer le développement en sprints. Chaque sprint regroupe un ensemble cohérent de fonctionnalités et aboutit à un incrément fonctionnel. Cette organisation facilite le découpage du projet, le suivi de l’avancement et l’intégration progressive des différentes parties de la plateforme.
 

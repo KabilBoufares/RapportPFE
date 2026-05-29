@@ -1,4 +1,4 @@
-# Chapitre 3 : Étude et réalisation du Sprint 1 — Authentification et gestion des accès
+﻿# Chapitre 3 : Étude et réalisation du Sprint 1 — Authentification et gestion des accès
 
 ## Introduction
 
@@ -8,7 +8,7 @@ Nous présentons d’abord le backlog du sprint afin d’identifier les user sto
 
 ## 3.1 Backlog du Sprint 1
 
-Le Sprint Backlog regroupe les user stories sélectionnées pour le premier sprint. Ces fonctionnalités constituent le socle d’accès à la plateforme FESTY et permettent de sécuriser les parcours utilisateur et administrateur.
+Le Sprint Backlog regroupe les user stories [REF-SCRUM] sélectionnées pour le premier sprint. Ces fonctionnalités constituent le socle d’accès à la plateforme FESTY et permettent de sécuriser les parcours utilisateur et administrateur.
 
 ### 3.1.1 Objectif du sprint
 
@@ -106,7 +106,7 @@ Cette section présente les descriptions textuelles des principaux cas d’utili
 | Objectif | Permettre à l’administrateur d’accéder au back-office de FESTY. |
 | Précondition | L’administrateur possède un compte autorisé à accéder au back-office. |
 | Postcondition | L’administrateur est authentifié et accède à l’espace d’administration. |
-| Scénario nominal | 1. L’administrateur accède à l’interface de connexion du back-office.<br>2. Il saisit son email et son mot de passe.<br>3. Le système recherche le compte et vérifie les identifiants saisis.<br>4. Le système vérifie le rôle administrateur.<br>5. Le système demande la vérification du code 2FA.<br>6. L’administrateur saisit le code 2FA.<br>7. Le système vérifie le code 2FA, génère un jeton administrateur sécurisé et autorise l’accès au back-office. |
+| Scénario nominal | 1. L’administrateur accède à l’interface de connexion du back-office.<br>2. Il saisit son email et son mot de passe.<br>3. Le système recherche le compte et vérifie les identifiants saisis.<br>4. Le système vérifie le rôle administrateur.<br>5. Le système demande la vérification du code 2FA.<br>6. L’administrateur saisit le code 2FA.<br>7. Le système vérifie le code 2FA, génère un jeton administrateur sécurisé [REF-JWT][REF-SPRING-SECURITY] et autorise l’accès au back-office. |
 | Exceptions | E1 : Les identifiants saisis sont incorrects.<br>E2 : Le code 2FA est invalide ou expiré.<br>E3 : Le compte ne possède pas le rôle administrateur. |
 
 **Tableau 3.5 : Description textuelle du cas d’utilisation « S’authentifier au back-office »**

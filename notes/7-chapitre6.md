@@ -1,4 +1,4 @@
-# Chapitre 6 : Étude et réalisation du Sprint 4 — Billetterie, paiement, revente et contrôle d’accès
+﻿# Chapitre 6 : Étude et réalisation du Sprint 4 — Billetterie, paiement, revente et contrôle d’accès
 
 ## 6.1 Introduction
 
@@ -16,14 +16,14 @@ L’objectif du Sprint 4 est de compléter le parcours événementiel en permett
 
 ### 6.2.2 Backlog du Sprint 4
 
-Le Sprint Backlog regroupe les user stories sélectionnées pour le quatrième sprint. Les user stories US-4.1 à US-4.7 concernent la billetterie, les tickets, le remboursement et la marketplace de revente, tandis que les user stories US-4.8 à US-4.13 portent sur le scan, le suivi partenaire et la supervision.
+Le Sprint Backlog regroupe les user stories [REF-SCRUM] sélectionnées pour le quatrième sprint. Les user stories US-4.1 à US-4.7 concernent la billetterie, les tickets, le remboursement et la marketplace de revente, tandis que les user stories US-4.8 à US-4.13 portent sur le scan, le suivi partenaire et la supervision.
 
 Le tableau suivant présente les user stories retenues pour ce sprint.
 
 | ID | User Story | Tâches principales | Priorité |
 |---|---|---|---|
 | US-4.1 | En tant qu’utilisateur, je veux consulter la billetterie d’un événement afin de choisir un billet adapté. | Afficher les types de billets disponibles ; consulter les prix ; vérifier les disponibilités. | Must Have |
-| US-4.2 | En tant qu’utilisateur, je veux réserver et payer un billet afin de participer à un événement. | Sélectionner un type de billet ; vérifier la disponibilité ; créer une réservation temporaire ; effectuer le paiement ; générer le ticket après confirmation. | Must Have |
+| US-4.2 | En tant qu’utilisateur, je veux réserver et payer un billet afin de participer à un événement. | Sélectionner un type de billet ; vérifier la disponibilité ; créer une réservation temporaire ; effectuer le paiement [REF-STRIPE] ; générer le ticket après confirmation. | Must Have |
 | US-4.3 | En tant qu’utilisateur, je veux consulter mes tickets afin d’accéder aux informations de mes achats. | Afficher la liste des tickets ; consulter le détail d’un ticket ; afficher le code du ticket. | Must Have |
 | US-4.4 | En tant qu’utilisateur, je veux demander un remboursement lorsque cela est possible. | Sélectionner un ticket ou une commande ; saisir la raison ; soumettre la demande ; suivre son statut. | Should Have |
 | US-4.5 | En tant qu’utilisateur, je veux mettre un ticket FESTY en revente afin de le céder à un autre utilisateur. | Sélectionner un ticket ; vérifier qu’il est revendable ; définir le prix ; publier l’annonce. | Should Have |

@@ -1,4 +1,4 @@
-# Chapitre 5 : Étude et réalisation du Sprint 3 — Exploration, personnalisation et interactions événementielles
+﻿# Chapitre 5 : Étude et réalisation du Sprint 3 — Exploration, personnalisation et interactions événementielles
 
 ## 5.1 Introduction
 
@@ -14,7 +14,7 @@ Le visiteur peut explorer les événements et les stars. Après authentification
 
 ### 5.2.1 Backlog du Sprint 3
 
-Le tableau suivant présente les principales user stories retenues pour le Sprint 3.
+Le tableau suivant présente les principales user stories retenues pour le Sprint 3 [REF-SCRUM].
 
 | ID | User Story | Tâches principales | Priorité |
 |---|---|---|---|

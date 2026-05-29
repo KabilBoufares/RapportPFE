@@ -1,4 +1,4 @@
-# Chapitre 4 : Étude et réalisation du Sprint 2 — Gestion des partenaires et des événements
+﻿# Chapitre 4 : Étude et réalisation du Sprint 2 — Gestion des partenaires et des événements
 
 ## Introduction
 
@@ -10,7 +10,7 @@ Dans ce chapitre, nous présentons d’abord le backlog du sprint. Ensuite, nous
 
 ## 4.1 Backlog du Sprint 2
 
-Le Sprint Backlog regroupe les user stories sélectionnées pour le deuxième sprint. Ces fonctionnalités permettent de mettre en place le parcours partenaire et la gestion initiale des événements.
+Le Sprint Backlog regroupe les user stories [REF-SCRUM] sélectionnées pour le deuxième sprint. Ces fonctionnalités permettent de mettre en place le parcours partenaire et la gestion initiale des événements.
 
 ### 4.1.1 Objectif du sprint
 
