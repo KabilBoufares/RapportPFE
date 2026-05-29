@@ -8,7 +8,7 @@ Nous présentons d’abord le Sprint Backlog, puis l’analyse fonctionnelle à 
 
 ## 4.2 Sprint Backlog
 
-Le Sprint 2 vise à permettre à un utilisateur de devenir partenaire organisateur, à gérer son profil professionnel et à créer des événements soumis à validation. Il introduit aussi le traitement administratif des demandes partenaires et le contrôle des événements avant leur publication. Le tableau 4.1 présente les user stories [REF-SCRUM] retenues pour ce sprint.
+Le Sprint 2 vise à permettre à un utilisateur de devenir partenaire organisateur, puis au partenaire de gérer son profil professionnel et de créer des événements soumis à validation. Il introduit aussi le traitement administratif des demandes partenaires et le contrôle des événements avant leur publication. Le tableau 4.1 présente les user stories [REF-SCRUM] retenues pour ce sprint.
 
 | ID | User Story | Tâches principales | Priorité |
 |---|---|---|---|
@@ -22,7 +22,7 @@ Le Sprint 2 vise à permettre à un utilisateur de devenir partenaire organisate
 
 ## 4.3 Analyse fonctionnelle
 
-L’analyse fonctionnelle précise les interactions entre les acteurs du Sprint 2 et les fonctionnalités réalisées. L’Utilisateur peut soumettre une demande partenaire et suivre son statut. Le Partenaire peut gérer son profil professionnel, créer un événement et gérer ses événements. L’Administrateur traite les demandes partenaires et contrôle l’offre événementielle.
+L’analyse fonctionnelle précise les interactions entre les acteurs du Sprint 2 et les fonctionnalités réalisées. L’utilisateur peut soumettre une demande partenaire et suivre son statut. Le partenaire peut gérer son profil professionnel, créer un événement et gérer ses événements. L’administrateur traite les demandes partenaires et contrôle l’offre événementielle.
 
 ### 4.3.1 Diagramme de cas d’utilisation
 
@@ -32,7 +32,7 @@ La figure 4.1 présente les principales fonctionnalités liées au parcours part
 
 **Figure 4.1 : Diagramme de cas d’utilisation du Sprint 2**
 
-Le diagramme montre que le cas « Devenir partenaire organisateur » inclut la soumission d’une demande partenaire. Après validation, le partenaire peut gérer son profil et ses événements, tandis que l’administrateur assure le traitement des demandes et la validation de l’offre événementielle.
+Le diagramme montre que le cas « Devenir partenaire organisateur » inclut la soumission d’une demande partenaire. Après validation, le partenaire peut gérer son profil et ses événements, tandis que l’administrateur assure le traitement des demandes et le contrôle de l’offre événementielle.
 
 ### 4.3.2 Description textuelle des cas d’utilisation
 
@@ -110,7 +110,7 @@ Les tableaux suivants décrivent les principaux cas d’utilisation du Sprint 2.
 
 ## 4.4 Conception
 
-La conception présente les éléments structurels et dynamiques nécessaires à la gestion des partenaires et des événements.
+La conception précise les éléments structurels et dynamiques nécessaires à la gestion des partenaires, des demandes et des événements.
 
 ### 4.4.1 Diagramme de classes
 
@@ -196,6 +196,6 @@ La figure 4.11 présente l’interface de contrôle de l’offre événementiell
 
 ## 4.6 Conclusion
 
-Dans ce chapitre, nous avons présenté l’étude et la réalisation du Sprint 2, consacré à la gestion des partenaires et des événements. Nous avons commencé par le Sprint Backlog, puis l’analyse fonctionnelle et la conception.
+Ce chapitre a présenté l’étude et la réalisation du Sprint 2, consacré à la gestion des partenaires et des événements. Il a d’abord exposé le Sprint Backlog, puis l’analyse fonctionnelle et la conception associées aux principales fonctionnalités du sprint.
 
 Ce sprint a permis de mettre en place le parcours de demande partenaire, la gestion du profil professionnel, la création d’événements et le contrôle administratif de l’offre événementielle. Le chapitre suivant sera consacré à l’exploration, à la personnalisation et aux interactions autour des événements.
