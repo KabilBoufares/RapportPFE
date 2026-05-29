@@ -235,7 +235,7 @@ Le tableau suivant présente les principaux outils logiciels utilisés durant la
 | pgAdmin | Administration et consultation de la base de données PostgreSQL. |
 | Docker | Exécution de certains services nécessaires aux tests et à l’environnement de développement. |
 | Stripe CLI | Test local des webhooks Stripe et simulation des événements de paiement. |
-| Draw.io | Création et amélioration visuelle des diagrammes. |
+| Draw.io / PlantUML | Création et amélioration visuelle des diagrammes. |
 
 **Tableau 2.9 : Environnement logiciel utilisé**
 
@@ -258,7 +258,7 @@ La partie Front-End de la plateforme FESTY comprend l’application mobile ainsi
 
 ### 2.6.2 Technologies Back-End
 
-Le Back-End de FESTY est développé avec Spring Boot et organisé selon une architecture modulaire. La base de données utilisée est PostgreSQL. Les services externes tels que Stripe, Firebase Cloud Messaging, Bunny.net et le service OTP/SMS interviennent dans des fonctionnalités spécifiques.
+Le Back-End de FESTY est développé avec Spring Boot et organisé selon une architecture modulaire. La base de données utilisée est PostgreSQL. Les services externes tels que Stripe, Firebase Cloud Messaging, Twilio et Bunny.net interviennent dans des fonctionnalités spécifiques.
 
 Cette partie assure la gestion de la logique métier, la sécurité, l’exposition des API REST, la persistance des données et l’intégration avec les services externes. Elle repose sur une architecture monolithique modulaire afin de séparer les domaines fonctionnels tout en conservant une plateforme centralisée.
 
@@ -299,8 +299,7 @@ FESTY intègre plusieurs services externes afin de prendre en charge certaines f
 |---|---|
 | Stripe | Gestion des paiements en ligne, des remboursements, des webhooks, des payouts et des comptes connectés des partenaires. |
 | Firebase Cloud Messaging | Envoi des notifications push aux utilisateurs de l’application mobile. |
-| Brevo | Envoi des emails transactionnels liés aux comptes, aux notifications et aux opérations importantes. |
-| Service OTP/SMS | Envoi des SMS, notamment pour les scénarios de vérification OTP. |
+| Twilio | Envoi des SMS pour la vérification OTP et des emails transactionnels liés aux comptes, aux notifications et aux opérations importantes. |
 | Bunny.net | Stockage et diffusion des fichiers ou médias utilisés par la plateforme. |
 
 **Tableau 2.13 : Services externes intégrés à FESTY**
@@ -321,9 +320,7 @@ Le Back-End FESTY, développé avec Spring Boot, représente le service applicat
 
 La base de données PostgreSQL est hébergée dans l’environnement Supabase. Elle permet de stocker les données principales de la plateforme, telles que les utilisateurs, les partenaires, les événements, les billets, les paiements et les opérations de scan. L’extension PostGIS est utilisée pour gérer les données géographiques liées à la localisation des événements.
 
-Supabase n’intervient donc pas dans le processus d’authentification de la plateforme ; son rôle se limite à l’hébergement de la base PostgreSQL utilisée par le Back-End FESTY.
-
-La plateforme intègre aussi plusieurs services externes. Stripe assure les paiements, les remboursements et les opérations financières. Firebase Cloud Messaging prend en charge les notifications push. Brevo est utilisé pour les emails transactionnels, le service OTP/SMS pour les SMS de vérification, et Bunny.net pour la gestion ou la diffusion des fichiers et médias.
+La plateforme intègre aussi plusieurs services externes. Stripe assure les paiements, les remboursements et les opérations financières. Firebase Cloud Messaging prend en charge les notifications push. Twilio est utilisé pour les SMS de vérification OTP ainsi que pour les emails transactionnels, et Bunny.net pour la gestion ou la diffusion des fichiers et médias.
 
 La figure suivante présente l’architecture physique de la plateforme FESTY.
 
