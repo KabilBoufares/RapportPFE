@@ -142,13 +142,13 @@ La figure 6.4 présente le contrôle d’accès à un événement. L’agent de 
 
 ## 6.4 Réalisation
 
-Cette section présente les principales interfaces réalisées durant le Sprint 4, dans l’ordre fonctionnel du parcours utilisateur et des opérations associées.
+Cette section présente les principales interfaces réalisées durant le Sprint 4. Les emplacements des figures de réalisation sont préparés pour ajout manuel des captures.
 
 ### 6.4.1 Interface de détail d’un événement et choix du billet
 
 Cette interface présente les informations d’un événement et les billets disponibles. Elle permet à l’utilisateur de choisir le type de billet souhaité.
 
-![Interface de détail d’un événement et choix du billet](images/interface_detail_evenement_billets.png)
+![Interface de détail d’un événement et choix du billet](<images/chapitre6/Figure 6.5 Interface de détail d’un événement et choix du billet.png>)
 
 **Figure 6.5 : Interface de détail d’un événement et choix du billet**
 
@@ -156,7 +156,7 @@ Cette interface présente les informations d’un événement et les billets dis
 
 Cette interface affiche les informations nécessaires à la validation de la commande. Elle permet à l’utilisateur de confirmer son achat après la sélection du billet.
 
-![Interface de paiement](images/interface_paiement.png)
+![Interface de paiement](<images/chapitre6/Figure 6.6 Interface de paiement.png>)
 
 **Figure 6.6 : Interface de paiement**
 
@@ -164,7 +164,7 @@ Cette interface affiche les informations nécessaires à la validation de la com
 
 Cette interface affiche la liste des tickets de l’utilisateur, leurs détails et les actions associées.
 
-![Interface de consultation des tickets](images/interface_mes_tickets.png)
+![Interface de consultation des tickets](<images/chapitre6/Figure 6.7 Interface de consultation des tickets.png>)
 
 **Figure 6.7 : Interface de consultation des tickets**
 
@@ -172,41 +172,17 @@ Cette interface affiche la liste des tickets de l’utilisateur, leurs détails 
 
 Cette interface affiche la marketplace et les tickets proposés à la revente. Elle permet aussi de publier un ticket FESTY ou de proposer un ticket externe avec une image justificative.
 
-![Interface de la marketplace](images/interface_marche_revente.png)
+![Interface de la marketplace](<images/chapitre6/Figure 6.8 Interface de la marketplace.png>)
 
 **Figure 6.8 : Interface de la marketplace**
 
-### 6.4.5 Interface de gestion des sessions de scan
-
-Cette interface permet au partenaire de préparer le contrôle d’accès à ses événements. Il peut y créer une session de scan, consulter son état et affecter des agents.
-
-![Interface de gestion des sessions de scan](images/interface_sessions_scan.png)
-
-**Figure 6.9 : Interface de gestion des sessions de scan**
-
-### 6.4.6 Interface de scan des tickets
+### 6.4.5 Interface de scan des tickets
 
 Cette interface permet à l’agent de scan de vérifier rapidement le ticket présenté à l’entrée. Le résultat du contrôle s’affiche immédiatement afin d’autoriser ou non l’accès.
 
-![Interface de scan des tickets](images/interface_scan_ticket.png)
+![Interface de scan des tickets](<images/chapitre6/Figure 6.9 Interface de scan des tickets.png>)
 
-**Figure 6.10 : Interface de scan des tickets**
-
-### 6.4.7 Interface de suivi partenaire
-
-Cette interface présente au partenaire les résultats liés à ses événements et les informations utiles au suivi de son activité.
-
-![Interface de suivi partenaire](images/interface_suivi_partenaire.png)
-
-**Figure 6.11 : Interface de suivi partenaire**
-
-### 6.4.8 Interface de supervision financière
-
-Cette interface centralise les informations utiles à la supervision financière. Elle permet à l’administrateur de consulter les opérations sensibles et de traiter les demandes nécessitant une intervention.
-
-![Interface de supervision financière](images/interface_supervision_financiere.png)
-
-**Figure 6.12 : Interface de supervision financière**
+**Figure 6.9 : Interface de scan des tickets**
 
 ## 6.5 Conclusion
 

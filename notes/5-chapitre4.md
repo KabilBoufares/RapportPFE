@@ -192,13 +192,13 @@ La figure 4.7 présente le processus de contrôle de l’offre événementielle.
 
 ## 4.4 Réalisation
 
-Cette section présente les principales interfaces réalisées durant le Sprint 2. Ces interfaces couvrent le parcours partenaire, la gestion des événements et le contrôle administratif.
+Cette section présente les principales interfaces réalisées durant le Sprint 2. Les emplacements des figures de réalisation sont préparés pour ajout manuel des captures.
 
 ### 4.4.1 Interface de soumission d’une demande partenaire
 
 Cette interface permet à l’utilisateur de remplir les informations nécessaires pour devenir partenaire organisateur. Il peut saisir ses informations professionnelles et ajouter les documents requis avant d’envoyer sa demande.
 
-![Interface de soumission d’une demande partenaire](images/interface_demande_partenaire.png)
+![Interface de soumission d’une demande partenaire](<images/chapitre4/Figure 4.8 Interface de soumission d’une demande partenaire.png>)
 
 **Figure 4.8 : Interface de soumission d’une demande partenaire**
 
@@ -206,41 +206,25 @@ Cette interface permet à l’utilisateur de remplir les informations nécessair
 
 Cette interface permet à l’administrateur de consulter les demandes partenaires reçues, d’afficher les détails d’un dossier et de prendre une décision.
 
-![Interface de traitement des demandes partenaires](images/interface_traitement_demandes.png)
+![Interface de traitement des demandes partenaires](<images/chapitre4/Figure 4.9 Interface de traitement des demandes partenaires.png>)
 
 **Figure 4.9 : Interface de traitement des demandes partenaires**
 
-### 4.4.3 Interface de gestion du profil partenaire
-
-Cette interface permet au partenaire de consulter et modifier ses informations professionnelles, telles que la description, les coordonnées et les médias associés à son profil.
-
-![Interface de gestion du profil partenaire](images/interface_profil_partenaire.png)
-
-**Figure 4.10 : Interface de gestion du profil partenaire**
-
-### 4.4.4 Interface de création d’un événement
+### 4.4.3 Interface de création d’un événement
 
 Cette interface permet au partenaire de créer un événement en saisissant les informations principales : titre, description, date, localisation et image de couverture.
 
-![Interface de création d’un événement](images/interface_creation_evenement.png)
+![Interface de création d’un événement](<images/chapitre4/Figure 4.10 Interface de création d’un événement.png>)
 
-**Figure 4.11 : Interface de création d’un événement**
+**Figure 4.10 : Interface de création d’un événement**
 
-### 4.4.5 Interface de gestion des événements
-
-Cette interface permet au partenaire de consulter la liste de ses événements, d’accéder aux détails, de modifier les informations ou d’annuler un événement si nécessaire.
-
-![Interface de gestion des événements](images/interface_gestion_evenements.png)
-
-**Figure 4.12 : Interface de gestion des événements**
-
-### 4.4.6 Interface de contrôle de l’offre événementielle
+### 4.4.4 Interface de contrôle de l’offre événementielle
 
 Cette interface permet à l’administrateur de consulter les événements soumis, de vérifier leurs informations et de prendre une décision d’approbation ou de rejet.
 
-![Interface de contrôle de l’offre événementielle](images/interface_controle_evenements.png)
+![Interface de contrôle de l’offre événementielle](<images/chapitre4/Figure 4.11 Interface de contrôle de l’offre événementielle.png>)
 
-**Figure 4.13 : Interface de contrôle de l’offre événementielle**
+**Figure 4.11 : Interface de contrôle de l’offre événementielle**
 
 ## Conclusion
 

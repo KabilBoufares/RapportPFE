@@ -192,13 +192,13 @@ La figure 5.7 présente le processus de traitement d’une star proposée par un
 
 ## 5.4 Réalisation
 
-Cette section présente les principales interfaces réalisées durant le Sprint 3. Ces interfaces permettent de concrétiser les fonctionnalités liées à l’exploration des événements, à la personnalisation de l’expérience utilisateur, aux recommandations, aux favoris, au suivi des stars, au chat événementiel, à la gestion du line-up artistique et à la gestion du catalogue artistique.
+Cette section présente les principales interfaces réalisées dans le cadre du Sprint 3. Les emplacements des figures de réalisation sont préparés pour ajout manuel des captures.
 
 ### 5.4.1 Interface d’exploration des événements
 
 Cette interface permet au visiteur ou à l’utilisateur de consulter les événements disponibles sur la plateforme. Elle donne accès aux informations principales et au détail d’un événement.
 
-![Interface d’exploration des événements](images/interface_exploration_evenements.png)
+![Interface d’exploration des événements](<images/chapitre5/Figure 5.8 Interface d’exploration des événements.png>)
 
 **Figure 5.8 : Interface d’exploration des événements**
 
@@ -206,57 +206,25 @@ Cette interface permet au visiteur ou à l’utilisateur de consulter les évén
 
 Cette interface permet à l’utilisateur de sélectionner ses catégories et centres d’intérêt. Ces préférences servent à personnaliser l’expérience et les recommandations.
 
-![Interface de personnalisation de l’expérience](images/interface_personnalisation.png)
+![Interface de personnalisation de l’expérience](<images/chapitre5/Figure 5.9 Interface de personnalisation de l’expérience.png>)
 
 **Figure 5.9 : Interface de personnalisation de l’expérience**
 
-### 5.4.3 Interface des recommandations personnalisées
-
-Cette interface affiche les événements recommandés à l’utilisateur selon ses préférences, ses centres d’intérêt, ses favoris et les stars suivies.
-
-![Interface des recommandations personnalisées](images/interface_recommandations.png)
-
-**Figure 5.10 : Interface des recommandations personnalisées**
-
-### 5.4.4 Interface de gestion des favoris
-
-Cette interface permet à l’utilisateur de consulter les événements ajoutés à ses favoris. Elle facilite l’accès rapide aux événements qui l’intéressent.
-
-![Interface de gestion des favoris](images/interface_favoris.png)
-
-**Figure 5.11 : Interface de gestion des favoris**
-
-### 5.4.5 Interface de consultation du profil d’une star
-
-Cette interface permet à l’utilisateur de consulter le profil d’une star, avec ses informations principales et les événements associés. L’utilisateur peut également suivre cette star afin d’affiner son expérience.
-
-![Interface de consultation du profil d’une star](images/interface_profil_star.png)
-
-**Figure 5.12 : Interface de consultation du profil d’une star**
-
-### 5.4.6 Interface du chat événementiel
+### 5.4.3 Interface du chat événementiel
 
 Cette interface permet à l’utilisateur de participer à une discussion autour d’un événement. Il peut consulter les messages existants et envoyer un nouveau message.
 
-![Interface du chat événementiel](images/interface_chat_evenement.png)
+![Interface du chat événementiel](<images/chapitre5/Figure 5.10 Interface du chat événementiel.png>)
 
-**Figure 5.13 : Interface du chat événementiel**
+**Figure 5.10 : Interface du chat événementiel**
 
-### 5.4.7 Interface de gestion du line-up artistique
+### 5.4.4 Interface de gestion du line-up artistique
 
 Cette interface permet au partenaire de gérer les stars associées à son événement. Il peut consulter le line-up actuel et ajouter une star existante ou proposer une nouvelle star.
 
-![Interface de gestion du line-up artistique](images/interface_lineup_artistique.png)
+![Interface de gestion du line-up artistique](<images/chapitre5/Figure 5.11 Interface de gestion du line-up artistique.png>)
 
-**Figure 5.14 : Interface de gestion du line-up artistique**
-
-### 5.4.8 Interface de gestion du catalogue artistique
-
-Cette interface permet à l’administrateur de consulter les stars disponibles et les propositions en attente. Il peut sélectionner une star proposée puis l’approuver ou la rejeter.
-
-![Interface de gestion du catalogue artistique](images/interface_catalogue_artistique.png)
-
-**Figure 5.15 : Interface de gestion du catalogue artistique**
+**Figure 5.11 : Interface de gestion du line-up artistique**
 
 ## Conclusion
 
