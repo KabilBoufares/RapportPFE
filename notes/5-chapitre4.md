@@ -4,11 +4,11 @@
 
 Ce chapitre présente l’étude et la réalisation du Sprint 2 du projet FESTY. Ce sprint est consacré à la gestion des partenaires et des événements, depuis la demande d’accès partenaire jusqu’au contrôle administratif de l’offre événementielle.
 
-Nous présentons d’abord le Sprint Backlog, puis l’analyse fonctionnelle à travers le diagramme de cas d’utilisation et les descriptions textuelles. Ensuite, la conception est détaillée à l’aide du diagramme de classes, des diagrammes de séquence et du diagramme d’activité. Enfin, la partie réalisation expose les principales interfaces développées durant ce sprint.
+Le chapitre présente d’abord le Sprint Backlog, puis l’analyse fonctionnelle à travers le diagramme de cas d’utilisation et les descriptions textuelles. Ensuite, la conception est détaillée à l’aide du diagramme de classes, des diagrammes de séquence et du diagramme d’activité. Enfin, la partie réalisation expose les principales interfaces développées durant ce sprint.
 
 ## 4.2 Sprint Backlog
 
-Le Sprint 2 vise à permettre à un utilisateur de devenir partenaire organisateur, puis au partenaire de gérer son profil professionnel et de créer des événements soumis à validation. Il introduit aussi le traitement administratif des demandes partenaires et le contrôle des événements avant leur publication. Le tableau 4.1 présente les user stories [REF-SCRUM] retenues pour ce sprint.
+Le Sprint 2 vise à permettre à un utilisateur de devenir partenaire organisateur, puis au partenaire de gérer son profil professionnel et de créer des événements soumis au contrôle administratif avant publication. Le tableau 4.1 présente les user stories [REF-SCRUM] retenues pour ce sprint.
 
 | ID | User Story | Tâches principales | Priorité |
 |---|---|---|---|
@@ -22,7 +22,7 @@ Le Sprint 2 vise à permettre à un utilisateur de devenir partenaire organisate
 
 ## 4.3 Analyse fonctionnelle
 
-L’analyse fonctionnelle précise les interactions entre les acteurs du Sprint 2 et les fonctionnalités réalisées. L’utilisateur peut soumettre une demande partenaire et suivre son statut. Le partenaire peut gérer son profil professionnel, créer un événement et gérer ses événements. L’administrateur traite les demandes partenaires et contrôle l’offre événementielle.
+L’analyse fonctionnelle précise les interactions entre les acteurs du Sprint 2 et les fonctionnalités réalisées. L’utilisateur peut soumettre une demande partenaire et suivre son statut. Le partenaire peut mettre à jour son profil professionnel, créer un événement et gérer ses événements. L’administrateur traite les demandes partenaires et contrôle l’offre événementielle.
 
 ### 4.3.1 Diagramme de cas d’utilisation
 
@@ -79,6 +79,8 @@ Les tableaux suivants décrivent les principaux cas d’utilisation du Sprint 2.
 | Exceptions | E1 : Les données saisies sont invalides.<br>E2 : Le partenaire quitte la page sans enregistrer les modifications. |
 
 **Tableau 4.4 : Description textuelle du cas d’utilisation « Gérer son profil partenaire »**
+
+La modification et l’annulation d’un événement sont considérées comme des extensions du cas principal « Créer un événement ».
 
 #### Cas d’utilisation : Créer un événement
 
@@ -196,6 +198,6 @@ La figure 4.11 présente l’interface de contrôle de l’offre événementiell
 
 ## 4.6 Conclusion
 
-Ce chapitre a présenté l’étude et la réalisation du Sprint 2, consacré à la gestion des partenaires et des événements. Il a d’abord exposé le Sprint Backlog, puis l’analyse fonctionnelle et la conception associées aux principales fonctionnalités du sprint.
+Ce chapitre a présenté l’étude et la réalisation du Sprint 2, consacré à la gestion des partenaires et des événements. Il a d’abord présenté le Sprint Backlog, puis l’analyse fonctionnelle et la conception associées aux principales fonctionnalités du sprint.
 
 Ce sprint a permis de mettre en place le parcours de demande partenaire, la gestion du profil professionnel, la création d’événements et le contrôle administratif de l’offre événementielle. Le chapitre suivant sera consacré à l’exploration, à la personnalisation et aux interactions autour des événements.

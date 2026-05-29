@@ -24,6 +24,8 @@ Le Sprint 3 vise à renforcer l’interactivité de FESTY et à améliorer la pe
 
 **Tableau 5.1 : Backlog du Sprint 3**
 
+Pour faciliter la lecture, les fonctionnalités du Sprint 3 sont regroupées en trois axes : l’exploration et la personnalisation de l’expérience utilisateur, les interactions autour des événements, et la gestion artistique par le partenaire et l’administrateur.
+
 ## 5.3 Analyse fonctionnelle
 
 L’analyse fonctionnelle précise les interactions entre les acteurs du Sprint 3 et les fonctionnalités liées à l’exploration, à la personnalisation et aux échanges autour des événements. Le Visiteur explore les événements et les stars. L’Utilisateur personnalise son expérience, consulte les recommandations, gère ses favoris, suit des stars et participe au chat événementiel. Le Partenaire gère le line-up artistique et propose de nouvelles stars, tandis que l’Administrateur contrôle le catalogue artistique.
@@ -41,6 +43,8 @@ Ce diagramme montre que le visiteur peut consulter les événements et les stars
 ### 5.3.2 Description textuelle des cas d’utilisation
 
 Les tableaux suivants décrivent les principaux cas d’utilisation du Sprint 3.
+
+Les cas d’utilisation détaillés ci-dessous correspondent aux scénarios les plus représentatifs du sprint. Les fonctionnalités de favoris, de suivi des stars et de recommandations sont intégrées dans le parcours de personnalisation et d’exploration.
 
 #### Cas d’utilisation : Personnaliser son expérience
 

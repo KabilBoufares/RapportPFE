@@ -30,6 +30,8 @@ Le Sprint 4 vise à finaliser les fonctionnalités transactionnelles et opérati
 
 **Tableau 6.1 : Backlog du Sprint 4**
 
+Afin de conserver une lecture claire, les user stories de ce sprint sont regroupées en trois blocs fonctionnels : la billetterie et le paiement, la marketplace de revente, puis le contrôle d’accès et la supervision.
+
 ## 6.3 Analyse fonctionnelle
 
 L’analyse fonctionnelle précise les interactions entre les acteurs du Sprint 4 et les fonctionnalités réalisées. L’Utilisateur interagit avec la billetterie, les tickets et la marketplace. Le Partenaire organise le contrôle d’accès et suit son activité. L’Agent de scan vérifie les tickets à l’entrée des événements. L’Administrateur supervise les opérations financières et les actions sensibles.
@@ -179,3 +181,5 @@ La figure 6.9 illustre l’interface de scan des tickets. Elle permet à l’age
 Dans ce chapitre, nous avons présenté l’étude et la réalisation du Sprint 4, consacré à la billetterie, au paiement, à la revente et au contrôle d’accès. Nous avons commencé par le Sprint Backlog, puis l’analyse fonctionnelle et la conception.
 
 Ce sprint a permis de compléter le parcours événementiel en reliant l’achat du billet, la gestion du ticket, la marketplace de revente et la validation de l’accès à l’événement. Il a également introduit le suivi partenaire et la supervision financière.
+
+Ce sprint clôture ainsi le cycle principal de développement fonctionnel de FESTY. La partie suivante sera consacrée à la conclusion générale du projet, aux limites rencontrées et aux perspectives d’évolution.

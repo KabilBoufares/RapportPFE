@@ -10,7 +10,7 @@ Nous présentons d’abord le Sprint Backlog, puis l’analyse fonctionnelle à 
 
 Le Sprint 1 vise à mettre en place le socle d’accès sécurisé à la plateforme FESTY. Il permet au visiteur de créer un compte et de vérifier son numéro de téléphone, à l’utilisateur de s’authentifier et de gérer son profil, et à l’administrateur d’accéder au back-office à travers une authentification renforcée par 2FA.
 
-Le tableau 3.1 présente les user stories retenues pour ce sprint.
+Le tableau 3.1 présente les user stories retenues pour ce premier sprint.
 
 | ID | User Story | Tâches principales | Priorité |
 |---|---|---|---|
