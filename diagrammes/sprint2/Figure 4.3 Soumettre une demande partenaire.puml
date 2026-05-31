@@ -47,7 +47,7 @@ else informations valides
         deactivate Storage
 
         activate Backend
-        Backend -> DB : Enregistrer la demande partenaire (statut : en attente)
+        Backend -> DB : Enregistrer la demande partenaire (statut : statut : en attente de traitement)
         deactivate Backend
 
         activate DB

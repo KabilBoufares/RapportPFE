@@ -1,40 +1,47 @@
-# Chapitre 6 : Sprint 4 — Billetterie, paiement, revente et contrôle d’accès
+# Chapitre 6 : Sprint 4 — Billetterie, paiement et contrôle d’accès
 
 ## 6.1 Introduction
 
-Ce chapitre présente l’étude et la réalisation du Sprint 4 du projet FESTY. Ce sprint est consacré à la billetterie, au paiement, à la gestion des tickets, à la revente et au contrôle d’accès aux événements.
+Ce chapitre présente l’étude et la réalisation du Sprint 4 du projet FESTY. Ce sprint est consacré aux fonctionnalités transactionnelles et opérationnelles de la plateforme, notamment la billetterie, le paiement, la gestion des tickets, les demandes de remboursement, la marketplace de revente et le contrôle d’accès aux événements.
 
-Il complète le parcours événementiel en permettant à l’utilisateur de réserver et payer un billet, de consulter ses tickets, de demander un remboursement et d’utiliser la marketplace de revente. Il couvre aussi le scan des tickets, le suivi partenaire et la supervision des opérations financières sensibles.
+Il complète le parcours événementiel initié dans les sprints précédents. Après avoir exploré les événements et interagi avec les contenus de la plateforme, l’utilisateur peut désormais réserver et payer un billet, consulter ses tickets, demander un remboursement lorsque les conditions le permettent, ou utiliser la marketplace pour revendre ou acheter un ticket. Le partenaire peut suivre son activité et sa monétisation, gérer les sessions de scan et affecter des agents au contrôle d’accès. L’agent de scan vérifie les tickets à l’entrée des événements, tandis que l’administrateur supervise les opérations financières sensibles.
 
-Nous présentons d’abord le Sprint Backlog, puis l’analyse fonctionnelle à travers le diagramme de cas d’utilisation et les descriptions textuelles. Ensuite, la conception est détaillée à l’aide du diagramme de classes et des diagrammes de séquence. Enfin, la partie réalisation expose les principales interfaces développées durant ce sprint.
+Ce sprint est particulièrement important, car il introduit des traitements liés aux transactions, aux statuts de paiement, à la génération des tickets et à la validation de l’accès physique aux événements. Pour cette raison, une attention particulière est accordée à la distinction entre la réservation temporaire, la commande, le paiement, le ticket, le remboursement, la revente et les opérations financières.
+
+Nous présentons d’abord le Sprint Backlog, puis l’analyse fonctionnelle à travers le diagramme de cas d’utilisation et les descriptions textuelles des scénarios principaux. Ensuite, la conception est détaillée à l’aide de deux diagrammes de classes complémentaires et de plusieurs diagrammes de séquence. La partie réalisation expose les principales interfaces développées durant ce sprint. Enfin, le chapitre présente les tests backend, les tests de sécurité, la revue du sprint et la conclusion.
 
 ## 6.2 Sprint Backlog
 
-Le Sprint 4 vise à finaliser les fonctionnalités transactionnelles et opérationnelles liées à la participation à un événement. Les user stories US-4.1 à US-4.7 concernent la billetterie, les tickets, le remboursement et la marketplace de revente. Les user stories US-4.8 à US-4.13 portent sur le scan, le suivi partenaire et la supervision. Le tableau 6.1 présente les user stories [REF-SCRUM] retenues pour ce sprint.
+Le Sprint 4 vise à finaliser les fonctionnalités liées à la participation effective à un événement. Il couvre le cycle de billetterie, depuis la consultation des billets jusqu’à la génération du ticket après paiement. Il intègre également la consultation des tickets, les demandes de remboursement, la revente, le contrôle d’accès, le suivi de la monétisation partenaire et le traitement des opérations financières sensibles.
+
+Le tableau 6.1 présente les principales user stories retenues pour ce sprint.
 
 | ID | User Story | Tâches principales | Priorité |
 |---|---|---|---|
-| US-4.1 | En tant qu’utilisateur, je veux consulter la billetterie d’un événement afin de choisir un billet adapté. | Afficher les types de billets disponibles ; consulter les prix ; vérifier les disponibilités. | Must Have |
-| US-4.2 | En tant qu’utilisateur, je veux réserver et payer un billet afin de participer à un événement. | Sélectionner un type de billet ; vérifier la disponibilité ; créer une réservation temporaire ; effectuer le paiement [REF-STRIPE] ; générer le ticket après confirmation. | Must Have |
-| US-4.3 | En tant qu’utilisateur, je veux consulter mes tickets afin d’accéder aux informations de mes achats. | Afficher la liste des tickets ; consulter le détail d’un ticket ; afficher le code du ticket. | Must Have |
-| US-4.4 | En tant qu’utilisateur, je veux demander un remboursement lorsque cela est possible. | Sélectionner un ticket ou une commande ; saisir la raison ; soumettre la demande ; suivre son statut. | Should Have |
-| US-4.5 | En tant qu’utilisateur, je veux mettre un ticket FESTY en revente afin de le céder à un autre utilisateur. | Sélectionner un ticket ; vérifier qu’il est revendable ; définir le prix ; publier l’annonce. | Should Have |
-| US-4.6 | En tant qu’utilisateur, je veux consulter la marketplace afin d’acheter un ticket revendu. | Afficher les annonces disponibles ; consulter une annonce ; effectuer le paiement ; confirmer l’achat. | Should Have |
-| US-4.7 | En tant qu’utilisateur, je veux proposer un ticket externe à la vente afin de le publier dans la marketplace. | Saisir les informations du ticket externe ; ajouter une image justificative ; définir le prix ; publier l’annonce. | Could Have |
+| US-4.1 | En tant qu’utilisateur, je veux consulter la billetterie d’un événement afin de choisir un billet adapté. | Afficher les types de billets disponibles ; consulter les prix ; vérifier les disponibilités ; afficher les conditions liées au billet. | Must Have |
+| US-4.2 | En tant qu’utilisateur, je veux réserver et payer un billet afin de participer à un événement. | Sélectionner un type de billet ; vérifier la disponibilité ; créer une réservation temporaire ; initier le paiement ; confirmer le paiement ; générer le ticket après validation. | Must Have |
+| US-4.3 | En tant qu’utilisateur, je veux consulter mes tickets afin d’accéder aux informations de mes achats. | Afficher la liste des tickets ; consulter le détail d’un ticket ; afficher le code du ticket ; consulter le statut du ticket. | Must Have |
+| US-4.4 | En tant qu’utilisateur, je veux demander un remboursement lorsque cela est possible. | Sélectionner un ticket ou une commande ; vérifier l’éligibilité au remboursement ; saisir la raison ; soumettre la demande ; suivre son statut. | Should Have |
+| US-4.5 | En tant qu’utilisateur, je veux mettre un ticket FESTY en revente afin de le céder à un autre utilisateur. | Sélectionner un ticket ; vérifier qu’il est revendable ; définir le prix ; publier l’annonce ; suivre son statut. | Should Have |
+| US-4.6 | En tant qu’utilisateur, je veux consulter la marketplace afin d’acheter un ticket revendu. | Afficher les annonces disponibles ; consulter une annonce ; vérifier la disponibilité du ticket ; effectuer le paiement ; confirmer l’achat. | Should Have |
+| US-4.7 | En tant qu’utilisateur, je veux proposer un ticket externe à la vente afin de le publier dans la marketplace. | Saisir les informations du ticket externe ; ajouter une image justificative ; définir le prix ; publier l’annonce ; suivre son statut. | Could Have |
 | US-4.8 | En tant que partenaire, je veux gérer les sessions de scan afin d’organiser le contrôle d’accès à mes événements. | Créer une session de scan ; ouvrir la session ; fermer la session ; consulter son statut. | Must Have |
-| US-4.9 | En tant que partenaire, je veux affecter des agents de scan à un événement afin de déléguer le contrôle d’accès. | Sélectionner un événement ; sélectionner un agent ; créer l’affectation ; révoquer l’affectation si nécessaire. | Must Have |
-| US-4.10 | En tant qu’agent de scan, je veux contrôler l’accès à un événement afin de vérifier les tickets des participants. | Scanner le ticket ; vérifier le ticket ; enregistrer le résultat ; afficher l’autorisation ou le refus d’accès. | Must Have |
-| US-4.11 | En tant que partenaire, je veux suivre mon activité et ma monétisation afin de consulter les résultats de mes événements. | Consulter les ventes ; consulter les fonds en attente ; suivre les montants à recevoir ; consulter les règlements. | Should Have |
-| US-4.12 | En tant qu’administrateur, je veux traiter les opérations financières afin de suivre les transactions sensibles de la plateforme. | Consulter les opérations ; vérifier les demandes financières ; approuver ou rejeter une opération ; mettre à jour son statut. | Should Have |
-| US-4.13 | En tant qu’administrateur, je veux superviser les opérations sensibles afin de limiter les risques liés aux paiements et aux accès. | Suivre les opérations sensibles ; contrôler les opérations échouées ; vérifier les actions nécessitant une supervision. | Should Have |
+| US-4.9 | En tant que partenaire, je veux affecter des agents de scan à un événement afin de déléguer le contrôle d’accès. | Sélectionner un événement ; sélectionner un agent de scan ; créer l’affectation ; révoquer l’affectation si nécessaire. | Must Have |
+| US-4.10 | En tant qu’agent de scan, je veux contrôler l’accès à un événement afin de vérifier les tickets des participants. | Scanner le ticket ; vérifier sa validité ; vérifier sa correspondance avec l’événement ; vérifier son état d’utilisation ; enregistrer le résultat ; afficher l’autorisation ou le refus d’accès. | Must Have |
+| US-4.11 | En tant que partenaire, je veux suivre mon activité et ma monétisation afin de consulter les résultats financiers de mes événements. | Consulter les ventes ; consulter les fonds en attente ; suivre les montants disponibles ; demander un retrait si l’événement est terminé et si un solde disponible existe. | Should Have |
+| US-4.12 | En tant qu’administrateur, je veux traiter les opérations financières afin de suivre les transactions sensibles de la plateforme. | Consulter les opérations ; vérifier les remboursements et les demandes de retrait ; approuver ou rejeter une opération ; mettre à jour son statut ; conserver une trace de traitement. | Should Have |
+| US-4.13 | En tant qu’administrateur, je veux superviser les opérations sensibles afin de limiter les risques liés aux paiements, aux remboursements, aux retraits et aux accès. | Suivre les opérations sensibles ; contrôler les opérations échouées ; vérifier les actions nécessitant une supervision ; consulter les anomalies. | Should Have |
 
 **Tableau 6.1 : Backlog du Sprint 4**
 
-Afin de conserver une lecture claire, les user stories de ce sprint sont regroupées en trois blocs fonctionnels : la billetterie et le paiement, la marketplace de revente, puis le contrôle d’accès et la supervision.
+Pour faciliter la lecture, les fonctionnalités du Sprint 4 sont regroupées en trois blocs fonctionnels. Le premier bloc concerne la billetterie, le paiement, les tickets et les remboursements. Le deuxième bloc concerne la marketplace de revente, incluant les tickets FESTY et les tickets externes. Le troisième bloc concerne le contrôle d’accès, le suivi partenaire, la demande de retrait et la supervision financière.
+
 
 ## 6.3 Analyse fonctionnelle
 
-L’analyse fonctionnelle précise les interactions entre les acteurs du Sprint 4 et les fonctionnalités réalisées. L’Utilisateur interagit avec la billetterie, les tickets et la marketplace. Le Partenaire organise le contrôle d’accès et suit son activité. L’Agent de scan vérifie les tickets à l’entrée des événements. L’Administrateur supervise les opérations financières et les actions sensibles.
+L’analyse fonctionnelle précise les interactions entre les acteurs du Sprint 4 et les fonctionnalités réalisées. L’Utilisateur interagit avec la billetterie, le paiement, ses tickets, les demandes de remboursement et la marketplace. Le Partenaire organise le contrôle d’accès à ses événements, affecte les agents de scan et suit son activité financière. L’Agent de scan contrôle les tickets à l’entrée des événements. L’Administrateur traite les opérations financières sensibles et supervise les actions nécessitant un contrôle particulier.
+
+Le Sprint 4 est plus sensible que les sprints précédents, car il manipule des opérations transactionnelles. Pour cette raison, les scénarios décrits ci-dessous distinguent clairement la réservation temporaire, le paiement, la commande, le ticket, le remboursement, la revente, le scan et le traitement financier.
 
 ### 6.3.1 Diagramme de cas d’utilisation
 
@@ -44,11 +51,15 @@ La figure 6.1 présente les principaux cas d’utilisation du Sprint 4.
 
 **Figure 6.1 : Diagramme de cas d’utilisation du Sprint 4**
 
-Ce diagramme regroupe les fonctionnalités liées à la réservation, au paiement, à la consultation des tickets, au remboursement, à la revente et au contrôle d’accès. Il met également en évidence le suivi partenaire et la supervision des opérations financières.
+Ce diagramme regroupe les fonctionnalités liées à la réservation, au paiement, à la consultation des tickets, au remboursement, à la revente et au contrôle d’accès. Il met également en évidence le suivi partenaire, la demande de retrait et la supervision des opérations financières par l’administrateur.
+
+La demande de retrait du partenaire est rattachée au suivi de son activité et de sa monétisation. Elle n’est possible que lorsque l’événement concerné est terminé et lorsqu’un solde disponible peut être demandé. Une fois soumise, elle génère une opération financière en attente de traitement administratif.
 
 ### 6.3.2 Description textuelle des cas d’utilisation
 
-Les tableaux suivants décrivent les principaux cas d’utilisation du Sprint 4.
+Les tableaux suivants décrivent les principaux cas d’utilisation du Sprint 4. Afin d’éviter une surcharge du chapitre, seuls les scénarios les plus représentatifs sont détaillés. Les autres fonctionnalités du sprint, telles que la gestion des sessions de scan, l’affectation des agents, la consultation des annonces et la supervision des opérations sensibles, sont intégrées dans les parcours principaux ou représentées dans le diagramme de cas d’utilisation.
+
+Les cinq cas retenus permettent de couvrir le cycle principal du Sprint 4 : achat d’un billet, consultation du ticket, remboursement, revente, contrôle d’accès et traitement financier.
 
 #### Cas d’utilisation : Réserver et payer un billet
 
@@ -56,13 +67,31 @@ Les tableaux suivants décrivent les principaux cas d’utilisation du Sprint 4.
 |---|---|
 | Cas d’utilisation | Réserver et payer un billet |
 | Acteur principal | Utilisateur |
-| Objectif | Permettre à l’utilisateur de réserver temporairement un billet, de le payer et d’obtenir son ticket après confirmation. |
-| Précondition | L’utilisateur est authentifié et consulte la billetterie d’un événement actif. |
-| Postcondition | La commande est confirmée et le ticket est généré pour l’utilisateur. |
-| Scénario nominal | 1. L’utilisateur consulte la billetterie d’un événement.<br>2. Il sélectionne un type de billet.<br>3. Le système vérifie la disponibilité du billet.<br>4. Le système crée une réservation temporaire.<br>5. L’utilisateur procède au paiement.<br>6. Le système confirme le paiement.<br>7. Le système convertit la réservation en commande payée.<br>8. Le système génère le ticket.<br>9. Le système affiche la confirmation de l’achat. |
-| Exceptions | E1 : Le billet n’est plus disponible.<br>E2 : La réservation temporaire a expiré.<br>E3 : Le paiement échoue. |
+| Objectif | Permettre à l’utilisateur de sélectionner un billet, de créer une réservation temporaire, d’effectuer le paiement et d’obtenir un ticket après confirmation. |
+| Précondition | L’utilisateur est authentifié et consulte la billetterie d’un événement actif disposant de billets disponibles. |
+| Postcondition | La commande est confirmée, le paiement est validé et le ticket est généré pour l’utilisateur. |
+| Scénario nominal | 1. L’utilisateur consulte le détail d’un événement.<br>2. Le système affiche les types de billets disponibles, les prix et les quantités restantes.<br>3. L’utilisateur sélectionne un type de billet.<br>4. Le système vérifie la disponibilité du billet sélectionné.<br>5. Le système crée une réservation temporaire avec une durée de validité limitée.<br>6. L’utilisateur procède au paiement.<br>7. Le système vérifie que la réservation est encore valide.<br>8. Le service de paiement confirme la transaction.<br>9. Le système transforme la réservation temporaire en commande payée.<br>10. Le système génère le ticket associé à la commande.<br>11. Le système affiche la confirmation de l’achat et rend le ticket disponible. |
+| Exceptions | E1 : Le billet n’est plus disponible.<br>E2 : La réservation temporaire a expiré avant le paiement.<br>E3 : Le paiement échoue ou est refusé.<br>E4 : La génération du ticket échoue après confirmation du paiement. |
 
 **Tableau 6.2 : Description textuelle du cas d’utilisation « Réserver et payer un billet »**
+
+Ce cas d’utilisation constitue le cœur transactionnel du Sprint 4. Il distingue la réservation temporaire, le paiement, la commande et le ticket. Cette séparation permet de gérer les cas d’expiration, d’échec de paiement et de génération du ticket après validation de la transaction.
+
+#### Cas d’utilisation : Consulter ses tickets et demander un remboursement
+
+| Élément | Description |
+|---|---|
+| Cas d’utilisation | Consulter ses tickets et demander un remboursement |
+| Acteur principal | Utilisateur |
+| Objectif | Permettre à l’utilisateur de consulter ses tickets, d’accéder aux détails d’un ticket et de demander un remboursement lorsque les conditions le permettent. |
+| Précondition | L’utilisateur est authentifié et possède au moins un ticket associé à son compte. |
+| Postcondition | Les tickets sont affichés. En cas de demande de remboursement valide, une demande est enregistrée avec un statut en attente de traitement. |
+| Scénario nominal | 1. L’utilisateur accède à l’espace de gestion de ses tickets.<br>2. Le système affiche la liste des tickets associés à son compte.<br>3. L’utilisateur sélectionne un ticket.<br>4. Le système affiche les détails du ticket, son statut et les actions disponibles.<br>5. L’utilisateur choisit de demander un remboursement.<br>6. Le système vérifie l’éligibilité du ticket au remboursement.<br>7. L’utilisateur saisit la raison de la demande.<br>8. Le système enregistre la demande de remboursement avec un statut en attente de traitement.<br>9. Le système affiche un message de confirmation. |
+| Exceptions | E1 : Aucun ticket n’est disponible pour l’utilisateur.<br>E2 : Le ticket sélectionné n’est pas remboursable.<br>E3 : Une demande de remboursement existe déjà pour ce ticket.<br>E4 : L’enregistrement de la demande échoue. |
+
+**Tableau 6.3 : Description textuelle du cas d’utilisation « Consulter ses tickets et demander un remboursement »**
+
+Ce cas d’utilisation complète le parcours d’achat. Après la génération du ticket, l’utilisateur peut consulter ses informations et demander un remboursement lorsque les règles métier l’autorisent. La demande n’entraîne pas automatiquement le remboursement : elle doit être traitée selon son statut et les règles de supervision financière.
 
 #### Cas d’utilisation : Gérer la marketplace de revente
 
@@ -70,15 +99,15 @@ Les tableaux suivants décrivent les principaux cas d’utilisation du Sprint 4.
 |---|---|
 | Cas d’utilisation | Gérer la marketplace de revente |
 | Acteur principal | Utilisateur |
-| Objectif | Permettre à l’utilisateur de publier un ticket FESTY ou un ticket externe dans la marketplace, et permettre à un autre utilisateur d’acheter un ticket revendu. |
+| Objectif | Permettre à l’utilisateur de publier un ticket FESTY en revente, de proposer un ticket externe ou d’acheter un ticket revendu par un autre utilisateur. |
 | Précondition | L’utilisateur est authentifié et accède à ses tickets ou à la marketplace. |
-| Postcondition | L’annonce est publiée dans la marketplace ou l’achat du ticket revendu est confirmé. |
-| Scénario nominal | 1. L’utilisateur accède à ses tickets ou à la marketplace.<br>2. Il choisit de mettre un ticket FESTY en revente ou de proposer un ticket externe.<br>3. Il saisit les informations nécessaires.<br>4. Le système vérifie les informations saisies.<br>5. Le système publie l’annonce de revente.<br>6. Un autre utilisateur consulte la marketplace.<br>7. Il sélectionne une annonce et procède au paiement.<br>8. Le système confirme l’achat du ticket revendu. |
-| Exceptions | E1 : Le ticket FESTY n’est pas revendable.<br>E2 : Les informations du ticket externe sont incomplètes.<br>E3 : Le paiement du ticket en revente échoue. |
+| Postcondition | Une annonce de revente est publiée, annulée ou vendue ; ou l’achat d’un ticket revendu est confirmé. |
+| Scénario nominal | 1. L’utilisateur accède à la marketplace ou à la liste de ses tickets.<br>2. Il choisit de mettre un ticket FESTY en revente ou de proposer un ticket externe.<br>3. Le système vérifie les informations du ticket et les conditions de publication.<br>4. L’utilisateur définit le prix de vente et confirme la publication.<br>5. Le système publie l’annonce dans la marketplace.<br>6. Un autre utilisateur consulte la marketplace.<br>7. Il sélectionne une annonce disponible.<br>8. Le système vérifie que l’annonce est encore active.<br>9. L’acheteur procède au paiement.<br>10. Le système confirme l’achat et met à jour le statut de l’annonce. |
+| Exceptions | E1 : Le ticket FESTY n’est pas revendable.<br>E2 : Les informations du ticket externe sont incomplètes ou invalides.<br>E3 : L’annonce n’est plus disponible au moment de l’achat.<br>E4 : Le paiement du ticket en revente échoue.<br>E5 : La mise à jour du statut de l’annonce échoue. |
 
-**Tableau 6.3 : Description textuelle du cas d’utilisation « Gérer la marketplace de revente »**
+**Tableau 6.4 : Description textuelle du cas d’utilisation « Gérer la marketplace de revente »**
 
-Dans le cas d’un ticket externe, l’utilisateur ajoute les informations du ticket ainsi qu’une image justificative. Cette fonctionnalité constitue une extension de la marketplace.
+Dans le cas d’un ticket FESTY, la revente s’appuie sur un ticket existant dans la plateforme. Dans le cas d’un ticket externe, l’utilisateur doit saisir les informations du ticket et fournir une image justificative. Cette distinction permet de gérer à la fois les tickets générés par FESTY et les tickets provenant d’un autre canal.
 
 #### Cas d’utilisation : Contrôler l’accès à un événement
 
@@ -88,11 +117,13 @@ Dans le cas d’un ticket externe, l’utilisateur ajoute les informations du ti
 | Acteur principal | Agent de scan |
 | Objectif | Permettre à l’agent de scan de vérifier la validité d’un ticket présenté à l’entrée d’un événement. |
 | Précondition | L’agent de scan est authentifié, affecté à l’événement et une session de scan est ouverte. |
-| Postcondition | Le scan est enregistré et l’accès est autorisé ou refusé. |
-| Scénario nominal | 1. L’agent de scan accède à la session de scan.<br>2. Il scanne le ticket présenté par le participant.<br>3. Le système vérifie le ticket.<br>4. Le système vérifie que le ticket correspond à l’événement.<br>5. Le système enregistre l’historique du scan.<br>6. Le système retourne le résultat du contrôle.<br>7. L’agent autorise ou refuse l’accès selon le résultat. |
-| Exceptions | E1 : Le ticket est invalide.<br>E2 : Le ticket a déjà été utilisé.<br>E3 : L’agent n’est pas autorisé à scanner pour cet événement.<br>E4 : La session de scan est fermée. |
+| Postcondition | Le scan est enregistré et l’accès est autorisé ou refusé selon le résultat du contrôle. |
+| Scénario nominal | 1. L’agent de scan accède à la session de scan liée à un événement.<br>2. Le système vérifie que l’agent est affecté à cet événement.<br>3. Le système vérifie que la session de scan est ouverte.<br>4. L’agent scanne le ticket présenté par le participant.<br>5. Le système vérifie l’existence et la validité du ticket.<br>6. Le système vérifie que le ticket correspond à l’événement concerné.<br>7. Le système vérifie que le ticket n’a pas déjà été utilisé.<br>8. Le système enregistre l’historique du scan.<br>9. Le système retourne le résultat du contrôle.<br>10. L’agent autorise ou refuse l’accès selon le résultat affiché. |
+| Exceptions | E1 : Le ticket est invalide ou introuvable.<br>E2 : Le ticket a déjà été utilisé.<br>E3 : Le ticket ne correspond pas à l’événement.<br>E4 : L’agent n’est pas autorisé à scanner pour cet événement.<br>E5 : La session de scan est fermée. |
 
-**Tableau 6.4 : Description textuelle du cas d’utilisation « Contrôler l’accès à un événement »**
+**Tableau 6.5 : Description textuelle du cas d’utilisation « Contrôler l’accès à un événement »**
+
+Ce cas d’utilisation relie directement la billetterie au contrôle d’accès physique. Le ticket généré après paiement devient exploitable lors du scan. Le système conserve également un historique de scan afin de tracer les accès autorisés et refusés.
 
 #### Cas d’utilisation : Traiter les opérations financières
 
@@ -100,86 +131,314 @@ Dans le cas d’un ticket externe, l’utilisateur ajoute les informations du ti
 |---|---|
 | Cas d’utilisation | Traiter les opérations financières |
 | Acteur principal | Administrateur |
-| Objectif | Permettre à l’administrateur de suivre et traiter les opérations financières sensibles de la plateforme. |
+| Objectif | Permettre à l’administrateur de consulter, vérifier et traiter les opérations financières sensibles de la plateforme, notamment les remboursements et les demandes de retrait partenaire. |
 | Précondition | L’administrateur est authentifié au back-office. |
-| Postcondition | L’opération financière est traitée ou son statut est mis à jour. |
-| Scénario nominal | 1. L’administrateur accède à l’espace de supervision financière.<br>2. Le système affiche les opérations financières à suivre.<br>3. L’administrateur consulte les détails d’une opération.<br>4. Le système affiche les informations nécessaires au traitement.<br>5. L’administrateur traite l’opération si nécessaire.<br>6. Le système met à jour le statut de l’opération.<br>7. Le système affiche un message de confirmation. |
-| Exceptions | E1 : L’opération financière est introuvable.<br>E2 : L’opération ne peut pas être traitée dans son état actuel.<br>E3 : La mise à jour du statut échoue. |
+| Postcondition | L’opération financière est validée, rejetée ou mise à jour selon son état et sa nature. Une trace de traitement est conservée. |
+| Scénario nominal | 1. L’administrateur accède à l’espace de supervision financière.<br>2. Le système affiche la liste des opérations financières à suivre.<br>3. L’administrateur sélectionne une opération.<br>4. Le système affiche les détails de l’opération, son type et son état actuel.<br>5. L’administrateur vérifie la nature de l’opération : remboursement, demande de retrait partenaire ou opération sensible.<br>6. Le système vérifie que l’opération est traitable dans son état actuel.<br>7. L’administrateur décide de valider, rejeter ou mettre à jour l’opération.<br>8. Le système met à jour le statut de l’opération.<br>9. Le système enregistre une trace de traitement.<br>10. Le système affiche un message de confirmation. |
+| Exceptions | E1 : L’opération financière est introuvable.<br>E2 : L’opération ne peut pas être traitée dans son état actuel.<br>E3 : La mise à jour du statut échoue.<br>E4 : L’enregistrement de la trace de traitement échoue. |
 
-**Tableau 6.5 : Description textuelle du cas d’utilisation « Traiter les opérations financières »**
+**Tableau 6.6 : Description textuelle du cas d’utilisation « Traiter les opérations financières »**
+
+Les opérations financières traitées par l’administrateur peuvent provenir d’une demande de remboursement ou d’une demande de retrait partenaire. La demande de retrait est initiée par le partenaire depuis son espace de monétisation uniquement lorsque l’événement concerné est terminé et qu’un solde disponible existe. Cette demande génère une opération financière en attente, ensuite contrôlée et traitée par l’administrateur.
 
 ## 6.4 Conception
 
-La conception présente les éléments structurels et dynamiques nécessaires à la billetterie, au paiement, à la revente et au contrôle d’accès.
+La conception du Sprint 4 précise les éléments structurels et dynamiques nécessaires à la billetterie, au paiement, à la gestion des tickets, à la revente, au contrôle d’accès et au traitement des opérations financières. Elle s’appuie sur deux diagrammes de classes complémentaires et sur des diagrammes de séquence décrivant les scénarios transactionnels les plus importants.
 
-### 6.4.1 Diagramme de classes
+Le Sprint 4 couvre deux sous-domaines fonctionnels. Le premier concerne le noyau transactionnel : billetterie, réservation temporaire, paiement, commande, ticket, remboursement et revente. Le second concerne l’exploitation opérationnelle : contrôle d’accès, sessions de scan, suivi de la monétisation partenaire, demandes de retrait et supervision financière.
 
-La figure 6.2 présente les principales classes liées à la billetterie, au paiement, à la gestion des tickets, aux remboursements et à la revente.
+Pour éviter de surcharger un seul diagramme de classes, la conception est présentée à travers deux diagrammes complémentaires. Le premier diagramme se concentre sur la billetterie, le paiement et la revente. Le second diagramme complète cette vue en présentant les classes liées au scan, au suivi partenaire et aux opérations financières.
+
+### 6.4.1 Diagramme de classes — Billetterie, paiement et revente
+
+La figure 6.2 présente les principales classes liées à la billetterie, au paiement, à la gestion des tickets, aux demandes de remboursement et à la marketplace de revente.
 
 ![Diagramme de classes — Billetterie, paiement et revente](<images/chapitre6/Figure 6.2 Diagramme de classes — Billetterie, paiement et revente.png>)
 
 **Figure 6.2 : Diagramme de classes — Billetterie, paiement et revente**
 
-Ce diagramme met en évidence la réservation temporaire, la commande, le paiement, le ticket, la demande de remboursement, la mise en revente d’un ticket FESTY et la proposition d’un ticket externe. Les classes complémentaires liées au contrôle d’accès, au suivi partenaire et à la supervision financière sont détaillées dans l’Annexe A.
+Ce diagramme met en évidence les entités principales du parcours transactionnel. La classe `TicketType` représente les types de billets disponibles pour un événement. Elle contient les informations relatives au prix, à la quantité totale, à la quantité disponible, à la quantité vendue et à la période de vente.
 
-### 6.4.2 Diagrammes de séquence
+La classe `TicketReservation` représente une réservation temporaire créée avant le paiement. Elle permet de bloquer provisoirement une quantité de billets pendant une durée limitée. Si le paiement n’est pas finalisé à temps, la réservation peut expirer. Si le paiement est validé, elle est convertie en commande.
 
-Les diagrammes de séquence retenus correspondent aux scénarios prioritaires du Sprint 4 : la réservation avec paiement d’un billet et le contrôle d’accès à un événement.
+La classe `UserOrder` représente la commande de l’utilisateur. Elle regroupe les montants, les frais, les taxes, le montant total et le type de commande. La classe `Payment` permet de suivre l’état du paiement associé à la commande. Elle conserve les informations nécessaires à la confirmation du paiement, à l’échec éventuel de la transaction ou au remboursement.
+
+La classe `Ticket` représente le billet généré après confirmation du paiement. Elle contient un code unique, un statut et des informations figées sur l’événement, la date, le lieu, le participant et le montant payé. Ces informations permettent de garantir que le ticket reste exploitable même si certaines informations de l’événement évoluent par la suite.
+
+La classe `RefundRequest` représente une demande de remboursement soumise par l’utilisateur. Elle permet de suivre la raison de la demande, son statut, sa date de demande et sa date de décision.
+
+Les classes `ResaleListing` et `ExternalTicketListing` représentent les annonces de revente. La première concerne la mise en revente d’un ticket FESTY existant, tandis que la seconde concerne la proposition d’un ticket externe à la plateforme. Cette séparation permet de distinguer les tickets générés par FESTY des tickets provenant d’un autre canal.
+
+Ainsi, ce diagramme apporte une vision structurée du cycle billetterie-paiement-ticket. Il distingue la réservation temporaire, la commande, le paiement, le ticket, le remboursement et la revente, ce qui permet de mieux comprendre les statuts et les transitions métier associés à l’achat d’un billet.
+
+### 6.4.2 Diagramme de classes — Contrôle d’accès, suivi partenaire et supervision financière
+
+La figure 6.3 présente les classes complémentaires liées au contrôle d’accès, à l’affectation des agents de scan, au suivi de la monétisation partenaire et au traitement financier.
+
+![Diagramme de classes — Contrôle d’accès, suivi partenaire et supervision financière](<images/chapitre6/Figure 6.3 Diagramme de classes — Contrôle d’accès, suivi partenaire et supervision financière.png>)
+
+**Figure 6.3 : Diagramme de classes — Contrôle d’accès, suivi partenaire et supervision financière**
+
+Ce diagramme complète le diagramme principal de billetterie. La classe `AgentScan` représente l’utilisateur chargé du contrôle d’accès à l’entrée d’un événement. Son action est encadrée par la classe `EventStaffAssignment`, qui associe un agent à un événement et permet de vérifier s’il est autorisé à scanner les tickets de cet événement.
+
+La classe `ScanSession` représente une session de scan ouverte ou fermée par le partenaire. Elle permet d’organiser le contrôle d’accès pendant une période donnée. La classe `TicketCheckInHistory` permet de conserver l’historique des scans, y compris les accès autorisés et les accès refusés. Cette trace est importante pour éviter la réutilisation d’un même ticket et pour suivre les anomalies d’accès.
+
+Du côté financier, la classe `SettlementLedger` permet de suivre les montants liés à l’activité du partenaire, notamment les montants bruts, les remboursements, les commissions et le montant net. La classe `EscrowHold` représente les fonds bloqués avant leur libération. La classe `PayoutRequest` représente une demande de retrait initiée par le partenaire.
+
+La demande de retrait n’est possible que lorsque l’événement est terminé et qu’un solde disponible existe. Cette règle permet d’éviter qu’un partenaire demande le retrait de montants avant la clôture effective de l’événement et avant le calcul du solde disponible.
+
+L’administrateur intervient sur les demandes de retrait et les opérations financières sensibles. Il peut superviser les opérations, approuver ou rejeter une demande et suivre les statuts associés. Ce diagramme permet donc de relier le parcours de vente des tickets au suivi financier et au traitement administratif.
+
+### 6.4.3 Diagrammes de séquence
+
+Les diagrammes de séquence retenus correspondent aux scénarios prioritaires du Sprint 4. Ils décrivent la réservation et le paiement d’un billet, le contrôle d’accès à un événement et le traitement administratif d’une opération financière.
 
 #### Diagramme de séquence : Réserver et payer un billet
 
-La figure 6.3 décrit la réservation et le paiement d’un billet. L’utilisateur sélectionne un billet, le système vérifie sa disponibilité, crée une réservation temporaire, confirme le paiement et génère le ticket.
+La figure 6.4 décrit le scénario de réservation et de paiement d’un billet. L’utilisateur consulte le détail d’un événement, sélectionne un type de billet, puis le système vérifie la disponibilité avant de créer une réservation temporaire.
 
-![Diagramme de séquence — Réserver et payer un billet](<images/chapitre6/Figure 6.3 Diagramme de séquence du scénario « Réserver et payer un billet ».png>)
+![Diagramme de séquence du scénario « Réserver et payer un billet »](<images/chapitre6/Figure 6.4 Diagramme de séquence du scénario Réserver et payer un billet.png>)
 
-**Figure 6.3 : Diagramme de séquence du scénario « Réserver et payer un billet »**
+**Figure 6.4 : Diagramme de séquence du scénario « Réserver et payer un billet »**
+
+Ce diagramme montre que la réservation temporaire possède une durée de validité limitée. Avant de confirmer le paiement, le système vérifie que cette réservation est encore valide. Si la réservation a expiré, le paiement ne peut pas aboutir. Si le paiement échoue, l’utilisateur reçoit un message d’erreur. En cas de paiement réussi, le système convertit la réservation en commande payée, génère le ticket et affiche la confirmation d’achat.
+
+Ce scénario donne plus de profondeur au processus de billetterie, car il ne se limite pas à l’achat du billet. Il montre aussi les cas de billet indisponible, de réservation expirée, d’échec de paiement, de commande confirmée et de ticket généré.
 
 #### Diagramme de séquence : Contrôler l’accès à un événement
 
-La figure 6.4 présente le contrôle d’accès à un événement. L’agent de scan scanne le ticket, puis le système vérifie sa validité et retourne le résultat du contrôle.
+La figure 6.5 présente le scénario de contrôle d’accès à un événement. L’agent de scan accède à la session de scan, puis le système vérifie son affectation à l’événement et l’état de la session.
 
-![Diagramme de séquence — Contrôler l’accès à un événement](<images/chapitre6/Figure 6.4 Diagramme de séquence du scénario « Contrôler l’accès à un événement ».png>)
+![Diagramme de séquence du scénario « Contrôler l’accès à un événement »](<images/chapitre6/Figure 6.5 Diagramme de séquence du scénario Contrôler l’accès à un événement.png>)
 
-**Figure 6.4 : Diagramme de séquence du scénario « Contrôler l’accès à un événement »**
+**Figure 6.5 : Diagramme de séquence du scénario « Contrôler l’accès à un événement »**
+
+Ce diagramme détaille les principaux cas possibles lors du scan. Si l’agent n’est pas autorisé ou si la session de scan est fermée, l’accès à l’interface de scan est refusé. Lorsque la session est ouverte, l’agent scanne le ticket présenté par le participant. Le système vérifie l’existence du ticket, sa validité, sa correspondance avec l’événement et son état d’utilisation.
+
+Si le ticket est invalide, ne correspond pas à l’événement ou a déjà été utilisé, le système enregistre l’historique du scan avec un résultat d’accès refusé. Si toutes les conditions sont satisfaites, le scan est enregistré avec un résultat d’accès autorisé. Ce scénario permet de relier le ticket généré après paiement au contrôle d’accès physique à l’événement.
+
+#### Diagramme de séquence : Traiter une opération financière
+
+La figure 6.6 présente le scénario de traitement d’une opération financière par l’administrateur. Ce scénario concerne notamment les demandes de remboursement, les demandes de retrait partenaire et les opérations financières nécessitant une supervision.
+
+![Diagramme de séquence du scénario « Traiter une opération financière »](<images/chapitre6/Figure 6.6 Diagramme de séquence du scénario Traiter une opération financière.png>)
+
+**Figure 6.6 : Diagramme de séquence du scénario « Traiter une opération financière »**
+
+L’administrateur accède d’abord à l’espace de supervision financière. Le système affiche les opérations à suivre, puis l’administrateur consulte les détails d’une opération. Si l’opération est introuvable, un message d’erreur est affiché. Sinon, le système affiche ses informations et permet à l’administrateur de lancer le traitement si l’opération est dans un état compatible.
+
+Le système vérifie alors l’état actuel de l’opération. Si elle n’est pas traitable, un message d’erreur est retourné. Si elle est traitable, le système met à jour son statut et conserve une trace de traitement. En cas d’échec de mise à jour, une erreur est affichée. En cas de succès, l’administrateur reçoit une confirmation.
+
+Ce diagramme complète la partie financière du Sprint 4. Il montre que les opérations sensibles ne sont pas de simples modifications manuelles : elles sont consultées, vérifiées, traitées selon leur état, puis tracées afin d’assurer un meilleur suivi administratif.
 
 ## 6.5 Réalisation
 
-Cette section présente les principales interfaces réalisées durant le Sprint 4.
+Cette section présente les principales interfaces réalisées durant le Sprint 4. Ces interfaces couvrent le parcours transactionnel de l’utilisateur, depuis la consultation de la billetterie jusqu’à l’obtention du ticket, ainsi que les fonctionnalités liées à la marketplace et au contrôle d’accès.
 
-La figure 6.5 illustre l’interface de détail d’un événement et de choix du billet. Elle permet à l’utilisateur de consulter les informations de l’événement et de sélectionner un billet.
+### 6.5.1 Interface de détail d’un événement et choix du billet
 
-![Interface de détail d’un événement et choix du billet](<images/chapitre6/Figure 6.5 Interface de détail d’un événement et choix du billet.png>)
+La figure 6.7 illustre l’interface de détail d’un événement et de choix du billet. Elle permet à l’utilisateur de consulter les informations principales de l’événement, de visualiser les types de billets disponibles et de sélectionner le billet souhaité.
 
-**Figure 6.5 : Interface de détail d’un événement et choix du billet**
+![Interface de détail d’un événement et choix du billet](<images/chapitre6/Figure 6.7 Interface de détail d’un événement et choix du billet.png>)
 
-La figure 6.6 présente l’interface de paiement, utilisée pour valider la commande après la sélection du billet.
+**Figure 6.7 : Interface de détail d’un événement et choix du billet**
 
-![Interface de paiement](<images/chapitre6/Figure 6.6 Interface de paiement.png>)
+Cette interface constitue le point d’entrée du processus d’achat. Elle affiche les informations nécessaires à la décision de l’utilisateur, notamment le type de billet, le prix et les disponibilités. Après sélection, le système peut créer une réservation temporaire afin de bloquer provisoirement le billet avant le paiement.
 
-**Figure 6.6 : Interface de paiement**
+### 6.5.2 Interface de paiement
 
-La figure 6.7 montre l’interface de consultation des tickets. Elle affiche la liste des tickets de l’utilisateur, leurs détails et les actions associées.
+La figure 6.8 présente l’interface de paiement utilisée après la sélection du billet. Elle permet à l’utilisateur de valider sa commande et de finaliser la transaction.
 
-![Interface de consultation des tickets](<images/chapitre6/Figure 6.7 Interface de consultation des tickets.png>)
+![Interface de paiement](<images/chapitre6/Figure 6.8 Interface de paiement.png>)
 
-**Figure 6.7 : Interface de consultation des tickets**
+**Figure 6.8 : Interface de paiement**
 
-La figure 6.8 présente l’interface de la marketplace. Elle permet de consulter les tickets en revente, de publier un ticket FESTY ou de proposer un ticket externe avec une image justificative.
+Cette interface est liée au processus de confirmation de la commande. Le paiement permet de transformer la réservation temporaire en commande confirmée. Lorsque la transaction est validée, le ticket est généré et devient disponible dans l’espace utilisateur. En cas d’échec du paiement ou d’expiration de la réservation temporaire, l’utilisateur est informé et l’achat n’est pas confirmé.
 
-![Interface de la marketplace](<images/chapitre6/Figure 6.8 Interface de la marketplace.png>)
+### 6.5.3 Interface de consultation des tickets
 
-**Figure 6.8 : Interface de la marketplace**
+La figure 6.9 montre l’interface de consultation des tickets. Elle permet à l’utilisateur d’accéder à la liste de ses tickets, de consulter les détails d’un ticket et d’afficher son code d’accès.
 
-La figure 6.9 illustre l’interface de scan des tickets. Elle permet à l’agent de scan de vérifier rapidement un ticket et d’afficher le résultat du contrôle.
+![Interface de consultation des tickets](<images/chapitre6/Figure 6.9 Interface de consultation des tickets.png>)
 
-![Interface de scan des tickets](<images/chapitre6/Figure 6.9 Interface de scan des tickets.png>)
+**Figure 6.9 : Interface de consultation des tickets**
 
-**Figure 6.9 : Interface de scan des tickets**
+Cette interface permet de prolonger le parcours d’achat après la confirmation du paiement. L’utilisateur peut retrouver ses tickets, consulter leur statut, accéder aux informations de l’événement et utiliser le code du ticket lors du contrôle d’accès. Selon les conditions définies, l’utilisateur peut également accéder aux actions associées, comme la demande de remboursement ou la mise en revente.
 
-## 6.6 Conclusion
+### 6.5.4 Interface de la marketplace
 
-Dans ce chapitre, nous avons présenté l’étude et la réalisation du Sprint 4, consacré à la billetterie, au paiement, à la revente et au contrôle d’accès. Nous avons commencé par le Sprint Backlog, puis l’analyse fonctionnelle et la conception.
+La figure 6.10 présente l’interface de la marketplace. Elle permet à l’utilisateur de consulter les tickets proposés en revente, de publier un ticket FESTY ou de proposer un ticket externe avec une image justificative.
 
-Ce sprint a permis de compléter le parcours événementiel en reliant l’achat du billet, la gestion du ticket, la marketplace de revente et la validation de l’accès à l’événement. Il a également introduit le suivi partenaire et la supervision financière.
+![Interface de la marketplace](<images/chapitre6/Figure 6.10 Interface de la marketplace.png>)
 
-Ce sprint clôture ainsi le cycle principal de développement fonctionnel de FESTY. La partie suivante sera consacrée à la conclusion générale du projet, aux limites rencontrées et aux perspectives d’évolution.
+**Figure 6.10 : Interface de la marketplace**
+
+Cette interface distingue deux types de revente. Le premier concerne les tickets FESTY déjà générés par la plateforme, tandis que le second concerne les tickets externes proposés par les utilisateurs. Dans les deux cas, l’annonce est associée à un statut permettant de suivre sa disponibilité, son achat ou son annulation.
+
+### 6.5.5 Interface de scan des tickets
+
+La figure 6.11 illustre l’interface de scan des tickets. Elle permet à l’agent de scan de vérifier rapidement un ticket présenté à l’entrée d’un événement et d’afficher le résultat du contrôle.
+
+![Interface de scan des tickets](<images/chapitre6/Figure 6.11 Interface de scan des tickets.png>)
+
+**Figure 6.11 : Interface de scan des tickets**
+
+Cette interface est utilisée dans le cadre du contrôle d’accès physique à l’événement. Le système vérifie que l’agent est autorisé à scanner pour l’événement concerné, que la session de scan est ouverte, que le ticket existe, qu’il correspond à l’événement et qu’il n’a pas déjà été utilisé. Le résultat du scan permet ensuite d’autoriser ou de refuser l’accès.
+
+### 6.5.6 Synthèse de la réalisation
+
+Les interfaces réalisées durant ce sprint couvrent les fonctionnalités essentielles de la billetterie et du contrôle d’accès. Elles permettent à l’utilisateur de choisir un billet, de payer sa commande, de consulter ses tickets et d’utiliser la marketplace. Elles permettent également à l’agent de scan de contrôler l’accès à l’événement à partir du ticket généré après paiement.
+
+Cette réalisation relie donc les différents éléments du Sprint 4 : la réservation temporaire, le paiement, la génération du ticket, la revente, le remboursement et le contrôle d’accès.
+## 6.6 Tests backend, tests de sécurité et validation
+
+Cette section présente les tests à réaliser afin de vérifier les fonctionnalités développées durant le Sprint 4 ainsi que les règles d’accès associées. Les vérifications portent principalement sur la billetterie, la réservation temporaire, le paiement, la génération des tickets, les demandes de remboursement, la marketplace de revente, le contrôle d’accès par scan et le traitement des opérations financières.
+
+Les tests ont également pour objectif de contrôler la séparation des accès selon les rôles applicatifs utilisés dans le Back-End. Dans cette section, les rôles techniques `USER`, `PARTNER`, `SCAN_AGENT` et `ADMIN` correspondent respectivement aux acteurs Utilisateur, Partenaire, Agent de scan et Administrateur définis dans l’analyse fonctionnelle.
+
+### 6.6.1 Outils utilisés
+
+Les tests du Sprint 4 seront réalisés au niveau du Back-End en réutilisant la même chaîne de test adoptée dans les sprints précédents. Cette continuité permet de conserver une méthode de validation homogène pour l’ensemble du projet.
+
+Les tests s’appuient principalement sur **JUnit 5**, **MockMvc**, **Spring Security Test**, **Mockito** et **ObjectMapper**. Ces outils permettent de simuler les requêtes HTTP, de vérifier les réponses des contrôleurs REST, de mocker les services nécessaires et de contrôler les règles d’accès selon les rôles applicatifs.
+
+Dans ce sprint, leur utilisation porte principalement sur la validation des fonctionnalités transactionnelles et de sécurité : réservation temporaire, paiement, génération de ticket, remboursement, revente, scan des tickets, demande de retrait partenaire et traitement administratif des opérations financières.
+
+### 6.6.2 Cas de test à réaliser
+
+Les tests du Sprint 4 sont regroupés en cinq blocs. Cette organisation permet de couvrir les fonctionnalités principales du sprint sans détailler chaque test individuellement dans le rapport.
+
+| Bloc de tests | Fonctionnalités vérifiées | Nombre de tests prévu |
+|---|---|---:|
+| Billetterie et paiement | Consultation des billets, création de réservation temporaire, paiement, expiration de réservation, génération du ticket. | 7 |
+| Tickets et remboursements | Consultation des tickets, détail d’un ticket, demande de remboursement, cas non remboursable, demande déjà existante. | 5 |
+| Marketplace de revente | Publication d’un ticket FESTY, proposition d’un ticket externe, consultation des annonces, achat d’un ticket revendu, annonce indisponible. | 6 |
+| Contrôle d’accès par scan | Session de scan, agent autorisé, ticket valide, ticket invalide, ticket déjà utilisé, mauvais événement, session fermée. | 7 |
+| Opérations financières et sécurité | Demande de retrait partenaire, traitement admin, accès refusés selon les rôles, réponses `401 Unauthorized` et `403 Forbidden`. | 7 |
+
+Au total, environ **trente-deux tests backend** sont proposés pour valider le Sprint 4. Ce nombre peut être ajusté selon les endpoints réellement disponibles dans le Back-End.
+
+### 6.6.3 Tests liés à la billetterie et au paiement
+
+Le premier groupe de tests concerne le cœur transactionnel du Sprint 4. Il vérifie que l’utilisateur peut consulter la billetterie d’un événement, sélectionner un type de billet et créer une réservation temporaire lorsque des billets sont disponibles.
+
+Les tests doivent également vérifier les cas d’échec liés au paiement et à la disponibilité. Si le billet n’est plus disponible, la réservation ne doit pas être confirmée. Si la réservation temporaire a expiré avant la confirmation du paiement, le système doit refuser la finalisation de l’achat. En cas de paiement validé, la réservation doit être transformée en commande payée et un ticket doit être généré pour l’utilisateur.
+
+Les principaux cas à tester sont :
+
+| Test | Objectif | Résultat attendu |
+|---|---|---|
+| Test 1 | Consulter les types de billets d’un événement actif | `200 OK` |
+| Test 2 | Créer une réservation temporaire pour un billet disponible | `200 OK` ou `201 Created` |
+| Test 3 | Refuser la réservation si le billet est indisponible | Erreur applicative contrôlée |
+| Test 4 | Initier un paiement pour une réservation valide | `200 OK` |
+| Test 5 | Refuser le paiement si la réservation est expirée | Erreur applicative contrôlée |
+| Test 6 | Confirmer une commande après paiement réussi | `200 OK` |
+| Test 7 | Générer un ticket après paiement confirmé | Ticket créé et associé à l’utilisateur |
+
+### 6.6.4 Tests liés aux tickets et aux remboursements
+
+Le deuxième groupe de tests vérifie la gestion des tickets après l’achat. L’utilisateur doit pouvoir consulter la liste de ses tickets, accéder au détail d’un ticket et visualiser son code d’accès.
+
+Les tests couvrent aussi la demande de remboursement. Le système doit vérifier l’éligibilité du ticket avant d’enregistrer la demande. Une demande valide doit être enregistrée avec un statut en attente de traitement, tandis qu’un ticket non remboursable ou une demande déjà existante doit produire une erreur applicative contrôlée.
+
+Les principaux cas à tester sont :
+
+| Test | Objectif | Résultat attendu |
+|---|---|---|
+| Test 8 | Consulter la liste des tickets de l’utilisateur | `200 OK` |
+| Test 9 | Consulter le détail d’un ticket | `200 OK` |
+| Test 10 | Demander un remboursement pour un ticket éligible | Demande enregistrée |
+| Test 11 | Refuser un remboursement pour un ticket non éligible | Erreur applicative contrôlée |
+| Test 12 | Refuser une deuxième demande de remboursement sur le même ticket | Erreur applicative contrôlée |
+
+### 6.6.5 Tests liés à la marketplace de revente
+
+Le troisième groupe de tests concerne la marketplace. Il vérifie qu’un utilisateur peut publier un ticket FESTY en revente lorsque celui-ci respecte les conditions de revente. Il vérifie aussi la proposition d’un ticket externe avec les informations nécessaires et une image justificative.
+
+Les tests doivent également couvrir le parcours d’achat d’un ticket revendu. Le système doit vérifier que l’annonce est encore active avant de permettre l’achat. Si l’annonce n’est plus disponible ou si le paiement échoue, l’achat doit être refusé.
+
+Les principaux cas à tester sont :
+
+| Test | Objectif | Résultat attendu |
+|---|---|---|
+| Test 13 | Publier un ticket FESTY revendable dans la marketplace | Annonce créée |
+| Test 14 | Refuser la revente d’un ticket non revendable | Erreur applicative contrôlée |
+| Test 15 | Proposer un ticket externe avec données valides | Annonce créée |
+| Test 16 | Refuser un ticket externe avec données incomplètes | Erreur applicative contrôlée |
+| Test 17 | Acheter un ticket revendu disponible | Achat confirmé |
+| Test 18 | Refuser l’achat d’une annonce indisponible | Erreur applicative contrôlée |
+
+### 6.6.6 Tests liés au contrôle d’accès par scan
+
+Le quatrième groupe de tests concerne le contrôle d’accès à l’événement. Ces tests vérifient qu’un agent de scan authentifié et affecté à l’événement peut scanner un ticket lorsque la session de scan est ouverte.
+
+Le système doit refuser le scan si l’agent n’est pas affecté à l’événement, si la session est fermée, si le ticket est invalide, s’il ne correspond pas à l’événement ou s’il a déjà été utilisé. Chaque tentative de scan doit être tracée afin de conserver un historique des accès autorisés ou refusés.
+
+Les principaux cas à tester sont :
+
+| Test | Objectif | Résultat attendu |
+|---|---|---|
+| Test 19 | Autoriser un agent affecté à accéder à une session ouverte | `200 OK` |
+| Test 20 | Refuser un agent non affecté à l’événement | `403 Forbidden` |
+| Test 21 | Refuser le scan si la session est fermée | Erreur applicative contrôlée |
+| Test 22 | Autoriser l’accès avec un ticket valide | Accès autorisé |
+| Test 23 | Refuser un ticket invalide ou introuvable | Accès refusé |
+| Test 24 | Refuser un ticket déjà utilisé | Accès refusé |
+| Test 25 | Refuser un ticket ne correspondant pas à l’événement | Accès refusé |
+
+### 6.6.7 Tests liés aux opérations financières et à la sécurité
+
+Le cinquième groupe de tests vérifie les opérations financières sensibles et les règles d’accès. Le partenaire peut demander un retrait uniquement si l’événement est terminé et si un solde disponible existe. Cette demande génère une opération financière en attente, qui doit ensuite être traitée par l’administrateur.
+
+Les tests doivent également vérifier que seul l’administrateur peut traiter les opérations financières sensibles. Un utilisateur non authentifié doit recevoir une réponse `401 Unauthorized`, tandis qu’un utilisateur authentifié avec un rôle insuffisant doit recevoir une réponse `403 Forbidden`.
+
+Les principaux cas à tester sont :
+
+| Test | Objectif | Résultat attendu |
+|---|---|---|
+| Test 26 | Créer une demande de retrait si l’événement est terminé et le solde disponible | Demande enregistrée |
+| Test 27 | Refuser une demande de retrait si l’événement n’est pas terminé | Erreur applicative contrôlée |
+| Test 28 | Refuser une demande de retrait si le solde est insuffisant | Erreur applicative contrôlée |
+| Test 29 | Administrateur consulte les opérations financières | `200 OK` |
+| Test 30 | Administrateur traite une opération financière valide | Statut mis à jour |
+| Test 31 | Utilisateur simple tente de traiter une opération financière | `403 Forbidden` |
+| Test 32 | Utilisateur non authentifié tente d’accéder aux opérations financières | `401 Unauthorized` |
+
+### 6.6.8 Résultats attendus et interprétation
+
+Après exécution des tests, une capture des résultats sera intégrée dans cette section. Elle devra montrer le nombre total de tests exécutés, le nombre d’échecs, le nombre d’erreurs et le nombre de tests ignorés.
+
+La figure 6.12 présentera l’exécution des tests backend et des tests de contrôle d’accès du Sprint 4.
+
+![Exécution des tests backend et de contrôle d’accès du Sprint 4](<images/chapitre6/Figure 6.12 Exécution des tests backend du Sprint 4.png>)
+
+**Figure 6.12 : Exécution des tests backend et de contrôle d’accès du Sprint 4**
+
+Les résultats attendus doivent confirmer le bon fonctionnement des principales fonctionnalités du Sprint 4. Les tests liés à la billetterie doivent valider la réservation temporaire, le paiement et la génération du ticket. Les tests liés aux tickets doivent confirmer la consultation et la demande de remboursement. Les tests de marketplace doivent valider la revente de tickets FESTY, la proposition de tickets externes et l’achat d’un ticket revendu.
+
+Les tests de scan doivent confirmer que l’accès à l’événement est autorisé uniquement lorsque le ticket est valide, non utilisé, associé au bon événement et scanné par un agent autorisé dans une session ouverte. Enfin, les tests financiers doivent vérifier la demande de retrait partenaire, le traitement administratif des opérations financières et le respect des règles d’accès.
+
+Les tests de sécurité doivent confirmer que les accès non authentifiés retournent le code `401 Unauthorized`, tandis que les accès réalisés avec un rôle insuffisant retournent le code `403 Forbidden`. Cette validation permet d’assurer la cohérence entre les fonctionnalités réalisées, les rôles applicatifs et les scénarios de conception du Sprint 4.
+
+## 6.7 Revue du sprint
+
+La revue du Sprint 4 a permis de vérifier l’avancement des fonctionnalités transactionnelles et opérationnelles de FESTY. Ce sprint a complété le parcours utilisateur en intégrant la billetterie, la réservation temporaire, le paiement, la génération des tickets, la consultation des tickets, les demandes de remboursement et la marketplace de revente.
+
+Le sprint a également permis de renforcer la partie opérationnelle de la plateforme. Le partenaire peut organiser le contrôle d’accès à ses événements, affecter des agents de scan et suivre son activité financière. L’agent de scan peut contrôler les tickets à l’entrée des événements, tandis que l’administrateur peut superviser et traiter les opérations financières sensibles.
+
+Les principales difficultés de ce sprint concernent la gestion cohérente des statuts transactionnels. En effet, le processus ne se limite pas à l’achat d’un billet : il implique une réservation temporaire, une confirmation de paiement, une commande, un ticket généré, puis éventuellement une demande de remboursement, une revente ou un contrôle d’accès. La séparation de ces états permet de mieux gérer les cas d’échec de paiement, d’expiration de réservation, de ticket déjà utilisé, de demande de retrait partenaire ou d’opération financière non traitable.
+
+La revue a également mis en évidence l’importance des règles de sécurité. Les fonctionnalités liées au paiement, aux tickets, aux remboursements, au scan et aux opérations financières doivent être strictement contrôlées selon les rôles applicatifs. Les tests prévus pour ce sprint permettent de vérifier les accès des utilisateurs, des partenaires, des agents de scan et des administrateurs, ainsi que les réponses attendues en cas d’accès non authentifié ou non autorisé.
+
+Ce sprint clôture le cycle principal des fonctionnalités métier de FESTY. Il assure le lien entre la découverte des événements, l’achat de billets, la participation à l’événement, la revente éventuelle et le contrôle d’accès physique.
+
+## 6.8 Conclusion
+
+Dans ce chapitre, nous avons présenté le Sprint 4, consacré à la billetterie, au paiement, à la revente et au contrôle d’accès. Ce sprint constitue une étape essentielle du projet, car il transforme l’exploration des événements en un parcours transactionnel complet permettant à l’utilisateur d’acheter un billet, de consulter ses tickets, de demander un remboursement et d’utiliser la marketplace de revente.
+
+L’analyse fonctionnelle a permis d’identifier les principaux cas d’utilisation du sprint, notamment la réservation et le paiement d’un billet, la consultation des tickets avec demande de remboursement, la gestion de la marketplace, le contrôle d’accès à un événement et le traitement des opérations financières. La conception a ensuite précisé les classes et les échanges nécessaires pour gérer la réservation temporaire, le paiement, la commande, le ticket, la revente, le scan et la supervision financière.
+
+La réalisation a présenté les principales interfaces développées, notamment l’interface de choix du billet, l’interface de paiement, l’interface de consultation des tickets, l’interface de la marketplace et l’interface de scan. Les tests backend et les tests de sécurité prévus permettent de valider les fonctionnalités principales du sprint ainsi que les règles d’accès associées aux rôles `USER`, `PARTNER`, `SCAN_AGENT` et `ADMIN`.
+
+Ce sprint clôture le développement des principales fonctionnalités métier de la plateforme FESTY. Il prépare ainsi la conclusion générale du rapport, qui présentera une synthèse du travail réalisé, les limites rencontrées et les perspectives d’amélioration possibles.
